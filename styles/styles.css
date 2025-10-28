@@ -54,8 +54,8 @@ This files table contents are outlined below>>>>>
 Default CSS
 =================================================*/
 :root {
-  --mainColor: #E13833;
-  --mainColor2: #104547;
+  --mainColor: #1489bc;
+  --mainColor2: #0e4c89;
   --optionalColor: #666666;
   --whiteColor: #ffffff;
   --blackColor: #262E2E;
@@ -415,7 +415,7 @@ Top Header Area CSS
   display: inline-block;
   margin-right: 15px;
   position: relative;
-  color: #d8d0d0;
+  color: var(--whiteColor);
   padding-left: 25px;
   font-size: 14px;
 }
@@ -6112,7 +6112,7 @@ Footer Area CSS
   margin-bottom: 20px;
 }
 .single-footer-widget p {
-  color: #d4d1d1;
+  color: #ffffff;
 }
 .single-footer-widget .footer-contact-info {
   margin-top: 20px;
@@ -6128,7 +6128,7 @@ Footer Area CSS
   list-style-type: none;
 }
 .single-footer-widget .footer-contact-info ul li {
-  color: #d4d1d1;
+  color: var(--whiteColor);
   margin-bottom: 10px;
 }
 .single-footer-widget .footer-contact-info ul li span {
@@ -6137,10 +6137,10 @@ Footer Area CSS
 }
 .single-footer-widget .footer-contact-info ul li a {
   display: inline-block;
-  color: #d4d1d1;
+  color: var(--whiteColor);
 }
 .single-footer-widget .footer-contact-info ul li a:hover {
-  color: var(--whiteColor);
+  color: var(--mainColor);
 }
 .single-footer-widget .footer-contact-info ul li:last-child {
   margin-bottom: 0;
@@ -6160,10 +6160,10 @@ Footer Area CSS
 }
 .single-footer-widget .links-list li a {
   display: inline-block;
-  color: #d4d1d1;
+  color: var(--whiteColor);
 }
 .single-footer-widget .links-list li a:hover {
-  color: var(--whiteColor);
+  color: var(--mainColor);
 }
 .single-footer-widget .links-list li:last-child {
   margin-bottom: 0;
@@ -6182,7 +6182,7 @@ Footer Area CSS
 }
 .single-footer-widget .opening-hours li {
   margin-bottom: 12px;
-  color: #d4d1d1;
+  color: var(--whiteColor);
   font-weight: 700;
 }
 .single-footer-widget .opening-hours li span {
