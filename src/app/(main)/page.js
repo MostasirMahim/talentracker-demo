@@ -16,7 +16,6 @@ export default function Home() {
     <>
       {/* Top Header imported in the Navbar component */}
       <NavbarStyleTwo />
-
       <MainBanner />
 
       <AboutContent />

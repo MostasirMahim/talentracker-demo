@@ -10,13 +10,12 @@ import "../../styles/styles.css";
 import "../../styles/responsive.css"; 
 
 import { Montserrat } from "next/font/google";
-import GoTop from "@/components/Layouts/GoTop";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "TalenTracker Limited - Creating Shared Experiences !!",
-  description: "TalenTracker Limited is a full-service Human Resources Business Partnering and Consultancy firm.",
+  title: "TalenTracker Limited",
+  description: "TalenTracker",
 };
 
 export default function RootLayout({ children }) {
@@ -24,8 +23,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={montserrat.className}>
         {children}
-
-        <GoTop />
       </body>
     </html>
   );
