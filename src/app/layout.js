@@ -10,6 +10,7 @@ import "../../styles/styles.css";
 import "../../styles/responsive.css"; 
 
 import { Montserrat } from "next/font/google";
+import GoTop from "@/components/Layouts/GoTop";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -23,6 +24,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={montserrat.className}>
         {children}
+
+        <GoTop />
       </body>
     </html>
   );
