@@ -20,11 +20,6 @@ const TopHeaderStyleOne = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="https://twitter.com/" target="_blank">
-                          <i className="ri-twitter-fill"></i>
-                        </a>
-                      </li>
-                      <li>
                         <a href="https://www.linkedin.com/" target="_blank">
                           <i className="ri-linkedin-fill"></i>
                         </a>
@@ -43,11 +38,7 @@ const TopHeaderStyleOne = () => {
                 <ul className="top-header-contact-info">
                   <li>
                     <i className="ri-time-line"></i>
-                    <span>SUN - THU:</span> 8:00 AM - 9:00 PM
-                  </li>
-                  <li>
-                    <i className="ri-map-pin-2-line"></i>
-                    <span>OFFICE:</span> 1847 Morris Street, Texas
+                    <span>Call : </span> +88 01234 567 890
                   </li>
                 </ul>
               </div>

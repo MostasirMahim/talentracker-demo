@@ -28,11 +28,6 @@ const TopHeaderStyleTwo = () => {
                         <i className="ri-linkedin-fill"></i>
                       </a>
                     </li>
-                    <li>
-                      <a href="https://www.instagram.com/" target="_blank">
-                        <i className="ri-instagram-line"></i>
-                      </a>
-                    </li>
                   </ul>
                 </div>
               </div>
@@ -42,11 +37,7 @@ const TopHeaderStyleTwo = () => {
               <ul className="top-header-contact-info">
                 <li>
                   <i className="ri-time-line"></i>
-                  <span>SUN - THU:</span> 8:00 AM - 9:00 PM
-                </li>
-                <li>
-                  <i className="ri-map-pin-2-line"></i>
-                  <span>OFFICE:</span> 1847 Morris Street, Texas
+                   <span>Call : </span> +88 01234 567 890
                 </li>
               </ul>
             </div>
