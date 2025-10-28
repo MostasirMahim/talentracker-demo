@@ -15,7 +15,7 @@ const Footer = () => {
               <div className="single-footer-widget">
                 <Link href="/" className="logo">
                   <Image
-                    src="/images/white-logo.png"
+                    src="/images/talentracker_logo.png"
                     alt="image"
                     width={147}
                     height={33}

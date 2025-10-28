@@ -91,12 +91,12 @@ const projects = [
 const ProjectsThreeColumn = () => {
   return (
     <>
-      <div className="projects-area ptb-100">
+      <div className="projects-area pb-100">
         <div className="container">
-          <div className="section-title">
+          {/* <div className="section-title">
             <span className="sub-title">COMPLETED PROJECTS</span>
             <h2>You Can Check Our Projects as Inspirations</h2>
-          </div>
+          </div> */}
 
           <div className="row justify-content-center">
             {projects &&
