@@ -433,6 +433,15 @@ Top Header Area CSS
 }
 .top-header-contact-info li:last-child {
   margin-right: 0;
+  padding-right: 0;
+  color: var(--whiteColor);
+}
+.top-header-contact-info li a {
+  color: var(--whiteColor);
+  font-weight: 600;
+}
+.top-header-contact-info li a:hover {
+  color: var(--mainColor2);
 }
 
 /*================================================

@@ -448,6 +448,15 @@ Top Header Area CSS
         }
         &:last-child {
             margin-right: 0;
+            padding-right: 0;
+            color: var(--whiteColor);
+        }
+        a {
+            color: var(--whiteColor);
+            font-weight: 600;
+            &:hover {
+                color: var(--mainColor2);
+            }
         }
     }
 }

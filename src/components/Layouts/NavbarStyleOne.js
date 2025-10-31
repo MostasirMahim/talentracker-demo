@@ -46,7 +46,7 @@ const NavbarStyleOne = () => {
             <nav className="navbar navbar-expand-md navbar-light">
               <Link href="/" className="navbar-brand">
                 <Image
-                  src="/images/talentracker_logo.png"
+                  src="/images/ttl_logo.png"
                   alt="logo"
                   width={154}
                   height={33}
