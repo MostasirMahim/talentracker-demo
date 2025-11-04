@@ -23,12 +23,9 @@ const FreeQuoteFormStyle1 = () => {
             <div className="col-lg-6 col-md-12">
               <div className="free-quote-text">
                 <span className="sub-title">FREE QUOTE</span>
-                <h2>Search and Expert Any Time From Just Knock Us</h2>
+                <h2>Looking for a Trusted HR Partner to Empower Your People?</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy ant extra eirmod te mpor invidunt ut labore et
-                  dolore magna aliquyam erat. Te mpor invidunt utttfg labore et
-                  dolore magna aliquyam erat
+                  At TalenTracker Limited, we connect strategy, people, and performance to help businesses grow stronger. Whether you need expert support in recruitment, HR consultancy, legal compliance, training, or employee wellbeing, our team is ready to deliver tailor-made solutions that truly make a difference.
                 </p>
 
                 <form>
@@ -49,14 +46,31 @@ const FreeQuoteFormStyle1 = () => {
 
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
+                        <label>Your Phone</label>
+                        <input type="text" className="form-control" />
+                      </div>
+                    </div>
+
+                    <div className="col-lg-6 col-md-6">
+                      <div className="form-group">
                         <label>Services</label>
                         <select className="form-select">
                           <option value="selected">
-                            Financial Consultancy
+                            Strategy Consultancy
                           </option>
-                          <option>Strategy Consultancy</option>
-                          <option>Organizational Consultancy</option>
-                          <option>Tax Consultancy</option>
+                          <option>Executive Search & Head Hunting</option>
+                          <option>Career Counselling & Placement</option>
+                          <option>Pre-Employment Screening</option>
+                          <option>HR & Management Consultancy</option>
+                          <option>Organization Culture & Change Management</option>
+                          <option>Employee Wellness & Mental Health</option>
+                          <option>Remote & Contract Staffing</option>
+                          <option>Employer of Record (EOR) & PEO</option>
+                          <option>Payroll Management</option>
+                          <option>BIDA/BEGA/Investment Advisory</option>
+                          <option>Tailored Training Solutions</option>
+                          <option>Labour Law Compliance Audit</option>
+                          <option>Regulatory Affairs Consultancy</option>
                         </select>
                       </div>
                     </div>
