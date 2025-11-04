@@ -41,7 +41,7 @@ const testimonials = [
 const TestimonialStyleOne = () => {
   return (
     <>
-      <div className="testimonial-area">
+      <div className="testimonial-area ptb-70">
         <div className="container">
           <div className="section-title">
             <span className="sub-title">TESTIMONIALS</span>
