@@ -7,7 +7,7 @@ import Image from "next/image";
 const projects = [
    {
     id: 1,
-    image: "/images/Services2/1_Executive_Search.jpeg",
+    image: "/images/services_images/1_Executive_Search.jpeg",
     altText: "Project Image",
     title: "Executive Search & Head Hunting",
     category: "Financial",
@@ -16,7 +16,7 @@ const projects = [
   },
   {
     id: 2,
-    image: "/images/Services2/2_Recruitment_process_outsourcing.png",
+    image: "/images/services_images/2_Recruitment_process_outsourcing.png",
     altText: "Recruitment Process Outsourcing (RPO)",
     title: "Strategy Consultancy",
     category: "Strategy",
@@ -26,7 +26,7 @@ const projects = [
 
   {
     id: 4,
-    image: "/images/Services2/4_Career_Counseling.jpg",
+    image: "/images/services_images/4_Career_Counseling.jpg",
     altText: "Project Image",
     title: "Career Counselling & Placement",
     category: "Consultancy",
@@ -35,7 +35,7 @@ const projects = [
   },
     {
     id: 3,
-    image: "/images/Services2/3_Pre-Employment_Check.jpg",
+    image: "/images/services_images/3_Pre-Employment_Check.jpg",
     altText: "Project Image",
     title: "Pre-Employment Screening",
     category: "Consultancy",
@@ -44,7 +44,7 @@ const projects = [
   },
   {
     id: 5,
-    image: "/images/Services2/5_HR_Management_and_consultant.jpg",
+    image: "/images/services_images/5_HR_Management_and_consultant.jpg",
     altText: "Project Image",
     title: "HR & Management Consultancy",
     category: "Business",
@@ -53,7 +53,7 @@ const projects = [
   },
   {
     id: 6,
-    image: "/images/Services2/6_Organization_Culture_&_Change_Management.jpg",
+    image: "/images/services_images/6_Organization_Culture__Change_Management.jpg",
     altText: "Project Image",
     title: "Organization Culture & Change Management",
     category: "Marketing",
@@ -62,7 +62,7 @@ const projects = [
   },
   {
     id: 7,
-    image: "/images/Services2/7_Employee_Wellness_&_Mental_Health.jpg",
+    image: "/images/services_images/7_Employee_Wellness__Mental_Health.jpg",
     altText: "Project Image",
     title: "Employee Wellness & Mental Health",
     category: "Startup",
@@ -71,7 +71,7 @@ const projects = [
   },
   {
     id: 8,
-    image: "/images/Services2/8_Remote_&_Contract_Staffing.jpg",
+    image: "/images/services_images/8_Remote__Contract_Staffing.jpg",
     altText: "Project Image",
     title: "Remote & Contract Staffing",
     category: "Resources",
@@ -80,7 +80,7 @@ const projects = [
   },
   {
     id: 9,
-    image: "/images/Services2/9_Employer_of_Record_(EOR)_&_PEO.jpg",
+    image: "/images/services_images/9_Employer_of_Record_EOR__PEO.jpg",
     altText: "Project Image",
     title: "Employer of Record (EOR) & PEO",
     category: "Strategy",
@@ -89,7 +89,7 @@ const projects = [
   },
   {
     id: 10,
-    image: "/images/Services2/10_Payroll_Management.jpg",
+    image: "/images/services_images/10_Payroll_Management.jpg",
     altText: "Project Image",
     title: "Payroll Management",
     category: "Strategy",
@@ -98,7 +98,7 @@ const projects = [
   },
   {
     id: 11,
-    image: "/images/Services2/11_BIDA_BEGA_Investment_Advisory.jpg",
+    image: "/images/services_images/11_BIDA_BEGA_Investment_Advisory.jpg",
     altText: "Project Image",
     title: "BIDA/BEGA/Investment Advisory",
     category: "Strategy",
@@ -107,7 +107,7 @@ const projects = [
   },
   {
     id: 12,
-    image: "/images/Services2/12_Tailored_Training_Solutions.jpg",
+    image: "/images/services_images/12_Tailored_Training_Solutions.jpg",
     altText: "Project Image",
     title: "Tailored Training Solutions",
     category: "Strategy",
@@ -116,7 +116,7 @@ const projects = [
   },
   {
     id: 13,
-    image: "/images/Services2/13_Labour_Law_Compliance_Audit.jpg",
+    image: "/images/services_images/13_Labour_Law_Compliance_Audit.jpg",
     altText: "Project Image",
     title: "Labour Law Compliance Audit",
     category: "Strategy",
@@ -125,7 +125,7 @@ const projects = [
   },
   {
     id: 14,
-    image: "/images/Services2/14_Regulatory_Affairs_Consultancy.jpg",
+    image: "/images/services_images/14_Regulatory_Affairs_Consultancy.jpg",
     altText: "Project Image",
     title: "Regulatory Affairs Consultancy",
     category: "Strategy",

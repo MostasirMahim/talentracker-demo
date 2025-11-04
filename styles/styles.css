@@ -6647,4 +6647,9 @@ Modal CSS
   font-size: 14px;
   font-weight: 500;
   color: var(--blackColor);
+}
+
+.read-more-btn {
+  display: flex;
+  justify-content: center;
 }/*# sourceMappingURL=styles.css.map */
