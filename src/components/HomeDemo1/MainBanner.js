@@ -36,19 +36,17 @@ const MainBanner = () => {
               <div className="row align-items-center">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
-                    <span className="sub-title">WELCOME TO US</span>
-                    <h1>Business Consultant & Grid Line For You</h1>
-                    <p>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam intaas nonumy eirmod tempor
-                      invidunt ut labore et.
-                    </p>
-
+                    <span className="sub-title">RIGHT PEOPLE RIGHT FIT</span>
+                    <h1>Partner Modern HR Solutions</h1>
                     <div className="btn-box">
                       <Link href="/contact" className="default-btn">
-                        Contact Us <i className="ri-arrow-right-line"></i>
-                      </Link>
+                        Employer <i className="ri-arrow-right-line"></i>
+                      </Link>                    
                       <Link href="/contact" className="default-btn">
-                        Get Started <i className="ri-arrow-right-line"></i>
+                        Applicant <i className="ri-arrow-right-line"></i>
+                      </Link>
+                        <Link href="/contact" className="default-btn">
+                        Consultant / Trainer <i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
                   </div>
@@ -75,19 +73,17 @@ const MainBanner = () => {
               <div className="row align-items-center">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
-                    <span className="sub-title">ABOUT ALL OF US</span>
-                    <h1>Take Our Help To Reach The Top</h1>
-                    <p>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam intaas nonumy eirmod tempor
-                      invidunt ut labore et.
-                    </p>
-
+                    <span className="sub-title">GROW YOUR BUSINESS WITH US</span>
+                    <h1>Start Excellence Here</h1>
                     <div className="btn-box">
                       <Link href="/contact" className="default-btn">
-                        Contact Us <i className="ri-arrow-right-line"></i>
-                      </Link>
+                        Employer <i className="ri-arrow-right-line"></i>
+                      </Link>                    
                       <Link href="/contact" className="default-btn">
-                        Get Started <i className="ri-arrow-right-line"></i>
+                        Applicant <i className="ri-arrow-right-line"></i>
+                      </Link>
+                        <Link href="/contact" className="default-btn">
+                        Consultant / Trainer <i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
                   </div>
@@ -114,19 +110,17 @@ const MainBanner = () => {
               <div className="row align-items-center">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
-                    <span className="sub-title">REASON OF CHOOSE US</span>
-                    <h1>Transform & Build Your Own Business</h1>
-                    <p>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam intaas nonumy eirmod tempor
-                      invidunt ut labore et.
-                    </p>
-
-                    <div className="btn-box">
+                    <span className="sub-title">MAKE YOUR VISION TO REALITY</span>
+                    <h1>Elevate Your Business with Our Tailored HR Solution</h1>
+                <div className="btn-box">
                       <Link href="/contact" className="default-btn">
-                        Contact Us <i className="ri-arrow-right-line"></i>
+                       Employer <i className="ri-arrow-right-line"></i>
+                      </Link>                    
+                      <Link href="/contact" className="default-btn">
+                        Applicant<i className="ri-arrow-right-line"></i>
                       </Link>
-                      <Link href="/contact" className="default-btn">
-                        Get Started <i className="ri-arrow-right-line"></i>
+                        <Link href="/contact" className="default-btn">
+                        Consultant / Trainer<i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
                   </div>
