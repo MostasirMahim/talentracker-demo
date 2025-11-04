@@ -1,5 +1,5 @@
+import FloatingForm from "@/components/Layouts/FloatingForm";
 import GoTop from "@/components/Layouts/GoTop";
-import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
 
 export const metadata = {
   title: "TalenTracker Limited - Creating Shared Experiences !!",
@@ -12,6 +12,7 @@ export default function MainLayout({ children }) {
     <>
       {children}
       <GoTop />
+      <FloatingForm />
     </>
   );
 }
