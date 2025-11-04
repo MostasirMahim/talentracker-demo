@@ -44,10 +44,7 @@ const MainBanner = () => {
                       </Link>                    
                       <Link href="/contact" className="default-btn">
                         Applicant <i className="ri-arrow-right-line"></i>
-                      </Link>
-                        <Link href="/contact" className="default-btn">
-                        Consultant / Trainer <i className="ri-arrow-right-line"></i>
-                      </Link>
+                      </Link>                   
                     </div>
                   </div>
                 </div>
@@ -82,9 +79,6 @@ const MainBanner = () => {
                       <Link href="/contact" className="default-btn">
                         Applicant <i className="ri-arrow-right-line"></i>
                       </Link>
-                        <Link href="/contact" className="default-btn">
-                        Consultant / Trainer <i className="ri-arrow-right-line"></i>
-                      </Link>
                     </div>
                   </div>
                 </div>
@@ -118,9 +112,6 @@ const MainBanner = () => {
                       </Link>                    
                       <Link href="/contact" className="default-btn">
                         Applicant<i className="ri-arrow-right-line"></i>
-                      </Link>
-                        <Link href="/contact" className="default-btn">
-                        Consultant / Trainer<i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
                   </div>
