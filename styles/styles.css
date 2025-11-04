@@ -3057,8 +3057,11 @@ Why Choose Us Area CSS
   font-size: 40px;
 }
 .why-choose-us-content span {
-  color: var(--mainColor);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background: linear-gradient(90deg, var(--mainColor2), var(--mainColor));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 .why-choose-us-content .choose-list {
   padding-left: 0;
