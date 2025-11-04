@@ -5,11 +5,14 @@ import "react-accessible-accordion/dist/fancy-example.css";
 import "react-tabs/style/react-tabs.css";
 import "swiper/css";
 import "swiper/css/bundle";
+
+import BootstrapClient from "@/components/Layouts/BootstrapClient";
 // Global Styles
 import "../../styles/styles.css";
 import "../../styles/responsive.css"; 
-
 import { Montserrat } from "next/font/google";
+
+
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -23,6 +26,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={montserrat.className}>
         {children}
+        <BootstrapClient />
       </body>
     </html>
   );
