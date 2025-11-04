@@ -2,6 +2,7 @@
   
 import React from "react";
 import Link from "next/link";
+import ServicesOverview from "./ServicesOverview";
 
 const services = [
   {
@@ -63,42 +64,14 @@ const services = [
 const ServicesCard = () => {
   return (
     <>
-      <div className="services-area pt-100 pb-70">
+      <div className="services-">
         <div className="container">
           <div className="section-title">
             <span className="sub-title">SERVICES</span>
-            <h2>Please See All of Our Services and All Other Details</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore.
-            </p>
+            <h2>See All of Our Services </h2>
           </div>
 
-          <div className="row align-items-center">
-            {services &&
-              services.map((service) => (
-                <div className="col-lg-4 col-sm-6 col-md-6" key={service.id}>
-                  <div className="services-box">
-                    <div className="d-flex align-items-center">
-                      <i className={service.serviceIcon}></i>
-                      <h3>
-                        <Link href={service.serviceDetailsUrl}>
-                          {service.serviceTitle}
-                        </Link>
-                      </h3>
-                    </div>
-                    <p>{service.serviceShortDescription}</p>
-                    <Link
-                      href={service.serviceDetailsUrl}
-                      className="default-btn"
-                    >
-                      {service.readMoreText}{" "}
-                      <i className="ri-arrow-right-line"></i>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-          </div>
+          <ServicesOverview />
         </div>
       </div>
     </>
