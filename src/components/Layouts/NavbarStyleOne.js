@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import SideCanvas from "./SideCanvas";
 
 const NavbarStyleOne = () => {
   const pathname = usePathname();
@@ -220,20 +221,7 @@ const NavbarStyleOne = () => {
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
       >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-            Search Panel
-          </h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          <p>Put your search inputs or content here.</p>
-        </div>
+        <SideCanvas />
       </div>
     </>
   );

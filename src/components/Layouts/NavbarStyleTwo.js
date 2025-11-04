@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
 import Image from "next/image";
+import SideCanvas from "./SideCanvas";
 
 const NavbarStyleTwo = () => {
   const pathname = usePathname();
@@ -108,7 +109,7 @@ const NavbarStyleTwo = () => {
                     <li className="nav-item">
                       <Link
                         href="/training-solutions/"
-                         className={`nav-link ${
+                        className={`nav-link ${
                           pathname == "/training-solutions/" && "active"
                         }`}
                       >
@@ -229,20 +230,7 @@ const NavbarStyleTwo = () => {
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
       >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-            Search Panel
-          </h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          <p>Put your search inputs or content here.</p>
-        </div>
+        <SideCanvas />
       </div>
     </>
   );
