@@ -70,18 +70,16 @@ const NavbarStyleOne = () => {
 
               <div className={classOne} id="navbarSupportedContent">
                 <ul className="navbar-nav">
-                    <li className="nav-item">
-                      <Link
-                        href="/"
-                        className={`nav-link ${
-                          pathname == "/" && "active"
-                        }`}
-                      >
-                        Home
-                      </Link>
-                    </li>
+                  <li className="nav-item">
+                    <Link
+                      href="/"
+                      className={`nav-link ${pathname == "/" && "active"}`}
+                    >
+                      Home
+                    </Link>
+                  </li>
 
-                    <li className="nav-item">
+                  <li className="nav-item">
                     <Link
                       href="/about-us/"
                       className={`nav-link ${
@@ -91,66 +89,87 @@ const NavbarStyleOne = () => {
                       About Us
                     </Link>
                   </li>
-                    <li className="nav-item">
-                      <Link
-                        href="/services/"
-                        className={`nav-link ${
-                          pathname == "/services/" && "active"
-                        }`}
-                      >
-                        Services
-                      </Link>
-                    </li>
+                  <li className="nav-item">
+                    <Link
+                      href="/services/"
+                      className={`nav-link ${
+                        pathname == "/services/" && "active"
+                      }`}
+                    >
+                      Services
+                    </Link>
+                  </li>
 
-                    <li className="nav-item">
-                      <Link
-                        href="/career/"
-                         className={`nav-link ${
-                          pathname == "/career/" && "active"
-                        }`}
-                      >
-                        Careers
-                      </Link>
-                    </li>
+                  <li className="nav-item">
+                    <Link
+                      href="/training-solutions/"
+                      className={`nav-link ${
+                        pathname == "/training-solutions/" && "active"
+                      }`}
+                    >
+                      Career Training
+                    </Link>
+                  </li>
 
-                    <li className="nav-item">
-                      <Link
-                        href="/training-solutions/"
+                  <li className="nav-item">
+                    <Link
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="dropdown-toggle nav-link"
+                    >
+                      Learining Resources Center
+                    </Link>
+
+                    <ul className="dropdown-menu">
+                      <li className="nav-item">
+                        <Link
+                          href="/news/"
                           className={`nav-link ${
-                          pathname == "/training-solutions/" && "active"
-                        }`}
-                      >
-                        Training Solutions
-                      </Link>
-                    </li>
+                            pathname == "/news/" && "active"
+                          }`}
+                        >
+                          News
+                        </Link>
+                      </li>
 
-                    <li className="nav-item">
-                      <Link
-                        href="/blog/"
+                      <li className="nav-item">
+                        <Link
+                          href="/blog/"
                           className={`nav-link ${
-                          pathname == "/blog/" && "active"
-                        }`}
-                      >
-                        Gallary & Blog
-                      </Link>
-                    </li>
+                            pathname == "/blog/" && "active"
+                          }`}
+                        >
+                          Blog & Gellary
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
 
-                    <li className="nav-item">
-                      <Link
-                        href="/contact/"
-                        className={`nav-link ${
-                          pathname == "/contact/" && "active"
-                        }`}
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
+                  <li className="nav-item">
+                    <Link
+                      href="/profile/"
+                      className={`nav-link ${
+                        pathname == "/profile/" && "active"
+                      }`}
+                    >
+                      Login
+                    </Link>
+                  </li>
+                </ul>
               </div>
 
               <div className="others-option">
                 <div className="search-icon" onClick={handleToggleSearchModal}>
                   <i className="ri-search-line"></i>
+                </div>
+                <div
+                  className="search-icon"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasExample"
+                  aria-controls="offcanvasExample"
+                  role="button"
+                >
+                  <i className="ri-dashboard-line"></i>
                 </div>
               </div>
             </nav>
@@ -191,6 +210,29 @@ const NavbarStyleOne = () => {
               </form>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Side Canvas */}
+      <div
+        className="offcanvas offcanvas-end"
+        tabIndex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+            Search Panel
+          </h5>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body">
+          <p>Put your search inputs or content here.</p>
         </div>
       </div>
     </>

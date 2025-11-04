@@ -48,7 +48,7 @@ const NavbarStyleTwo = () => {
         <div id="navbar" className="navbar-area navbar-style-two">
           <div className="zixon-nav">
             <div className="container-fluid">
-              <nav className="navbar navbar-expand-md navbar-light">
+              <nav className="navbar navbar-expand-md navbar-light ">
                 <Link href="/" className="navbar-brand">
                   <Image
                     src="/images/ttl_logo.png"
@@ -78,24 +78,22 @@ const NavbarStyleTwo = () => {
                     <li className="nav-item">
                       <Link
                         href="/"
-                        className={`nav-link ${
-                          pathname == "/" && "active"
-                        }`}
+                        className={`nav-link ${pathname == "/" && "active"}`}
                       >
                         Home
                       </Link>
                     </li>
 
                     <li className="nav-item">
-                    <Link
-                      href="/about-us/"
-                      className={`nav-link ${
-                        pathname == "/about-us/" && "active"
-                      }`}
-                    >
-                      About Us
-                    </Link>
-                  </li>
+                      <Link
+                        href="/about-us/"
+                        className={`nav-link ${
+                          pathname == "/about-us/" && "active"
+                        }`}
+                      >
+                        About Us
+                      </Link>
+                    </li>
                     <li className="nav-item">
                       <Link
                         href="/services/"
@@ -109,45 +107,57 @@ const NavbarStyleTwo = () => {
 
                     <li className="nav-item">
                       <Link
-                        href="/career/"
-                         className={`nav-link ${
-                          pathname == "/career/" && "active"
-                        }`}
-                      >
-                        Careers
-                      </Link>
-                    </li>
-
-                    <li className="nav-item">
-                      <Link
                         href="/training-solutions/"
-                          className={`nav-link ${
+                         className={`nav-link ${
                           pathname == "/training-solutions/" && "active"
                         }`}
                       >
-                        Training Solutions
+                        Career Training
                       </Link>
                     </li>
 
                     <li className="nav-item">
                       <Link
-                        href="/blog/"
-                          className={`nav-link ${
-                          pathname == "/blog/" && "active"
-                        }`}
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        className="dropdown-toggle nav-link"
                       >
-                        Gallary & Blog
+                        Learining Resources Center
                       </Link>
+
+                      <ul className="dropdown-menu">
+                        <li className="nav-item">
+                          <Link
+                            href="/news/"
+                            className={`nav-link ${
+                              pathname == "/news/" && "active"
+                            }`}
+                          >
+                            News
+                          </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link
+                            href="/blog/"
+                            className={`nav-link ${
+                              pathname == "/blog/" && "active"
+                            }`}
+                          >
+                            Blog & Gellary
+                          </Link>
+                        </li>
+                      </ul>
                     </li>
 
                     <li className="nav-item">
                       <Link
-                        href="/contact/"
+                        href="/user/login/"
                         className={`nav-link ${
-                          pathname == "/contact/" && "active"
+                          pathname == "/profile/" && "active"
                         }`}
                       >
-                        Contact
+                        Login
                       </Link>
                     </li>
                   </ul>
@@ -159,6 +169,15 @@ const NavbarStyleTwo = () => {
                     onClick={handleToggleSearchModal}
                   >
                     <i className="ri-search-line"></i>
+                  </div>
+                  <div
+                    className="search-icon"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample"
+                    aria-controls="offcanvasExample"
+                    role="button"
+                  >
+                    <i className="ri-dashboard-line"></i>
                   </div>
                 </div>
               </nav>
@@ -200,6 +219,29 @@ const NavbarStyleTwo = () => {
               </form>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Side Canvas */}
+      <div
+        className="offcanvas offcanvas-end"
+        tabIndex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+            Search Panel
+          </h5>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body">
+          <p>Put your search inputs or content here.</p>
         </div>
       </div>
     </>
