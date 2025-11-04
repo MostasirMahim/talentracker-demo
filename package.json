@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
+    "lucide": "^0.552.0",
+    "lucide-react": "^0.552.0",
     "next": "14.2.3",
     "react": "^18",
     "react-accessible-accordion": "^5.0.0",
+    "react-bootstrap": "^2.10.10",
+    "react-countup": "^6.5.3",
     "react-dom": "^18",
     "react-tabs": "^6.0.2",
     "sass": "^1.76.0",
