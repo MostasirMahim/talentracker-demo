@@ -324,7 +324,7 @@ textarea.form-control {
 Top Header Area CSS
 =================================================*/
 .top-header-area {
-  background-color: var(--mainColor2);
+  background: linear-gradient(90deg, var(--mainColor2) 0%, var(--mainColor) 100%);
   padding-top: 12px;
   padding-bottom: 12px;
 }
