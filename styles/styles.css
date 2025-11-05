@@ -6268,7 +6268,7 @@ Footer Area CSS
 }
 
 .single-footer-widget {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .single-footer-widget .logo {
   display: inline-block;
@@ -6276,6 +6276,8 @@ Footer Area CSS
 }
 .single-footer-widget p {
   color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
 }
 .single-footer-widget .footer-contact-info {
   margin-top: 20px;
@@ -6357,8 +6359,8 @@ Footer Area CSS
 }
 
 .copyright-area {
-  border-top: 1px solid #355253;
-  margin-top: 60px;
+  border-top: 1px solid var(--mainColor);
+  margin-top: 20px;
   padding-top: 25px;
   padding-bottom: 25px;
 }
