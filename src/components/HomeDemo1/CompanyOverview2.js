@@ -14,7 +14,7 @@ const CompanyOverview2 = () => {
             <div className="col-lg-6 col-md-12 order-2 order-lg-1">
               <div className="what-we-do-img">
                 <Image
-                  src="/images/what-we-do/what-we-do2.jpg"
+                  src="/images/about/office.jpg"
                   alt="image"
                   width={720}
                   height={720}

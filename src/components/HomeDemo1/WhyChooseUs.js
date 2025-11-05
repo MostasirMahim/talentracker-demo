@@ -38,11 +38,11 @@ const WhyChooseUs = () => {
               <div 
                 className="why-choose-us-image bg-image"
                 style={{
-                  backgroundImage: `url(/images/why-choose-us.jpg)`,
+                  backgroundImage: `url(/images/office1.jpg)`,
                 }}
               >
                 <Image
-                  src="/images/why-choose-us.jpg"
+                  src="/images/office1.jpg"
                   alt="why-choose-us"
                   width={670}
                   height={718}

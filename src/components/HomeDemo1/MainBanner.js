@@ -29,7 +29,7 @@ const MainBanner = () => {
           <div
             className="single-banner-item"
             style={{
-              backgroundImage: `url(/images/banner/banner-bg2.jpg)`,
+              backgroundImage: `url(/images/banner/banner-bg4.jpg)`,
             }}
           >
             <div className="container">
@@ -42,7 +42,7 @@ const MainBanner = () => {
                       <Link href="/contact" className="default-btn">
                         Employer <i className="ri-arrow-right-line"></i>
                       </Link>                    
-                      <Link href="/contact" className="default-btn">
+                      <Link href="/career" className="default-btn">
                         Applicant <i className="ri-arrow-right-line"></i>
                       </Link>                   
                     </div>
@@ -51,7 +51,7 @@ const MainBanner = () => {
 
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-image">
-                    <Image src="/images/banner/banner2.png" alt="image" width={655} height={810} />
+                    <Image src="/images/banner_images/slide1.png" alt="image" width={655} height={810} />
                   </div>
                 </div>
               </div>
@@ -63,7 +63,7 @@ const MainBanner = () => {
           <div
             className="single-banner-item"
             style={{
-              backgroundImage: `url(/images/banner/banner-bg3.jpg)`,
+              backgroundImage: `url(/images/banner_images/bgbn1.jpeg)`,
             }}
           >
             <div className="container">
@@ -76,7 +76,7 @@ const MainBanner = () => {
                       <Link href="/contact" className="default-btn">
                         Employer <i className="ri-arrow-right-line"></i>
                       </Link>                    
-                      <Link href="/contact" className="default-btn">
+                      <Link href="/career" className="default-btn">
                         Applicant <i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
@@ -85,7 +85,7 @@ const MainBanner = () => {
 
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-image">
-                    <Image src="/images/banner/banner3.png" alt="image" width={655} height={810} />
+                    <Image src="/images/banner_images/slide2.png" alt="image" width={655} height={810} />
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@ const MainBanner = () => {
                       <Link href="/contact" className="default-btn">
                        Employer <i className="ri-arrow-right-line"></i>
                       </Link>                    
-                      <Link href="/contact" className="default-btn">
+                      <Link href="/career" className="default-btn">
                         Applicant<i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
@@ -119,7 +119,7 @@ const MainBanner = () => {
 
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-image">
-                    <Image src="/images/banner/banner4.png" alt="image" width={655} height={810} />
+                    <Image src="/images/banner_images/slide3.png" alt="image" width={655} height={810} />
                   </div>
                 </div>
               </div>
