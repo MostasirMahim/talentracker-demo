@@ -1,0 +1,54 @@
+.job-detail-card {
+  border-radius: 12px;
+}
+
+.job-detail-logo {
+  object-fit: cover;
+}
+
+.job-body {
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* Rich text styling */
+.job-body h2,
+.job-body h3 {
+  color: var(--mainColor2);
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+.job-body p {
+  margin-bottom: 1rem;
+}
+
+.job-body strong,
+.job-body b {
+  color: var(--blackColor);
+  font-weight: 600;
+}
+
+.job-body ul {
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+.job-body li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .job-detail-card {
+    padding: 1.5rem;
+  }
+
+  .job-body {
+    font-size: 0.95rem;
+  }
+
+  .btn-main {
+    width: 100%;
+  }
+}

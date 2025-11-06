@@ -108,12 +108,12 @@ const NavbarStyleTwo = () => {
 
                     <li className="nav-item">
                       <Link
-                        href="/training-solutions/"
+                        href="/career/"
                         className={`nav-link ${
-                          pathname == "/training-solutions/" && "active"
+                          pathname == "/career/" && "active"
                         }`}
                       >
-                        Career Training
+                        Career
                       </Link>
                     </li>
 
@@ -123,7 +123,7 @@ const NavbarStyleTwo = () => {
                         onClick={(e) => e.preventDefault()}
                         className="dropdown-toggle nav-link"
                       >
-                        Learining Resources Center
+                        Training & Learning Resources Center
                       </Link>
 
                       <ul className="dropdown-menu">

@@ -1,0 +1,123 @@
+"use client";
+import React from "react";
+import { Briefcase, MapPin, Calendar, Search } from "lucide-react";
+import "./JobList.css";
+import Link from "next/link";
+import Image from "next/image";
+import SmartPagination from "../SmartPagination/SmartPagination";
+
+const JobList = ({ jobs }) => {
+  return (
+    <div className="job-list container my-4">
+      <h3 className="fw-bold text-main mb-4">All Jobs</h3>
+
+      {/* Search Bar */}
+      <div className="card border-0 shadow-sm mb-4 p-4 search-bar">
+        {/* Row 1: Keyword */}
+        <div className="row mb-3">
+          <div className="col-12">
+            <input
+              type="text"
+              className="form-control keyword-input"
+              placeholder="Search jobs by keyword (e.g., designer, backend, react)"
+            />
+          </div>
+        </div>
+
+        {/* Row 2: Filters */}
+        <div className="row g-2 align-items-center">
+          <div className="col-md-4 col-sm-6">
+            <select className="form-select">
+              <option>Category</option>
+              <option>Development</option>
+              <option>Design</option>
+              <option>Marketing</option>
+            </select>
+          </div>
+          <div className="col-md-4 col-sm-6">
+            <select className="form-select">
+              <option>Job Type</option>
+              <option>Full Time</option>
+              <option>Part Time</option>
+              <option>Remote</option>
+            </select>
+          </div>
+          <div className="col-md-3 col-sm-6">
+            <select className="form-select">
+              <option>Location</option>
+              <option>Dhaka</option>
+              <option>Chittagong</option>
+              <option>Remote</option>
+            </select>
+          </div>
+          <div className="col-md-1 col-sm-6 d-grid">
+            <button className="btn btn-main d-flex align-items-center justify-content-center">
+              <Search size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* Job Cards */}
+      {jobs.map((job, idx) => (
+        <div key={idx} className="card job-card mb-4 p-1 shadow-sm border">
+          <div className="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+            <div className="d-flex flex-column flex-md-row align-items-start gap-3 w-100">
+              <div className="d-flex justify-content-center justify-content-md-start mb-3 mb-md-0">
+                <Image
+                  src="https://www.searchenginejournal.com/wp-content/uploads/2017/06/shutterstock_268688447.jpg"
+                  alt="company-logo"
+                  className="job-logo"
+                  width={80}
+                  height={80}
+                />
+              </div>
+
+              <div className="flex-grow-1">
+                <Link href={`jobs/1`}>
+                  <h5 className="job-title text-main mb-1">{job.title}</h5>
+                </Link>
+                <div className="text-muted small d-flex flex-wrap gap-3">
+                  <span className="d-flex align-items-center">
+                    <Briefcase size={14} className="me-1 text-main" />
+                    {job.type}
+                  </span>
+                  <span className="d-flex align-items-center">
+                    <MapPin size={14} className="me-1 text-main" />
+                    {job.location}
+                  </span>
+                  <span className="d-flex align-items-center">
+                    <Calendar size={14} className="me-1 text-main" />
+                    {job.posted}
+                  </span>
+                </div>
+                <p className="mt-2 mb-0 text-secondary small">
+                  {job.description}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-3 mt-md-0 d-flex justify-content-md-end">
+              <Link href="/career" className="default-btn">
+                Apply<i className="ri-arrow-right-line"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* Pagination */}
+      <SmartPagination
+        paginationData={{
+          count: 120,
+          total_pages: 10,
+          current_page: 3,
+          next: "/jobs?page=4",
+          previous: "/jobs?page=2",
+          page_size: 10,
+        }}
+      />
+    </div>
+  );
+};
+
+export default JobList;
