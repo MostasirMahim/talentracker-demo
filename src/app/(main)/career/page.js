@@ -4,59 +4,34 @@ import PageBanner from "@/components/Common/PageBanner";
 import ProjectsThreeColumn from "@/components/Projects/ProjectsThreeColumn";
 import Footer from "@/components/Layouts/Footer";
 import JobList from "@/components/JobList/JobList";
+import axiosInstance from "@/lib/axiosIntance";
 
-const jobs = [
-  {
-    title: "Jr. Cybersecurity – Offensive (Web/App Pentester)",
-    location: "Dhaka",
-    type: "Full Time",
-    posted: "2 weeks ago",
-    description:
-      "We’re hiring Jr. Cybersecurity engineers to perform penetration testing...",
-  },
-  {
-    title: "Chief Operating Officer (COO)",
-    location: "Dhaka",
-    type: "Full Time",
-    posted: "1 month ago",
-    description:
-      "Oversee strategic operations and drive organizational efficiency...",
-  },
-  {
-    title: "Chief Operating Officer (COO)",
-    location: "Dhaka",
-    type: "Full Time",
-    posted: "1 month ago",
-    description:
-      "Oversee strategic operations and drive organizational efficiency...",
-  },
-  {
-    title: "Chief Operating Officer (COO)",
-    location: "Dhaka",
-    type: "Full Time",
-    posted: "1 month ago",
-    description:
-      "Oversee strategic operations and drive organizational efficiency...",
-  },
-  {
-    title: "Chief Operating Officer (COO)",
-    location: "Dhaka",
-    type: "Full Time",
-    posted: "1 month ago",
-    description:
-      "Oversee strategic operations and drive organizational efficiency...",
-  },
-  {
-    title: "Chief Operating Officer (COO)",
-    location: "Dhaka",
-    type: "Full Time",
-    posted: "1 month ago",
-    description:
-      "Oversee strategic operations and drive organizational efficiency...",
-  },
-];
+export default async function Page() {
+  let jobs, job_types, job_categories, job_locations;
+  try {
+    const job_req = axiosInstance.get("/api/jobs/v1/jobs/?page_size=10");
+    const job_type_req = axiosInstance.get("/api/jobs/v1/job_types/");
+    const job_category_req = axiosInstance.get("/api/jobs/v1/job_categories/");
+    const job_location_req = axiosInstance.get("/api/jobs/v1/job_locations/");
 
-export default function Page() {
+    const [
+      job_response,
+      job_type_response,
+      job_category_response,
+      job_location_response,
+    ] = await Promise.all([
+      job_req,
+      job_type_req,
+      job_category_req,
+      job_location_req,
+    ]);
+    jobs = job_response.data;
+    job_types = job_type_response.data;
+    job_categories = job_category_response.data;
+    job_locations = job_location_response.data;
+  } catch (error) {
+    console.error(error);
+  }
   return (
     <>
       <TopHeaderStyleTwo />
@@ -70,7 +45,12 @@ export default function Page() {
         activePageText="Careers"
       />
 
-      <JobList jobs={jobs} />
+      <JobList
+        jobs={jobs}
+        job_categories={job_categories}
+        job_locations={job_locations}
+        job_types={job_types}
+      />
 
       <Footer />
     </>
