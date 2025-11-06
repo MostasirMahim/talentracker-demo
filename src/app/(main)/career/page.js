@@ -1,15 +1,33 @@
 import TopHeaderStyleTwo from "@/components/Layouts/TopHeaderStyleTwo";
 import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import PageBanner from "@/components/Common/PageBanner";
-import ProjectsThreeColumn from "@/components/Projects/ProjectsThreeColumn";
+
 import Footer from "@/components/Layouts/Footer";
 import JobList from "@/components/JobList/JobList";
 import axiosInstance from "@/lib/axiosIntance";
 
-export default async function Page() {
+export default async function Page({ searchParams }) {
+  let { page, job_category, job_type, job_location } = await searchParams;
+  page = page || "1";
+  console.log(job_category, job_type, job_location);
   let jobs, job_types, job_categories, job_locations;
+  let query = "";
+  if (job_category) {
+    query += `&job_category=${job_category}`;
+  }
+  if (job_type) {
+    query += `&job_type=${job_type}`;
+  }
+  if (job_location) {
+    query += `&job_location=${job_location}`;
+  }
+  if (query.startsWith("&")) {
+    query = query.slice(1);
+  }
+  console.log(query);
   try {
-    const job_req = axiosInstance.get("/api/jobs/v1/jobs/?page_size=10");
+    const jobURL = `/api/jobs/v1/jobs/?page_size=10&page=${page}&${query}`;
+    const job_req = axiosInstance.get(jobURL);
     const job_type_req = axiosInstance.get("/api/jobs/v1/job_types/");
     const job_category_req = axiosInstance.get("/api/jobs/v1/job_categories/");
     const job_location_req = axiosInstance.get("/api/jobs/v1/job_locations/");
