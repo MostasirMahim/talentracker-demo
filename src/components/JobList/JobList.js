@@ -12,7 +12,7 @@ const JobList = ({ jobs }) => {
       <h3 className="fw-bold text-main mb-4">All Jobs</h3>
 
       {/* Search Bar */}
-      <div className="card border-0 shadow-sm mb-4 p-4 search-bar">
+      <div className="card border shadow-sm mb-4 p-4 search-bar">
         {/* Row 1: Keyword */}
         <div className="row mb-3">
           <div className="col-12">
@@ -51,8 +51,8 @@ const JobList = ({ jobs }) => {
             </select>
           </div>
           <div className="col-md-1 col-sm-6 d-grid">
-            <button className="btn btn-main d-flex align-items-center justify-content-center">
-              <Search size={18} />
+            <button className="btn btn-secondary d-flex align-items-center justify-content-center">
+              <Search size={16} /> Search
             </button>
           </div>
         </div>
