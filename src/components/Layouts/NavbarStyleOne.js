@@ -111,6 +111,16 @@ const NavbarStyleOne = () => {
                       Career
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link
+                      href="#"
+                      className={`nav-link ${
+                        pathname == "/training_solutions/" && "active"
+                      }`}
+                    >
+                      Training solutions
+                    </Link>
+                  </li>
 
                   <li className="nav-item">
                     <Link
@@ -118,7 +128,7 @@ const NavbarStyleOne = () => {
                       onClick={(e) => e.preventDefault()}
                       className="dropdown-toggle nav-link"
                     >
-                      Training & Learning Resources Center
+                      Learning Resources Center
                     </Link>
 
                     <ul className="dropdown-menu">
