@@ -13,7 +13,6 @@ const TopHeaderStyleOne = () => {
                 <div className="top-header-left-side">
                   <div className="d-flex align-items-center">
                     <ul className="top-header-social-links d-flex align-items-center">
-                      <li>Follow us :</li>
                       <li>
                         <a
                           href="https://www.facebook.com/talentracker/"
