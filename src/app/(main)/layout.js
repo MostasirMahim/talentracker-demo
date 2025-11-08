@@ -1,3 +1,12 @@
+import "../../../styles/bootstrap.min.css";
+import "../../../styles/animate.min.css";
+import "../../../styles/remixicon.css";
+
+import BootstrapClient from "@/components/Layouts/BootstrapClient";
+// Global Styles
+import "../../../styles/styles.css";
+import "../../../styles/responsive.css";
+
 import FloatingForm from "@/components/Layouts/FloatingForm";
 import GoTop from "@/components/Layouts/GoTop";
 
@@ -13,6 +22,7 @@ export default function MainLayout({ children }) {
       {children}
       <GoTop />
       <FloatingForm />
+      <BootstrapClient />
     </>
   );
 }
