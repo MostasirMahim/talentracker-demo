@@ -1,5 +1,3 @@
-
-import "../../../../styles/dashboard.css";
 import "../../../../styles/tailwind.css";
 import DashboardLayoutClient from "@/components/Dashboard/DashboardLayout";
 
