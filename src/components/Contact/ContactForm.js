@@ -1,10 +1,50 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import GoogleMap from "@/components/Contact/GoogleMap";
-import Link from "next/link";
+import { MessageSquareMore } from "lucide-react";
+import axiosInstance from "@/lib/axiosIntance";
 
 const ContactForm = () => {
+  const [full_name, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [subject, setSubject] = useState("");
+  const [company, setCompany] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      full_name,
+      email,
+      phone_number,
+      subject,
+      company,
+      message,
+    };
+    console.log(data);
+
+    try {
+      const response = await axiosInstance.post(
+        "/api/contacts/v1/contacts/",
+        data
+      );
+      if (response.status == 201) {
+        alert("Message sent successfully");
+        setFullName("");
+        setEmail("");
+        setPhoneNumber("");
+        setSubject("");
+        setCompany("");
+        setMessage("");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error sending message");
+    }
+  };
+
   return (
     <>
       <div className="contact-area ptb-100">
@@ -17,15 +57,15 @@ const ContactForm = () => {
             <div className="col-lg-6 col-md-12">
               <div className="contact-form">
                 <span className="sub-title">SEND MESSAGE</span>
-                <h2>Lets Provide Us a Message & Contact Us</h2>
+                <h2>
+                  Send us a message <MessageSquareMore />{" "}
+                </h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy liquyam erat, sed diam voluptua. At vero eos et
-                  accusam et justo duo dolo lorem ipsum dolor sit amet,
-                  consetetur sadipscing elitr.
+                  For sending us message please fill up required information and
+                  click send. We will get back to you as soon as possible.
                 </p>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-6">
                       <div className="form-group">
@@ -35,6 +75,8 @@ const ContactForm = () => {
                           placeholder="Name"
                           className="form-control"
                           required
+                          value={full_name}
+                          onChange={(e) => setFullName(e.target.value)}
                         />
                       </div>
                     </div>
@@ -46,6 +88,8 @@ const ContactForm = () => {
                           name="email"
                           placeholder="Email"
                           className="form-control"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           required
                         />
                       </div>
@@ -58,6 +102,8 @@ const ContactForm = () => {
                           name="number"
                           placeholder="Phone number"
                           className="form-control"
+                          value={phone_number}
+                          onChange={(e) => setPhoneNumber(e.target.value)}
                           required
                         />
                       </div>
@@ -70,7 +116,20 @@ const ContactForm = () => {
                           name="subject"
                           placeholder="Subject"
                           className="form-control"
-                          required
+                          value={subject}
+                          onChange={(e) => setSubject(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="company"
+                          placeholder="Company"
+                          className="form-control"
+                          value={company}
+                          onChange={(e) => setCompany(e.target.value)}
                         />
                       </div>
                     </div>
@@ -78,33 +137,15 @@ const ContactForm = () => {
                     <div className="col-lg-12 col-md-12 col-sm-12">
                       <div className="form-group">
                         <textarea
-                          name="text"
+                          name="message"
                           cols="30"
                           rows="6"
                           placeholder="Write your message..."
                           className="form-control"
                           required
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
                         />
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12 col-md-12 col-sm-12">
-                      <div className="form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="checkme"
-                        />
-                        <label className="form-check-label" htmlFor="checkme">
-                          Accept{" "}
-                          <Link href="/terms-conditions">
-                            Terms of Services
-                          </Link>{" "}
-                          and{" "}
-                          <Link href="/privacy-policy">
-                            Privacy Policy
-                          </Link>
-                        </label>
                       </div>
                     </div>
 
