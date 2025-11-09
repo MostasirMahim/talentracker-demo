@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
+import AdminLogInForm from "@/components/Auth/AdminLogInForm";
 
 function AdminLogIn() {
+
   return (
     <>
       <div className="profile-authentication-area">
@@ -16,41 +18,7 @@ function AdminLogIn() {
             <div className="container">
               <div className="signin-form">
                 <h2>Log In</h2>
-
-                <form>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Username or email"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Password"
-                    />
-                  </div>
-
-                  <div className="row align-items-center">
-                    <div className="col-lg-6 col-md-6 col-sm-6 remember-me-wrap">
-                      <p>
-                        <input type="checkbox" id="test" />
-                        <label htmlFor="test">Remember me</label>
-                      </p>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6 lost-your-password-wrap">
-                      <Link href="#" className="lost-your-password">
-                        Lost your password?
-                      </Link>
-                    </div>
-                  </div>
-
-                  <button type="submit">Log In</button>
-                </form>
-
+                <AdminLogInForm />
               </div>
             </div>
           </div>
