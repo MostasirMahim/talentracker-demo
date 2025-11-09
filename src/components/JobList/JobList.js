@@ -13,6 +13,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
   const [category, setCategory] = useState(null);
   const [jobType, setJobType] = useState(null);
   const [location, setLocation] = useState(null);
+  const [keyword, setKeyword] = useState(null);
 
   const handleSearch = () => {
     let URL = "?";
@@ -24,6 +25,9 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
     }
     if (location && location !== "None") {
       URL += `job_location=${location}&`;
+    }
+    if (keyword) {
+      URL += `keyword=${keyword}&`;
     }
     if (URL.endsWith("&")) {
       URL = URL.slice(0, -1);
@@ -38,6 +42,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
     setCategory(null);
     setJobType(null);
     setLocation(null);
+    setKeyword("");
     router.push(window.location.pathname);
     router.refresh();
   };
@@ -55,6 +60,8 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
               type="text"
               className="form-control keyword-input"
               placeholder="Search jobs by keyword (e.g., designer, backend, react)"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
             />
           </div>
         </div>
@@ -111,7 +118,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
         </div>
 
         <div>
-          {(category || jobType || location) && (
+          {(category || jobType || location || keyword) && (
             <button
               className="btn btn-secondary mt-2"
               onClick={handleClearFilters}

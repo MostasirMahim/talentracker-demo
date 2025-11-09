@@ -7,7 +7,8 @@ import JobList from "@/components/JobList/JobList";
 import axiosInstance from "@/lib/axiosIntance";
 
 export default async function Page({ searchParams }) {
-  let { page, job_category, job_type, job_location } = await searchParams;
+  let { page, job_category, job_type, job_location, keyword } =
+    await searchParams;
   page = page || "1";
   console.log(job_category, job_type, job_location);
   let jobs, job_types, job_categories, job_locations;
@@ -20,6 +21,9 @@ export default async function Page({ searchParams }) {
   }
   if (job_location) {
     query += `&job_location=${job_location}`;
+  }
+  if (keyword) {
+    query += `&keyword=${keyword}`;
   }
   if (query.startsWith("&")) {
     query = query.slice(1);
