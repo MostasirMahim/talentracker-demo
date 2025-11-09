@@ -33,6 +33,15 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
       router.refresh();
     }
   };
+
+  const handleClearFilters = () => {
+    setCategory(null);
+    setJobType(null);
+    setLocation(null);
+    router.push(window.location.pathname);
+    router.refresh();
+  };
+
   return (
     <div className="job-list container my-4">
       <h3 className="fw-bold text-main mb-4">All Jobs</h3>
@@ -100,7 +109,19 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
             </button>
           </div>
         </div>
+
+        <div>
+          {(category || jobType || location) && (
+            <button
+              className="btn btn-secondary mt-2"
+              onClick={handleClearFilters}
+            >
+              Clear Filters
+            </button>
+          )}
+        </div>
       </div>
+
       {/* Job Cards */}
       {jobs?.data?.map((job, idx) => (
         <div key={idx} className="card job-card mb-4 p-1 shadow-sm border">
