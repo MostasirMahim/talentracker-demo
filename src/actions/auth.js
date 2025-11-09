@@ -260,12 +260,13 @@ export async function forgetId_emailVerify_Verify_OTP(formData) {
   );
 
   const data = await res.json();
-  console.log(data);
   if (data.code === 200 && data.status === "success") {
+
     cookies().set({
       name: "token",
       value: data.token,
     });
+    
     redirect(`/auth/forget-password?email=${email}&step=2`);
   } else {
     return {
