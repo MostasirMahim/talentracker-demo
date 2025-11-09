@@ -10,7 +10,7 @@ export default async function Page({ searchParams }) {
   let { page, job_category, job_type, job_location, keyword } =
     await searchParams;
   page = page || "1";
-  console.log(job_category, job_type, job_location);
+
   let jobs, job_types, job_categories, job_locations;
   let query = "";
   if (job_category) {
@@ -28,7 +28,6 @@ export default async function Page({ searchParams }) {
   if (query.startsWith("&")) {
     query = query.slice(1);
   }
-  console.log(query);
   try {
     const jobURL = `/api/jobs/v1/jobs/?page_size=10&page=${page}&${query}`;
     const job_req = axiosInstance.get(jobURL);

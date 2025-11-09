@@ -1,10 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function SmartPagination({ paginationData, className = "" }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   if (!paginationData || paginationData.total_pages <= 1) return null;
 
@@ -12,7 +13,16 @@ export default function SmartPagination({ paginationData, className = "" }) {
 
   const goToPage = (page) => {
     if (page !== current_page && page >= 1 && page <= total_pages) {
-      router.push(`?page=${page}`);
+      // Clone current search params
+      const params = new URLSearchParams(searchParams.toString());
+
+      // Update or add the 'page' parameter
+      params.set("page", page);
+
+      // Build new URL with all query params
+      const newUrl = `?${params.toString()}`;
+
+      router.push(newUrl);
       router.refresh();
     }
   };
