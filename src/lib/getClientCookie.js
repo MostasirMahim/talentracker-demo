@@ -1,7 +1,8 @@
-export function getClientCookie(name) {
-  const cookie = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(name + "="));
+"use server";
+import { cookies } from "next/headers";
 
-  return cookie ? cookie.split("=")[1] : null;
+export async function getClientCookie(name) {
+  const cookieStore = cookies();         
+  const cookie = cookieStore.get(name);   
+  return cookie?.value || null; 
 }
