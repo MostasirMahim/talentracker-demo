@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
 import Image from "next/image";
 import SideCanvas from "./SideCanvas";
-
+import "./NavCss.css";
 const NavbarStyleTwo = () => {
   const pathname = usePathname();
 
