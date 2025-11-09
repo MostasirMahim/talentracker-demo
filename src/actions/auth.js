@@ -221,3 +221,88 @@ export async function emailVerify_Verify_OTP(formData) {
     };
   }
 }
+export async function forgetId_emailVerify_Send_OTP(formData) {
+  const { email } = formData;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/forget_password/`,
+    {
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+    }
+  );
+
+  const data = await res.json();
+  if (data.code === 200 && data.status === "success") {
+    redirect(`/auth/forget-password?email=${email}&step=1`);
+  } else {
+    return {
+      error: true,
+      message: data.message || "Verification failed",
+      data,
+    };
+  }
+}
+
+export async function forgetId_emailVerify_Verify_OTP(formData) {
+  const { email, otp } = formData;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/verify_otp/`,
+    {
+      method: "POST",
+      body: JSON.stringify({ email, otp }),
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+    }
+  );
+
+  const data = await res.json();
+  console.log(data);
+  if (data.code === 200 && data.status === "success") {
+    cookies().set({
+      name: "token",
+      value: data.token,
+    });
+    redirect(`/auth/forget-password?email=${email}&step=2`);
+  } else {
+    return {
+      error: true,
+      message: data.message || "Verification failed",
+      data,
+    };
+  }
+}
+
+export async function forgetId_Reset(formData) {
+  const { email, password } = formData;
+  const token = cookies().get("token")?.value;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/reset_password/`,
+    {
+      method: "POST",
+      body: JSON.stringify({ email, password, token }),
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+    }
+  );
+
+  const data = await res.json();
+  if (data.code === 200 && data.status === "success") {
+    cookies().set({
+      name: "token",
+      value: "",
+      maxAge: 0,
+    });
+    redirect("/auth/forget-password?success=true");
+  } else {
+    return {
+      error: true,
+      message: data.message || "Verification failed",
+      data,
+    };
+  }
+}
