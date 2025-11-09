@@ -1,3 +1,5 @@
+import "../../../../styles/tailwind.css";
+import DashboardLayoutClient from "@/components/Dashboard/DashboardLayout";
 
 export const metadata = {
   title: "TalenTracker Limited - Creating Shared Experiences !!",
@@ -8,7 +10,7 @@ export const metadata = {
 export default function DashboardLayout({ children }) {
   return (
     <>
-      {children}
+      <DashboardLayoutClient>{children}</DashboardLayoutClient>
     </>
   );
 }

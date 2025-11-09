@@ -1,9 +1,11 @@
-import React from 'react'
+import DashboardHome from "@/components/Dashboard/home/DashboardHome";
 
-function page() {
+function DashboardPage() {
   return (
-    <div>page</div>
-  )
+    <>
+      <DashboardHome />
+    </>
+  );
 }
 
-export default page
+export default DashboardPage;
