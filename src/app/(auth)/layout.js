@@ -1,5 +1,10 @@
-import GoTop from "@/components/Layouts/GoTop";
-import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
+import "../../../styles/bootstrap.min.css";
+import "../../../styles/animate.min.css";
+import "../../../styles/remixicon.css";
+
+// Global Styles
+import "../../../styles/styles.css";
+import "../../../styles/responsive.css";
 
 export const metadata = {
   title: "TalenTracker Limited - Creating Shared Experiences !!",
@@ -11,7 +16,6 @@ export default function AuthLayout({ children }) {
   return (
     <>
       {children}
-      <GoTop />
     </>
   );
 }
