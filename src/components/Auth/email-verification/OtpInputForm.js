@@ -35,10 +35,9 @@ export default function OtpInputForm({ email }) {
 
     } catch (err) {
       console.log(err);
-      toast.error( err.message || "Verification failed");
+      toast.error("Verification failed");
     } finally {
       setLoading(false);
-      toast.success("Verification successful");
     }
   }
 

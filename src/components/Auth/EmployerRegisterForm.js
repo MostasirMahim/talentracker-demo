@@ -31,7 +31,7 @@ function EmployerRegisterForm() {
     
         } catch (err) {
           console.log(err);
-          toast.error( err.message || "Registration failed");
+          toast.error("Registration failed");
         } finally {
           setLoading(false);
         }

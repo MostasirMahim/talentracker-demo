@@ -27,7 +27,7 @@ export default function EmailInputForm() {
     }
 
     } catch (err) {
-      toast.error( err.message || "Send OTP failed");
+      toast.error( "Send OTP failed");
     } finally {
       setLoading(false);
     }
