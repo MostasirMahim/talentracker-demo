@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import UserRegisterForm from "@/components/Auth/UserRegisterForm";
 
 function UserRegister() {
   return (
@@ -16,47 +17,7 @@ function UserRegister() {
             <div className="container">
               <div className="signup-form">
                 <h2>Sign Up</h2>
-
-                <form>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Full Name"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="Email Address"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Password"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Confirm Password"
-                    />
-                  </div>
-
-                  <button type="submit">Sign Up</button>
-
-                  <span className="dont-account">
-                    Already have an account?{" "}
-                    <Link href="/auth/user/login">Log In Now!</Link>
-                  </span>
-                </form>
+                <UserRegisterForm />
               </div>
             </div>
           </div>
