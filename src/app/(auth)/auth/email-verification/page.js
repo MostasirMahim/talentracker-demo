@@ -1,23 +1,40 @@
 import Link from "next/link";
 import Image from "next/image";
-import UserRegisterForm from "@/components/Auth/UserRegisterForm";
+import EmailInputForm from "@/components/Auth/email-verification/EmailInputForm";
+import OtpInputForm from "@/components/Auth/email-verification/OtpInputForm";
+import VerificationSuccess from "@/components/Auth/email-verification/VerificationSuccess";
 
-function UserRegister() {
+function EmailVerification({ searchParams }) {
+  const email = searchParams?.email;
+  const success = searchParams?.success;
+
+  let FormComponent = <EmailInputForm />;
+
+  if (success) {
+    FormComponent = <VerificationSuccess />;
+  } else if (email) {
+    FormComponent = <OtpInputForm email={email} />;
+  }
   return (
     <>
       <div className="profile-authentication-area">
         <div className="logo">
           <Link href="/" className="d-inline-block">
-            <Image src="/images/ttl_logo.png" alt="logo" width={200} height={50} />
+            <Image
+              src="/images/ttl_logo.png"
+              alt="logo"
+              width={200}
+              height={50}
+            />
           </Link>
         </div>
 
         <div className="d-table">
           <div className="d-table-cell">
             <div className="container">
-              <div className="signup-form">
-                <h2>Sign Up</h2>
-                <UserRegisterForm />
+              <div className="signin-form">
+                <h2>Email Verification</h2>
+                {FormComponent}
               </div>
             </div>
           </div>
@@ -60,4 +77,4 @@ function UserRegister() {
   );
 }
 
-export default UserRegister;
+export default EmailVerification;

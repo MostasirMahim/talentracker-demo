@@ -1,23 +1,44 @@
 import Link from "next/link";
 import Image from "next/image";
-import UserRegisterForm from "@/components/Auth/UserRegisterForm";
+import PasswordResetSuccess from "@/components/Auth/forget-password/ResetSuccess";
+import ForgetIdEmail from "@/components/Auth/forget-password/ForgetIdEmail";
+import ForgetOtp from "@/components/Auth/forget-password/ForgetOtp";
+import ResetPassword from "@/components/Auth/forget-password/ResetPassword";
 
-function UserRegister() {
+function EmailVerification({ searchParams }) {
+  const email = searchParams?.email;
+  const success = searchParams?.success;
+  const step = searchParams?.step;
+
+  let FormComponent = <ForgetIdEmail />;
+
+  if (success) {
+    FormComponent = <PasswordResetSuccess />;
+  } else if (email && step === "1") {
+    FormComponent = <ForgetOtp email={email} />;
+  } else if (email && step === "2") {
+    FormComponent = <ResetPassword email={email} />;
+  }
   return (
     <>
       <div className="profile-authentication-area">
         <div className="logo">
           <Link href="/" className="d-inline-block">
-            <Image src="/images/ttl_logo.png" alt="logo" width={200} height={50} />
+            <Image
+              src="/images/ttl_logo.png"
+              alt="logo"
+              width={200}
+              height={50}
+            />
           </Link>
         </div>
 
         <div className="d-table">
           <div className="d-table-cell">
             <div className="container">
-              <div className="signup-form">
-                <h2>Sign Up</h2>
-                <UserRegisterForm />
+              <div className="signin-form">
+                <h2>Forget Password</h2>
+                {FormComponent}
               </div>
             </div>
           </div>
@@ -60,4 +81,4 @@ function UserRegister() {
   );
 }
 
-export default UserRegister;
+export default EmailVerification;
