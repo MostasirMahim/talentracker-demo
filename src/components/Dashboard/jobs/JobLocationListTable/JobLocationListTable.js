@@ -1,12 +1,15 @@
 "use client";
 
 import axiosInstance from "@/lib/axiosIntance";
+import { useJobLocation } from "@/stores/job_dependencies_update_store";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
 const JobLocationListTable = ({ jobLocation = {} }) => {
   const router = useRouter();
+  const setLocation = useJobLocation((state) => state.setLocation);
+
   const handleDelete = async (id) => {
     try {
       const response = await axiosInstance.delete(
@@ -23,6 +26,8 @@ const JobLocationListTable = ({ jobLocation = {} }) => {
   };
 
   const handleUpdate = (id) => {
+    const location = jobLocation?.data?.find((type) => type.id === id);
+    setLocation(location);
     router.push("/dashboard/jobs/job_locations/create/?location_id=" + id);
   };
 

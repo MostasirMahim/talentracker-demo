@@ -1,6 +1,9 @@
 "use client";
 
 import axiosInstance from "@/lib/axiosIntance";
+import { useJobLocation } from "@/stores/job_dependencies_update_store";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -11,18 +14,65 @@ export default function JobLocationForm() {
     reset,
     formState: { errors, isSubmitting },
     setError,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      city: "",
+      country: "",
+    },
+  });
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const locationId = searchParams.get("location_id");
+
+  const getLocation = useJobLocation((state) => state.getLocation);
+  const clearLocation = useJobLocation((state) => state.clearLocation);
+
+  useEffect(() => {
+    if (locationId) {
+      const location = getLocation();
+      const city = location.city;
+      const country = location.country;
+      console.log(city, country);
+      reset({
+        city: city,
+        country: country,
+      });
+    } else {
+      reset({
+        city: "",
+        country: "",
+      });
+    }
+
+    return () => {
+      reset();
+    };
+  }, [locationId, clearLocation, getLocation, reset]);
 
   const onSubmit = async (data) => {
-    console.log("Submitted Data:", data);
     try {
-      const response = await axiosInstance.post(
-        "/api/jobs/v1/job_locations/",
-        data
-      );
-      if (response.status == 201) {
-        toast.success("Job location created successfully");
-        reset();
+      if (locationId) {
+        const response = await axiosInstance.put(
+          `/api/jobs/v1/job_locations/${locationId}/`,
+          data
+        );
+        if (response.status == 200) {
+          toast.success("Job location updated successfully");
+          reset();
+        }
+        clearLocation();
+        router.push("/dashboard/jobs/job_locations/view/");
+        router.refresh();
+        return;
+      } else {
+        const response = await axiosInstance.post(
+          "/api/jobs/v1/job_locations/",
+          data
+        );
+        if (response.status == 201) {
+          toast.success("Job location created successfully");
+          reset();
+        }
       }
     } catch (error) {
       console.log(error);
