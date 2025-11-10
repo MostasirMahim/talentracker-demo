@@ -30,7 +30,7 @@ export default function DashboardLayout({ children }) {
     { href: "#", label: "Home", icon: Home },
     { href: "#", label: "Users", icon: Users },
     { href: "#", label: "Settings", icon: Settings },
-    { href: "#", label: "Jobs", icon: Flower },
+    { href: "/dashboard/jobs", label: "Jobs", icon: Flower },
     { href: "#", label: "Blogs", icon: FilePenLine },
     { href: "#", label: "Analytics", icon: Settings },
     { href: "#", label: "Teams", icon: Users },
