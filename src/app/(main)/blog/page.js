@@ -17,17 +17,19 @@ export default async function BlogPage() {
 
   try {
     // fetch blogs and gallery at the same time
-    const [blogResponse, galleryResponse] = await Promise.all([
-      axiosInstance.get("/api/blogs/v1/blogs/", {
-        headers: { Cookie: `access_token=${authToken}` },
-      }),
+    // const [blogResponse, galleryResponse] = await Promise.all([
+    //   axiosInstance.get("/api/blogs/v1/blogs/")
+      //   headers: { Cookie: `access_token=${authToken}` },
+      // ),
       // axiosInstance.get("/api/blogs/v1/gallery/", {
       //   headers: { Cookie: `access_token=${authToken}` },
       // }),
-    ]);
+    // ]);
+    const blogResponse = await axiosInstance.get("/api/blogs/v1/blogs/");
 
     // slice first 6 blogs for homepage
     blogs = blogResponse.data.data?.slice(0, 6) || [];
+    console.log("Blogs Data:", blogs);
     // gallery = galleryResponse.data.data?.slice(0, 6) || [];
   } catch (err) {
     console.error(err);

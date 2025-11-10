@@ -4,88 +4,19 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const posts = [
-  {
-    id: 1,
-    image: "/images/blog/blog1.jpg",
-    altText: "Blog Image",
-    date: "Jan 22, 2024",
-    author: "Lords Evans",
-    authorLink: "/blog/author",
-    title: "The Secret of Your Business Success Find Quickly",
-    shortDesc:
-      "Lorem ipsum dolor sit amet, conseteturants atal into sadipscing elitr, sed diam nonumy eirmod nsa ada tempor invidunt ut.",
-    btnText: "Read More",
-    detailsUrl: "/blog/details",
-  },
-  {
-    id: 2,
-    image: "/images/blog/blog2.jpg",
-    altText: "Blog Image",
-    date: "Jan 22, 2024",
-    author: "Sarah Taylor",
-    authorLink: "/blog/author",
-    title: "Consulting is a Good and Best Into Our Company",
-    shortDesc:
-      "Lorem ipsum dolor sit amet, conseteturants atal into sadipscing elitr, sed diam nonumy eirmod nsa ada tempor invidunt ut.",
-    btnText: "Read More",
-    detailsUrl: "/blog/details",
-  },
-  {
-    id: 3,
-    image: "/images/blog/blog3.jpg",
-    altText: "Blog Image",
-    date: "Jan 22, 2024",
-    author: "James Andy",
-    authorLink: "/blog/author",
-    title: "Business Has Become a Good in the Global World",
-    shortDesc:
-      "Lorem ipsum dolor sit amet, conseteturants atal into sadipscing elitr, sed diam nonumy eirmod nsa ada tempor invidunt ut.",
-    btnText: "Read More",
-    detailsUrl: "/blog/details",
-  },
-  {
-    id: 4,
-    image: "/images/blog/blog4.jpg",
-    altText: "Blog Image",
-    date: "Jan 16, 2024",
-    author: "James Andy",
-    authorLink: "/blog/author",
-    title: "Business Has Become a Good in the Global World",
-    shortDesc:
-      "Lorem ipsum dolor sit amet, conseteturants atal into sadipscing elitr, sed diam nonumy eirmod nsa ada tempor invidunt ut.",
-    btnText: "Read More",
-    detailsUrl: "/blog/details",
-  },
-  {
-    id: 5,
-    image: "/images/blog/blog5.jpg",
-    altText: "Blog Image",
-    date: "Jan 14, 2024",
-    author: "Sarah Taylor",
-    authorLink: "/blog/author",
-    title: "Magic Monday: Looking Forward With Hope",
-    shortDesc:
-      "Lorem ipsum dolor sit amet, conseteturants atal into sadipscing elitr, sed diam nonumy eirmod nsa ada tempor invidunt ut.",
-    btnText: "Read More",
-    detailsUrl: "/blog/details",
-  },
-  {
-    id: 6,
-    image: "/images/blog/blog6.jpg",
-    altText: "Blog Image",
-    date: "Jan 12, 2024",
-    author: "James Andy",
-    authorLink: "/blog/author",
-    title: "Outsourcing IT Services: The Hows and Why",
-    shortDesc:
-      "Lorem ipsum dolor sit amet, conseteturants atal into sadipscing elitr, sed diam nonumy eirmod nsa ada tempor invidunt ut.",
-    btnText: "Read More",
-    detailsUrl: "/blog/details",
-  },
-];
 
 const BlogGridPost = ({ blogs }) => {
+  const formatBDTime = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleString("en-BD", {
+      timeZone: "Asia/Dhaka",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      // hour: "2-digit",
+      // minute: "2-digit",
+    });
+  };
   return (
     <>
       <div className="blog-area ptb-100">
@@ -96,10 +27,10 @@ const BlogGridPost = ({ blogs }) => {
                 <div className="col-lg-4 col-md-6" key={blog.id}>
                   <div className="single-blog-post">
                     <div className="post-image">
-                      <Link href={blog.detailsUrl} className="d-block">
+                      <Link href="#" className="d-block">
                         <Image
-                          src={blog.image}
-                          alt={blog.altText}
+                          src={blog.featured_image || "/images/blog/blog1.jpg"}
+                          alt={blog.alt_text}
                           width={860}
                           height={622}
                         />
@@ -108,26 +39,31 @@ const BlogGridPost = ({ blogs }) => {
                     <div className="post-content">
                       <ul className="meta">
                         <li>
-                          <i className="ri-calendar-2-line"></i> {blog.date}
+                          <i className="ri-calendar-2-line"></i> {formatBDTime(blog.created_at)}
                         </li>
                         <li>
                           <i className="ri-user-voice-line"></i>
-                          <Link href={blog.authorLink}>{blog.author}</Link>
+                          <Link href="#">{blog.author}</Link>
                         </li>
                       </ul>
                       <h3>
-                        <Link href={blog.detailsUrl}>{blog.title}</Link>
+                        <Link href="#">{blog.title}</Link>
                       </h3>
 
-                      <p>{blog.shortDesc}</p>
+                      <p>{blog.summary}</p>
 
-                      <Link href={blog.detailsUrl} className="default-btn">
-                        {blog.btnText} <i className="ri-arrow-right-line"></i>
+                      <Link href = {'/blog/all'} className="default-btn">
+                        Read More<i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
                   </div>
                 </div>
               ))}
+          </div>
+          <div className="read-more-btn">
+            <Link href="/blog/all" className="default-btn">
+              See More <i className="ri-arrow-right-line"></i>
+            </Link>
           </div>
         </div>
       </div>
