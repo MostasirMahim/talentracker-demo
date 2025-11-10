@@ -46,6 +46,11 @@ export default function DashboardLayout({ children }) {
       label: "Set Job locations",
       icon: Flower,
     },
+    {
+      href: "/dashboard/jobs/post",
+      label: "Post Job",
+      icon: Flower,
+    },
     { href: "#", label: "Blogs", icon: FilePenLine },
     { href: "#", label: "Analytics", icon: Settings },
     { href: "#", label: "Teams", icon: Users },
