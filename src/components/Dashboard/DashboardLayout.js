@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Menu,
   Home,
@@ -18,6 +18,13 @@ import {
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("dashboardReloaded")) {
+      sessionStorage.setItem("dashboardReloaded", "true");
+      window.location.reload();
+    }
+  }, []);
 
   const navItems = [
     { href: "#", label: "Home", icon: Home },

@@ -9,6 +9,7 @@ import "../../../styles/responsive.css";
 
 import FloatingForm from "@/components/Layouts/FloatingForm";
 import GoTop from "@/components/Layouts/GoTop";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "TalenTracker Limited - Creating Shared Experiences !!",
@@ -19,6 +20,7 @@ export const metadata = {
 export default function MainLayout({ children }) {
   return (
     <>
+      <ToastContainer />
       {children}
       <GoTop />
       <FloatingForm />
