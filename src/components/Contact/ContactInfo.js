@@ -12,13 +12,8 @@ const ContactInfo = () => {
             <div className="col-lg-6 col-md-12">
               <div className="contact-content">
                 <span className="sub-title">CONTACT US</span>
-                <h2>Contact Us With Your Details & Ready To Start</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod liquyam erat, sed diam voluptua. At vero
-                  eos et accusam et justo duo dolores et ea lorem ipsum dolor
-                  sit amet, consetetur sadipscing elitr.
-                </p>
+                <h2>Contact Us </h2>
+                <p>Connect with our experts to build a better workplace.</p>
 
                 <div className="row justify-content-center">
                   <div className="col-lg-4 col-md-4 col-sm-6">

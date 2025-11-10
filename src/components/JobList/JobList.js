@@ -7,12 +7,17 @@ import Image from "next/image";
 import SmartPagination from "../SmartPagination/SmartPagination";
 import { format_date } from "@/lib/utility_functions";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page");
+  console.log({ page });
   const [category, setCategory] = useState(null);
   const [jobType, setJobType] = useState(null);
   const [location, setLocation] = useState(null);
+  const [keyword, setKeyword] = useState("");
 
   const handleSearch = () => {
     let URL = "?";
@@ -25,6 +30,12 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
     if (location && location !== "None") {
       URL += `job_location=${location}&`;
     }
+    if (keyword) {
+      URL += `keyword=${keyword}&`;
+    }
+    if (page) {
+      URL += `page=${page}&`;
+    }
     if (URL.endsWith("&")) {
       URL = URL.slice(0, -1);
     }
@@ -33,6 +44,16 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
       router.refresh();
     }
   };
+
+  const handleClearFilters = () => {
+    setCategory(null);
+    setJobType(null);
+    setLocation(null);
+    setKeyword("");
+    router.push(window.location.pathname);
+    router.refresh();
+  };
+
   return (
     <div className="job-list container my-4">
       <h3 className="fw-bold text-main mb-4">All Jobs</h3>
@@ -46,6 +67,8 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
               type="text"
               className="form-control keyword-input"
               placeholder="Search jobs by keyword (e.g., designer, backend, react)"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
             />
           </div>
         </div>
@@ -100,7 +123,19 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
             </button>
           </div>
         </div>
+
+        <div>
+          {(category || jobType || location || keyword) && (
+            <button
+              className="btn btn-secondary mt-2"
+              onClick={handleClearFilters}
+            >
+              Clear Filters
+            </button>
+          )}
+        </div>
       </div>
+
       {/* Job Cards */}
       {jobs?.data?.map((job, idx) => (
         <div key={idx} className="card job-card mb-4 p-1 shadow-sm border">
@@ -117,7 +152,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
               </div>
 
               <div className="flex-grow-1">
-                <Link href={`jobs/1`}>
+                <Link href={`jobs/${job?.id}/`}>
                   <h5 className="job-title text-main mb-1">{job?.title}</h5>
                 </Link>
                 <div className="text-muted small d-flex flex-wrap gap-3">
@@ -141,7 +176,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
             </div>
 
             <div className="mt-3 mt-md-0 d-flex justify-content-md-end">
-              <Link href="/career" className="default-btn">
+              <Link href={`/career/jobs/${job?.id}/`} className="default-btn">
                 Apply<i className="ri-arrow-right-line"></i>
               </Link>
             </div>

@@ -12,6 +12,7 @@ import "./JobDetails.css";
 
 export default function JobDetails({ job }) {
   if (!job) return null;
+  console.log(job);
 
   return (
     <div className="container my-5">
