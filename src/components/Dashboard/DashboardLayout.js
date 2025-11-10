@@ -14,6 +14,7 @@ import {
   FilePenLine,
   Flower,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -30,7 +31,21 @@ export default function DashboardLayout({ children }) {
     { href: "#", label: "Home", icon: Home },
     { href: "#", label: "Users", icon: Users },
     { href: "#", label: "Settings", icon: Settings },
-    { href: "/dashboard/jobs", label: "Jobs", icon: Flower },
+    {
+      href: "/dashboard/jobs/job_types/create",
+      label: "Set Job type",
+      icon: Flower,
+    },
+    {
+      href: "/dashboard/jobs/job_categories/create",
+      label: "Set Job category",
+      icon: Flower,
+    },
+    {
+      href: "/dashboard/jobs/job_locations/create",
+      label: "Set Job locations",
+      icon: Flower,
+    },
     { href: "#", label: "Blogs", icon: FilePenLine },
     { href: "#", label: "Analytics", icon: Settings },
     { href: "#", label: "Teams", icon: Users },
@@ -69,7 +84,7 @@ export default function DashboardLayout({ children }) {
         </div>
         <nav className="flex-1 overflow-y-auto py-6 px-0 overflow-x-hidden">
           {navItems.map((item, i) => (
-            <a
+            <Link
               key={i}
               href={item.href}
               className={`flex hover:bg-blue-500/50  transition-colors group duration-200 items-center py-3  relative w-full ${
@@ -89,7 +104,7 @@ export default function DashboardLayout({ children }) {
                   {item.label}
                 </div>
               )}
-            </a>
+            </Link>
           ))}
         </nav>
         <div
