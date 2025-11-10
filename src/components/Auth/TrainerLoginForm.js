@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { userLogin } from "@/actions/auth";
+import { trainerLogin } from "@/actions/auth";
 import Link from "next/link";
 
-export default function UserLoginForm() {
+export default function TrainerLoginForm() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
 
@@ -17,7 +17,7 @@ export default function UserLoginForm() {
         email: values.email,
         password: values.password,
       };
-      const res = await userLogin(formData);
+      const res = await trainerLogin(formData);
       if (res?.error) {
         Object.entries(res?.data?.errors).forEach(([field, messages]) => {
           messages.forEach((msg) => toast.error(msg));
@@ -27,7 +27,7 @@ export default function UserLoginForm() {
         toast.success("Login successful");
       }
     } catch (err) {
-      toast.error( "Login failed");
+      toast.error(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -75,12 +75,12 @@ export default function UserLoginForm() {
         className="btn btn-primary w-100"
         disabled={loading}
       >
-        {loading ? "Logging in..." : "Log In As User"}
+        {loading ? "Logging in..." : "Log In As Trainer"}
       </button>
 
       <span className="dont-account">
         Don&apos;t have an account?{" "}
-        <Link href="/auth/user/register">Sign Up Now!</Link>
+        <Link href="/auth/trainer/register">Sign Up Now!</Link>
       </span>
     </form>
   );

@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { employerLogin } from "@/actions/auth";
+import { candidateLogin } from "@/actions/auth";
 import Link from "next/link";
 
-export default function EmployerLoginForm() {
+export default function CandidateLoginForm() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
 
@@ -17,7 +17,7 @@ export default function EmployerLoginForm() {
         email: values.email,
         password: values.password,
       };
-      const res = await employerLogin(formData);
+      const res = await candidateLogin(formData);
       if (res?.error) {
         Object.entries(res?.data?.errors).forEach(([field, messages]) => {
           messages.forEach((msg) => toast.error(msg));
@@ -27,7 +27,7 @@ export default function EmployerLoginForm() {
         toast.success("Login successful");
       }
     } catch (err) {
-      toast.error(err.message || "Login failed");
+      toast.error( "Login failed");
     } finally {
       setLoading(false);
     }
@@ -75,12 +75,12 @@ export default function EmployerLoginForm() {
         className="btn btn-primary w-100"
         disabled={loading}
       >
-        {loading ? "Logging in..." : "Log In As Employer"}
+        {loading ? "Logging in..." : "Log In As Candidate"}
       </button>
 
       <span className="dont-account">
         Don&apos;t have an account?{" "}
-        <Link href="/auth/employer/register">Sign Up Now!</Link>
+        <Link href="/auth/candidate/register">Sign Up Now!</Link>
       </span>
     </form>
   );

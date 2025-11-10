@@ -25,7 +25,7 @@ export async function adminLogin(formData) {
   }
 }
 
-export async function userLogin(formData) {
+export async function candidateLogin(formData) {
   const { email, password } = formData;
 
   const res = await axiosInstance.post(`/api/authentication/v1/login/`, {
@@ -44,7 +44,7 @@ export async function userLogin(formData) {
   }
 }
 
-export async function employerLogin(formData) {
+export async function trainerLogin(formData) {
   const { email, password } = formData;
 
   const res = await axiosInstance.post(`/api/authentication/v1/login/`, {
@@ -63,7 +63,7 @@ export async function employerLogin(formData) {
   }
 }
 
-export async function userRegister(formData) {
+export async function candidateRegister(formData) {
   const { email, password, first_name, last_name, remember_me } = formData;
 
   const res = await axiosInstance.post(
@@ -84,7 +84,7 @@ export async function userRegister(formData) {
   }
 }
 
-export async function employerRegister(formData) {
+export async function trainerRegister(formData) {
   const { email, password, first_name, last_name, remember_me } = formData;
 
   const res = await axiosInstance.post(

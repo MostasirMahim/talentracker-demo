@@ -1,11 +1,11 @@
 "use client";
-import { employerRegister } from "@/actions/auth";
+import { trainerRegister } from "@/actions/auth";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-function EmployerRegisterForm() {
+function TrainerRegisterForm() {
      const [loading, setLoading] = useState(false);
       const { register, handleSubmit } = useForm();
     
@@ -18,7 +18,7 @@ function EmployerRegisterForm() {
           first_name: values.first_name,
           last_name: values.last_name
         }
-        const res = await employerRegister(formData);
+        const res = await trainerRegister(formData);
         
         if (res?.error) {
           Object.entries(res?.data?.errors).forEach(([field, messages]) => {
@@ -69,14 +69,14 @@ function EmployerRegisterForm() {
         />
       </div>
 
-      <button type="submit">{loading ? "Loading..." : "Sign Up As Employer"}</button>
+      <button type="submit">{loading ? "Loading..." : "Sign Up As Trainer"}</button>
 
       <span className="dont-account">
         Already have an account?{" "}
-        <Link href="/auth/employer/login">Log In Now!</Link>
+        <Link href="/auth/trainer/login">Log In Now!</Link>
       </span>
     </form>
   );
 }
 
-export default EmployerRegisterForm;
+export default TrainerRegisterForm;

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-function UserRegisterForm() {
+function CandidateRegisterForm() {
      const [loading, setLoading] = useState(false);
       const { register, handleSubmit } = useForm();
     
@@ -69,14 +69,14 @@ function UserRegisterForm() {
         />
       </div>
 
-      <button type="submit">{loading ? "Loading..." : "Sign Up As User"}</button>
+      <button type="submit">{loading ? "Loading..." : "Sign Up As Candidate"}</button>
 
       <span className="dont-account">
         Already have an account?{" "}
-        <Link href="/auth/user/login">Log In Now!</Link>
+        <Link href="/auth/candidate/login">Log In Now!</Link>
       </span>
     </form>
   );
 }
 
-export default UserRegisterForm;
+export default CandidateRegisterForm;
