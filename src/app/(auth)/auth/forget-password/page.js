@@ -1,24 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import PasswordResetSuccess from "@/components/Auth/forget-password/ResetSuccess";
-import ForgetIdEmail from "@/components/Auth/forget-password/ForgetIdEmail";
-import ForgetOtp from "@/components/Auth/forget-password/ForgetOtp";
-import ResetPassword from "@/components/Auth/forget-password/ResetPassword";
+import ForgetPasswordForm from "@/components/Auth/forget-password/ForgetPasswordForm";
 
-function EmailVerification({ searchParams }) {
-  const email = searchParams?.email;
-  const success = searchParams?.success;
-  const step = searchParams?.step;
-
-  let FormComponent = <ForgetIdEmail />;
-
-  if (success) {
-    FormComponent = <PasswordResetSuccess />;
-  } else if (email && step === "1") {
-    FormComponent = <ForgetOtp email={email} />;
-  } else if (email && step === "2") {
-    FormComponent = <ResetPassword email={email} />;
-  }
+function EmailVerification() {
   return (
     <>
       <div className="profile-authentication-area">
@@ -38,7 +22,7 @@ function EmailVerification({ searchParams }) {
             <div className="container">
               <div className="signin-form">
                 <h2>Forget Password</h2>
-                {FormComponent}
+                <ForgetPasswordForm/>
               </div>
             </div>
           </div>

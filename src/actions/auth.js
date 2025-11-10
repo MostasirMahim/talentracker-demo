@@ -2,172 +2,142 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import axiosInstance from "@/lib/axiosIntance";
 
 export async function adminLogin(formData) {
   const { email, password } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/login/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-      credentials: "include",
+  try {
+    const res = await axiosInstance.post(`/api/authentication/v1/login/`, {
+      email,
+      password,
+    });
+
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      cookies().set({ name: "access_token", value: data.access_token });
+      cookies().set({ name: "user_type", value: data.user_type });
+      return data;
+    } else {
+      return { error: true, message: data.message || "Login failed", data };
     }
-  );
-
-  const data = await res.json();
-
-  if (data.code === 200 && data.status === "success") {
-    cookies().set({
-      name: "access_token",
-      value: data.access_token,
-    });
-    cookies().set({
-      name: "user_type",
-      value: data.user_type,
-    });
-
-    if (data.user_type === "") redirect("/dashboard");
-    else redirect("/");
-  } else {
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Login failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
-export async function userLogin(formData) {
+
+export async function candidateLogin(formData) {
   const { email, password } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/login/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-      credentials: "include",
+  try {
+    const res = await axiosInstance.post(`/api/authentication/v1/login/`, {
+      email,
+      password,
+    });
+
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      cookies().set({ name: "access_token", value: data.access_token });
+      cookies().set({ name: "user_type", value: data.user_type });
+      return data;
+    } else {
+      return { error: true, message: data.message || "Login failed", data };
     }
-  );
-
-  const data = await res.json();
-
-  if (data.code === 200 && data.status === "success") {
-    cookies().set({
-      name: "access_token",
-      value: data.access_token,
-    });
-    cookies().set({
-      name: "user_type",
-      value: data.user_type,
-    });
-
-    redirect("/");
-  } else {
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Login failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
 
-export async function employerLogin(formData) {
+export async function trainerLogin(formData) {
   const { email, password } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/login/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-      credentials: "include",
+  try {
+    const res = await axiosInstance.post(`/api/authentication/v1/login/`, {
+      email,
+      password,
+    });
+
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      cookies().set({ name: "access_token", value: data.access_token });
+      cookies().set({ name: "user_type", value: data.user_type });
+      return data;
+    } else {
+      return { error: true, message: data.message || "Login failed", data };
     }
-  );
-
-  const data = await res.json();
-
-  if (data.code === 200 && data.status === "success") {
-    cookies().set({
-      name: "access_token",
-      value: data.access_token,
-    });
-    cookies().set({
-      name: "user_type",
-      value: data.user_type,
-    });
-
-    redirect("/");
-  } else {
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Login failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
 
-export async function userRegister(formData) {
+export async function candidateRegister(formData) {
   const { email, password, first_name, last_name, remember_me } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/register/candidate/`,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password,
-        first_name,
-        last_name,
-        remember_me,
-      }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-    }
-  );
+  try {
+    const res = await axiosInstance.post(
+      `/api/authentication/v1/register/candidate/`,
+      { email, password, first_name, last_name, remember_me }
+    );
 
-  const data = await res.json();
-  if (data.code === 201 && data.status === "success") {
-    redirect("/auth/user/login");
-  } else {
+    const data = res.data;
+
+    if (data.code === 201 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Registration failed",
+        data,
+      };
+    }
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Registration failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
-export async function employerRegister(formData) {
+
+export async function trainerRegister(formData) {
   const { email, password, first_name, last_name, remember_me } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/register/trainer/`,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password,
-        first_name,
-        last_name,
-        remember_me,
-      }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-    }
-  );
+  try {
+    const res = await axiosInstance.post(
+      `/api/authentication/v1/register/trainer/`,
+      { email, password, first_name, last_name, remember_me }
+    );
 
-  const data = await res.json();
-  if (data.code === 201 && data.status === "success") {
-    redirect("/auth/user/login");
-  } else {
+    const data = res.data;
+    if (data.code === 201 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Registration failed",
+        data,
+      };
+    }
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Registration failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
@@ -175,24 +145,27 @@ export async function employerRegister(formData) {
 export async function emailVerify_Send_OTP(formData) {
   const { email } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/register/email/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-    }
-  );
+  try {
+    const res = await axiosInstance.post(
+      `/api/authentication/v1/register/email/`,
+      { email }
+    );
 
-  const data = await res.json();
-  if (data.code === 201 && data.status === "success") {
-    redirect("/auth/email-verification?email=" + email);
-  } else {
+    const data = res.data;
+    if (data.code === 201 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Verification failed",
+        data,
+      };
+    }
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Verification failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
@@ -200,48 +173,57 @@ export async function emailVerify_Send_OTP(formData) {
 export async function emailVerify_Verify_OTP(formData) {
   const { email, otp } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/register/email/verify/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email, otp }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-    }
-  );
+  try {
+    const res = await axiosInstance.post(
+      `/api/authentication/v1/register/email/verify/`,
+      { email, otp }
+    );
 
-  const data = await res.json();
-  if (data.code === 200 && data.status === "success") {
-    redirect("/auth/email-verification?success=true");
-  } else {
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Verification failed",
+        data,
+      };
+    }
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Verification failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
+
 export async function forgetId_emailVerify_Send_OTP(formData) {
   const { email } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/forget_password/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-    }
-  );
+  try {
+    const res = await axiosInstance.post(
+      `/api/authentication/v1/forget_password/`,
+      { email }
+    );
 
-  const data = await res.json();
-  if (data.code === 200 && data.status === "success") {
-    redirect(`/auth/forget-password?email=${email}&step=1`);
-  } else {
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Verification failed",
+        data,
+      };
+    }
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Verification failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
@@ -249,61 +231,57 @@ export async function forgetId_emailVerify_Send_OTP(formData) {
 export async function forgetId_emailVerify_Verify_OTP(formData) {
   const { email, otp } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/verify_otp/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email, otp }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-    }
-  );
-
-  const data = await res.json();
-  if (data.code === 200 && data.status === "success") {
-
-    cookies().set({
-      name: "token",
-      value: data.token,
+  try {
+    const res = await axiosInstance.post(`/api/authentication/v1/verify_otp/`, {
+      email,
+      otp,
     });
-    
-    redirect(`/auth/forget-password?email=${email}&step=2`);
-  } else {
+
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Verification failed",
+        data,
+      };
+    }
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Verification failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }
 
 export async function forgetId_Reset(formData) {
-  const { email, password } = formData;
-  const token = cookies().get("token")?.value;
+  const { email, password, token } = formData;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/authentication/v1/reset_password/`,
-    {
-      method: "POST",
-      body: JSON.stringify({ email, password, token }),
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
+  try {
+    const res = await axiosInstance.post(
+      `/api/authentication/v1/reset_password/`,
+      { email, password, token }
+    );
+
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Verification failed",
+        data,
+      };
     }
-  );
-
-  const data = await res.json();
-  if (data.code === 200 && data.status === "success") {
-    cookies().set({
-      name: "token",
-      value: "",
-      maxAge: 0,
-    });
-    redirect("/auth/forget-password?success=true");
-  } else {
+  } catch (err) {
     return {
       error: true,
-      message: data.message || "Verification failed",
-      data,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
     };
   }
 }

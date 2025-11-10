@@ -5,34 +5,39 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { emailVerify_Verify_OTP } from "@/actions/auth";
 import { useRouter } from "next/navigation";
+import { useRegistrationStore } from "@/stores/regestration_steps_store";
 
-export default function OtpInputForm({ email }) {
+export default function OtpInputForm() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const router = useRouter();
-
-  if(!email) {
+  const { nextStep, email } = useRegistrationStore();
+  if (!email) {
     toast.error("Email not found");
-    router.push("/auth/email-verification");
+    router.push(-1);
   }
   async function onSubmit(values) {
     setLoading(true);
     try {
-    const formData = {
-      email,
-      otp: values.otp,
-    }
-     const res = await emailVerify_Verify_OTP(formData);
+      const formData = {
+        email,
+        otp: values.otp,
+      };
+      const res = await emailVerify_Verify_OTP(formData);
 
       if (res?.error) {
-        Object.entries(res?.data?.errors).forEach(([field, messages]) => {
-          messages.forEach((msg) => toast.error(msg));
-        });
         console.log(res);
+        if (res?.data?.errors) {
+          Object.entries(res.data.errors).forEach(([field, messages]) => {
+            messages.forEach((msg) => toast.error(msg));
+          });
+        } else if (res?.message) {
+          toast.error(res.message);
+        }
       } else {
         toast.success("Verification successful");
+        nextStep();
       }
-
     } catch (err) {
       console.log(err);
       toast.error("Verification failed");
@@ -51,7 +56,7 @@ export default function OtpInputForm({ email }) {
           disabled
         />
       </div>
-       <div className="form-group mb-3">
+      <div className="form-group mb-3">
         <input
           type="number"
           className="form-control"
@@ -60,7 +65,11 @@ export default function OtpInputForm({ email }) {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+      <button
+        type="submit"
+        className="btn btn-primary w-100"
+        disabled={loading}
+      >
         {loading ? "Verifying..." : "Verify OTP"}
       </button>
     </form>
