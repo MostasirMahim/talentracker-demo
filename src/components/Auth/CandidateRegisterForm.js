@@ -1,5 +1,5 @@
 "use client";
-import { userRegister } from "@/actions/auth";
+import { candidateRegister } from "@/actions/auth";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -18,7 +18,7 @@ function CandidateRegisterForm() {
           first_name: values.first_name,
           last_name: values.last_name
         }
-        const res = await userRegister(formData);
+        const res = await candidateRegister(formData);
         
         if (res?.error) {
           Object.entries(res?.data?.errors).forEach(([field, messages]) => {
