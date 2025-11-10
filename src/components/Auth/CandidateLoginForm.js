@@ -5,11 +5,17 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { candidateLogin } from "@/actions/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForgetPasswordStore } from "@/stores/forget_password_store";
 
-export default function CandidateLoginForm() {
+export default function CandidateLoginForm({ email: propEmail }) {
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit } = useForm();
-
+  const { setUserType } = useForgetPasswordStore();
+  const { register, handleSubmit, setValue, watch } = useForm({
+    defaultValues: { email: propEmail || "" },
+  });
+  const email = watch("email");
+  const router = useRouter();
   async function onSubmit(values) {
     setLoading(true);
     try {
@@ -19,15 +25,20 @@ export default function CandidateLoginForm() {
       };
       const res = await candidateLogin(formData);
       if (res?.error) {
-        Object.entries(res?.data?.errors).forEach(([field, messages]) => {
-          messages.forEach((msg) => toast.error(msg));
-        });
         console.log(res);
+        if (res?.data?.errors) {
+          Object.entries(res.data.errors).forEach(([field, messages]) => {
+            messages.forEach((msg) => toast.error(msg));
+          });
+        } else if (res?.message) {
+          toast.error(res.message);
+        }
       } else {
         toast.success("Login successful");
+        router.push("/");
       }
     } catch (err) {
-      toast.error( "Login failed");
+      toast.error("Login failed");
     } finally {
       setLoading(false);
     }
@@ -39,8 +50,9 @@ export default function CandidateLoginForm() {
         <input
           type="text"
           className="form-control"
-          placeholder="Username or email"
-          {...register("email", { required: true })}
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setValue("email", e.target.value)}
         />
       </div>
 
@@ -64,7 +76,15 @@ export default function CandidateLoginForm() {
         </div>
 
         <div className="col-lg-6 col-md-6 col-sm-6 lost-your-password-wrap text-end">
-          <a href="/auth/forget-password" className="lost-your-password">
+          <a
+            href="/auth/forget-password"
+            onClick={(e) => {
+              e.preventDefault();
+              setUserType("candidate");
+              router.push("/auth/forget-password");
+            }}
+            className="lost-your-password"
+          >
             Lost your password?
           </a>
         </div>
@@ -80,7 +100,7 @@ export default function CandidateLoginForm() {
 
       <span className="dont-account">
         Don&apos;t have an account?{" "}
-        <Link href="/auth/candidate/register">Sign Up Now!</Link>
+        <Link href="/auth/candidate/register">Register Now!</Link>
       </span>
     </form>
   );

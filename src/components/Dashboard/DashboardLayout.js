@@ -14,17 +14,20 @@ import {
   FilePenLine,
   Flower,
 } from "lucide-react";
+import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
+  const { layoutTransition, setLayoutTransitionOff } =
+    useLayoutTransitionStore();
 
   useEffect(() => {
-    if (!sessionStorage.getItem("dashboardReloaded")) {
-      sessionStorage.setItem("dashboardReloaded", "true");
+    if (layoutTransition) {
       window.location.reload();
+      setLayoutTransitionOff();
     }
-  }, []);
+  }, [layoutTransition]);
 
   const navItems = [
     { href: "#", label: "Home", icon: Home },

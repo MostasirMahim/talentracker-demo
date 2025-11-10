@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import TrainerRegisterForm from "@/components/Auth/TrainerRegisterForm";
+import TrainerRegistration from "@/components/Auth/trainer/TrainerRegistration";
 
 
 function EmployeerRegister() {
@@ -17,8 +17,8 @@ function EmployeerRegister() {
           <div className="d-table-cell">
             <div className="container">
               <div className="signup-form">
-                <h2>Sign Up</h2>
-                <TrainerRegisterForm />
+                <h2>Register</h2>
+                <TrainerRegistration />
               </div>
             </div>
           </div>

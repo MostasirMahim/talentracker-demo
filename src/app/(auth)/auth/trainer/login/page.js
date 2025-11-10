@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import TrainerLoginForm from "@/components/Auth/TrainerLoginForm";
 
-function TrainerLogIn() {
+function TrainerLogIn({ searchParams }) {
+  const email = searchParams?.email;
   return (
     <>
       <div className="profile-authentication-area">
@@ -17,7 +18,7 @@ function TrainerLogIn() {
             <div className="container">
               <div className="signin-form">
                 <h2>Log In</h2>
-                <TrainerLoginForm />
+                <TrainerLoginForm email={email}/>
               </div>
             </div>
           </div>

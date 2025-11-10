@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import CandidateRegisterForm from "@/components/Auth/CandidateRegisterForm";
+import CandidateRegistration from "@/components/Auth/candidate/CandidateRegistration";
 
 function UserRegister() {
   return (
@@ -16,8 +17,8 @@ function UserRegister() {
           <div className="d-table-cell">
             <div className="container">
               <div className="signup-form">
-                <h2>Sign Up</h2>
-                <CandidateRegisterForm />
+                <h2>Register</h2>
+                <CandidateRegistration />
               </div>
             </div>
           </div>
