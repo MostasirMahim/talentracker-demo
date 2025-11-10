@@ -1,8 +1,26 @@
 "use client";
 
+import axiosInstance from "@/lib/axiosIntance";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 
-const JobCategoriesListTable = ({ categories = [] }) => {
+const JobCategoriesListTable = ({ categories = {} }) => {
+  const router = useRouter();
+  const handleDelete = async (id) => {
+    try {
+      const response = await axiosInstance.delete(
+        `/api/jobs/v1/job_categories/${id}/`
+      );
+      if (response.status == 200) {
+        toast.success("Deleted successfully");
+        router.refresh();
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
       <h2 className="text-xl font-semibold mb-4 text-gray-700">
@@ -36,7 +54,10 @@ const JobCategoriesListTable = ({ categories = [] }) => {
                     <button className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                       Update
                     </button>
-                    <button className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">
+                    <button
+                      onClick={() => handleDelete(type.id)}
+                      className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                    >
                       Delete
                     </button>
                   </div>
