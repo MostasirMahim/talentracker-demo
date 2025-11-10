@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import EmployerRegisterForm from "@/components/Auth/EmployerRegisterForm";
+import CandidateRegisterForm from "@/components/Auth/CandidateRegisterForm";
+import CandidateRegistration from "@/components/Auth/candidate/CandidateRegistration";
 
-function EmployeerRegister() {
+function UserRegister() {
   return (
     <>
       <div className="profile-authentication-area">
@@ -16,8 +17,8 @@ function EmployeerRegister() {
           <div className="d-table-cell">
             <div className="container">
               <div className="signup-form">
-                <h2>Sign Up</h2>
-                <EmployerRegisterForm />
+                <h2>Register</h2>
+                <CandidateRegistration />
               </div>
             </div>
           </div>
@@ -60,4 +61,4 @@ function EmployeerRegister() {
   );
 }
 
-export default EmployeerRegister;
+export default UserRegister;

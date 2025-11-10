@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import EmployerLoginForm from "@/components/Auth/EmployerLoginForm";
+import TrainerLoginForm from "@/components/Auth/TrainerLoginForm";
 
-function EmployeerLogIn() {
+function TrainerLogIn({ searchParams }) {
+  const email = searchParams?.email;
   return (
     <>
       <div className="profile-authentication-area">
@@ -17,7 +18,7 @@ function EmployeerLogIn() {
             <div className="container">
               <div className="signin-form">
                 <h2>Log In</h2>
-                <EmployerLoginForm />
+                <TrainerLoginForm email={email}/>
               </div>
             </div>
           </div>
@@ -60,4 +61,4 @@ function EmployeerLogIn() {
   );
 }
 
-export default EmployeerLogIn;
+export default TrainerLogIn;

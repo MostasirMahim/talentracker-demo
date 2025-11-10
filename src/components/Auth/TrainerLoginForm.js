@@ -3,12 +3,19 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { userLogin } from "@/actions/auth";
+import { trainerLogin } from "@/actions/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForgetPasswordStore } from "@/stores/forget_password_store";
 
-export default function UserLoginForm() {
+export default function TrainerLoginForm({ email: propEmail }) {
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { setUserType } = useForgetPasswordStore();
+  const { register, handleSubmit, setValue, watch } = useForm({
+    defaultValues: { email: propEmail || "" },
+  });
+  const email = watch("email");
+  const router = useRouter();
 
   async function onSubmit(values) {
     setLoading(true);
@@ -17,17 +24,22 @@ export default function UserLoginForm() {
         email: values.email,
         password: values.password,
       };
-      const res = await userLogin(formData);
+      const res = await trainerLogin(formData);
       if (res?.error) {
-        Object.entries(res?.data?.errors).forEach(([field, messages]) => {
-          messages.forEach((msg) => toast.error(msg));
-        });
         console.log(res);
+        if (res?.data?.errors) {
+          Object.entries(res.data.errors).forEach(([field, messages]) => {
+            messages.forEach((msg) => toast.error(msg));
+          });
+        } else if (res?.message) {
+          toast.error(res.message);
+        }
       } else {
         toast.success("Login successful");
+        router.push("/");
       }
     } catch (err) {
-      toast.error( "Login failed");
+      toast.error(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -39,8 +51,9 @@ export default function UserLoginForm() {
         <input
           type="text"
           className="form-control"
-          placeholder="Username or email"
-          {...register("email", { required: true })}
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setValue("email", e.target.value)}
         />
       </div>
 
@@ -64,7 +77,15 @@ export default function UserLoginForm() {
         </div>
 
         <div className="col-lg-6 col-md-6 col-sm-6 lost-your-password-wrap text-end">
-          <a href="/auth/forget-password" className="lost-your-password">
+          <a
+            href="/auth/forget-password"
+            onClick={(e) => {
+              e.preventDefault();
+              setUserType("trainer");
+              router.push("/auth/forget-password");
+            }}
+            className="lost-your-password"
+          >
             Lost your password?
           </a>
         </div>
@@ -75,12 +96,12 @@ export default function UserLoginForm() {
         className="btn btn-primary w-100"
         disabled={loading}
       >
-        {loading ? "Logging in..." : "Log In As User"}
+        {loading ? "Logging in..." : "Log In As Trainer"}
       </button>
 
       <span className="dont-account">
         Don&apos;t have an account?{" "}
-        <Link href="/auth/user/register">Sign Up Now!</Link>
+        <Link href="/auth/trainer/register">Register Now!</Link>
       </span>
     </form>
   );
