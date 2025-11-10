@@ -85,21 +85,21 @@ const posts = [
   },
 ];
 
-const BlogGridPost = ({ blogs }) => {
+const AllBlogPost = () => {
   return (
     <>
       <div className="blog-area ptb-100">
         <div className="container">
           <div className="row justify-content-center">
-            {blogs &&
-              blogs.map((blog) => (
-                <div className="col-lg-4 col-md-6" key={blog.id}>
+            {posts &&
+              posts.map((post) => (
+                <div className="col-lg-4 col-md-6" key={post.id}>
                   <div className="single-blog-post">
                     <div className="post-image">
-                      <Link href={blog.detailsUrl} className="d-block">
+                      <Link href={post.detailsUrl} className="d-block">
                         <Image
-                          src={blog.image}
-                          alt={blog.altText}
+                          src={post.image}
+                          alt={post.altText}
                           width={860}
                           height={622}
                         />
@@ -108,21 +108,21 @@ const BlogGridPost = ({ blogs }) => {
                     <div className="post-content">
                       <ul className="meta">
                         <li>
-                          <i className="ri-calendar-2-line"></i> {blog.date}
+                          <i className="ri-calendar-2-line"></i> {post.date}
                         </li>
                         <li>
                           <i className="ri-user-voice-line"></i>
-                          <Link href={blog.authorLink}>{blog.author}</Link>
+                          <Link href={post.authorLink}>{post.author}</Link>
                         </li>
                       </ul>
                       <h3>
-                        <Link href={blog.detailsUrl}>{blog.title}</Link>
+                        <Link href={post.detailsUrl}>{post.title}</Link>
                       </h3>
 
-                      <p>{blog.shortDesc}</p>
+                      <p>{post.shortDesc}</p>
 
-                      <Link href={blog.detailsUrl} className="default-btn">
-                        {blog.btnText} <i className="ri-arrow-right-line"></i>
+                      <Link href={post.detailsUrl} className="default-btn">
+                        {post.btnText} <i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
                   </div>
@@ -135,4 +135,4 @@ const BlogGridPost = ({ blogs }) => {
   );
 };
 
-export default BlogGridPost;
+export default AllBlogPost;
