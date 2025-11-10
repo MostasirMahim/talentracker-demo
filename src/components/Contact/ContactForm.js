@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import GoogleMap from "@/components/Contact/GoogleMap";
 import { MessageSquareMore } from "lucide-react";
 import axiosInstance from "@/lib/axiosIntance";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const [full_name, setFullName] = useState("");
@@ -23,7 +24,9 @@ const ContactForm = () => {
       company,
       message,
     };
-    console.log(data);
+    if (company == "") {
+      delete data.company;
+    }
 
     try {
       const response = await axiosInstance.post(
@@ -31,7 +34,7 @@ const ContactForm = () => {
         data
       );
       if (response.status == 201) {
-        alert("Message sent successfully");
+        toast.success("Message sent successfully");
         setFullName("");
         setEmail("");
         setPhoneNumber("");
@@ -41,7 +44,7 @@ const ContactForm = () => {
       }
     } catch (error) {
       console.error(error);
-      alert("Error sending message");
+      toast.error("Something went wrong!");
     }
   };
 
