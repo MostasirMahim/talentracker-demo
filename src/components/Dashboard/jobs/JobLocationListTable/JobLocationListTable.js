@@ -21,6 +21,11 @@ const JobLocationListTable = ({ jobLocation = {} }) => {
       toast.error("Something went wrong");
     }
   };
+
+  const handleUpdate = (id) => {
+    router.push("/dashboard/jobs/job_locations/create/?location_id=" + id);
+  };
+
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
       <h2 className="text-xl font-semibold mb-4 text-gray-700">
@@ -55,7 +60,10 @@ const JobLocationListTable = ({ jobLocation = {} }) => {
                 </td>
                 <td className="py-3 px-4 border-b">
                   <div className="flex gap-2">
-                    <button className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                    <button
+                      onClick={() => handleUpdate(type.id)}
+                      className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                    >
                       Update
                     </button>
                     <button
