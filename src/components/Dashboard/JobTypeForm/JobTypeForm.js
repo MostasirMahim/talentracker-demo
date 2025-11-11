@@ -1,6 +1,9 @@
 "use client";
 
 import axiosInstance from "@/lib/axiosIntance";
+import { useJobType } from "@/stores/job_dependencies_update_store";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -13,16 +16,56 @@ export default function JobTypeForm() {
     setError,
   } = useForm();
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const job_type_id = searchParams.get("job_type_id");
+
+  const getJobType = useJobType((state) => state.getJobType);
+  const clearJobType = useJobType((state) => state.clearJobType);
+
+  useEffect(() => {
+    if (job_type_id) {
+      const job_type = getJobType();
+      const name = job_type.name;
+      console.log(name);
+      reset({
+        name: name,
+      });
+    } else {
+      reset({
+        name: "",
+      });
+    }
+
+    return () => {
+      reset();
+    };
+  }, [job_type_id, getJobType, reset]);
+
   const onSubmit = async (data) => {
-    console.log("Submitted Data:", data);
     try {
-      const response = await axiosInstance.post(
-        "/api/jobs/v1/job_types/",
-        data
-      );
-      if (response.status == 201) {
-        toast.success("Job type created successfully");
-        reset();
+      if (job_type_id) {
+        const response = await axiosInstance.put(
+          `/api/jobs/v1/job_types/${job_type_id}/`,
+          data
+        );
+        if (response.status == 200) {
+          toast.success("Job type updated successfully");
+          reset();
+          clearJobType();
+          router.push("/dashboard/jobs/job_types/view/");
+          router.refresh();
+          return;
+        }
+      } else {
+        const response = await axiosInstance.post(
+          "/api/jobs/v1/job_types/",
+          data
+        );
+        if (response.status == 201) {
+          toast.success("Job type created successfully");
+          reset();
+        }
       }
     } catch (error) {
       console.log(error);

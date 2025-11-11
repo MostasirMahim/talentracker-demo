@@ -1,12 +1,16 @@
 "use client";
 
 import axiosInstance from "@/lib/axiosIntance";
+import { useJobType } from "@/stores/job_dependencies_update_store";
+
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
-const JobTypeListTable = ({ jobTypes = [] }) => {
+const JobTypeListTable = ({ jobTypes = {} }) => {
   const router = useRouter();
+  const setJobType = useJobType((state) => state.setJobType);
+
   const handleDelete = async (id) => {
     try {
       const response = await axiosInstance.delete(
@@ -21,6 +25,13 @@ const JobTypeListTable = ({ jobTypes = [] }) => {
       toast.error("Something went wrong");
     }
   };
+
+  const handleUpdate = (id) => {
+    const type = jobTypes?.data?.find((type) => type.id === id);
+    setJobType(type);
+    router.push("/dashboard/jobs/job_types/create/?job_type_id=" + id);
+  };
+
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
       <h2 className="text-xl font-semibold mb-4 text-gray-700">Job Types</h2>
@@ -49,7 +60,10 @@ const JobTypeListTable = ({ jobTypes = [] }) => {
                 </td>
                 <td className="py-3 px-4 border-b">
                   <div className="flex gap-2">
-                    <button className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                    <button
+                      onClick={() => handleUpdate(type.id)}
+                      className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                    >
                       Update
                     </button>
                     <button
