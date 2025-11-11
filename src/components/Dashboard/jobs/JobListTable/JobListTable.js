@@ -30,6 +30,10 @@ const JobListTable = ({ jobs = {} }) => {
     router.push("/dashboard/jobs/post/?job_id=" + id);
   };
 
+  const handleApplications = (id) => {
+    router.push(`/dashboard/jobs/applications/${id}/`);
+  };
+
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
       <h2 className="text-xl font-semibold mb-4 text-gray-700">
@@ -78,7 +82,7 @@ const JobListTable = ({ jobs = {} }) => {
                         Delete
                       </button>
                       <button
-                        onClick={() => handleDelete(job.id)}
+                        onClick={() => handleApplications(job.id)}
                         className="px-3 py-1 bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-colors"
                       >
                         applications
