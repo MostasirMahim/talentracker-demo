@@ -18,12 +18,11 @@ export default async function AllBlogsPage({ searchParams }) {
 
   try {
     // Pass page parameter to API
-    const blogResponse = await axiosInstance.get(`/api/blogs/v1/blogs/?page_size=2&page=${currentPage}`, {
+    const blogResponse = await axiosInstance.get(`/api/blogs/v1/blogs/?page_size=6&page=${currentPage}`, {
      
     });
 
     blogs = blogResponse.data || [];
-    console.log("Blogs Data:", blogs);
   } catch (err) {
     console.error(err);
     blogs = [];
