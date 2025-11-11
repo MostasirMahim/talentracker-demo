@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Briefcase, MapPin, Calendar, Search } from "lucide-react";
 import "./JobList.css";
 import Link from "next/link";
@@ -13,7 +13,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
-  console.log({ page });
+
   const [category, setCategory] = useState(null);
   const [jobType, setJobType] = useState(null);
   const [location, setLocation] = useState(null);

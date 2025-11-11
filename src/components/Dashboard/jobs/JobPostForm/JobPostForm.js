@@ -20,6 +20,7 @@ export default function JobPostForm({ jobTypes, jobCategories, jobLocations }) {
     control,
     reset,
     formState: { errors, isSubmitting },
+    setError,
   } = useForm();
 
   const [editorValue, setEditorValue] = useState("");
