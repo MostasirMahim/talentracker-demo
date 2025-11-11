@@ -7,9 +7,10 @@ import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
 import Image from "next/image";
 import SideCanvas from "./SideCanvas";
 import "./NavCss.css";
+import { getClientCookie } from "@/lib/getClientCookie";
 const NavbarStyleTwo = () => {
   const pathname = usePathname();
-
+  const user = getClientCookie("user_type");
   const [menu, setMenu] = React.useState(true);
 
   const toggleNavbar = () => {
@@ -161,16 +162,44 @@ const NavbarStyleTwo = () => {
                       </ul>
                     </li>
 
-                    <li className="nav-item">
-                      <Link
-                        href="/user/login/"
-                        className={`nav-link ${
-                          pathname == "/profile/" && "active"
-                        }`}
-                      >
-                        Login
-                      </Link>
-                    </li>
+                    {user ? (
+                      <li className="nav-item">
+                        <Link
+                          href="/profile/"
+                          className={`nav-link ${
+                            pathname == "/profile/" && "active"
+                          }`}
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                    ) : (
+                      <li className="nav-item">
+                        <Link href="#" className="dropdown-toggle nav-link">
+                          Login
+                        </Link>
+
+                        <ul className="dropdown-menu">
+                          <li className="nav-item">
+                            <Link
+                              href="/auth/user/login/"
+                              className={`nav-link`}
+                            >
+                              Login as User
+                            </Link>
+                          </li>
+
+                          <li className="nav-item">
+                            <Link
+                              href="/auth/employer/login/"
+                              className={`nav-link`}
+                            >
+                              Login as Employer
+                            </Link>
+                          </li>
+                        </ul>
+                      </li>
+                    )}
                   </ul>
                 </div>
 
