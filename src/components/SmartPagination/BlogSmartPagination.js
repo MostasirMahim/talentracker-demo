@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function SmartPagination({ paginationData, className = "" }) {
+export default function BlogSmartPagination({ paginationData, className = "" }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 

@@ -74,7 +74,44 @@ export default function DashboardLayout({ children }) {
       label: "View all jobs",
       icon: Flower,
     },
-    { href: "#", label: "Blogs", icon: FilePenLine },
+    // blog categories view
+    { href: "/dashboard/blogs/categories/view", 
+      label: "View all Blog Categories", 
+      icon: FilePenLine 
+    },
+    // blogs categories create
+    {
+      href: "/dashboard/blogs/categories/create",
+      label: "Create Blog Category",
+      icon: FilePenLine,
+    },
+    // blogs tag create
+    {
+      href: "/dashboard/blogs/tags/create",
+      label: "Create Blog Tag",
+      icon: FilePenLine,
+    },
+    // blogs tag view
+    {
+      href: "/dashboard/blogs/tags/view",
+      label: "View all Blog Tags",
+      icon: FilePenLine,
+    },
+    
+    // blogs create
+    {
+      href: "/dashboard/blogs/post/",
+      label: "Post a Blog",
+      icon: FilePenLine,
+    },
+    // blogs view
+    {
+      href: "/dashboard/blogs",
+      label: "View all Blogs",
+      icon: FilePenLine,
+    },
+
+
     { href: "#", label: "Analytics", icon: Settings },
     { href: "#", label: "Teams", icon: Users },
   ];
