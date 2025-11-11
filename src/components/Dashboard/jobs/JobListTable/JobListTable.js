@@ -55,7 +55,11 @@ const JobListTable = ({ jobs = {} }) => {
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
                   <td className="py-3 px-4 border-b">{job.id}</td>
-                  <td className="py-3 px-4 border-b capitalize">{job.title}</td>
+                  <td className="py-3 px-4 border-b capitalize">
+                    <a href={`/career/jobs/${job.id}/`} target="_blank">
+                      {job.title}
+                    </a>
+                  </td>
                   <td className="py-3 px-4 border-b capitalize">
                     {job.deadline}
                   </td>
