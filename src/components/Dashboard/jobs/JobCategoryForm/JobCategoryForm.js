@@ -1,6 +1,9 @@
 "use client";
 
 import axiosInstance from "@/lib/axiosIntance";
+import { useJobCategory } from "@/stores/job_dependencies_update_store";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -12,17 +15,57 @@ export default function JobCategoryForm() {
     formState: { errors, isSubmitting },
     setError,
   } = useForm();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const category_id = searchParams.get("category_id");
+
+  const getCategory = useJobCategory((state) => state.getCategory);
+  const clearCategory = useJobCategory((state) => state.clearJobCategory);
+
+  useEffect(() => {
+    if (category_id) {
+      const category = getCategory();
+      const name = category.name;
+      console.log(name);
+      reset({
+        name: name,
+      });
+    } else {
+      reset({
+        name: "",
+      });
+    }
+
+    return () => {
+      reset();
+    };
+  }, [category_id, getCategory, reset]);
 
   const onSubmit = async (data) => {
     console.log("Submitted Data:", data);
     try {
-      const response = await axiosInstance.post(
-        "/api/jobs/v1/job_categories/",
-        data
-      );
-      if (response.status == 201) {
-        toast.success("Job category created successfully");
-        reset();
+      if (category_id) {
+        const response = await axiosInstance.put(
+          `/api/jobs/v1/job_categories/${category_id}/`,
+          data
+        );
+        if (response.status == 200) {
+          toast.success("Job category updated successfully");
+          reset();
+          clearCategory();
+          router.push("/dashboard/jobs/job_categories/view/");
+          router.refresh();
+          return;
+        }
+      } else {
+        const response = await axiosInstance.post(
+          "/api/jobs/v1/job_categories/",
+          data
+        );
+        if (response.status == 201) {
+          toast.success("Job category created successfully");
+          reset();
+        }
       }
     } catch (error) {
       console.log(error);

@@ -12,3 +12,16 @@ export const useJobLocation = create((set, get) => ({
   // Clear
   clearLocation: () => set({ locationObj: {} }),
 }));
+
+export const useJobCategory = create((set, get) => ({
+  category: {},
+
+  // Setter
+  setCategory: (category) => set({ category: category }),
+
+  // Getter
+  getCategory: () => get().category,
+
+  // Clear
+  clearJobCategory: () => set({ category: {} }),
+}));
