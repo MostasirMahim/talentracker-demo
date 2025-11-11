@@ -2,11 +2,13 @@
 
 import { useForm, Controller } from "react-hook-form";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
 import axiosInstance from "@/lib/axiosIntance";
 import { toast } from "react-toastify";
+import { useJob } from "@/stores/job_dependencies_update_store";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // Dynamically import React Quill (prevents SSR issues)
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -18,9 +20,38 @@ export default function JobPostForm({ jobTypes, jobCategories, jobLocations }) {
     control,
     reset,
     formState: { errors, isSubmitting },
+    setError,
   } = useForm();
 
   const [editorValue, setEditorValue] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const job_id = searchParams.get("job_id");
+  const getJob = useJob((state) => state.getJob);
+  const clearJob = useJob((state) => state.clearJob);
+
+  useEffect(() => {
+    if (job_id) {
+      const job = getJob();
+      setEditorValue(job.body);
+      reset({
+        body: job.body,
+        title: job.title,
+        short_description: job.short_description,
+        salary: job.salary,
+        deadline: job.deadline,
+        job_type: job.job_type.id,
+        job_category: job.job_category.id,
+        job_location: job.job_location.id,
+      });
+    } else {
+      reset();
+    }
+
+    return () => {
+      reset();
+    };
+  }, [job_id, getJob, reset]);
 
   const onSubmit = async (data) => {
     const payload = {
@@ -31,14 +62,29 @@ export default function JobPostForm({ jobTypes, jobCategories, jobLocations }) {
       job_category: parseInt(data.job_category),
       job_location: parseInt(data.job_location),
     };
-    console.log(payload);
 
     try {
-      const res = await axiosInstance.post("/api/jobs/v1/jobs/", payload);
-      if (res.status === 201) {
-        toast.success("Job posted successfully!");
-        reset();
-        setEditorValue("");
+      if (job_id) {
+        const response = await axiosInstance.patch(
+          `/api/jobs/v1/jobs/${job_id}/`,
+          payload
+        );
+        if (response.status == 200) {
+          toast.success("Job updated successfully");
+          reset();
+          clearJob();
+          setEditorValue("");
+          router.push("/dashboard/jobs/");
+          router.refresh();
+          return;
+        }
+      } else {
+        const res = await axiosInstance.post("/api/jobs/v1/jobs/", payload);
+        if (res.status === 201) {
+          toast.success("Job posted successfully!");
+          reset();
+          setEditorValue("");
+        }
       }
     } catch (error) {
       console.error(error);

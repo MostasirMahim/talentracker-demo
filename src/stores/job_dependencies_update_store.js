@@ -38,3 +38,16 @@ export const useJobType = create((set, get) => ({
   // Clear
   clearJobType: () => set({ job_type: {} }),
 }));
+
+export const useJob = create((set, get) => ({
+  job: {},
+
+  // Setter
+  setJob: (job) => set({ job: job }),
+
+  // Getter
+  getJob: () => get().job,
+
+  // Clear
+  clearJob: () => set({ job: {} }),
+}));
