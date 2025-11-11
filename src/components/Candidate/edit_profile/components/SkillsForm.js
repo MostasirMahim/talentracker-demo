@@ -1,0 +1,62 @@
+"use client"
+
+import { useForm, useFieldArray } from "react-hook-form"
+import { Plus, Trash2 } from "lucide-react"
+
+
+export default function SkillsForm({ initialData, onSubmit, isLoading }) {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      skills: initialData || [{ name: "" }],
+    },
+  })
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "skills",
+  })
+  const handleFormSubmit = (getValues) => {
+    const data = {
+      skills : getValues.skills?.map((skill) => skill.name)
+    }
+    onSubmit(data)
+  }
+  return (
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="profile-form">
+      <div className="form-group">
+        <label className="form-label">Skills</label>
+        <div className="skills-field-container">
+          {fields.map((field, index) => (
+            <div key={field.id} className="skill-input-group">
+              <input
+                {...register(`skills.${index}.name`)}
+                type="text"
+                className="form-input"
+                placeholder={`Skill ${index + 1}`}
+              />
+              {fields.length > 1 && (
+                <button type="button" onClick={() => remove(index)} className="btn btn-icon btn-danger">
+                  <Trash2 size={18} />
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <button type="button" onClick={() => append({ name: "" })} className="btn btn-secondary btn-sm">
+          <Plus size={18} />
+          Add Skill
+        </button>
+      </div>
+
+      <button type="submit" disabled={isLoading} className="btn btn-primary">
+        {isLoading ? "Saving..." : "Save & Continue"}
+      </button>
+    </form>
+  )
+}
