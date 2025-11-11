@@ -10,7 +10,7 @@ import "./NavCss.css";
 import { getClientCookie } from "@/lib/getClientCookie";
 const NavbarStyleTwo = () => {
   const pathname = usePathname();
-  const user = getClientCookie("user_type");
+  const user = ""
   const [menu, setMenu] = React.useState(true);
 
   const toggleNavbar = () => {
@@ -167,7 +167,7 @@ const NavbarStyleTwo = () => {
                         <Link
                           href="/profile/"
                           className={`nav-link ${
-                            pathname == "/profile/" && "active"
+                            pathname == "/candidate/profile/" && "active"
                           }`}
                         >
                           Profile
@@ -182,10 +182,10 @@ const NavbarStyleTwo = () => {
                         <ul className="dropdown-menu">
                           <li className="nav-item">
                             <Link
-                              href="/auth/user/login/"
+                              href="/auth/candidate/login/"
                               className={`nav-link`}
                             >
-                              Login as User
+                              Login as Candidate
                             </Link>
                           </li>
 

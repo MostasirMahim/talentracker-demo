@@ -9,7 +9,7 @@ import { getClientCookie } from "@/lib/getClientCookie";
 
 const NavbarStyleOne = () => {
   const pathname = usePathname();
-  const user = getClientCookie("user_type");
+  const user = ""
   const [menu, setMenu] = React.useState(true);
 
   const toggleNavbar = () => {
