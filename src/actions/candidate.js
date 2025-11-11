@@ -62,3 +62,37 @@ const API_ENDPOINTS = {
   location: "/api/candidates/v1/locations/",
   skills: "/api/candidates/v1/skills/",
 };
+
+export async function updateCandidateProfile(section, formData, isNew) {
+  try {
+    const endpoint = API_ENDPOINTS[section];
+
+    if (!endpoint) {
+      throw new Error(`No API endpoint found for section: ${section}`);
+    }
+    const method = isNew ? "post" : "patch";
+
+    const res = await axiosHandler(method, endpoint, formData);
+
+    if ((res.code === 200 || res.code === 201) && res.status === "success") {
+      return {
+        success: true,
+        message: `${section} ${isNew ? "created" : "updated"} successfully`,
+        data: res.data,
+      };
+    } else {
+      return {
+        success: false,
+        message:
+          res.message || `Failed to ${isNew ? "create" : "update"} ${section}`,
+        data: res,
+      };
+    }
+  } catch (err) {
+    return {
+      success: false,
+      message: err?.message || "Network Error",
+      data: null,
+    };
+  }
+}
