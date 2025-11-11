@@ -2,12 +2,15 @@
 
 import SmartPagination from "@/components/SmartPagination/SmartPagination";
 import axiosInstance from "@/lib/axiosIntance";
+import { useJob } from "@/stores/job_dependencies_update_store";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
 const JobListTable = ({ jobs = {} }) => {
   const router = useRouter();
+  const setJob = useJob((state) => state.setJob);
+
   const handleDelete = async (id) => {
     try {
       const response = await axiosInstance.delete(`/api/jobs/v1/jobs/${id}/`);
@@ -21,7 +24,11 @@ const JobListTable = ({ jobs = {} }) => {
     }
   };
 
-  const handleUpdate = (id) => {};
+  const handleUpdate = (id) => {
+    const job = jobs?.data?.find((type) => type.id === id);
+    setJob(job);
+    router.push("/dashboard/jobs/post/?job_id=" + id);
+  };
 
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
