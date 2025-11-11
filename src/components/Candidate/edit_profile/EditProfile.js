@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
   User,
   Briefcase,
-  DollarSign,
   FileText,
   MapPin,
   Code,
@@ -19,7 +18,8 @@ import CompensationForm from "./components/CompensationForm";
 import DocumentsForm from "./components/DocumentsForm";
 import LocationsForm from "./components/LocationForm";
 import SkillsForm from "./components/SkillsForm";
-import { updateCandidateProfile } from "@/actions/candidatedemo";
+import { updateCandidateProfile } from "@/actions/candidate";
+
 
 const STEPS = [
   {
@@ -88,7 +88,7 @@ export default function EditProfileForm({ candidateId, initialData }) {
     if (Array.isArray(formData)) {
       const results = await Promise.all(
         formData.map((item) => {
-      const isItemNew = !item.id; // 🔥 Newly added items have no ID
+      const isItemNew = !item.id;
       return updateCandidateProfile(step.id, item, isItemNew);
     })
       );
@@ -136,7 +136,6 @@ export default function EditProfileForm({ candidateId, initialData }) {
     employment_type: emp.employment_type,
   }));
 
-  // Compensation Data (multiple entries)
   const compensationData = {
     id: initialData.compensation[0].id,
     current_salary: Number(initialData.compensation[0].current_salary),
@@ -145,7 +144,6 @@ export default function EditProfileForm({ candidateId, initialData }) {
     notice_period: initialData.compensation[0].notice_period,
   };
 
-  // Skills Data (array of skill names)
   const skillsData = initialData.candidate.skills.map((skill) => {
     return {
       id: skill.id,
