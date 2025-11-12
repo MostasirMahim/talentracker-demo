@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import { useForm, useFieldArray } from "react-hook-form"
-import { Plus, Trash2 } from "lucide-react"
-
+import { useForm, useFieldArray } from "react-hook-form";
+import { Plus, Trash2 } from "lucide-react";
 
 export default function SkillsForm({ initialData, onSubmit, isLoading }) {
   const {
@@ -12,20 +11,23 @@ export default function SkillsForm({ initialData, onSubmit, isLoading }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      skills: initialData || [{ name: "" }],
+      skills:
+        initialData && Array.isArray(initialData) && initialData.length > 0
+          ? initialData
+          : [{ name: "" }],
     },
-  })
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "skills",
-  })
+  });
   const handleFormSubmit = (getValues) => {
     const data = {
-      skills : getValues.skills?.map((skill) => skill.name)
-    }
-    onSubmit(data)
-  }
+      skills: getValues.skills?.map((skill) => skill.name),
+    };
+    onSubmit(data);
+  };
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="profile-form">
       <div className="form-group">
@@ -40,7 +42,11 @@ export default function SkillsForm({ initialData, onSubmit, isLoading }) {
                 placeholder={`Skill ${index + 1}`}
               />
               {fields.length > 1 && (
-                <button type="button" onClick={() => remove(index)} className="btn btn-icon btn-danger">
+                <button
+                  type="button"
+                  onClick={() => remove(index)}
+                  className="btn btn-icon btn-danger"
+                >
                   <Trash2 size={18} />
                 </button>
               )}
@@ -48,7 +54,11 @@ export default function SkillsForm({ initialData, onSubmit, isLoading }) {
           ))}
         </div>
 
-        <button type="button" onClick={() => append({ name: "" })} className="btn btn-secondary btn-sm">
+        <button
+          type="button"
+          onClick={() => append({ name: "" })}
+          className="btn btn-secondary btn-sm"
+        >
           <Plus size={18} />
           Add Skill
         </button>
@@ -58,5 +68,5 @@ export default function SkillsForm({ initialData, onSubmit, isLoading }) {
         {isLoading ? "Saving..." : "Save & Continue"}
       </button>
     </form>
-  )
+  );
 }
