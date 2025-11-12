@@ -236,6 +236,7 @@ export default function EditProfileForm({ candidateId, initialData }) {
               initialData={documentData}
               onSubmit={handleSubmit}
               isLoading={isLoading}
+              setSubmitStatus={setSubmitStatus}
             />
           )}
 
