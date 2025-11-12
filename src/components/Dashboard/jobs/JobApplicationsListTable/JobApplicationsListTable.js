@@ -78,11 +78,23 @@ const JobApplicationsListTable = ({ data = {} }) => {
     );
   };
 
+  const handleRefresh = () => {
+    router.refresh();
+  };
+
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">
-        Job applications
-      </h2>
+      <div className="flex justify-between mb-3 align-baseline">
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">
+          Job applications
+        </h2>
+        <button
+          onClick={() => handleRefresh()}
+          className="px-3  bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+        >
+          Refresh
+        </button>
+      </div>
       {data?.data?.length === 0 ? (
         <p className="text-gray-500 text-center py-4">
           No job applications found.
