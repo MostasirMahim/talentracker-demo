@@ -1,10 +1,14 @@
-"use client"
+"use client";
 
-import { useForm, useFieldArray } from "react-hook-form"
-import { Trash2, Plus } from "lucide-react"
-import "../style.css"
+import { useForm, useFieldArray } from "react-hook-form";
+import { Trash2, Plus } from "lucide-react";
+import "../style.css";
 
-export default function EmploymentHistoryForm({ initialData, onSubmit, isLoading }) {
+export default function EmploymentHistoryForm({
+  initialData,
+  onSubmit,
+  isLoading,
+}) {
   const {
     register,
     control,
@@ -12,19 +16,32 @@ export default function EmploymentHistoryForm({ initialData, onSubmit, isLoading
     formState: { errors },
   } = useForm({
     defaultValues: {
-      employment: initialData || [{}], // wrapped in object for RHF
+      employment:
+        initialData && Array.isArray(initialData) && initialData.length > 0
+          ? initialData
+          : [
+              {
+                id: "",
+                company_name: "",
+                designation: "",
+                joining_date: "",
+                end_date: "",
+                is_current: false,
+                employment_type: "",
+              },
+            ],
     },
-  })
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "employment", // required by RHF
-  })
+  });
 
   const handleFormSubmit = (data) => {
     // send only the array to your API
-    onSubmit(data.employment)
-  }
+    onSubmit(data.employment);
+  };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="profile-form">
@@ -47,49 +64,68 @@ export default function EmploymentHistoryForm({ initialData, onSubmit, isLoading
           <div className="form-group">
             <label className="form-label">Company Name *</label>
             <input
-              {...register(`employment.${index}.company_name`, { required: "Company name is required" })}
+              {...register(`employment.${index}.company_name`, {
+                required: "Company name is required",
+              })}
               type="text"
               className="form-input"
               placeholder="Enter company name"
             />
             {errors.employment?.[index]?.company_name && (
-              <span className="form-error">{errors.employment[index]?.company_name?.message}</span>
+              <span className="form-error">
+                {errors.employment[index]?.company_name?.message}
+              </span>
             )}
           </div>
 
           <div className="form-group">
             <label className="form-label">Designation *</label>
             <input
-              {...register(`employment.${index}.designation`, { required: "Designation is required" })}
+              {...register(`employment.${index}.designation`, {
+                required: "Designation is required",
+              })}
               type="text"
               className="form-input"
               placeholder="Enter designation"
             />
             {errors.employment?.[index]?.designation && (
-              <span className="form-error">{errors.employment[index]?.designation?.message}</span>
+              <span className="form-error">
+                {errors.employment[index]?.designation?.message}
+              </span>
             )}
           </div>
 
           <div className="form-group">
             <label className="form-label">Joining Date *</label>
             <input
-              {...register(`employment.${index}.joining_date`, { required: "Joining date is required" })}
+              {...register(`employment.${index}.joining_date`, {
+                required: "Joining date is required",
+              })}
               type="date"
               className="form-input"
             />
             {errors.employment?.[index]?.joining_date && (
-              <span className="form-error">{errors.employment[index]?.joining_date?.message}</span>
+              <span className="form-error">
+                {errors.employment[index]?.joining_date?.message}
+              </span>
             )}
           </div>
 
           <div className="form-group">
             <label className="form-label">End Date</label>
-            <input {...register(`employment.${index}.end_date`)} type="date" className="form-input" />
+            <input
+              {...register(`employment.${index}.end_date`)}
+              type="date"
+              className="form-input"
+            />
           </div>
 
           <div className="form-group">
             <label className="form-label">Employment Type</label>
-            <select {...register(`employment.${index}.employment_type`)} className="form-input">
+            <select
+              {...register(`employment.${index}.employment_type`)}
+              className="form-input"
+            >
               <option value="">Select employment type</option>
               <option value="full_time">Full Time</option>
               <option value="part_time">Part Time</option>
@@ -100,7 +136,10 @@ export default function EmploymentHistoryForm({ initialData, onSubmit, isLoading
 
           <div className="form-group checkbox-group">
             <label className="checkbox-label">
-              <input {...register(`employment.${index}.is_current`)} type="checkbox" />
+              <input
+                {...register(`employment.${index}.is_current`)}
+                type="checkbox"
+              />
               <span>Currently working here</span>
             </label>
           </div>
@@ -129,5 +168,5 @@ export default function EmploymentHistoryForm({ initialData, onSubmit, isLoading
         {isLoading ? "Saving..." : "Save & Continue"}
       </button>
     </form>
-  )
+  );
 }
