@@ -96,3 +96,45 @@ export async function updateCandidateProfile(section, formData, isNew) {
     };
   }
 }
+
+export async function uploadDocument(formData, isNew) {
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("access_token")?.value;
+
+    const endpoint = "/api/candidates/v1/document_and_socials/";
+    const method = isNew ? "post" : "patch";
+
+    const res = await axiosInstance({
+      method,
+      url: endpoint,
+      data: formData,
+      headers: {
+        Cookie: accessToken ? `access_token=${accessToken}` : "",
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    const data = res.data;
+
+    if ((data.code === 200 || data.code === 201) && data.status === "success") {
+      return {
+        success: true,
+        message: `Document ${isNew ? "created" : "updated"} successfully`,
+        data: data.data,
+      };
+    } else {
+      return {
+        success: false,
+        message: data.message || `Failed to ${isNew ? "create" : "update"} document`,
+        data,
+      };
+    }
+  } catch (err) {
+    return {
+      success: false,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
+    };
+  }
+}
