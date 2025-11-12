@@ -7,12 +7,15 @@ import {
   Mail,
   Settings,
   HelpCircle,
+  LogOut,
 } from "lucide-react";
 import "./style.css";
 import { HeaderLayout } from "./HeaderLayout";
 import { SidebarLayout } from "./SidebarLayout";
 import { MobileSidebarLayout } from "./MobileSidebar";
 import { usePathname, useRouter } from "next/navigation";
+import { candidateLogOut } from "@/actions/auth";
+import { toast } from "react-toastify";
 
 const navItems = [
   {
@@ -41,19 +44,9 @@ const navItems = [
     ],
   },
   {
-    id: "dashboard",
-    label: "Dashboard",
-    icon: <LayoutDashboard size={18} />,
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    icon: <Settings size={18} />,
-  },
-  {
-    id: "help",
-    label: "Help",
-    icon: <HelpCircle size={18} />,
+    id: "logout",
+    label: "Log Out",
+    icon: <LogOut size={18} />,
   },
 ];
 
@@ -97,11 +90,27 @@ export default function ProfileClient({ children }) {
     setExpandedSections(newExpanded);
   };
 
-  const handleItemClick = (item) => {
-    setActiveItemId(item.id);
-    setHeaderTitle(item.label);
-    if (item.href) {
-      router.push(item.href);
+  const handleItemClick = async (item) => {
+    if (item.id === "logout") {
+      try {
+        const result = await candidateLogOut();
+        if (result.error) {
+          console.log(result);
+          toast.error("Log Out Failed");
+        } else {
+          router.push("/");
+          toast.success("Log Out Successful");
+        }
+      } catch (err) {
+        console.log(result);
+        toast.error("Log Out Failed");
+      }
+    } else {
+      setActiveItemId(item.id);
+      setHeaderTitle(item.label);
+      if (item.href) {
+        router.push(item.href);
+      }
     }
   };
 
