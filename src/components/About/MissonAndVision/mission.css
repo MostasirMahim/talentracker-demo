@@ -1,0 +1,20 @@
+.about-us-section {
+  background-color: #f9fafc;
+  color: #333;
+}
+
+.about-subtitle {
+  max-width: 800px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.about-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}

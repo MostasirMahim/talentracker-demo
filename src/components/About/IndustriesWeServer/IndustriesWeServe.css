@@ -1,0 +1,40 @@
+.industries-section {
+  background-color: #ffffff;
+}
+
+.industries-subtitle {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.industry-card {
+  border-radius: 12px;
+  background-color: #f9fafc;
+  transition: all 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+
+.icon-wrapper {
+  background-color: #e9f2ff;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-purple {
+  color: #7b3fe4;
+}
+
+.text-orange {
+  color: #ff7a00;
+}

@@ -22,47 +22,27 @@ const AboutContentOne = () => {
 
             <div className="col-lg-6 col-md-12">
               <div className="about-content">
-                <span className="sub-title">ABOUT ALL OF US</span>
-                <h2>One of the Fastest Way to Gain Business Success</h2>
+                <span className="sub-title">ABOUT US</span>
                 <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy ant extra eirmod tempor invidunt ut labore et
-                  dolore magna aliquyam erat, sed diammi maxil voluptua. At vero
-                  eos et accusam et justo duo dolores et ea rebum.
+                  <span className="h3">TalenTracker Limited</span> is a HR
+                  solutions provider specializing in Talent Acquisition, HR
+                  Outsourcing, Global Mobility and People & Culture
+                  transformation. We support local and multinational companies
+                  operating in Bangladesh with compliant, scalable and
+                  industry-ready HR services aligned with Bangladesh Labour Law
+                  and international best practices. With a strong understanding
+                  of the Bangladesh talent landscape, including expatriate
+                  onboarding, employer of record (EOR/PEO), payroll management,
+                  and labour compliance; we help organizations reduce
+                  operational complexity and focus on growth. <br /> Our
+                  approach combines strategic HR consulting with handson
+                  execution, ensuring both speed and quality in delivering
+                  talent and HR operations. From executive search to culture
+                  change, from global hiring to remote staffing, and from HR
+                  governance to employee wellbeing — TalenTracker partners with
+                  organizations to build future-ready workforces built on trust,
+                  compliance, and performance.
                 </p>
-                <p>
-                  At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                  clitaiai to ankasd gubergren, no sea takimata sanctus est
-                  Lorem ipsum dolor sit amet. Adasta na lorem ipsum dolor sit
-                  amet.
-                </p>
-
-                <div className="row justify-content-center">
-                  <div className="col-lg-4 col-md-4 col-sm-4 col-6">
-                    <div className="single-about-box">
-                      <div className="icon">
-                        <i className="ri-star-line"></i>
-                      </div>
-                      <h3>Consistency</h3>
-                    </div>
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-4 col-6">
-                    <div className="single-about-box">
-                      <div className="icon">
-                        <i className="ri-settings-2-line"></i>
-                      </div>
-                      <h3>Strategy</h3>
-                    </div>
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-4 col-6">
-                    <div className="single-about-box">
-                      <div className="icon">
-                        <i className="ri-line-chart-line"></i>
-                      </div>
-                      <h3>Investment</h3>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
