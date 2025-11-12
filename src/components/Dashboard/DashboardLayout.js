@@ -12,6 +12,7 @@ import {
   ChevronRight,
   ChevronLeft,
   FilePenLine,
+  UserPlus,
   Link as LinkIcon,
   Flower,
 } from "lucide-react";
@@ -35,6 +36,12 @@ export default function DashboardLayout({ children }) {
     { href: "#", label: "Home", icon: Home },
     { href: "#", label: "Users", icon: Users },
     { href: "#", label: "Settings", icon: Settings },
+    {
+      icon: UserPlus,
+      label: "Onboarding",
+      href: "/dashboard/registration/email",
+      urls: ["/dashboard/registration/"],
+    },
     {
       href: "/dashboard/jobs/job_types/create",
       label: "Set Job type",
