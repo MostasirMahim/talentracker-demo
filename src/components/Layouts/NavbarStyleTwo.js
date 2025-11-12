@@ -1,18 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
 import Image from "next/image";
 import SideCanvas from "./SideCanvas";
 import "./NavCss.css";
-import { getClientCookie } from "@/lib/getClientCookie";
+import { get_candidate_profile_data } from "@/actions/candidate";
+import { get_me } from "@/actions/auth";
 const NavbarStyleTwo = () => {
   const pathname = usePathname();
-  const user = ""
   const [menu, setMenu] = React.useState(true);
+  const [data, setData] = useState(null);
 
+  const handleFetchData = async () => {
+    const fetchedData = await get_me();
+    setData(fetchedData);
+  };
+  useEffect(() => {
+    handleFetchData();
+  }, []);
+console.log(data);
   const toggleNavbar = () => {
     setMenu(!menu);
   };
@@ -27,7 +36,7 @@ const NavbarStyleTwo = () => {
       }
     });
   });
-
+const user = data?.error === false ? true : "";
   // Search Modal
   const [isActiveSearchModal, setActiveSearchModal] = useState("false");
   const handleToggleSearchModal = () => {
@@ -165,10 +174,10 @@ const NavbarStyleTwo = () => {
                     {user ? (
                       <li className="nav-item">
                         <Link
-                          href="/profile/"
-                          className={`nav-link ${
-                            pathname == "/candidate/profile/" && "active"
-                          }`}
+                          href={`/${data?.data?.user?.user_type}/profile/`}
+                        className={`nav-link ${
+                          pathname == `/${data?.data?.user?.user_type}/profile/` && "active"
+                        }`}
                         >
                           Profile
                         </Link>
