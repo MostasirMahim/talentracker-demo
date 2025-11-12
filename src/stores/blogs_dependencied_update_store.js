@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 // Blog Category State
 export const useBlogCategory = create((set, get) => ({

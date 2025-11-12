@@ -12,6 +12,7 @@ import {
   ChevronRight,
   ChevronLeft,
   FilePenLine,
+  Link as LinkIcon,
   Flower,
 } from "lucide-react";
 import Link from "next/link";
@@ -109,6 +110,11 @@ export default function DashboardLayout({ children }) {
       href: "/dashboard/blogs",
       label: "View all Blogs",
       icon: FilePenLine,
+    },
+    {
+      href: "/dashboard/hooks/",
+      label: "View all Hooks",
+      icon: LinkIcon,
     },
 
 
