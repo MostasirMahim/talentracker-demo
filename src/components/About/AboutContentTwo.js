@@ -10,14 +10,14 @@ const AboutContentTwo = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-md-12">
-              <div 
+              <div
                 className="about-image bg-image"
                 style={{
-                  backgroundImage: `url(/images/about/about3.jpg)`,
+                  backgroundImage: `url(/images/about/core_values.webp)`,
                 }}
               >
                 <Image
-                  src="/images/about/about3.jpg"
+                  src="/images/about/core_values.webp"
                   alt="image"
                   width={755}
                   height={829}
@@ -27,50 +27,43 @@ const AboutContentTwo = () => {
 
             <div className="col-lg-6 col-md-12">
               <div className="about-content">
-                <span className="sub-title">ABOUT ALL OF US</span>
-                <h2>What Will You Get From Our Dedicated Company</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy ant extra eirmo tempor invidunt ut labore et
-                  dolore magna aliquyam erat, sed diammi maxil voluptua. At ve
-                  ro eos et accusam et justo duo dolores et ea rebum.
-                </p>
-
+                <span className="h3">Core Values</span>
                 <ul className="features-list">
                   <li>
                     <div className="number">01</div>
-                    <h3>Consistency</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                      sed diam nonumy ant extra mpor invidunt ut labore et
-                      dolore magna aliquyam erat.
-                    </p>
+                    <h3>Integrity</h3>
+                    <p>We operate with honesty, confidentiality and fairness</p>
                   </li>
                   <li>
                     <div className="number">02</div>
-                    <h3>Strategy</h3>
+                    <h3>Compliance</h3>
                     <p>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                      sed diam nonumy ant extra mpor invidunt ut labore et
-                      dolore magna aliquyam erat.
+                      Every service aligns with Bangladesh Labour Law & global
+                      standards.
                     </p>
                   </li>
                   <li>
                     <div className="number">03</div>
-                    <h3>Investment</h3>
+                    <h3>Partnership</h3>
                     <p>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                      sed diam nonumy ant extra mpor invidunt ut labore et
-                      dolore magna aliquyam erat.
+                      We work as a strategic HR ally, not just a service
+                      provider.
                     </p>
                   </li>
                   <li>
                     <div className="number">04</div>
-                    <h3>Final Output Gain</h3>
+                    <h3>Agility</h3>
                     <p>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                      sed diam nonumy ant extra mpor invidunt ut labore et
-                      dolore magna aliquyam erat.
+                      Tailored, flexible HR solutions designed around client
+                      needs.
+                    </p>
+                  </li>
+                  <li>
+                    <div className="number">05</div>
+                    <h3>People-First </h3>
+                    <p>
+                      We prioritize wellbeing, culture, and sustainable
+                      performance
                     </p>
                   </li>
                 </ul>

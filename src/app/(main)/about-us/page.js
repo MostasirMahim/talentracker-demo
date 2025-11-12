@@ -9,12 +9,15 @@ import TestimonialStyleOne from "@/components/Common/TestimonialStyleOne";
 import FreeQuoteFormStyle1 from "@/components/FreeQuoteForm/FreeQuoteFormStyle1";
 import Footer from "@/components/Layouts/Footer";
 import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
+import MissionAndVision from "@/components/About/MissonAndVision/MissionAndVision";
+import IndustriesWeServe from "@/components/About/IndustriesWeServer/IndustriesWebServe";
+import StrategicPartners from "@/components/About/StrategicPartner/StrategicPartner";
 
 export default function Page() {
   return (
     <>
-    <TopHeaderStyleTwo />
-    <NavbarStyleOne />
+      <TopHeaderStyleTwo />
+      <NavbarStyleOne />
       <PageBanner
         pageTitle="About Us"
         homePageUrl="/"
@@ -23,16 +26,13 @@ export default function Page() {
       />
 
       <AboutContentOne />
-
-      <FunfactsTwo />
-
-      <TeamMember />
+      <MissionAndVision />
 
       <AboutContentTwo />
+      <IndustriesWeServe />
 
       <TestimonialStyleOne />
-
-      <FreeQuoteFormStyle1 />
+      <StrategicPartners />
 
       <Footer />
     </>
