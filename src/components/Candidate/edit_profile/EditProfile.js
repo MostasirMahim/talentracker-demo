@@ -60,7 +60,7 @@ const STEPS = [
   },
 ];
 
-export default function EditProfileForm({ candidateId, initialData }) {
+export default function EditProfileForm({ initialData }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ type: null, message: "" });
@@ -80,7 +80,9 @@ export default function EditProfileForm({ candidateId, initialData }) {
     const sectionData = initialData[step.id]
     let isNew
     if(step.id === "personal"){
-      isNew = initialData.candidate.id === null
+      isNew = initialData?.candidate?.id === null
+    }else if (step.id === "skills") {
+      isNew = initialData?.candidate?.skills?.length === 0
     } else {
       isNew = !sectionData || sectionData.length === 0
     }
@@ -117,47 +119,47 @@ export default function EditProfileForm({ candidateId, initialData }) {
 };
 
   const personalDetails = {
-    id: initialData.candidate.id,
-    full_name: initialData.candidate.full_name,
-    primary_phone_number: initialData.candidate.primary_phone_number,
-    secondary_phone_number: initialData.candidate.secondary_phone_number,
-    national_id: initialData.candidate.national_id,
-    career_start_date: initialData.candidate.career_start_date,
-    field_of_specialization: initialData.candidate.field_of_specialization,
-    other_specialization: initialData.candidate.other_specialization,
+    id: initialData?.candidate?.id,
+    full_name: initialData?.candidate?.full_name,
+    primary_phone_number: initialData?.candidate?.primary_phone_number,
+    secondary_phone_number: initialData?.candidate?.secondary_phone_number,
+    national_id: initialData?.candidate.national_id,
+    career_start_date: initialData?.candidate?.career_start_date,
+    field_of_specialization: initialData?.candidate?.field_of_specialization,
+    other_specialization: initialData?.candidate?.other_specialization,
   };
-  const employmentData = initialData.employment.map((emp) => ({
-    id: emp.id,
-    company_name: emp.company_name,
-    designation: emp.designation,
-    joining_date: emp.joining_date,
-    end_date: emp.end_date,
-    is_current: emp.is_current,
-    employment_type: emp.employment_type,
+  const employmentData = initialData?.employment?.map((emp) => ({
+    id: emp?.id,
+    company_name: emp?.company_name,
+    designation: emp?.designation,
+    joining_date: emp?.joining_date,
+    end_date: emp?.end_date,
+    is_current: emp?.is_current,
+    employment_type: emp?.employment_type,
   }));
 
   const compensationData = {
-    id: initialData.compensation[0].id,
-    current_salary: Number(initialData.compensation[0].current_salary),
-    expected_salary: Number(initialData.compensation[0].expected_salary),
-    currency: initialData.compensation[0].currency,
-    notice_period: initialData.compensation[0].notice_period,
+    id: initialData?.compensation[0]?.id,
+    current_salary: Number(initialData?.compensation[0]?.current_salary),
+    expected_salary: Number(initialData?.compensation[0]?.expected_salary),
+    currency: initialData?.compensation[0]?.currency,
+    notice_period: initialData?.compensation[0]?.notice_period,
   };
 
-  const skillsData = initialData.candidate.skills.map((skill) => {
+  const skillsData = initialData?.candidate.skills?.map((skill) => {
     return {
-      id: skill.id,
-      name: skill.name,
+      id: skill?.id,
+      name: skill?.name,
     };
   });
   const documentData = {
-      id: initialData.document[0].id,
-      linked_in_url: initialData.document[0].linked_in_url,
-      resume: initialData.document[0].resume
+      id: initialData?.document[0]?.id,
+      linked_in_url: initialData?.document[0]?.linked_in_url,
+      resume: initialData?.document[0]?.resume
     }
     const locationData =  {
-      id: initialData.location[0].id,
-      current_job_location: initialData.location[0].current_job_location
+      id: initialData?.location[0]?.id,
+      current_job_location: initialData?.location[0]?.current_job_location
     }
 
   return (
