@@ -8,6 +8,7 @@ async function page() {
 
   try {
     const res = await get_candidate_profile_data();
+    console.log(res);
     if (res?.error) {
       error = res?.message || "Something went wrong.";
     } else {
@@ -20,7 +21,10 @@ async function page() {
   if (error) {
     return (
       <div className="p-10 text-center text-red-500 text-lg">
-        <p>⚠️ Failed to load profile.</p>
+        <p className="text-lg">
+          {" "}
+          🚩 Failed to load profile. Please Register & Set Your Profile First
+        </p>
         <p>{error}</p>
       </div>
     );
