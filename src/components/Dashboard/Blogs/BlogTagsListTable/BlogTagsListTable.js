@@ -14,6 +14,13 @@ const BlogTagsListTable = ({ tags = {} }) => {
   const handleDelete = async (id) => {
     // convert id to integer
     id = parseInt(id);
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this tag?"
+    );
+    if (!confirmDelete) {
+      toast.info("Tag deletion cancelled");
+      return;
+    }
     try {
       const response = await axiosInstance.delete(
         `/api/blogs/v1/tags/${id}/`
@@ -30,6 +37,7 @@ const BlogTagsListTable = ({ tags = {} }) => {
 
   const handleUpdate = (id) => {
     id = parseInt(id);
+     
     const tag = tags?.data?.find((type) => type.id === id);
     setTag(tag);
     router.push("/dashboard/blogs/tags/create/?tag_id=" + id);
@@ -81,13 +89,13 @@ const BlogTagsListTable = ({ tags = {} }) => {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleUpdate(type.id)}
-                      className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                      className="px-3 py-1 cursor-pointer bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                     >
                       Update
                     </button>
                     <button
                       onClick={() => handleDelete(type.id)}
-                      className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                      className="px-3 py-1 cursor-pointer bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
                     >
                       Delete
                     </button>

@@ -9,25 +9,11 @@ const BlogSidebar = ({ category, tags }) => {
 
   return (
     <aside className="widget-area">
-      {/* Search Widget */}
-      <div className="widget widget_search">
-        <form className="search-form">
-          <label>
-            <input
-              type="search"
-              className="search-field"
-              placeholder="Search..."
-            />
-          </label>
-          <button type="submit">
-            <i className="ri-search-2-line"></i>
-          </button>
-        </form>
-      </div>
+ 
 
       {/* Categories Widget */}
       <div className="widget widget_categories">
-        <h3 className="widget-title">Category</h3>
+        <h3 className="widget-title fs-3">Category</h3>
         <ul>
          <li className="fw-bold"> 
           {category}
@@ -37,10 +23,10 @@ const BlogSidebar = ({ category, tags }) => {
 
       {/* Tags Widget */}
       <div className="widget widget_tag_cloud">
-        <h3 className="widget-title">Tags</h3>
-        <div className="tagcloud">
+        <h3 className="widget-title fs-3">Tags</h3>
+        <div className="tagcloud ">
           {tags.map((tag, index) => (
-            <Link key={index} href="#" className="tag-cloud-link">
+            <Link key={index} href="#" className="tag-cloud-link ">
               {tag} <span className="tag-link-count">(1)</span>
             </Link>
           ))}

@@ -40,6 +40,11 @@ const BlogDetailsContent = ({ blog }) => {
                   width={860}
                   height={622}
                   className="rounded-3"
+                  style={{
+                    width: "90%",
+                    height: "400px",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
 
