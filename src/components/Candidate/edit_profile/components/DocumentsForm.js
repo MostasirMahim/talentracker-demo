@@ -1,15 +1,50 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
+import { uploadDocument } from "@/actions/candidate";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-export default function DocumentsForm({ initialData, onSubmit, isLoading }) {
+export default function DocumentsForm({ initialData, setSubmitStatus }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: initialData || {},
-  })
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const isNew = initialData?.id === null || initialData?.id === undefined;
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    if (
+      !data.resume ||
+      data.resume == initialData.resume ||
+      !data.linked_in_url
+    ) {
+      toast.error("Please upload your resume and LinkedIn URL.");
+      return;
+    }
+    try {
+      const formData = new FormData();
+      formData.append("linked_in_url", data.linked_in_url || "");
+
+      if (data.resume && data.resume[0]) {
+        formData.append("resume", data.resume[0]);
+      }
+      const result = await uploadDocument(formData, isNew);
+      if (result.success) {
+        setSubmitStatus({ type: "success", message: "Saved successfully." });
+      } else {
+        setSubmitStatus({ type: "error", message: result.message });
+        console.log(result.data);
+      }
+    } catch (err) {
+      setSubmitStatus({ type: "error", message: err.message });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="profile-form">
@@ -25,7 +60,12 @@ export default function DocumentsForm({ initialData, onSubmit, isLoading }) {
 
       <div className="form-group">
         <label className="form-label">Resume</label>
-        <input {...register("resume")} type="file" className="form-input" accept=".pdf,.doc,.docx" />
+        <input
+          {...register("resume")}
+          type="file"
+          className="form-input"
+          accept=".pdf,.doc,.docx"
+        />
         <small className="form-hint">Accepted formats: PDF, DOC, DOCX</small>
       </div>
 
@@ -33,5 +73,5 @@ export default function DocumentsForm({ initialData, onSubmit, isLoading }) {
         {isLoading ? "Saving..." : "Save & Continue"}
       </button>
     </form>
-  )
+  );
 }
