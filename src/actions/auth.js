@@ -57,6 +57,27 @@ export async function candidateLogin(formData) {
     };
   }
 }
+export async function candidateLogOut() {
+  try {
+    const res = await axiosInstance.delete(`/api/authentication/v1/logout/`);
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      const cookieStore = cookies();
+      cookieStore.delete("access_token");
+      cookieStore.delete("user_type");
+      return data;
+    } else {
+      return { error: true, message: data.message || "Log Out failed", data };
+    }
+  } catch (err) {
+    return {
+      error: true,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
+    };
+  }
+}
 
 export async function trainerLogin(formData) {
   const { email, password } = formData;
