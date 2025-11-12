@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import "../../../../styles/tailwind.css";
 import DashboardLayoutClient from "@/components/Dashboard/DashboardLayout";
 
@@ -10,6 +11,7 @@ export const metadata = {
 export default function DashboardLayout({ children }) {
   return (
     <>
+      <ToastContainer />
       <DashboardLayoutClient>{children}</DashboardLayoutClient>
     </>
   );

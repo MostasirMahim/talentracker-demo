@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Briefcase, MapPin, Calendar, Search } from "lucide-react";
 import "./JobList.css";
 import Link from "next/link";
@@ -13,7 +13,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
-  console.log({ page });
+
   const [category, setCategory] = useState(null);
   const [jobType, setJobType] = useState(null);
   const [location, setLocation] = useState(null);
@@ -78,6 +78,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
           <div className="col-md-4 col-sm-6">
             <select
               className="form-select"
+              value={category || "None"}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value={"None"}>Categories</option>
@@ -91,6 +92,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
           <div className="col-md-4 col-sm-6">
             <select
               className="form-select"
+              value={jobType || "None"}
               onChange={(e) => setJobType(e.target.value)}
             >
               <option value={"None"}>Job Types</option>
@@ -104,6 +106,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
           <div className="col-md-3 col-sm-6">
             <select
               className="form-select"
+              value={location || "None"}
               onChange={(e) => setLocation(e.target.value)}
             >
               <option value={"None"}>Locations</option>

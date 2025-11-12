@@ -151,7 +151,7 @@ const NavbarStyleOne = () => {
                             pathname == "/blog/" && "active"
                           }`}
                         >
-                          Blog & Gellary
+                          Blog & Gallery
                         </Link>
                       </li>
                     </ul>
