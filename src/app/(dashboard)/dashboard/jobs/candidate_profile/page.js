@@ -23,7 +23,10 @@ async function page({ searchParams }) {
   }
   return (
     <div>
-      <CandidateProfileForApplication candidateData={candidateData} />
+      <CandidateProfileForApplication
+        candidateData={candidateData}
+        job_application_id={job_application}
+      />
     </div>
   );
 }

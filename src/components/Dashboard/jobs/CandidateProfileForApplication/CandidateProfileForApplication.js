@@ -1,11 +1,52 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import { Download, Edit } from "lucide-react";
 import axiosInstance from "@/lib/axiosIntance";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
-export default function CandidateProfileForApplication({ candidateData }) {
+const STATUS_CHOICES = [
+  { value: "pending", label: "Pending" },
+  { value: "accepted", label: "Accepted" },
+  { value: "rejected", label: "Rejected" },
+  { value: "reached", label: "Reached" },
+];
+
+export default function CandidateProfileForApplication({
+  candidateData,
+  job_application_id,
+}) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: { status: "" },
+  });
+
+  const [showUpdateStatusForm, setShowUpdateStatusForm] = useState(false);
+
+  const onSubmit = async (data) => {
+    try {
+      const req_data = {
+        job_application: job_application_id,
+        status: data.status,
+      };
+      console.log(req_data);
+      const response = await axiosInstance.patch(
+        "/api/jobs/v1/job_applications/",
+        req_data
+      );
+      if (response.status === 200) {
+        toast.success("Status updated successfully!");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to update status");
+    }
+  };
+
   if (!candidateData?.data) return <p>No candidate data found.</p>;
 
   const {
@@ -81,7 +122,7 @@ export default function CandidateProfileForApplication({ candidateData }) {
   };
 
   const handleUpdateStatus = () => {
-    toast("Feature coming soon — update candidate status here.");
+    setShowUpdateStatusForm((state) => !state);
   };
 
   return (
@@ -249,9 +290,62 @@ export default function CandidateProfileForApplication({ candidateData }) {
           onClick={() => handleUpdateStatus()}
           className="flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition"
         >
-          <Edit size={18} /> Update Status
+          {showUpdateStatusForm ? (
+            <>Cancel</>
+          ) : (
+            <>
+              <Edit size={18} /> Update Status
+            </>
+          )}
         </button>
       </div>
+
+      {showUpdateStatusForm && (
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+        >
+          <h2 className="text-xl font-semibold text-gray-800">
+            Update Job Status
+          </h2>
+
+          <div>
+            <label
+              htmlFor="status"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Status
+            </label>
+            <select
+              id="status"
+              {...register("status", { required: "Please select a status" })}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                errors.status ? "border-red-500" : "border-gray-300"
+              }`}
+            >
+              <option value="">Select status</option>
+              {STATUS_CHOICES.map((choice) => (
+                <option key={choice.value} value={choice.value}>
+                  {choice.label}
+                </option>
+              ))}
+            </select>
+            {errors.status && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.status.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Updating..." : "Update Status"}
+          </button>
+        </form>
+      )}
     </div>
   );
 }
