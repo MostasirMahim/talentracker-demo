@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import JobCategoryForm from "@/components/Dashboard/jobs/JobCategoryForm/JobCategoryForm";
 import React, { Suspense } from "react";
 

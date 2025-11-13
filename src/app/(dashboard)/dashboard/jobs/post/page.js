@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import JobPostForm from "@/components/Dashboard/jobs/JobPostForm/JobPostForm";
 import axiosInstance from "@/lib/axiosIntance";
 import React, { Suspense } from "react";

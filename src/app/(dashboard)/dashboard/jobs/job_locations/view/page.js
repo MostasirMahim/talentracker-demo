@@ -1,3 +1,5 @@
+"use client";
+export const dynamic = "force-dynamic";
 import JobLocationListTable from "@/components/Dashboard/jobs/JobLocationListTable/JobLocationListTable";
 import JobTypeListTable from "@/components/Dashboard/jobs/JobTypeListTable/jobTypeListTable";
 import axiosInstance from "@/lib/axiosIntance";
