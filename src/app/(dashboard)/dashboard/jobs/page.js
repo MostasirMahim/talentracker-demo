@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import JobListTable from "@/components/Dashboard/jobs/JobListTable/JobListTable";
 import axiosInstance from "@/lib/axiosIntance";
 import React from "react";

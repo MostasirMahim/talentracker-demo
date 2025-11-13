@@ -1,0 +1,358 @@
+/* ========EDIT PROFILE======== */
+
+.edit-profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+
+}
+
+/* Edit Profile Stepper */
+.edit-profile-stepper {
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.stepper-container {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-width: 100%;
+}
+
+.stepper-item-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  flex: 1;
+  text-align: left;
+}
+
+@media (min-width: 992px) {
+  .stepper-item {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.stepper-item:hover {
+  background-color: var(--hover-gray);
+}
+
+.stepper-item.active {
+  background-color: var(--mainColor);
+  color: var(--white);
+}
+.stepper-item.active:hover {
+  background-color: var(--mainColor2);
+  color: var(--white);
+}
+
+.stepper-item.active .stepper-icon-wrapper {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+.stepper-item.completed .stepper-icon-wrapper {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+.stepper-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  color: var(--white);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.stepper-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stepper-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: currentColor;
+}
+
+.stepper-description {
+  font-size: 12px;
+  color: var(--text-gray);
+  opacity: 0.8;
+}
+@media (min-width: 992px) {
+  .stepper-description {
+    display: none;
+  }
+}
+
+.stepper-item.active .stepper-description {
+  color: var(--white);
+  opacity: 0.9;
+}
+
+
+/* Edit Profile Form Content */
+.edit-profile-content {
+  background-color: var(--white);
+  border-radius: 4px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-container {
+  max-width: 500px;
+}
+
+.form-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-gray);
+  padding-bottom: 16px;
+}
+
+/* Profile Form */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.form-input,
+.form-input:focus {
+  padding: 10px 12px;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--dark-gray);
+  background-color: var(--white);
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.1);
+}
+
+.form-error {
+  font-size: 12px;
+  color: #d32f2f;
+  margin-top: 4px;
+}
+
+.form-hint {
+  font-size: 12px;
+  color: var(--text-gray);
+}
+
+.form-status-message {
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.form-status-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.form-status-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Checkbox */
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--dark-gray);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--primary-green);
+}
+
+/* Skills Field */
+.skills-field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.skill-input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.skill-input-group .form-input {
+  flex: 1;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(
+    90deg,
+    var(--mainColor2) 0%,
+    var(--mainColor) 100%
+  );
+  color: var(--white);
+  width: 100%;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(
+    90deg,
+    var(--mainColor) 0%,
+    var(--mainColor2) 100%
+  );
+}
+
+.btn-secondary {
+  background-color: var(--mainColor);
+  color: var(--white);
+  border: 1px solid var(--border-gray);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--mainColor2);
+}
+.btn-secondary2 {
+  background-color: var(--mainColor2);
+  color: var(--white);
+  border: 1px solid var(--border-gray);
+}
+
+.btn-secondary2:hover:not(:disabled) {
+  background-color: var(--mainColor);
+  color: var(--white);
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: var(--white);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #d32f2f;
+}
+
+.btn-icon {
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+}
+
+.btn-sm {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* Form Navigation */
+.form-navigation {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.form-navigation .btn {
+  flex: 1;
+}
+
+.employment-form-group {
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+  border-left: 3px solid var(--primary-green);
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+.employment-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.employment-form-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin: 0;
+}

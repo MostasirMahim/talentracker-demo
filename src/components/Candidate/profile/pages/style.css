@@ -1,0 +1,403 @@
+/* ========VIEW PROFILE======== */
+/* Color Variables */
+:root {
+  --light-gray: #f5f5f5;
+
+  
+}
+.view-profile-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  gap: 24px;
+  margin: 0 auto;
+}
+
+/* Profile Section Base */
+.profile-section {
+  background-color: var(--white);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section-title {
+  padding-top: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  height: 24px;
+  text-transform: none;
+
+
+ 
+}
+
+/* added styles for lucide icon integration in profile sections */
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  background-color: var(--hover-gray);
+  border-radius: 4px;
+  padding: 8px 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section-header .icon-md {
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-green);
+  height: 24px;
+
+  flex-shrink: 0
+}
+
+/* Introduction Section */
+.profile-intro {
+  padding: 0px 26px;
+}
+
+.profile-intro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.profile-intro-content {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark-gray);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+/* Update contact item icons styling */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-gray);
+}
+
+.contact-item svg {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-green);
+  flex-shrink: 0;
+}
+
+.profile-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--dark-gray);
+}
+
+.contact-label {
+  width: 20px;
+  display: inline-block;
+}
+
+.contact-value {
+  font-weight: 600;
+  color: var(--black);
+}
+
+
+.profile-image-container {
+  flex-shrink: 0;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Employment History Section */
+.employment-summary {
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.summary-label {
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.summary-value {
+  color: var(--text-gray);
+}
+
+.employment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 10px;
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.employment-item {
+  border-left: 5px solid var(--primary-green);
+  padding-left: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+  padding: 16px;
+
+}
+
+.employment-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.employment-position {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin: 0;
+}
+
+.employment-date {
+  font-size: 13px;
+  color: var(--primary-green);
+}
+
+.employment-company {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-gray);
+  margin: 8px 0;
+}
+
+/* Employment company icon */
+.employment-company svg {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--primary-green);
+}
+
+.employment-details {
+  font-size: 13px;
+}
+
+.detail-item {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.detail-value {
+  color: var(--text-gray);
+}
+
+/* Compensation Section */
+.compensation-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.compensation-item {
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.compensation-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.compensation-row:last-child {
+  margin-bottom: 0;
+}
+
+.compensation-label {
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.compensation-value {
+font-weight: 500;
+  color: var(--mainColor2);
+}
+
+/* Skills Section */
+.skills-container {
+  display: flex;
+  gap: 16px;
+}
+
+.skills-box {
+  flex: 1;
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-gray);
+}
+
+.skills-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin-bottom: 12px;
+  margin: 0 0 12px 0;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-item {
+  font-size: 16px;
+  color: var(--mainColor2);
+  padding-left: 20px;
+  position: relative;
+}
+
+.skill-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+  font-weight: bold;
+}
+
+/* Personal Details Section */
+.personal-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-gray);
+  font-size: 14px;
+  gap: 16px;
+}
+
+
+
+.detail-row .detail-label {
+  font-weight: 600;
+  color: var(--dark-gray);
+  min-width: 150px;
+}
+
+.detail-row .detail-value {
+  color: var(--mainColor);
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .detail-row {
+    flex-direction: column;
+  }
+  .detail-row .detail-value {
+    text-align: left;
+
+}
+}
+/* Added Document Section Styles */
+.document-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.document-item {
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.document-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+/* Document label with icon */
+.document-label-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.document-label-with-icon svg {
+  color: var(--primary-green);
+  flex-shrink: 0;
+}
+
+.document-label {
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.document-link {
+  color: var(--primary-green);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.document-link:hover {
+  text-decoration: underline;
+}

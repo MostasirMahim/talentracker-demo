@@ -1,6 +1,6 @@
 import BlogPostForm from "@/components/Dashboard/Blogs/BlogPostForm/BlogPostForm";
 import axiosInstance from "@/lib/axiosIntance";
-import React from "react";
+import React, { Suspense } from "react";
 
 async function BlogPostPage() {
   let blog_tags = [];
@@ -11,13 +11,12 @@ async function BlogPostPage() {
     // Fetch tags and categories in parallel
     const [tags_res, categories_res] = await Promise.all([
       axiosInstance.get("/api/blogs/v1/tags/"),
-      axiosInstance.get("/api/blogs/v1/categories/")
+      axiosInstance.get("/api/blogs/v1/categories/"),
     ]);
 
     // Extract data safely
     blog_tags = tags_res?.data?.data || [];
     blog_categories = categories_res?.data?.data || [];
-
   } catch (err) {
     console.error("Error fetching blog data:", err);
     error = err.message;
@@ -47,10 +46,9 @@ async function BlogPostPage() {
 
   return (
     <>
-      <BlogPostForm
-        blogTags={blog_tags}
-        blogCategories={blog_categories}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <BlogPostForm blogTags={blog_tags} blogCategories={blog_categories} />
+      </Suspense>
     </>
   );
 }
