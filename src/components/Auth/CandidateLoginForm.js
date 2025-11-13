@@ -35,7 +35,11 @@ export default function CandidateLoginForm({ email: propEmail }) {
         }
       } else {
         toast.success("Login successful");
-        router.push("/candidate/profile/edit");
+        if(propEmail) {
+          router.push("/candidate/profile/edit");
+        } else {
+           router.push("/candidate/profile/");
+        }
       }
     } catch (err) {
       toast.error("Login failed");
