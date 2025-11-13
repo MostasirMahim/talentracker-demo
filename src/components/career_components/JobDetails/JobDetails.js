@@ -9,11 +9,54 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import "./JobDetails.css";
+import { toast } from "react-toastify";
+import { job_Apply } from "@/actions/jobs";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { get_me } from "@/actions/auth";
 
 export default function JobDetails({ job }) {
+  const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState(null);
+    const user = data?.error === false ? true : "";
+    const router = useRouter();
+    const handleFetchData = async () => {
+      const fetchedData = await get_me();
+      setData(fetchedData);
+    };
+    useEffect(() => {
+      handleFetchData();
+    }, []);
+  const onApply = async (e) => {
+    e.preventDefault();
+    if(!user){
+      toast.error("You must be logged in to apply for a job");
+      router.push("/auth/candidate/login");
+      return
+    }
+    setIsLoading(true);
+    try {
+      if (!job?.id) {
+        return;
+      }
+      const formData = {
+        job: job.id,
+      };
+      const result = await job_Apply(formData);
+      if (result.success) {
+        toast.success("Job applied successfully");
+      } else {
+        toast.error(result.message);
+        console.log(result.data);
+      }
+    } catch (err) {
+      toast.error(err.message);
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   if (!job) return null;
-  console.log(job);
-
   return (
     <div className="container my-5">
       <div className="card border-0 shadow-sm job-detail-card p-4">
@@ -74,8 +117,8 @@ export default function JobDetails({ job }) {
 
         {/* Apply Button */}
         <div className="text-center mt-5">
-          <button href="/contact" className="default-btn">
-            Apply Now
+          <button onClick={(e) => onApply(e)} className="default-btn">
+            {isLoading ? "Applying..." : "Apply Now"}
             <i className="ri-arrow-right-line"></i>
           </button>
         </div>
