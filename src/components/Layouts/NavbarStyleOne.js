@@ -20,7 +20,6 @@ const NavbarStyleOne = () => {
   useEffect(() => {
     handleFetchData();
   }, []);
-  console.log(data);
   const toggleNavbar = () => {
     setMenu(!menu);
   };
