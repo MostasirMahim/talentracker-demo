@@ -1,8 +1,9 @@
 "use client";
 
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { Trash2, Plus } from "lucide-react";
 import "../style.css";
+import { useEffect } from "react";
 
 export default function EmploymentHistoryForm({
   initialData,
@@ -13,6 +14,7 @@ export default function EmploymentHistoryForm({
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -35,11 +37,36 @@ export default function EmploymentHistoryForm({
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "employment", // required by RHF
+    name: "employment",
   });
 
+  const employmentData = useWatch({
+    control,
+    name: "employment",
+  });
+
+  useEffect(() => {
+    const currentIndex = employmentData?.findIndex(
+      (item) => item.is_current === true
+    );
+
+    if (currentIndex !== -1) {
+      employmentData.forEach((item, index) => {
+        if (index !== currentIndex && item.is_current === true) {
+          setValue(`employment.${index}.is_current`, false);
+        }
+      });
+    }
+  }, [employmentData, setValue]);
+
+  const handleCheckboxChange = (checkedIndex) => {
+    employmentData.forEach((item, index) => {
+      if (index !== checkedIndex) {
+        setValue(`employment.${index}.is_current`, false);
+      }
+    });
+  };
   const handleFormSubmit = (data) => {
-    // send only the array to your API
     onSubmit(data.employment);
   };
 
@@ -139,6 +166,11 @@ export default function EmploymentHistoryForm({
               <input
                 {...register(`employment.${index}.is_current`)}
                 type="checkbox"
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    handleCheckboxChange(index);
+                  }
+                }}
               />
               <span>Currently working here</span>
             </label>
