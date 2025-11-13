@@ -1,10 +1,12 @@
 import BlogTagsForm from "@/components/Dashboard/Blogs/BlogTagsForm/BlogTagsForm";
-import React from "react";
+import React, { Suspense } from "react";
 
 function Page() {
   return (
     <>
-      <BlogTagsForm />
+      <Suspense fallback={<h5>Loading...</h5>}>
+        <BlogTagsForm />
+      </Suspense>
     </>
   );
 }
