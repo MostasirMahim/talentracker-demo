@@ -1,8 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import axiosInstance from "@/lib/axiosIntance";
+import { revalidateTag } from "next/cache";
 
 export async function adminLogin(formData) {
   const { email, password } = formData;
@@ -45,6 +45,7 @@ export async function candidateLogin(formData) {
     if (data.code === 200 && data.status === "success") {
       cookies().set({ name: "access_token", value: data.access_token });
       cookies().set({ name: "user_type", value: data.user_type });
+      revalidateTag("get-me");
       return data;
     } else {
       return { error: true, message: data.message || "Login failed", data };
@@ -66,6 +67,7 @@ export async function candidateLogOut() {
       const cookieStore = cookies();
       cookieStore.delete("access_token");
       cookieStore.delete("user_type");
+      revalidateTag("get-me");
       return data;
     } else {
       return { error: true, message: data.message || "Log Out failed", data };
