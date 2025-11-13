@@ -12,6 +12,8 @@ import {
   ChevronRight,
   ChevronLeft,
   FilePenLine,
+  UserPlus,
+  Link as LinkIcon,
   Flower,
 } from "lucide-react";
 import Link from "next/link";
@@ -34,6 +36,12 @@ export default function DashboardLayout({ children }) {
     { href: "#", label: "Home", icon: Home },
     { href: "#", label: "Users", icon: Users },
     { href: "#", label: "Settings", icon: Settings },
+    {
+      icon: UserPlus,
+      label: "Onboarding",
+      href: "/dashboard/registration/email",
+      urls: ["/dashboard/registration/"],
+    },
     {
       href: "/dashboard/jobs/job_types/create",
       label: "Set Job type",
@@ -74,7 +82,49 @@ export default function DashboardLayout({ children }) {
       label: "View all jobs",
       icon: Flower,
     },
-    { href: "#", label: "Blogs", icon: FilePenLine },
+    // blog categories view
+    { href: "/dashboard/blogs/categories/view", 
+      label: "View all Blog Categories", 
+      icon: FilePenLine 
+    },
+    // blogs categories create
+    {
+      href: "/dashboard/blogs/categories/create",
+      label: "Create Blog Category",
+      icon: FilePenLine,
+    },
+    // blogs tag create
+    {
+      href: "/dashboard/blogs/tags/create",
+      label: "Create Blog Tag",
+      icon: FilePenLine,
+    },
+    // blogs tag view
+    {
+      href: "/dashboard/blogs/tags/view",
+      label: "View all Blog Tags",
+      icon: FilePenLine,
+    },
+    
+    // blogs create
+    {
+      href: "/dashboard/blogs/post/",
+      label: "Post a Blog",
+      icon: FilePenLine,
+    },
+    // blogs view
+    {
+      href: "/dashboard/blogs",
+      label: "View all Blogs",
+      icon: FilePenLine,
+    },
+    {
+      href: "/dashboard/hooks/",
+      label: "View all Hooks",
+      icon: LinkIcon,
+    },
+
+
     { href: "#", label: "Analytics", icon: Settings },
     { href: "#", label: "Teams", icon: Users },
   ];

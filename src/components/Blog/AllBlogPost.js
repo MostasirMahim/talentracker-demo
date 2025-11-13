@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import SmartPagination from "../SmartPagination/SmartPagination";
+import BlogSmartPagination from "../SmartPagination/BlogSmartPagination";
 
 const AllBlogPost = ({ blogs }) => {
   const blogList = blogs?.data || [];
@@ -31,6 +31,12 @@ const AllBlogPost = ({ blogs }) => {
     );
   }
 
+  // Helper function to limit text length
+  const truncateText = (text, maxLength) => {
+    if (!text) return "";
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+  };
+
   return (
     <div className="blog-area ptb-100">
       <div className="container">
@@ -49,6 +55,12 @@ const AllBlogPost = ({ blogs }) => {
                       alt={post.altText || post.title}
                       width={860}
                       height={622}
+                      style={{
+                        width: "100%",
+                        height: "250px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                      }}
                     />
                   </Link>
                 </div>
@@ -64,9 +76,9 @@ const AllBlogPost = ({ blogs }) => {
                     </li>
                   </ul>
                   <h3>
-                    <Link href={`/blog/${post.id}`}>{post.title}</Link>
+                    <Link href={`/blog/${post.id}`}>{truncateText(post.title, 40)}</Link>
                   </h3>
-                  <p>{post.summary}</p>
+                  <p>{truncateText(post.summary, 100)}</p>
                   <Link href={`/blog/${post.id}`} className="default-btn">
                     Read More <i className="ri-arrow-right-line"></i>
                   </Link>
@@ -77,7 +89,7 @@ const AllBlogPost = ({ blogs }) => {
         </div>
 
         {/* Pagination */}
-        <SmartPagination paginationData={pagination} />
+        <BlogSmartPagination paginationData={pagination} />
       </div>
     </div>
   );
