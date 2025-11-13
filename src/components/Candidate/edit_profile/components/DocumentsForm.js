@@ -34,12 +34,15 @@ export default function DocumentsForm({ initialData, setSubmitStatus }) {
       }
       const result = await uploadDocument(formData, isNew);
       if (result.success) {
+        toast.success(result.message);
         setSubmitStatus({ type: "success", message: "Saved successfully." });
       } else {
+        toast.error(result.message);
         setSubmitStatus({ type: "error", message: result.message });
         console.log(result.data);
       }
     } catch (err) {
+      toast.error(err.message);
       setSubmitStatus({ type: "error", message: err.message });
     } finally {
       setIsLoading(false);
