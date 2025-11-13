@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import axiosInstance from "@/lib/axiosIntance";
+import { revalidateTag } from "next/cache";
 export async function get_candidate_profile_data() {
   const accessToken = cookies().get("access_token")?.value;
 
@@ -75,6 +76,7 @@ export async function updateCandidateProfile(section, formData, isNew) {
     const res = await axiosHandler(method, endpoint, formData);
 
     if ((res.code === 200 || res.code === 201) && res.status === "success") {
+       revalidateTag("candidate-profile");
       return {
         success: true,
         message: `${section} details ${isNew ? "created" : "updated"} successfully`,
@@ -118,6 +120,7 @@ export async function uploadDocument(formData, isNew) {
     const data = res.data;
 
     if ((data.code === 200 || data.code === 201) && data.status === "success") {
+       revalidateTag("candidate-profile");
       return {
         success: true,
         message: `Document ${isNew ? "created" : "updated"} successfully`,
