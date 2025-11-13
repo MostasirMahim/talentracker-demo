@@ -14,6 +14,7 @@ import {
   PhoneCall,
   Wallet,
   SquareUser,
+  User2,
 } from "lucide-react";
 import Image from "next/image";
 import "./style.css";
@@ -30,9 +31,37 @@ export default function ViewProfile({ profileData }) {
     });
   };
 
-  const currentLocation =
-    location && location.length > 0 ? location[0].current_job_location : "-";
+  const currentLocation = location && location.length > 0 ? location[0].current_job_location : "-";
 
+  if (
+    !profileData?.candidate ||
+    Object.keys(profileData?.candidate).length === 0
+  ) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            marginTop: "50px",
+          }}
+        >
+          <User2 size={50} style={{ color: "#1489bc" }} />
+          <h3 style={{ color: "#0e4c89" }}>Please Edit Your Profile First</h3>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="view-profile-container">
       <section className="profile-section profile-intro">

@@ -23,6 +23,24 @@ body {
   background-color: var(--light-gray);
 }
 
+.btn-primary {
+  background: linear-gradient(
+    90deg,
+    var(--mainColor2) 0%,
+    var(--mainColor) 100%
+  );
+  color: var(--white);
+  width: 100%;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(
+    90deg,
+    var(--mainColor) 0%,
+    var(--mainColor2) 100%
+  );
+}
+
 .client-layout {
   padding: 0px 5px 0px 5px;
   display: flex;
