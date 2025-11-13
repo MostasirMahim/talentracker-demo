@@ -13,7 +13,7 @@ function OnboardingPage({ params }) {
 
   useEffect(() => {
     if (!validSteps.includes(steps)) {
-      router.replace("/registration/email");
+      router.replace("/dashboard/registration/email");
     }
   }, [steps, router]);
   return (

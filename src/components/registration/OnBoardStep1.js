@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useRegUserStore } from "@/stores/register_store";
 import { useRouter } from "next/navigation";
 
+
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
@@ -19,6 +20,7 @@ const EmailForm = () => {
   const setEmail   = useRegUserStore((state) => state.setEmail);
   
   const [loading, setLoading] = useState(false);
+  const { setError } = useForm();
 
   const {
     register,
@@ -38,17 +40,36 @@ const EmailForm = () => {
 
       const response = await axiosInstance.post("/api/authorization/v1/onboarding/employee/", data);
 
-      if (response.status === 201) {
-        toast.success("OTP sent successfully!");
+      if (response.data?.status === "success") {
+        toast.success(response.data.message || "OTP sent successfully!");
         router.push("/dashboard/registration/otp/");
         reset(); // form reset
       } else {
         toast.error("Something went wrong!");
       }
-    } catch (error) {
-      console.error(error);
-      toast.error(error.response?.data?.message || "Failed to send OTP");
-    } finally {
+    } 
+    catch (error) {
+      console.log(error);
+      if (error.response?.data?.errors) {
+        const backendErrors = error.response?.data?.errors;
+
+        Object.keys(backendErrors).forEach((field) => {
+          setError(field, {
+            type: "server",
+            message: backendErrors[field][0],
+          });
+          // Optional toast for each field
+          toast.error(`${field}: ${backendErrors[field][0]}`);
+        });
+      } else {
+        // Fallback if no detailed error
+        toast.error(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again."
+        );
+      }
+    }
+    finally {
       setLoading(false);
     }
   };

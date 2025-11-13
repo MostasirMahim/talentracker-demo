@@ -21,6 +21,7 @@ export default function OnboardingStep2() {
   const router = useRouter();
   const [otp, setOtp] = useState(Array(4).fill(""));
   const inputRefs = useRef([]);
+  const { setError } = useForm();
 
   const {
     register,
@@ -34,7 +35,7 @@ export default function OnboardingStep2() {
 
   useEffect(() => {
     if (!email) {
-      router.replace("/registration/email");
+      router.replace("/dashboard/registration/email");
     }
   }, [email, router]);
 
@@ -47,23 +48,42 @@ export default function OnboardingStep2() {
 
     try {
       const response = await axiosInstance.post(
-        "/api/account/v1/authorization/admin_user_verify_otp/",
+        "/api/authorization/v1/onboarding/employee/verify/",
         { email, otp: parseInt(otpValue, 10) }
       );
 
       if (response.data?.status === "success") {
         setOtpPass(true);
         toast.success(response.data.message || "OTP verified successfully.");
-        router.push("/registration/add");
+        router.push("/dashboard/registration/add");
       } else {
         toast.error(response.data.message || "OTP verification failed.");
       }
-    } catch (error) {
-      console.error("OTP verification error:", error);
-      toast.error(
-        error.response?.data?.message || "Server error during OTP verification"
-      );
+    } 
+    catch (error) {
+      console.log(error);
+      // Backend returns structured validation errors
+      if (error.response?.data?.errors) {
+        const backendErrors = error.response?.data?.errors;
+
+        // Dynamically set errors for each invalid field
+        Object.keys(backendErrors).forEach((field) => {
+          setError(field, {
+            type: "server",
+            message: backendErrors[field][0],
+          });
+          // Optional toast for each field
+          toast.error(`${field}: ${backendErrors[field][0]}`);
+        });
+      } else {
+        // Fallback if no detailed error
+        toast.error(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again."
+        );
+      }
     }
+
   };
 
   const handleOtpChange = (e, index) => {
@@ -88,7 +108,7 @@ export default function OnboardingStep2() {
 
   const handleBack = () => {
     setOtp(Array(4).fill(""));
-    router.push("/registration/email");
+    router.push("/dashboard/registration/email");
   };
 
   return (
@@ -127,16 +147,17 @@ export default function OnboardingStep2() {
             <p className="text-red-500 text-xs mt-2">{errors.otp.message}</p>
           )}
 
-          <p className="text-sm text-gray-500">
+          {/* <p className="text-sm text-gray-500">
             Didn't get the code?{" "}
             <button
               type="button"
               className="text-blue-600 hover:underline"
               onClick={() => toast.info("Resend OTP functionality")}
+              disabled
             >
               Resend
             </button>
-          </p>
+          </p> */}
 
           <div className="flex gap-2">
             <button
