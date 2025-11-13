@@ -7,9 +7,10 @@ import WhyChooseUs from "@/components/HomeDemo1/WhyChooseUs";
 import Footer from "@/components/Layouts/Footer";
 import FreeQuoteFormStyle2 from "@/components/FreeQuoteForm/FreeQuoteFormStyle2";
 import CompanyOverview2 from "@/components/HomeDemo1/CompanyOverview2";
+import { get_me } from "@/actions/auth";
 
-export default function Home() {
-  
+export default async function Home() {
+  const data = await get_me();
   return (
     <>
       <NavbarStyleTwo />
