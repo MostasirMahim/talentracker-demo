@@ -1,6 +1,7 @@
+export const dynamic = "force-dynamic";
 import JobPostForm from "@/components/Dashboard/jobs/JobPostForm/JobPostForm";
 import axiosInstance from "@/lib/axiosIntance";
-import React from "react";
+import React, { Suspense } from "react";
 
 async function page() {
   let job_type, job_categories, job_locations;
@@ -20,11 +21,13 @@ async function page() {
   }
   return (
     <>
-      <JobPostForm
-        jobTypes={job_type}
-        jobCategories={job_categories}
-        jobLocations={job_locations}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <JobPostForm
+          jobTypes={job_type}
+          jobCategories={job_categories}
+          jobLocations={job_locations}
+        />
+      </Suspense>
     </>
   );
 }

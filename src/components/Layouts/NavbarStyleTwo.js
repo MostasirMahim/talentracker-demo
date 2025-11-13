@@ -21,7 +21,7 @@ const NavbarStyleTwo = () => {
   useEffect(() => {
     handleFetchData();
   }, []);
-console.log(data);
+  console.log(data);
   const toggleNavbar = () => {
     setMenu(!menu);
   };
@@ -36,7 +36,7 @@ console.log(data);
       }
     });
   });
-const user = data?.error === false ? true : "";
+  const user = data?.error === false ? true : "";
   // Search Modal
   const [isActiveSearchModal, setActiveSearchModal] = useState("false");
   const handleToggleSearchModal = () => {
@@ -175,9 +175,11 @@ const user = data?.error === false ? true : "";
                       <li className="nav-item">
                         <Link
                           href={`/${data?.data?.user?.user_type}/profile/`}
-                        className={`nav-link ${
-                          pathname == `/${data?.data?.user?.user_type}/profile/` && "active"
-                        }`}
+                          className={`nav-link ${
+                            pathname ==
+                              `/${data?.data?.user?.user_type}/profile/` &&
+                            "active"
+                          }`}
                         >
                           Profile
                         </Link>
@@ -203,7 +205,7 @@ const user = data?.error === false ? true : "";
                               href="/auth/employer/login/"
                               className={`nav-link`}
                             >
-                              Login as Employer
+                              Login as Trainer
                             </Link>
                           </li>
                         </ul>

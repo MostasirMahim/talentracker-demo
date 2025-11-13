@@ -66,7 +66,6 @@ export default function EditProfileForm({ initialData }) {
   const [submitStatus, setSubmitStatus] = useState({ type: null, message: "" });
 
   const step = STEPS[currentStep];
-  console.log(initialData);
   const handleStepClick = (stepIndex) => {
     if (
       !initialData?.candidate ||

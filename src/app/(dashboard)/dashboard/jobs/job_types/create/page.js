@@ -1,10 +1,13 @@
+export const dynamic = "force-dynamic";
 import JobTypeForm from "@/components/Dashboard/JobTypeForm/JobTypeForm";
-import React from "react";
+import React, { Suspense } from "react";
 
 function Page() {
   return (
     <>
-      <JobTypeForm />
+      <Suspense fallback={<h5>Loading...</h5>}>
+        <JobTypeForm />
+      </Suspense>
     </>
   );
 }

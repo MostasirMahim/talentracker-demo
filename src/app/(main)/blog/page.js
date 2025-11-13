@@ -29,7 +29,6 @@ export default async function BlogPage() {
 
     // slice first 6 blogs for homepage
     blogs = blogResponse.data.data?.slice(0, 6) || [];
-    console.log("Blogs Data:", blogs);
     // gallery = galleryResponse.data.data?.slice(0, 6) || [];
   } catch (err) {
     console.error(err);

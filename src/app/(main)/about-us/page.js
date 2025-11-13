@@ -12,6 +12,7 @@ import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
 import MissionAndVision from "@/components/About/MissonAndVision/MissionAndVision";
 import IndustriesWeServe from "@/components/About/IndustriesWeServer/IndustriesWebServe";
 import StrategicPartners from "@/components/About/StrategicPartner/StrategicPartner";
+import VideoIntegration from "@/components/About/VideoIntegration/VideoIntegration";
 
 export default function Page() {
   return (
@@ -33,7 +34,7 @@ export default function Page() {
 
       <TestimonialStyleOne />
       <StrategicPartners />
-
+      <VideoIntegration />
       <Footer />
     </>
   );

@@ -9,6 +9,7 @@ import FreeQuoteFormStyle2 from "@/components/FreeQuoteForm/FreeQuoteFormStyle2"
 import CompanyOverview2 from "@/components/HomeDemo1/CompanyOverview2";
 
 export default function Home() {
+  
   return (
     <>
       <NavbarStyleTwo />
