@@ -59,14 +59,23 @@ export default function DocumentsForm({ initialData, setSubmitStatus }) {
       </div>
 
       <div className="form-group">
-        <label className="form-label">Resume</label>
+        <div style={{
+          display : "flex",
+          justifyContent: "space-between"
+        }}>
+          <label className="form-label">Resume</label>
+           <small style={{color : "#0e4c89"}}>{initialData?.resume?.split("/").pop()}</small>
+        </div>
         <input
           {...register("resume")}
           type="file"
           className="form-input"
           accept=".pdf,.doc,.docx"
         />
-        <small className="form-hint">Accepted formats: PDF, DOC, DOCX</small>
+        <div>
+          <small className="form-hint">Accepted formats: PDF, DOC, DOCX</small>
+         
+        </div>
       </div>
 
       <button type="submit" disabled={isLoading} className="btn btn-primary">
