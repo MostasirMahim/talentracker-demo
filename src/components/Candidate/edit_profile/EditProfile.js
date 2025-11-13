@@ -123,7 +123,7 @@ export default function EditProfileForm({ initialData }) {
         const result = await updateCandidateProfile(step.id, formData, isNew);
 
         if (result.success) {
-          setCurrentStep(currentStep + 1);
+         setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1));
           toast.success(result.message || "Saved successfully.");
           setSubmitStatus({ type: "success", message: "Saved successfully." });
         } else {
@@ -226,7 +226,7 @@ export default function EditProfileForm({ initialData }) {
         </div>
       </div>
       <div className="edit-profile-content">
-        <h2 className="form-title">{step.description}</h2>
+        <h2 className="form-title">{step?.description}</h2>
         <div className="form-container">
           {submitStatus.type && (
             <div className={`form-status-message ${submitStatus.type}`}>
