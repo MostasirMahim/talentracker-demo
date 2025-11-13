@@ -31,7 +31,7 @@ export default function ViewProfile({ profileData }) {
     });
   };
 
-  const currentLocation = location && location.length > 0 ? location[0].current_job_location : "-";
+  const currentLocation = location && location.length > 0 ? location[0].current_job_location : "";
 
   if (
     !profileData?.candidate ||
@@ -89,10 +89,10 @@ export default function ViewProfile({ profileData }) {
                   {candidate.email}
                 </span>
               </div>
-              <div className="contact-item">
+              {currentLocation && <div className="contact-item">
                 <MapPin className="icon-md" />
                 <span className="contact-value">{currentLocation}</span>
-              </div>
+              </div>}
             </div>
           </div>
           {candidate?.profile_img && (
