@@ -8,7 +8,6 @@ async function page() {
 
   try {
     const res = await get_candidate_profile_data();
-    console.log(res);
     if (res?.error) {
       error = res?.message || "Something went wrong.";
     } else {
