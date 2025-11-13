@@ -19,7 +19,7 @@ import DocumentsForm from "./components/DocumentsForm";
 import LocationsForm from "./components/LocationForm";
 import SkillsForm from "./components/SkillsForm";
 import { updateCandidateProfile } from "@/actions/candidate";
-
+import { toast } from "react-toastify";
 
 const STEPS = [
   {
@@ -66,57 +66,79 @@ export default function EditProfileForm({ initialData }) {
   const [submitStatus, setSubmitStatus] = useState({ type: null, message: "" });
 
   const step = STEPS[currentStep];
-
+console.log(initialData);
   const handleStepClick = (stepIndex) => {
-    setCurrentStep(stepIndex);
-    setSubmitStatus({ type: null, message: "" });
+    if (!initialData?.candidate || Object.keys(initialData.candidate).length === 0) {
+      toast.error("Please save your personal details first");
+    } else {
+      setCurrentStep(stepIndex);
+      setSubmitStatus({ type: null, message: "" });
+    }
   };
 
   const handleSubmit = async (formData) => {
-  setIsLoading(true);
-  setSubmitStatus({ type: null, message: "" });
+    setIsLoading(true);
+    setSubmitStatus({ type: null, message: "" });
 
-  try {
-    const sectionData = initialData[step.id]
-    let isNew
-    if(step.id === "personal"){
-      isNew = initialData?.candidate?.id === null
-    }else if (step.id === "skills") {
-      isNew = initialData?.candidate?.skills?.length === 0
-    } else {
-      isNew = !sectionData || sectionData.length === 0
-    }
-
-    if (Array.isArray(formData)) {
-      const results = await Promise.all(
-        formData.map((item) => {
-      const isItemNew = !item.id;
-      return updateCandidateProfile(step.id, item, isItemNew);
-    })
-      );
-
-    const hasError = results.some((res) => res.success === false);
-
-      if (hasError) {
-        setSubmitStatus({ type: "error", message: "Some employment entries failed to save." });
+    try {
+      const sectionData = initialData[step.id];
+      let isNew;
+      if (step.id === "personal") {
+        isNew = !initialData?.candidate || Object.keys(initialData.candidate).length === 0;
+      } else if (step.id === "skills") {
+        isNew = initialData?.candidate?.skills?.length === 0;
       } else {
-        setSubmitStatus({ type: "success", message: "All employment entries saved successfully." });
+        isNew = !sectionData || sectionData.length === 0;
       }
-    } else {
-      const result = await updateCandidateProfile(step.id, formData, isNew);
 
-      if (result.success) {
-        setSubmitStatus({ type: "success", message: "Saved successfully." });
+      if (Array.isArray(formData)) {
+        const results = await Promise.all(
+          formData.map((item) => {
+            const isItemNew = !item.id;
+            return updateCandidateProfile(step.id, item, isItemNew);
+          })
+        );
+
+        const hasError = results.some((res) => res.success === false);
+
+        if (hasError) {
+          toast.error("Some employment entries failed to save.");
+          setSubmitStatus({
+            type: "error",
+            message: "Some employment entries failed to save.",
+          });
+        } else {
+          setCurrentStep(currentStep + 1);
+          toast.success( "All employment entries saved successfully.");
+          setSubmitStatus({
+            type: "success",
+            message: "All employment entries saved successfully.",
+          });
+        }
       } else {
-        setSubmitStatus({ type: "error", message: result.message || "Failed to save." });
+        const result = await updateCandidateProfile(step.id, formData, isNew);
+
+        if (result.success) {
+          setCurrentStep(currentStep + 1);
+          toast.success( result.message || "Saved successfully.");
+          setSubmitStatus({ type: "success", message: "Saved successfully." });
+        } else {
+          toast.error(result.message || "Failed to save.");
+          setSubmitStatus({
+            type: "error",
+            message: result.message || "Failed to save.",
+          });
+        }
       }
+    } catch (err) {
+      setSubmitStatus({
+        type: "error",
+        message: err?.message || "Network Error",
+      });
+    } finally {
+      setIsLoading(false);
     }
-  } catch (err) {
-    setSubmitStatus({ type: "error", message: err?.message || "Network Error" });
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
   const personalDetails = {
     id: initialData?.candidate?.id,
@@ -153,18 +175,17 @@ export default function EditProfileForm({ initialData }) {
     };
   });
   const documentData = {
-      id: initialData?.document[0]?.id,
-      linked_in_url: initialData?.document[0]?.linked_in_url,
-      resume: initialData?.document[0]?.resume
-    }
-    const locationData =  {
-      id: initialData?.location[0]?.id,
-      current_job_location: initialData?.location[0]?.current_job_location
-    }
+    id: initialData?.document[0]?.id,
+    linked_in_url: initialData?.document[0]?.linked_in_url,
+    resume: initialData?.document[0]?.resume,
+  };
+  const locationData = {
+    id: initialData?.location[0]?.id,
+    current_job_location: initialData?.location[0]?.current_job_location,
+  };
 
   return (
     <div className="edit-profile-wrapper">
-
       <div className="edit-profile-stepper">
         <div className="stepper-container">
           {STEPS.map((item, index) => {
@@ -269,7 +290,12 @@ export default function EditProfileForm({ initialData }) {
 
             <button
               onClick={() =>
-                setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1))
+              {
+                if (!initialData?.candidate || Object.keys(initialData.candidate).length === 0) {
+                  toast.error("Please save your personal details first");
+                } else {
+                 setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1))
+                }}
               }
               disabled={currentStep === STEPS.length - 1 || isLoading}
               className="btn btn-secondary"
