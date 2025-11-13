@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import BlogPostForm from "@/components/Dashboard/Blogs/BlogPostForm/BlogPostForm";
 import axiosInstance from "@/lib/axiosIntance";
 import React, { Suspense } from "react";

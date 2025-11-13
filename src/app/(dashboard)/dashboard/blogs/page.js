@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import BlogTable from "@/components/Dashboard/Blogs/BlogTable/BlogTable";
 import axiosInstance from "@/lib/axiosIntance";
 import React from "react";

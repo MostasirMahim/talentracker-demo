@@ -1,6 +1,9 @@
+export const dynamic = "force-dynamic";
+
 import BlogsCategoriesListTable from "@/components/Dashboard/Blogs/BlogCategoryListTable/BlogsCategoriesListTable";
 import axiosInstance from "@/lib/axiosIntance";
 import React from "react";
+
 
 async function page() {
   let blog_category;

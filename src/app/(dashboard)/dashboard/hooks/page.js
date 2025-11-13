@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import HooksTableList from "@/components/Dashboard/Hooks/HooksTableList/HooksTableList";
 import axiosInstance from "@/lib/axiosIntance";
 import React from "react";
