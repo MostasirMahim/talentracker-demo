@@ -66,9 +66,12 @@ export default function EditProfileForm({ initialData }) {
   const [submitStatus, setSubmitStatus] = useState({ type: null, message: "" });
 
   const step = STEPS[currentStep];
-console.log(initialData);
+  console.log(initialData);
   const handleStepClick = (stepIndex) => {
-    if (!initialData?.candidate || Object.keys(initialData.candidate).length === 0) {
+    if (
+      !initialData?.candidate ||
+      Object.keys(initialData.candidate).length === 0
+    ) {
       toast.error("Please save your personal details first");
     } else {
       setCurrentStep(stepIndex);
@@ -84,7 +87,9 @@ console.log(initialData);
       const sectionData = initialData[step.id];
       let isNew;
       if (step.id === "personal") {
-        isNew = !initialData?.candidate || Object.keys(initialData.candidate).length === 0;
+        isNew =
+          !initialData?.candidate ||
+          Object.keys(initialData.candidate).length === 0;
       } else if (step.id === "skills") {
         isNew = initialData?.candidate?.skills?.length === 0;
       } else {
@@ -109,7 +114,7 @@ console.log(initialData);
           });
         } else {
           setCurrentStep(currentStep + 1);
-          toast.success( "All employment entries saved successfully.");
+          toast.success("All employment entries saved successfully.");
           setSubmitStatus({
             type: "success",
             message: "All employment entries saved successfully.",
@@ -120,7 +125,7 @@ console.log(initialData);
 
         if (result.success) {
           setCurrentStep(currentStep + 1);
-          toast.success( result.message || "Saved successfully.");
+          toast.success(result.message || "Saved successfully.");
           setSubmitStatus({ type: "success", message: "Saved successfully." });
         } else {
           toast.error(result.message || "Failed to save.");
@@ -222,9 +227,8 @@ console.log(initialData);
         </div>
       </div>
       <div className="edit-profile-content">
+        <h2 className="form-title">{step.description}</h2>
         <div className="form-container">
-          <h2 className="form-title">{step.description}</h2>
-
           {submitStatus.type && (
             <div className={`form-status-message ${submitStatus.type}`}>
               {submitStatus.message}
@@ -289,14 +293,16 @@ console.log(initialData);
             </button>
 
             <button
-              onClick={() =>
-              {
-                if (!initialData?.candidate || Object.keys(initialData.candidate).length === 0) {
+              onClick={() => {
+                if (
+                  !initialData?.candidate ||
+                  Object.keys(initialData.candidate).length === 0
+                ) {
                   toast.error("Please save your personal details first");
                 } else {
-                 setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1))
-                }}
-              }
+                  setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1));
+                }
+              }}
               disabled={currentStep === STEPS.length - 1 || isLoading}
               className="btn btn-secondary"
               type="button"
