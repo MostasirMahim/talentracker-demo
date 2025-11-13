@@ -77,7 +77,7 @@ export async function updateCandidateProfile(section, formData, isNew) {
     if ((res.code === 200 || res.code === 201) && res.status === "success") {
       return {
         success: true,
-        message: `${section} ${isNew ? "created" : "updated"} successfully`,
+        message: `${section} details ${isNew ? "created" : "updated"} successfully`,
         data: res.data,
       };
     } else {
