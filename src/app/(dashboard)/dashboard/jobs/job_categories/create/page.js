@@ -1,10 +1,12 @@
 import JobCategoryForm from "@/components/Dashboard/jobs/JobCategoryForm/JobCategoryForm";
-import React from "react";
+import React, { Suspense } from "react";
 
 function Page() {
   return (
     <>
-      <JobCategoryForm />
+      <Suspense fallback={<h5>Loading...</h5>}>
+        <JobCategoryForm />
+      </Suspense>
     </>
   );
 }
