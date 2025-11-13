@@ -12,7 +12,7 @@ const NavbarStyleOne = () => {
   const pathname = usePathname();
   const [menu, setMenu] = React.useState(true);
   const [data, setData] = useState(null);
-const user = data?.error === false ? true : "";
+  const user = data?.error === false ? true : "";
   const handleFetchData = async () => {
     const fetchedData = await get_me();
     setData(fetchedData);
@@ -20,7 +20,7 @@ const user = data?.error === false ? true : "";
   useEffect(() => {
     handleFetchData();
   }, []);
-console.log(data);
+  console.log(data);
   const toggleNavbar = () => {
     setMenu(!menu);
   };
@@ -171,7 +171,9 @@ console.log(data);
                       <Link
                         href={`/${data?.data?.user?.user_type}/profile/`}
                         className={`nav-link ${
-                          pathname == `/${data?.data?.user?.user_type}/profile/` && "active"
+                          pathname ==
+                            `/${data?.data?.user?.user_type}/profile/` &&
+                          "active"
                         }`}
                       >
                         Profile
@@ -195,7 +197,7 @@ console.log(data);
                             href="/auth/employer/login/"
                             className={`nav-link`}
                           >
-                            Login as Employer
+                            Login as Trainer
                           </Link>
                         </li>
                       </ul>
