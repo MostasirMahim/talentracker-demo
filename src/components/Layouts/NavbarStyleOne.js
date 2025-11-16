@@ -197,7 +197,7 @@ const NavbarStyleOne = () => {
                       <ul className="dropdown-menu">
                         <li className="nav-item">
                           <Link href="/auth/user/login/" className={`nav-link`}>
-                            Login as User
+                            Login as Candidate
                           </Link>
                         </li>
 
