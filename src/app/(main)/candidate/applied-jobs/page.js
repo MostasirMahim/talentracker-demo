@@ -2,7 +2,7 @@
 
 function page() {
   return (
-    <div>applied-jobs</div>
+    <div>applied-jobs </div>
   )
 }
 
