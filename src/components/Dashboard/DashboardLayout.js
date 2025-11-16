@@ -15,6 +15,8 @@ import {
   UserPlus,
   Link as LinkIcon,
   Flower,
+  Contact,
+  Quote
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -122,6 +124,16 @@ export default function DashboardLayout({ children }) {
       href: "/dashboard/hooks/",
       label: "View all Hooks",
       icon: LinkIcon,
+    },
+    {
+      href: "/dashboard/contacts/",
+      label: "View all Contacts",
+      icon: Contact,
+    },
+    {
+      href: "/dashboard/quotes/",
+      label: "View all Quotes",
+      icon: Quote,
     },
 
 
