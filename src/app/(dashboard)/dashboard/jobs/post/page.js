@@ -15,7 +15,6 @@ async function page() {
     job_type = job_type_res.data;
     job_categories = job_category_res.data;
     job_locations = job_location_res.data;
-    console.log(job_type, job_categories, job_locations);
   } catch (error) {
     console.log(error);
   }

@@ -137,7 +137,7 @@ const NavbarStyleOne = () => {
                       onClick={(e) => e.preventDefault()}
                       className="dropdown-toggle nav-link"
                     >
-                      Learning Resources Center
+                      Resources
                     </Link>
 
                     <ul className="dropdown-menu">
@@ -159,7 +159,17 @@ const NavbarStyleOne = () => {
                             pathname == "/blog/" && "active"
                           }`}
                         >
-                          Blog & Gallery
+                          Blog
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          href="/gallery/"
+                          className={`nav-link ${
+                            pathname == "/gallery/" && "active"
+                          }`}
+                        >
+                          Gallery
                         </Link>
                       </li>
                     </ul>

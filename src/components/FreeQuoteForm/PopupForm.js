@@ -1,8 +1,40 @@
 "use client";
 
-import React from "react";
+import axiosInstance from "@/lib/axiosIntance";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 function PopupForm({ onClose }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [service, setService] = useState("");
+  const handleRequestQuote = async (e) => {
+    e.preventDefault();
+    if (!name || !phone || !service) {
+      toast.info("Please fill all the fields");
+      return;
+    }
+    if (service == "" || service == "None") {
+      toast.info("Please select a service");
+      return;
+    }
+    const response = await axiosInstance.post("/api/quotes/v1/quotes/", {
+      name,
+      email,
+      phone,
+      service,
+    });
+    if (response.status == 201) {
+      toast.success("Request sent successfully");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setService("");
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <div
       className="p-4 shadow-lg free-quote-form-popover"
@@ -13,7 +45,7 @@ function PopupForm({ onClose }) {
         width: "90%",
         maxWidth: "450px",
         zIndex: 1040,
-     
+
         transition: "all 0.3s ease-in-out",
       }}
     >
@@ -22,26 +54,45 @@ function PopupForm({ onClose }) {
         <button className="btn-close" onClick={onClose}></button>
       </div>
 
-      <form >
+      <form onSubmit={handleRequestQuote}>
         <div className="row">
           <div className="col-md-6 mb-3">
             <label>Your Name</label>
-            <input type="text" className="form-control" />
+            <input
+              type="text"
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
 
           <div className="col-md-6 mb-3">
             <label>Your Email</label>
-            <input type="text" className="form-control" />
+            <input
+              type="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
 
           <div className="col-md-6 mb-3">
             <label>Your Phone</label>
-            <input type="text" className="form-control" />
+            <input
+              type="text"
+              className="form-control"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
           </div>
 
           <div className="col-md-6 mb-3">
             <label>Services</label>
-            <select className="form-select">
+            <select
+              className="form-select"
+              value={service}
+              onChange={(e) => setService(e.target.value)}
+            >
               <option value="selected">Strategy Consultancy</option>
               <option>Executive Search & Head Hunting</option>
               <option>Career Counselling & Placement</option>
@@ -59,13 +110,11 @@ function PopupForm({ onClose }) {
             </select>
           </div>
 
-         
-            <div className="form-group d-flex justify-content-center align-items-center col-12">
-              <button type="submit" className="default-btn">
-                Request A Quote <i className="ri-arrow-right-line"></i>
-              </button>
-            </div>
-         
+          <div className="form-group d-flex justify-content-center align-items-center col-12">
+            <button type="submit" className="default-btn">
+              Request A Quote <i className="ri-arrow-right-line"></i>
+            </button>
+          </div>
         </div>
       </form>
     </div>
