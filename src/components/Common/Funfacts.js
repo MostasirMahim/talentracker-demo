@@ -110,12 +110,13 @@ const Funfacts = () => {
 
           <div className="row justify-content-center">
             {funfact &&
-              funfact.map((item) => (
+              funfact.map((item, index) => (
                 <div className="col-lg-4 col-sm-3 col-6 col-md-3" key={item.id}>
                   <div className="funfacts-box">
                     <i className={item.icon}></i>
                     <h3>
                       <CountUp
+                        key={item?.number || index}
                         start={0}
                         end={item.number}
                         enableScrollSpy
