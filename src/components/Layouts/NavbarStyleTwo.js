@@ -143,7 +143,7 @@ const NavbarStyleTwo = () => {
                         onClick={(e) => e.preventDefault()}
                         className="dropdown-toggle nav-link"
                       >
-                        Learning Resources Center
+                        Resources
                       </Link>
 
                       <ul className="dropdown-menu">
@@ -165,7 +165,17 @@ const NavbarStyleTwo = () => {
                               pathname == "/blog/" && "active"
                             }`}
                           >
-                            Blog & Gellary
+                            Blog
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            href="/Gallery/"
+                            className={`nav-link ${
+                              pathname == "/blog/" && "active"
+                            }`}
+                          >
+                            Gallery
                           </Link>
                         </li>
                       </ul>
