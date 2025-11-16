@@ -1,9 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import axiosInstance from "@/lib/axiosIntance";
 
 const FreeQuoteFormStyle2 = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [service, setService] = useState("");
+  const handleRequestQuote = async (e) => {
+    e.preventDefault();
+    if (!name || !phone || !service) {
+      toast.info("Please fill all the fields");
+      return;
+    }
+    if (service == "" || service == "None") {
+      toast.info("Please select a service");
+      return;
+    }
+    const response = await axiosInstance.post("/api/quotes/v1/quotes/", {
+      name,
+      email,
+      phone,
+      service,
+    });
+    if (response.status == 201) {
+      toast.success("Request sent successfully");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setService("");
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <>
       <div className="free-quote-area bg-color">
@@ -12,9 +44,15 @@ const FreeQuoteFormStyle2 = () => {
             <div className="col-lg-5 col-md-12">
               <div className="free-quote-content">
                 <span className="sub-title">FREE QUOTE</span>
-               <h2>Looking for a Trusted HR Partner to Empower Your People?</h2>
+                <h2>
+                  Looking for a Trusted HR Partner to Empower Your People?
+                </h2>
                 <p>
-                  At TalenTracker Limited, we connect strategy, people, and performance to help businesses grow stronger. Whether you need expert support in recruitment, HR consultancy, legal compliance, training, or employee wellbeing, our team is ready to deliver tailor-made solutions that truly make a difference.
+                  At TalenTracker Limited, we connect strategy, people, and
+                  performance to help businesses grow stronger. Whether you need
+                  expert support in recruitment, HR consultancy, legal
+                  compliance, training, or employee wellbeing, our team is ready
+                  to deliver tailor-made solutions that truly make a difference.
                 </p>
               </div>
             </div>
@@ -22,42 +60,60 @@ const FreeQuoteFormStyle2 = () => {
             <div className="col-lg-7 col-md-12">
               <div className="free-quote-form">
                 <h3>GET A QUOTE</h3>
-                <form>
+                <form onSubmit={handleRequestQuote}>
                   <div className="row">
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
                         <label>Your Name</label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
                       </div>
                     </div>
 
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
                         <label>Your Email</label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="email"
+                          className="form-control"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
                       </div>
                     </div>
 
-                     <div className="col-lg-6 col-md-6">
+                    <div className="col-lg-6 col-md-6">
                       <div className="form-group">
                         <label>Your Phone</label>
-                        <input type="text" className="form-control" />
+                        <input
+                          type="number"
+                          className="form-control"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                        />
                       </div>
                     </div>
-
 
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
                         <label>Services</label>
-                        <select className="form-select">
-                          <option value="selected">
-                            Strategy Consultancy
-                          </option>
+                        <select
+                          className="form-select"
+                          onChange={(e) => setService(e.target.value)}
+                          value={service}
+                        >
+                          <option value="None">Strategy Consultancy</option>
                           <option>Executive Search & Head Hunting</option>
                           <option>Career Counselling & Placement</option>
                           <option>Pre-Employment Screening</option>
                           <option>HR & Management Consultancy</option>
-                          <option>Organization Culture & Change Management</option>
+                          <option>
+                            Organization Culture & Change Management
+                          </option>
                           <option>Employee Wellness & Mental Health</option>
                           <option>Remote & Contract Staffing</option>
                           <option>Employer of Record (EOR) & PEO</option>
@@ -73,7 +129,7 @@ const FreeQuoteFormStyle2 = () => {
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
                         <button type="submit" className="default-btn">
-                          Request A Quote{" "}
+                          Request A Quote
                           <i className="ri-arrow-right-line"></i>
                         </button>
                       </div>
