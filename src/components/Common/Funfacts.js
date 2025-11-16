@@ -1,47 +1,104 @@
 "use client";
 
-import React from "react";
+import axiosInstance from "@/lib/axiosIntance";
+import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
 
-const funfact = [
-  {
-    id: 1,
-    icon: "ri-file-copy-2-line",
-    number: "40",
-    sign: "K+",
-    title: "Screened Resume",
-  },
-  {
-    id: 2,
-    icon: "ri-book-open-line",
-    number: "10",
-    sign: "K",
-    title: "Access Profiles",
-  },
-  {
-    id: 3,
-    icon: "ri-team-fill",
-    number: "500",
-    sign: "+",
-    title: "Trained Employee",
-  },
-  {
-    id: 4,
-    icon: "ri-user-settings-line",
-    number: "30",
-    sign: "+",
-    title: "MNC & Local Clients",
-  },
-  {
-    id: 5,
-    icon: "ri-user-settings-line",
-    number: "1000",
-    sign: "+",
-    title: "Outsource Employee",
-  },
-];
-
 const Funfacts = () => {
+  const [hooks, setHooks] = useState({});
+  const [funfact, setFunfact] = useState([
+    {
+      id: 1,
+      icon: "ri-file-copy-2-line",
+      number: 0,
+      sign: "K+",
+      title: "Screened Resume",
+    },
+    {
+      id: 2,
+      icon: "ri-book-open-line",
+      number: 0,
+      sign: "K",
+      title: "Access Profiles",
+    },
+    {
+      id: 3,
+      icon: "ri-team-fill",
+      number: 0,
+      sign: "+",
+      title: "Trained Employee",
+    },
+    {
+      id: 4,
+      icon: "ri-user-settings-line",
+      number: 0,
+      sign: "+",
+      title: "MNC & Local Clients",
+    },
+    {
+      id: 5,
+      icon: "ri-user-settings-line",
+      number: 0,
+      sign: "+",
+      title: "Outsource Employee",
+    },
+  ]);
+  useEffect(() => {
+    const getHooksData = async () => {
+      try {
+        const response = await axiosInstance.get("/api/hooks/v1/hooks/");
+        if (response.status == 200) {
+          setHooks(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getHooksData();
+  }, []);
+
+  useEffect(() => {
+    if (hooks) {
+      setFunfact([
+        {
+          id: 1,
+          icon: "ri-file-copy-2-line",
+          number: hooks?.data?.scanned_resume,
+          sign: "K+",
+          title: "Screened Resume",
+        },
+        {
+          id: 2,
+          icon: "ri-book-open-line",
+          number: hooks?.data?.access_to_profile,
+          sign: "K",
+          title: "Access Profiles",
+        },
+        {
+          id: 3,
+          icon: "ri-team-fill",
+          number: hooks?.data?.trained_employee,
+          sign: "+",
+          title: "Trained Employee",
+        },
+        {
+          id: 4,
+          icon: "ri-user-settings-line",
+          number: hooks?.data?.mnc_and_local_clients,
+          sign: "+",
+          title: "MNC & Local Clients",
+        },
+        {
+          id: 5,
+          icon: "ri-user-settings-line",
+          number: hooks?.data?.out_source_employee,
+          sign: "+",
+          title: "Outsource Employee",
+        },
+      ]);
+    }
+  }, [hooks]);
+
   return (
     <>
       <div className="funfacts-area ptb-70">
