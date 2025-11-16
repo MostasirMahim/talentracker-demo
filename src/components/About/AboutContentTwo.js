@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { Expand, Scale, Handshake, Speech, UsersRound } from "lucide-react";
 
 const AboutContentTwo = () => {
   return (
@@ -30,12 +31,16 @@ const AboutContentTwo = () => {
                 <span className="h3">Core Values</span>
                 <ul className="features-list">
                   <li>
-                    <div className="number">01</div>
+                    <div className="number">
+                      <Expand />
+                    </div>
                     <h3>Integrity</h3>
                     <p>We operate with honesty, confidentiality and fairness</p>
                   </li>
                   <li>
-                    <div className="number">02</div>
+                    <div className="number">
+                      <Scale />
+                    </div>
                     <h3>Compliance</h3>
                     <p>
                       Every service aligns with Bangladesh Labour Law & global
@@ -43,7 +48,9 @@ const AboutContentTwo = () => {
                     </p>
                   </li>
                   <li>
-                    <div className="number">03</div>
+                    <div className="number">
+                      <Handshake />
+                    </div>
                     <h3>Partnership</h3>
                     <p>
                       We work as a strategic HR ally, not just a service
@@ -51,7 +58,9 @@ const AboutContentTwo = () => {
                     </p>
                   </li>
                   <li>
-                    <div className="number">04</div>
+                    <div className="number">
+                      <Speech />
+                    </div>
                     <h3>Agility</h3>
                     <p>
                       Tailored, flexible HR solutions designed around client
@@ -59,7 +68,9 @@ const AboutContentTwo = () => {
                     </p>
                   </li>
                   <li>
-                    <div className="number">05</div>
+                    <div className="number">
+                      <UsersRound />
+                    </div>
                     <h3>People-First </h3>
                     <p>
                       We prioritize wellbeing, culture, and sustainable
