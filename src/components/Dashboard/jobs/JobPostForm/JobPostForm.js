@@ -21,7 +21,11 @@ export default function JobPostForm({ jobTypes, jobCategories, jobLocations }) {
     reset,
     formState: { errors, isSubmitting },
     setError,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      rank: 0,
+    },
+  });
 
   const [editorValue, setEditorValue] = useState("");
   const router = useRouter();
@@ -43,6 +47,7 @@ export default function JobPostForm({ jobTypes, jobCategories, jobLocations }) {
         job_type: job.job_type.id,
         job_category: job.job_category.id,
         job_location: job.job_location.id,
+        rank: job.rank,
       });
     } else {
       reset();
@@ -194,6 +199,26 @@ export default function JobPostForm({ jobTypes, jobCategories, jobLocations }) {
           />
           {errors.salary && (
             <p className="text-red-500 text-sm mt-1">{errors.salary.message}</p>
+          )}
+        </div>
+        {/* Rank */}
+        <div>
+          <label className="block font-medium mb-2 text-gray-700">
+            Job rank (Hightest to lowest)
+          </label>
+          <input
+            type="number"
+            placeholder="Enter job rank"
+            {...register("rank", {
+              required:
+                "Rank is required. If you want default behavior then enter 0",
+            })}
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+              errors.rank ? "border-red-500" : "border-gray-300"
+            }`}
+          />
+          {errors.rank && (
+            <p className="text-red-500 text-sm mt-1">{errors.rank.message}</p>
           )}
         </div>
 

@@ -49,6 +49,7 @@ const JobListTable = ({ jobs = {} }) => {
                 <th className="text-left py-3 px-4 border-b">ID</th>
                 <th className="text-left py-3 px-4 border-b">Title</th>
                 <th className="text-left py-3 px-4 border-b">Deadline</th>
+                <th className="text-left py-3 px-4 border-b">Rank</th>
                 <th className="text-left py-3 px-4 border-b">Actions</th>
               </tr>
             </thead>
@@ -67,6 +68,7 @@ const JobListTable = ({ jobs = {} }) => {
                   <td className="py-3 px-4 border-b capitalize">
                     {job.deadline}
                   </td>
+                  <td className="py-3 px-4 border-b capitalize">{job.rank}</td>
                   <td className="py-3 px-4 border-b">
                     <div className="flex gap-2">
                       <button
