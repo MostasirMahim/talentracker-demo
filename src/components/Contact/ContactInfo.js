@@ -22,7 +22,10 @@ const ContactInfo = () => {
                         <i className="ri-home-7-line"></i>
                       </div>
                       <h3>Main Office</h3>
-                      <p>325 Rockford Lane Durham, New York, USA</p>
+                      <p>
+                        House 1(Level 2), Road 3, Block A, Mirpur 11, Begum
+                        Rokeya Avenue, Dhaka-1216
+                      </p>
                     </div>
                   </div>
 
@@ -34,11 +37,7 @@ const ContactInfo = () => {
                       <h3>Our Phone</h3>
                       <p>
                         <span>Call:</span>
-                        <a href="mailto:+18144822296">+(1) 814 482 2296</a>
-                      </p>
-                      <p>
-                        <span>Call:</span>
-                        <a href="mailto:+54789632157">+(5) 478 963 2157</a>
+                        <a href="tel:+8801847293000">+880 184 7293 000</a>
                       </p>
                     </div>
                   </div>
@@ -51,11 +50,9 @@ const ContactInfo = () => {
                       <h3>Email Address</h3>
                       <p>
                         <span>Email:</span>
-                        <a href="mailto:hello@zixon.com">hello@zixon.com</a>
-                      </p>
-                      <p>
-                        <span>Email:</span>
-                        <a href="mailto:info@zixon.com">info@zixon.com</a>
+                        <a href="mailto:care@talentracker.net">
+                          care@talentracker.net
+                        </a>
                       </p>
                     </div>
                   </div>

@@ -122,7 +122,7 @@ const NavbarStyleOne = () => {
                   </li>
                   <li className="nav-item">
                     <Link
-                      href="#"
+                      href="/coming_soon"
                       className={`nav-link ${
                         pathname == "/training_solutions/" && "active"
                       }`}
@@ -143,7 +143,7 @@ const NavbarStyleOne = () => {
                     <ul className="dropdown-menu">
                       <li className="nav-item">
                         <Link
-                          href="/news/"
+                          href="/coming_soon"
                           className={`nav-link ${
                             pathname == "/news/" && "active"
                           }`}
@@ -154,7 +154,7 @@ const NavbarStyleOne = () => {
 
                       <li className="nav-item">
                         <Link
-                          href="/blog/"
+                          href="/blog/all/"
                           className={`nav-link ${
                             pathname == "/blog/" && "active"
                           }`}
@@ -164,7 +164,7 @@ const NavbarStyleOne = () => {
                       </li>
                       <li className="nav-item">
                         <Link
-                          href="/gallery/"
+                          href="/coming_soon"
                           className={`nav-link ${
                             pathname == "/gallery/" && "active"
                           }`}
@@ -202,10 +202,7 @@ const NavbarStyleOne = () => {
                         </li>
 
                         <li className="nav-item">
-                          <Link
-                            href="/auth/employer/login/"
-                            className={`nav-link`}
-                          >
+                          <Link href="/coming_soon" className={`nav-link`}>
                             Login as Trainer
                           </Link>
                         </li>

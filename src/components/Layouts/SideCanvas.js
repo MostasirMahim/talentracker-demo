@@ -36,20 +36,27 @@ function SideCanvas() {
         <div className="contact-info">
           {/* Address */}
           <div className="contact-item">
-            <i className="ri-map-pin-line contact-icon address"></i>
-            <span className="contact-text">123 Main Street, City, Country</span>
+            <div>
+              <i className="ri-map-pin-line contact-icon address"></i>
+            </div>
+            <span className="contact-text">
+              House 1(Level 2), Road 3, Block A, Mirpur 11, Begum Rokeya Avenue,
+              Dhaka-1216
+            </span>
           </div>
 
           {/* Phone */}
           <div className="contact-item">
             <i className="ri-phone-line contact-icon phone"></i>
-            <span className="contact-text">+880 1847 293 000</span>
+            <span className="contact-text">+880 184 7293 000</span>
           </div>
 
           {/* Email */}
           <div className="contact-item">
             <i className="ri-mail-line contact-icon email"></i>
-            <span className="contact-text">info@example.com</span>
+            <span className="contact-text">
+              <a href="mailto:care@talentracker.net">care@talentracker.net</a>
+            </span>
           </div>
         </div>
 

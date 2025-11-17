@@ -41,7 +41,7 @@ const Footer = () => {
                     <Link href="/career">Available Jobs</Link>
                   </li>
                   <li>
-                    <Link href="/training-solutions">Training Services</Link>
+                    <Link href="/coming_soon">Training Services</Link>
                   </li>
                   <li>
                     <Link href="/about-us">About Us</Link>
@@ -63,20 +63,19 @@ const Footer = () => {
                   <ul>
                     <li>
                       <span>Call:</span>{" "}
-                      <a href="tel:+(1)8144822296">+880 1847 293 000</a>
+                      <a href="tel:+8801847293000">+880 184 7293 000</a>
                     </li>
                     <li>
                       <span>Email:</span>{" "}
-                      <a href="mailto:hello@zixon.com">hello@zixon.com</a>
-                    </li>
-                    <li>
-                      <span>Phone:</span>{" "}
-                      <a href="mailto:hello@zixon.com">969 000 000</a>
+                      <a href="mailto:care@talentracker.net">
+                        care@talentracker.net
+                      </a>
                     </li>
                     <li>
                       <span>Location:</span>{" "}
-                      <a href="mailto:hello@zixon.com">
-                        Road 1, House 1, Section 1, Block 1, Mirpur, Dhaka 1216.
+                      <a>
+                        House 1(Level 2), Road 3, Block A, Mirpur 11, Begum
+                        Rokeya Avenue, Dhaka-1216
                       </a>
                     </li>
                   </ul>
