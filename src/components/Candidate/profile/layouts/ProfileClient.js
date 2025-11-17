@@ -118,7 +118,7 @@ export default function ProfileClient({ children }) {
           toast.success("Log Out Successful");
         }
       } catch (err) {
-        console.log(result);
+        console.log(err);
         toast.error("Log Out Failed");
       }
     } else {

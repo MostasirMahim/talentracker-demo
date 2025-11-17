@@ -11,19 +11,23 @@ import {
   Search,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   FilePenLine,
   UserPlus,
-  Link as LinkIcon,
+  LinkIcon,
   Flower,
   Contact,
   Quote,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
+import { useUserStore } from "@/stores/user_store";
+import { candidateLogOut, get_me } from "@/actions/auth";
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
+  const [expandedItems, setExpandedItems] = useState({});
   const { layoutTransition, setLayoutTransitionOff } =
     useLayoutTransitionStore();
 
@@ -34,10 +38,18 @@ export default function DashboardLayout({ children }) {
     }
   }, [layoutTransition]);
 
+  const { setUser, user: data } = useUserStore();
+  const user = data?.error === false ? true : "";
+  const handleFetchData = async () => {
+    const fetchedData = await get_me();
+    setUser(fetchedData);
+  };
+  useEffect(() => {
+    handleFetchData();
+  }, []);
+
   const navItems = [
     { href: "#", label: "Home", icon: Home },
-    { href: "#", label: "Users", icon: Users },
-    { href: "#", label: "Settings", icon: Settings },
     {
       icon: UserPlus,
       label: "Onboarding",
@@ -45,81 +57,50 @@ export default function DashboardLayout({ children }) {
       urls: ["/dashboard/registration/"],
     },
     {
-      href: "/dashboard/jobs/job_types/create",
-      label: "Set Job type",
+      href: "#",
+      label: "Jobs",
       icon: Flower,
+      children: [
+        { href: "/dashboard/jobs/job_types/create", label: "Set Job type" },
+        {
+          href: "/dashboard/jobs/job_categories/create",
+          label: "Set Job category",
+        },
+        {
+          href: "/dashboard/jobs/job_locations/create",
+          label: "Set Job locations",
+        },
+        { href: "/dashboard/jobs/post", label: "Post Job" },
+        { href: "/dashboard/jobs/job_types/view", label: "View job types" },
+        {
+          href: "/dashboard/jobs/job_categories/view",
+          label: "View job category",
+        },
+        {
+          href: "/dashboard/jobs/job_locations/view",
+          label: "View job locations",
+        },
+        { href: "/dashboard/jobs/", label: "View all jobs" },
+      ],
     },
     {
-      href: "/dashboard/jobs/job_categories/create",
-      label: "Set Job category",
-      icon: Flower,
-    },
-    {
-      href: "/dashboard/jobs/job_locations/create",
-      label: "Set Job locations",
-      icon: Flower,
-    },
-    {
-      href: "/dashboard/jobs/post",
-      label: "Post Job",
-      icon: Flower,
-    },
-    {
-      href: "/dashboard/jobs/job_types/view",
-      label: "View job types",
-      icon: Flower,
-    },
-    {
-      href: "/dashboard/jobs/job_categories/view",
-      label: "View job category",
-      icon: Flower,
-    },
-    {
-      href: "/dashboard/jobs/job_locations/view",
-      label: "View job locations",
-      icon: Flower,
-    },
-    {
-      href: "/dashboard/jobs/",
-      label: "View all jobs",
-      icon: Flower,
-    },
-    // blog categories view
-    {
-      href: "/dashboard/blogs/categories/view",
-      label: "View all Blog Categories",
+      href: "#",
+      label: "Blogs",
       icon: FilePenLine,
-    },
-    // blogs categories create
-    {
-      href: "/dashboard/blogs/categories/create",
-      label: "Create Blog Category",
-      icon: FilePenLine,
-    },
-    // blogs tag create
-    {
-      href: "/dashboard/blogs/tags/create",
-      label: "Create Blog Tag",
-      icon: FilePenLine,
-    },
-    // blogs tag view
-    {
-      href: "/dashboard/blogs/tags/view",
-      label: "View all Blog Tags",
-      icon: FilePenLine,
-    },
-
-    // blogs create
-    {
-      href: "/dashboard/blogs/post/",
-      label: "Post a Blog",
-      icon: FilePenLine,
-    },
-    // blogs view
-    {
-      href: "/dashboard/blogs",
-      label: "View all Blogs",
-      icon: FilePenLine,
+      children: [
+        {
+          href: "/dashboard/blogs/categories/create",
+          label: "Set Blog Category",
+        },
+        { href: "/dashboard/blogs/tags/create", label: "Set Blog Tags" },
+        { href: "/dashboard/blogs/post", label: "Post Blog" },
+        {
+          href: "/dashboard/blogs/categories/view",
+          label: "View Blog Categories",
+        },
+        { href: "/dashboard/blogs/tags/view", label: "View Blog Tags" },
+        { href: "/dashboard/blogs/", label: "View all Blogs" },
+      ],
     },
     {
       href: "/dashboard/hooks/",
@@ -136,15 +117,53 @@ export default function DashboardLayout({ children }) {
       label: "View all Quotes",
       icon: Quote,
     },
-    {
-      href: "/dashboard/candidates/",
-      label: "Candidates Profiles",
-      icon: Quote,
-    },
-
-    { href: "#", label: "Analytics", icon: Settings },
-    { href: "#", label: "Teams", icon: Users },
   ];
+
+  const handleParentClick = (e, item, index) => {
+    if (item.children && item.children.length > 0) {
+      e.preventDefault();
+      setExpandedItems((prev) => ({
+        ...prev,
+        [index]: !prev[index],
+      }));
+      if (collapsed) {
+        setCollapsed(false);
+      }
+    } else if (item.href && item.href !== "#") {
+      return;
+    }
+  };
+
+  const handleIconClick = (e, item, index) => {
+    if (collapsed && window.innerWidth < 1024) {
+      e.preventDefault();
+      if (item.children && item.children.length > 0) {
+        setExpandedItems((prev) => ({
+          ...prev,
+          [index]: !prev[index],
+        }));
+      } else if (item.href && item.href !== "#") {
+        window.location.href = item.href;
+      }
+    }
+  };
+  const handleLogOut = async () => {
+    try {
+      const result = await candidateLogOut();
+      if (result.error) {
+        toast.error("Log Out Failed");
+      } else {
+        setUser(null);
+        router.push("/auth/admin/login");
+        toast.success("Log Out Successful");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Log Out Failed");
+    }
+  };
+
+  const hasChildren = (item) => item.children && item.children.length > 0;
 
   return (
     <div className="flex h-screen w-screen bg-linear-to-b from-blue-50 to-white">
@@ -177,29 +196,83 @@ export default function DashboardLayout({ children }) {
             {collapsed ? <ChevronRight size={25} /> : <ChevronLeft size={20} />}
           </button>
         </div>
-        <nav className="flex-1 overflow-y-auto py-6 px-0 overflow-x-hidden">
+        <nav className="flex-1 overflow-y-auto  py-6 px-0 overflow-x-hidden">
           {navItems.map((item, i) => (
-            <Link
-              key={i}
-              href={item.href}
-              className={`flex hover:bg-blue-500/50  transition-colors group duration-200 items-center py-3  relative w-full ${
-                collapsed ? "justify-center px-2" : "px-4"
-              }`}
-            >
-              <div className="shrink-0 w-6 h-6 flex items-center justify-center">
-                <item.icon size={20} className="text-white" />
-              </div>
-              {!collapsed && (
-                <span className="text-white  text-sm font-medium ml-4 truncate group-hover:translate-x-1 transition-transform">
-                  {item.label}
-                </span>
+            <div key={i}>
+              {!hasChildren(item) ? (
+                <Link
+                  href={item.href}
+                  className={`flex hover:bg-blue-500/50 transition-colors group duration-200 items-center py-3 relative w-full ${
+                    collapsed ? "justify-center px-2" : "px-4"
+                  }`}
+                >
+                  <div className="shrink-0 w-6 h-6 flex items-center justify-center">
+                    <item.icon size={20} className="text-white" />
+                  </div>
+                  {!collapsed && (
+                    <span className="text-white text-sm font-medium ml-4 truncate group-hover:translate-x-1 transition-transform">
+                      {item.label}
+                    </span>
+                  )}
+                  {collapsed && (
+                    <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                      {item.label}
+                    </div>
+                  )}
+                </Link>
+              ) : (
+                <button
+                  onClick={(e) => {
+                    handleParentClick(e, item, i);
+                    handleIconClick(e, item, i);
+                  }}
+                  className={`flex hover:bg-blue-500/50 transition-colors group duration-200 items-center py-3 relative w-full cursor-pointer ${
+                    collapsed ? "justify-center px-2" : "px-4"
+                  }`}
+                >
+                  <div className="shrink-0 w-6 h-6 flex items-center justify-center">
+                    <item.icon size={20} className="text-white" />
+                  </div>
+                  {!collapsed && (
+                    <div className="flex items-center flex-1">
+                      <span className="text-white text-sm font-medium ml-4 truncate group-hover:translate-x-1 transition-transform">
+                        {item.label}
+                      </span>
+                      {hasChildren(item) && (
+                        <ChevronDown
+                          size={16}
+                          className={`text-white ml-auto transition-transform duration-300 ${
+                            expandedItems[i] ? "rotate-180" : ""
+                          }`}
+                        />
+                      )}
+                    </div>
+                  )}
+                  {collapsed && (
+                    <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                      {item.label}
+                    </div>
+                  )}
+                </button>
               )}
-              {collapsed && (
-                <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                  {item.label}
+
+              {hasChildren(item) && expandedItems[i] && !collapsed && (
+                <div className="bg-blue-700/30 border-l-2 border-blue-400">
+                  {item.children.map((child, childIdx) => (
+                    <Link
+                      key={childIdx}
+                      href={child.href}
+                      className="flex items-center py-2 px-4 ml-4 text-white text-sm hover:bg-blue-500/50 transition-colors group rounded-r"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-blue-300 shrink-0 mr-3" />
+                      <span className="truncate group-hover:translate-x-1 transition-transform">
+                        {child.label}
+                      </span>
+                    </Link>
+                  ))}
                 </div>
               )}
-            </Link>
+            </div>
           ))}
         </nav>
         <div
@@ -208,15 +281,17 @@ export default function DashboardLayout({ children }) {
           }`}
         >
           {!collapsed ? (
-            <button className="flex items-center gap-4 w-full hover:bg-blue-500/50 px-4 py-3 rounded-lg transition-colors">
-              <div className="w-10 h-10 rounded-full bg-sky-400 shrink-0" />
+            <div className="flex items-center gap-4 w-full hover:bg-blue-500/50 px-4 py-3 rounded-lg transition-colors">
+              <button onClick={handleLogOut} className="w-10 h-10 cursor-pointer rounded-full bg-white/30 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors">
+                <LogOut size={16} />
+              </button>
               <div className="text-left">
                 <p className="text-sm font-medium text-white">Mahim Rahad</p>
                 <p className="text-xs text-blue-200">Admin</p>
               </div>
-            </button>
+            </div>
           ) : (
-            <button className="w-8 h-8 rounded-full bg-white/30 hover:bg-white/40 text-white flex items-center justify-center transition-colors">
+            <button onClick={handleLogOut} className="w-8 h-8 cursor-pointer rounded-full bg-white/30 hover:bg-white/40 text-white flex items-center justify-center transition-colors">
               <LogOut size={16} />
             </button>
           )}
