@@ -7,7 +7,6 @@ import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
 import Image from "next/image";
 import SideCanvas from "./SideCanvas";
 import "./NavCss.css";
-import { get_candidate_profile_data } from "@/actions/candidate";
 import { get_me } from "@/actions/auth";
 const NavbarStyleTwo = () => {
   const pathname = usePathname();
@@ -21,7 +20,7 @@ const NavbarStyleTwo = () => {
   useEffect(() => {
     handleFetchData();
   }, []);
-  console.log(data);
+
   const toggleNavbar = () => {
     setMenu(!menu);
   };

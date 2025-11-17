@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import SideCanvas from "./SideCanvas";
-import { get_candidate_profile_data } from "@/actions/candidate";
 import { get_me } from "@/actions/auth";
 
 const NavbarStyleOne = () => {
