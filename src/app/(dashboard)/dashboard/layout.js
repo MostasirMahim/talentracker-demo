@@ -13,7 +13,7 @@ export const metadata = {
 export default async function DashboardLayout({ children }) {
   const authUser = await get_me();
   if (!authUser?.error) {
-    if (authUser?.data?.user.user_type !== "") {
+    if (authUser?.data?.user.user_type !== "admin") {
       redirect("/");
     }
   } else {

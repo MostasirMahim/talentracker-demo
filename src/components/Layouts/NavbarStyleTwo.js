@@ -186,7 +186,7 @@ const NavbarStyleTwo = () => {
                       <li className="nav-item">
                         <Link
                           href={`${
-                            data?.data?.user?.user_type === ""
+                            data?.data?.user?.user_type === "admin"
                               ? "/dashboard"
                               : `/${data?.data?.user?.user_type}/profile/`
                           }`}
@@ -196,7 +196,7 @@ const NavbarStyleTwo = () => {
                             "active"
                           }`}
                         >
-                          {data?.data?.user?.user_type === "" ? (
+                          {data?.data?.user?.user_type === "admin" ? (
                             <span
                               style={{ color: "#333" }}
                               onClick={() => setLayoutTransitionOn()}
