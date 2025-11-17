@@ -11,7 +11,7 @@ async function page({ searchParams }) {
   let candidateData;
   try {
     const response = await axiosInstance(
-      `/api/candidates/v1/candidates/view/all/?page_size=1&page=${page}`,
+      `/api/candidates/v1/candidates/view/all/?page_size=10&page=${page}`,
       {
         headers: {
           Cookie: accessToken ? `access_token=${accessToken}` : "",
