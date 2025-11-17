@@ -5,17 +5,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import SideCanvas from "./SideCanvas";
-import { get_candidate_profile_data } from "@/actions/candidate";
 import { get_me } from "@/actions/auth";
+import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
+import { useUserStore } from "@/stores/user_store";
 
 const NavbarStyleOne = () => {
   const pathname = usePathname();
   const [menu, setMenu] = React.useState(true);
-  const [data, setData] = useState(null);
+  const { setUser, user: data } = useUserStore();
+  const { setLayoutTransitionOn } = useLayoutTransitionStore();
   const user = data?.error === false ? true : "";
   const handleFetchData = async () => {
     const fetchedData = await get_me();
-    setData(fetchedData);
+    setUser(fetchedData);
   };
   useEffect(() => {
     handleFetchData();
@@ -178,14 +180,27 @@ const NavbarStyleOne = () => {
                   {user ? (
                     <li className="nav-item">
                       <Link
-                        href={`/${data?.data?.user?.user_type}/profile/`}
+                        href={`${
+                          data?.data?.user?.user_type === ""
+                            ? "/dashboard"
+                            : `/${data?.data?.user?.user_type}/profile/`
+                        }`}
                         className={`nav-link ${
                           pathname ==
                             `/${data?.data?.user?.user_type}/profile/` &&
                           "active"
                         }`}
                       >
-                        Profile
+                        {data?.data?.user?.user_type === "" ? (
+                          <span
+                            style={{ color: "#333" }}
+                            onClick={() => setLayoutTransitionOn()}
+                          >
+                            Dashboard
+                          </span>
+                        ) : (
+                          "Profile"
+                        )}
                       </Link>
                     </li>
                   ) : (

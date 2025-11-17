@@ -6,10 +6,8 @@ import {
   Mail,
   Building2,
   Briefcase,
-  Award,
   FileText,
   Linkedin,
-  Download,
   CheckCircle2,
   PhoneCall,
   Wallet,
@@ -18,6 +16,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import "./style.css";
+import ResumeButton from "./ResumeButton";
 
 export default function ViewProfile({ profileData }) {
   const { candidate, employment, compensation, document, location } =
@@ -31,7 +30,8 @@ export default function ViewProfile({ profileData }) {
     });
   };
 
-  const currentLocation = location && location.length > 0 ? location[0].current_job_location : "";
+  const currentLocation =
+    location && location.length > 0 ? location[0].current_job_location : "";
 
   if (
     !profileData?.candidate ||
@@ -89,10 +89,12 @@ export default function ViewProfile({ profileData }) {
                   {candidate.email}
                 </span>
               </div>
-              {currentLocation && <div className="contact-item">
-                <MapPin className="icon-md" />
-                <span className="contact-value">{currentLocation}</span>
-              </div>}
+              {currentLocation && (
+                <div className="contact-item">
+                  <MapPin className="icon-md" />
+                  <span className="contact-value">{currentLocation}</span>
+                </div>
+              )}
             </div>
           </div>
           {candidate?.profile_img && (
@@ -194,7 +196,6 @@ export default function ViewProfile({ profileData }) {
         </section>
       )}
 
-      {/* ========VIEW PROFILE PERSONAL DETAILS SECTION======== */}
       <section className="profile-section">
         <div className="profile-section-header">
           <SquareUser className="icon-md" />
@@ -226,7 +227,6 @@ export default function ViewProfile({ profileData }) {
         </div>
       </section>
 
-      {/* ========VIEW PROFILE DOCUMENT SECTION======== */}
       {document && document.length > 0 && (
         <section className="profile-section">
           <div className="profile-section-header">
@@ -253,20 +253,7 @@ export default function ViewProfile({ profileData }) {
                   </div>
                 )}
                 {doc.resume && (
-                  <div className="document-row">
-                    <div className="document-label-with-icon">
-                      <Download className="icon-md" />
-                      <span>Resume</span>
-                    </div>
-                    <a
-                      href={doc.resume}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="document-link"
-                    >
-                      {doc.resume.split("/").pop()}
-                    </a>
-                  </div>
+                <ResumeButton id={candidate?.id} doc={doc}/>
                 )}
               </div>
             ))}

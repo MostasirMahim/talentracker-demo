@@ -36,6 +36,39 @@ export async function get_candidate_profile_data() {
     };
   }
 }
+export async function get_candidate_applications() {
+  const accessToken = cookies().get("access_token")?.value;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/candidates/v1/candidates/applied_jobs/`,
+      {
+        credentials: "include",
+        headers: { Cookie: `access_token=${accessToken}` },
+        next: { tags: ["candidate-applications"] },
+      }
+    );
+    const response = await res.json();
+    if (response.code === 200 && response.status === "success") {
+      return {
+        error: false,
+        data: response.data,
+      };
+    } else {
+      return {
+        error: true,
+        message: data.message || "Verification failed",
+        data: response.data,
+      };
+    }
+  } catch (err) {
+    return {
+      error: true,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
+    };
+  }
+}
 
 async function axiosHandler(method, url, data) {
   try {
@@ -76,10 +109,12 @@ export async function updateCandidateProfile(section, formData, isNew) {
     const res = await axiosHandler(method, endpoint, formData);
 
     if ((res.code === 200 || res.code === 201) && res.status === "success") {
-       revalidateTag("candidate-profile");
+      revalidateTag("candidate-profile");
       return {
         success: true,
-        message: `${section} details ${isNew ? "created" : "updated"} successfully`,
+        message: `${section} details ${
+          isNew ? "created" : "updated"
+        } successfully`,
         data: res.data,
       };
     } else {
@@ -120,7 +155,7 @@ export async function uploadDocument(formData, isNew) {
     const data = res.data;
 
     if ((data.code === 200 || data.code === 201) && data.status === "success") {
-       revalidateTag("candidate-profile");
+      revalidateTag("candidate-profile");
       return {
         success: true,
         message: `Document ${isNew ? "created" : "updated"} successfully`,
@@ -129,7 +164,8 @@ export async function uploadDocument(formData, isNew) {
     } else {
       return {
         success: false,
-        message: data.message || `Failed to ${isNew ? "create" : "update"} document`,
+        message:
+          data.message || `Failed to ${isNew ? "create" : "update"} document`,
         data,
       };
     }
