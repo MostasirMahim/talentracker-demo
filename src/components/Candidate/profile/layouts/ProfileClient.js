@@ -16,6 +16,7 @@ import { MobileSidebarLayout } from "./MobileSidebar";
 import { usePathname, useRouter } from "next/navigation";
 import { candidateLogOut, get_me } from "@/actions/auth";
 import { toast } from "react-toastify";
+import { useUserStore } from "@/stores/user_store";
 
 const navItems = [
   {
@@ -56,7 +57,8 @@ export default function ProfileClient({ children }) {
   );
   const router = useRouter();
   const pathname = usePathname();
-
+  const { setUser } = useUserStore();
+  
   const findActiveItem = () => {
     for (const item of navItems) {
       if (item.href === pathname) return item.id;
@@ -81,17 +83,19 @@ export default function ProfileClient({ children }) {
   const [activeItemId, setActiveItemId] = useState(findActiveItem());
   const [headerTitle, setHeaderTitle] = useState(getHeaderTitle());
 
-    const [data, setData] = useState(null);
-  
-    const handleFetchData = async () => {
-      const fetchedData = await get_me();
-      setData(fetchedData);
-    };
-    useEffect(() => {
-      handleFetchData();
-    }, []);
+  const [data, setData] = useState(null);
 
-    const candidate_name = data?.data?.user ? data?.data?.user?.first_name + " " + data?.data?.user?.last_name : "Candidate Profile";
+  const handleFetchData = async () => {
+    const fetchedData = await get_me();
+    setData(fetchedData);
+  };
+  useEffect(() => {
+    handleFetchData();
+  }, []);
+
+  const candidate_name = data?.data?.user
+    ? data?.data?.user?.first_name + " " + data?.data?.user?.last_name
+    : "Candidate Profile";
   const toggleSection = (sectionId) => {
     const newExpanded = new Set(expandedSections);
     if (newExpanded.has(sectionId)) {
@@ -107,10 +111,10 @@ export default function ProfileClient({ children }) {
       try {
         const result = await candidateLogOut();
         if (result.error) {
-          console.log(result);
           toast.error("Log Out Failed");
         } else {
           router.push("/");
+          setUser(null);
           toast.success("Log Out Successful");
         }
       } catch (err) {
