@@ -127,7 +127,7 @@ const NavbarStyleTwo = () => {
                     </li>
                     <li className="nav-item">
                       <Link
-                        href="#"
+                        href="/coming_soon"
                         className={`nav-link ${
                           pathname == "/training_solutions/" && "active"
                         }`}
@@ -148,7 +148,7 @@ const NavbarStyleTwo = () => {
                       <ul className="dropdown-menu">
                         <li className="nav-item">
                           <Link
-                            href="/news/"
+                            href="/coming_soon"
                             className={`nav-link ${
                               pathname == "/news/" && "active"
                             }`}
@@ -159,7 +159,7 @@ const NavbarStyleTwo = () => {
 
                         <li className="nav-item">
                           <Link
-                            href="/blog/"
+                            href="/blog/all/"
                             className={`nav-link ${
                               pathname == "/blog/" && "active"
                             }`}
@@ -169,7 +169,7 @@ const NavbarStyleTwo = () => {
                         </li>
                         <li className="nav-item">
                           <Link
-                            href="/Gallery/"
+                            href="/coming_soon"
                             className={`nav-link ${
                               pathname == "/blog/" && "active"
                             }`}
@@ -210,10 +210,7 @@ const NavbarStyleTwo = () => {
                           </li>
 
                           <li className="nav-item">
-                            <Link
-                              href="/auth/employer/login/"
-                              className={`nav-link`}
-                            >
+                            <Link href="/coming_soon" className={`nav-link`}>
                               Login as Trainer
                             </Link>
                           </li>

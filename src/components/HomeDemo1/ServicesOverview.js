@@ -12,17 +12,18 @@ const projects = [
     title: "Executive Search & Head Hunting",
     category: "Financial",
     linkText: "Read More",
-    detailsUrl: "/projects/details",
+    detailsUrl: "/services/1",
   },
   {
     id: 2,
     image: "/images/services_images/2_Recruitment_process_outsourcing.png",
     altText: "Recruitment Process Outsourcing (RPO)",
-    title: "Strategy Consultancy",
+    title: "Recruitment Process Outsourcing (RPO)",
     category: "Strategy",
     linkText: "Read More",
-    detailsUrl: "/projects/details",
+    detailsUrl: "/services/2",
   },
+
   {
     id: 3,
     image: "/images/services_images/3_Pre-Employment_Check.jpg",
@@ -30,16 +31,17 @@ const projects = [
     title: "Pre-Employment Screening",
     category: "Consultancy",
     linkText: "Read More",
-    detailsUrl: "/projects/details",
+    detailsUrl: "/services/3",
   },
   {
     id: 4,
-    image: "/images/services_images/4_Career_Counseling.jpg",
+    image:
+      "/images/services_images/6_Organization_Culture__Change_Management.jpg",
     altText: "Project Image",
     title: "Career Counselling & Placement",
     category: "Consultancy",
     linkText: "Read More",
-    detailsUrl: "/projects/details",
+    detailsUrl: "/services/4",
   },
   {
     id: 5,
@@ -48,17 +50,16 @@ const projects = [
     title: "HR & Management Consultancy",
     category: "Business",
     linkText: "Read More",
-    detailsUrl: "/projects/details",
+    detailsUrl: "/services/5",
   },
   {
     id: 6,
-    image:
-      "/images/services_images/6_Organization_Culture__Change_Management.jpg",
+    image: "/images/services_images/4_Career_Counseling.jpg",
     altText: "Project Image",
     title: "Organization Culture & Change Management",
     category: "Marketing",
     linkText: "Read More",
-    detailsUrl: "/projects/details",
+    detailsUrl: "/services/6",
   },
 ];
 
