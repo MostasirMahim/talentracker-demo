@@ -23,6 +23,7 @@ import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
 import { useUserStore } from "@/stores/user_store";
 import { candidateLogOut, get_me } from "@/actions/auth";
+import { toast } from "react-toastify";
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);

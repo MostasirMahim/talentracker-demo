@@ -33,7 +33,7 @@ export default function AdminLogInForm() {
         }
       } else {
         toast.success("Login successful");
-        if(res?.user_type === "") {
+        if(res?.user_type === "admin") {
           setLayoutTransitionOn(true);
           router.push("/dashboard");
           router.refresh();
