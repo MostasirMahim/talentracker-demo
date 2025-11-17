@@ -24,6 +24,7 @@ import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
 import { useUserStore } from "@/stores/user_store";
 import { candidateLogOut, get_me } from "@/actions/auth";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -283,16 +284,26 @@ export default function DashboardLayout({ children }) {
         >
           {!collapsed ? (
             <div className="flex items-center gap-4 w-full hover:bg-blue-500/50 px-4 py-3 rounded-lg transition-colors">
-              <button onClick={handleLogOut} className="w-10 h-10 cursor-pointer rounded-full bg-white/30 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors">
+              <button
+                onClick={handleLogOut}
+                className="w-10 h-10 cursor-pointer rounded-full bg-white/30 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors"
+              >
                 <LogOut size={16} />
               </button>
               <div className="text-left">
-                <p className="text-sm font-medium text-white">Mahim Rahad</p>
-                <p className="text-xs text-blue-200">Admin</p>
+                <p className="text-sm font-medium text-white">
+                  {data?.data?.user?.email}
+                </p>
+                <p className="text-xs text-blue-200">
+                  {data?.data?.user?.user_type?.toUpperCase()}
+                </p>
               </div>
             </div>
           ) : (
-            <button onClick={handleLogOut} className="w-8 h-8 cursor-pointer rounded-full bg-white/30 hover:bg-white/40 text-white flex items-center justify-center transition-colors">
+            <button
+              onClick={handleLogOut}
+              className="w-8 h-8 cursor-pointer rounded-full bg-white/30 hover:bg-white/40 text-white flex items-center justify-center transition-colors"
+            >
               <LogOut size={16} />
             </button>
           )}
@@ -321,8 +332,14 @@ export default function DashboardLayout({ children }) {
               <Bell size={20} />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
             </button>
-            <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold cursor-pointer hover:shadow-lg transition-shadow">
-              M
+            <div className="w-9 h-9 rounded-full border-2 border-blue-500 flex items-center justify-center text-white font-bold cursor-pointer hover:shadow-lg transition-shadow">
+              <Image
+                src="/images/TTL_Fav.png"
+                width={30}
+                height={30}
+                alt="User"
+                className="rounded-full"
+              />
             </div>
           </div>
         </header>
