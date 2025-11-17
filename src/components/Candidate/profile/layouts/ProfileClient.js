@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   User,
@@ -14,7 +14,7 @@ import { HeaderLayout } from "./HeaderLayout";
 import { SidebarLayout } from "./SidebarLayout";
 import { MobileSidebarLayout } from "./MobileSidebar";
 import { usePathname, useRouter } from "next/navigation";
-import { candidateLogOut } from "@/actions/auth";
+import { candidateLogOut, get_me } from "@/actions/auth";
 import { toast } from "react-toastify";
 
 const navItems = [
@@ -80,6 +80,18 @@ export default function ProfileClient({ children }) {
   };
   const [activeItemId, setActiveItemId] = useState(findActiveItem());
   const [headerTitle, setHeaderTitle] = useState(getHeaderTitle());
+
+    const [data, setData] = useState(null);
+  
+    const handleFetchData = async () => {
+      const fetchedData = await get_me();
+      setData(fetchedData);
+    };
+    useEffect(() => {
+      handleFetchData();
+    }, []);
+
+    const candidate_name = data?.data?.user ? data?.data?.user?.first_name + " " + data?.data?.user?.last_name : "Candidate Profile";
   const toggleSection = (sectionId) => {
     const newExpanded = new Set(expandedSections);
     if (newExpanded.has(sectionId)) {
@@ -122,6 +134,7 @@ export default function ProfileClient({ children }) {
         activeItemId={activeItemId}
         onToggleSection={toggleSection}
         onItemClick={handleItemClick}
+        candidate_name={candidate_name}
       />
       <div className="hide-on-mobile">
         <SidebarLayout
@@ -130,6 +143,7 @@ export default function ProfileClient({ children }) {
           activeItemId={activeItemId}
           onToggleSection={toggleSection}
           onItemClick={handleItemClick}
+          candidate_name={candidate_name}
         />
       </div>
 
