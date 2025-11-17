@@ -16,7 +16,7 @@ import {
   Link as LinkIcon,
   Flower,
   Contact,
-  Quote
+  Quote,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -85,9 +85,10 @@ export default function DashboardLayout({ children }) {
       icon: Flower,
     },
     // blog categories view
-    { href: "/dashboard/blogs/categories/view", 
-      label: "View all Blog Categories", 
-      icon: FilePenLine 
+    {
+      href: "/dashboard/blogs/categories/view",
+      label: "View all Blog Categories",
+      icon: FilePenLine,
     },
     // blogs categories create
     {
@@ -107,7 +108,7 @@ export default function DashboardLayout({ children }) {
       label: "View all Blog Tags",
       icon: FilePenLine,
     },
-    
+
     // blogs create
     {
       href: "/dashboard/blogs/post/",
@@ -135,7 +136,11 @@ export default function DashboardLayout({ children }) {
       label: "View all Quotes",
       icon: Quote,
     },
-
+    {
+      href: "/dashboard/candidates/",
+      label: "Candidates Profiles",
+      icon: Quote,
+    },
 
     { href: "#", label: "Analytics", icon: Settings },
     { href: "#", label: "Teams", icon: Users },

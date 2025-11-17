@@ -9,7 +9,7 @@ async function page({ searchParams }) {
   let jobs;
   try {
     const response = await axiosInstance.get(
-      `/api/jobs/v1/jobs/?page_size=10&page=${page}`
+      `/api/jobs/v1/jobs/?page_size=1&page=${page}`
     );
     jobs = response.data;
   } catch (error) {
