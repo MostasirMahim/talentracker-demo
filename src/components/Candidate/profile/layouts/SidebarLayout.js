@@ -2,7 +2,6 @@
 
 import { ChevronDown, ChevronRight, User2Icon } from "lucide-react";
 import "./style.css";
-import { useRouter } from "next/navigation";
 
 export function SidebarLayout({
   navItems,
@@ -10,6 +9,7 @@ export function SidebarLayout({
   activeItemId,
   onToggleSection,
   onItemClick,
+  candidate_name,
 }) {
   const renderNavItems = (items, depth = 0) => {
     return items.map((item) => {
@@ -70,7 +70,7 @@ export function SidebarLayout({
       className="sidebar"
     >
       <div className="sidebar-header">
-        <span>MD. MOSTASIR MAHIM</span>
+        <span>{candidate_name}</span>
       </div>
       <div className="sidebar-content">{renderNavItems(navItems)}</div>
     </aside>

@@ -9,6 +9,7 @@ export function MobileSidebarLayout({
   activeItemId,
   onToggleSection,
   onItemClick,
+  candidate_name
 }) {
   const renderNavItems = (items, depth = 0) => {
     return items.map((item) => {
@@ -65,7 +66,7 @@ export function MobileSidebarLayout({
       aria-labelledby="offcanvasSidebar"
     >
       <div className="sidebar-header">
-        <span>MD. MOSTASIR MAHIM</span>
+        <span>{candidate_name}</span>
         <button
           type="button"
           className="btn-close"
