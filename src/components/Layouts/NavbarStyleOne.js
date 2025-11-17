@@ -154,7 +154,7 @@ const NavbarStyleOne = () => {
 
                       <li className="nav-item">
                         <Link
-                          href="/blog/"
+                          href="/blog/all/"
                           className={`nav-link ${
                             pathname == "/blog/" && "active"
                           }`}
