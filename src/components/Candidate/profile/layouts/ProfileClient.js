@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 import {
-  LayoutDashboard,
   User,
-  Mail,
-  Settings,
-  HelpCircle,
   LogOut,
+  UserPen,
+  BriefcaseBusiness,
 } from "lucide-react";
 import "./style.css";
 import { HeaderLayout } from "./HeaderLayout";
@@ -33,14 +31,14 @@ const navItems = [
       {
         id: "edit-profile",
         label: "Edit Profile",
-        icon: <User size={18} />,
+        icon: <UserPen size={18} />,
         href: "/candidate/profile/edit/",
       },
       {
         id: "applied-jobs",
         label: "Applied Jobs",
-        icon: <Mail size={18} />,
-        href: "/candidate/applied-jobs/",
+        icon: <BriefcaseBusiness size={18} />,
+        href: "/candidate/profile/applied-jobs/",
       },
     ],
   },

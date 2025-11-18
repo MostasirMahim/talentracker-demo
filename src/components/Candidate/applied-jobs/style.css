@@ -12,10 +12,24 @@
 
 .applied-jobs-header {
   margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
+.refresh-btn {
+  height: 40px;
+  width: 110px;
 
+}
+.flex-d {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
 .applied-jobs-header h1 {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
@@ -58,6 +72,11 @@
   padding-left: 14px;
   border-left: 3px solid #0066cc;
 }
+.job-card.read {
+  background: #f8f9fa;
+  padding-left: 14px;
+  border-left: 3px solid #1489bc;
+}
 
 .job-card.unread::before {
   content: '';
@@ -89,9 +108,9 @@
 .job-status {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 500;
+  padding: 6px 15px;
+  font-size: 15px;
+  font-weight: 600;
   border-radius: 12px;
   white-space: nowrap;
   text-transform: capitalize;
@@ -102,7 +121,7 @@
   color: #92400e;
 }
 
-.status-approved {
+.status-accepted {
   background: #dcfce7;
   color: #166534;
 }
@@ -110,6 +129,10 @@
 .status-rejected {
   background: #fee2e2;
   color: #991b1b;
+}
+.status-reached {
+  background: #e2f6fe;
+  color: #1b7e99;
 }
 
 /* Job Details - Simplified layout: horizontal flex instead of grid */
@@ -133,6 +156,7 @@
 
 .job-detail-value {
   color: #444;
+  font-weight: 600;
 }
 
 /* Empty State */
@@ -165,7 +189,7 @@
   }
 
   .applied-jobs-header h1 {
-    font-size: 22px;
+    font-size: 16px;
   }
 
   .job-title {
