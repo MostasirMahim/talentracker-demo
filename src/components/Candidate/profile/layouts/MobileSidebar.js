@@ -49,6 +49,7 @@ export function MobileSidebarLayout({
           key={item.id}
           className={`sidebar-item ${isActive ? "active" : ""}`}
           onClick={() => onItemClick(item)}
+          data-bs-dismiss="offcanvas"
           style={{ cursor: "pointer" }}
         >
           {item.icon && <span className="sidebar-item-icon">{item.icon}</span>}
