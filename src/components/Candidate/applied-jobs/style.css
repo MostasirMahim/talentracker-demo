@@ -21,6 +21,7 @@
 .refresh-btn {
   height: 40px;
   width: 110px;
+  max-width: 110px;
 
 }
 .flex-d {
