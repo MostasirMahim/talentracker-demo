@@ -10,7 +10,7 @@ export default function JobsList({ jobs, loading = false, error = null }) {
       </div>
     );
   }
-console.log(jobs, loading, error);
+  
   if (error) {
     return (
       <div className="empty-state">
