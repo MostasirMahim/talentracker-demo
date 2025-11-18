@@ -1,32 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Menu,
-  Home,
-  Users,
-  Settings,
-  LogOut,
-  Bell,
-  Search,
-  ChevronRight,
-  ChevronLeft,
-  ChevronDown,
-  FilePenLine,
-  UserPlus,
-  LinkIcon,
-  Flower,
-  Contact,
-  Quote,
-  UserCheck,
-} from "lucide-react";
+import { Menu, Home, LogOut, Bell, Search, ChevronRight, ChevronLeft, ChevronDown, FilePenLine, UserPlus, LinkIcon, Flower, Contact, Quote, UserCheck } from 'lucide-react';
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
 import { useUserStore } from "@/stores/user_store";
 import { candidateLogOut, get_me } from "@/actions/auth";
 import { toast } from "react-toastify";
 import Image from "next/image";
-
+import "./style.css"
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
@@ -175,7 +157,7 @@ export default function DashboardLayout({ children }) {
   const hasChildren = (item) => item.children && item.children.length > 0;
 
   return (
-    <div className="flex h-screen w-screen bg-linear-to-b from-blue-50 to-white">
+    <div className="flex h-screen w-screen bg-linear-to-b from-blue-50 to-white overflow-hidden">
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black opacity-50 lg:hidden z-30"
@@ -205,7 +187,7 @@ export default function DashboardLayout({ children }) {
             {collapsed ? <ChevronRight size={25} /> : <ChevronLeft size={20} />}
           </button>
         </div>
-        <nav className="flex-1 overflow-y-auto  py-6 px-0 overflow-x-hidden">
+        <nav className="flex-1 overflow-y-auto sidebar-scrollbar py-6 px-0 overflow-x-hidden">
           {navItems.map((item, i) => (
             <div key={i}>
               {!hasChildren(item) ? (
@@ -316,8 +298,46 @@ export default function DashboardLayout({ children }) {
           )}
         </div>
       </aside>
-      <div className="flex-1 flex flex-col w-full">
-        <header className="sticky top-0 z-20 h-16 bg-linear-to-r from-blue-50 to-blue-100 border-b border-gray-200 shadow-sm flex items-center justify-between px-6">
+      <div className="hidden lg:flex lg:flex-1 lg:flex-col w-full h-full overflow-hidden">
+        <header className="sticky top-0 z-20 h-16 bg-linear-to-r from-blue-50 to-blue-100 border-b border-gray-200 shadow-sm flex items-center justify-between px-6 shrink-0">
+          <div className="flex items-center gap-4 flex-1">
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="lg:hidden text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <Menu size={24} />
+            </button>
+            <div className="hidden md:flex items-center gap-2 bg-white px-4 py-2 rounded-lg flex-1 max-w-md">
+              <Search size={18} className="text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
+              />
+            </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <button className="relative p-2 hover:bg-blue-200 rounded-lg transition-colors text-blue-600 cursor-pointer">
+              <Bell size={20} />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+            </button>
+            <div className="w-9 h-9 rounded-full border-2 border-blue-500 flex items-center justify-center text-white font-bold cursor-pointer hover:shadow-lg transition-shadow">
+              <Image
+                src="/images/TTL_Fav.png"
+                width={30}
+                height={30}
+                alt="User"
+                className="rounded-full"
+              />
+            </div>
+          </div>
+        </header>
+        <main className="flex-1 overflow-auto bg-linear-to-br from-blue-50 via-white to-blue-50 p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
+      </div>
+      <div className="flex lg:hidden flex-1 flex-col w-full h-full overflow-hidden">
+        <header className="sticky top-0 z-20 h-16 bg-linear-to-r from-blue-50 to-blue-100 border-b border-gray-200 shadow-sm flex items-center justify-between px-6 shrink-0">
           <div className="flex items-center gap-4 flex-1">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
