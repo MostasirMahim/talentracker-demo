@@ -104,9 +104,7 @@ const NavbarStyleOne = () => {
                   <li className="nav-item">
                     <Link
                       href="/services/"
-                      className={`nav-link ${
-                        pathname == "/services/" && "active"
-                      }`}
+                      className={`nav-link ${pathname.startsWith("/services/") ? "active" : ""}`}
                     >
                       Services
                     </Link>
@@ -115,9 +113,7 @@ const NavbarStyleOne = () => {
                   <li className="nav-item">
                     <Link
                       href="/career/"
-                      className={`nav-link ${
-                        pathname == "/career/" && "active"
-                      }`}
+                     className={`nav-link ${pathname.startsWith("/career/") ? "active" : ""}`}
                     >
                       Career
                     </Link>
@@ -186,9 +182,11 @@ const NavbarStyleOne = () => {
                             : `/${data?.data?.user?.user_type}/profile/`
                         }`}
                         className={`nav-link ${
-                          pathname ==
-                            `/${data?.data?.user?.user_type}/profile/` &&
-                          "active"
+                          pathname.startsWith(
+                            `/${data?.data?.user?.user_type}/profile/`
+                          )
+                            ? "active"
+                            : ""
                         }`}
                       >
                         {data?.data?.user?.user_type === "admin" ? (
@@ -211,7 +209,10 @@ const NavbarStyleOne = () => {
 
                       <ul className="dropdown-menu">
                         <li className="nav-item">
-                          <Link href="/auth/candidate/login/" className={`nav-link`}>
+                          <Link
+                            href="/auth/candidate/login/"
+                            className={`nav-link`}
+                          >
                             Login as Candidate
                           </Link>
                         </li>
