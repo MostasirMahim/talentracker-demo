@@ -12,9 +12,10 @@ import { HeaderLayout } from "./HeaderLayout";
 import { SidebarLayout } from "./SidebarLayout";
 import { MobileSidebarLayout } from "./MobileSidebar";
 import { usePathname, useRouter } from "next/navigation";
-import { candidateLogOut, get_me } from "@/actions/auth";
+import { candidateLogOut } from "@/actions/auth";
 import { toast } from "react-toastify";
 import { useUserStore } from "@/stores/user_store";
+import { get_candidate_profile_data } from "@/actions/candidate";
 
 const navItems = [
   {
@@ -84,15 +85,14 @@ export default function ProfileClient({ children }) {
   const [data, setData] = useState(null);
 
   const handleFetchData = async () => {
-    const fetchedData = await get_me();
+    const fetchedData = await get_candidate_profile_data()
     setData(fetchedData);
   };
   useEffect(() => {
     handleFetchData();
   }, []);
-
-  const candidate_name = data?.data?.user
-    ? data?.data?.user?.first_name + " " + data?.data?.user?.last_name
+  const candidate_name = data?.data?.candidate
+    ? data?.data?.candidate?.full_name 
     : "Candidate Profile";
   const toggleSection = (sectionId) => {
     const newExpanded = new Set(expandedSections);
