@@ -1177,11 +1177,34 @@ Navbar Area CSS
             top: 15px;
             bottom: 15px;
         };
+        &.navbar-style-one {
+            .others-option {
+
+                .search-icon {
+                    color: var(--blackColor);
+                     padding-top: 5px;
+                    &:hover {
+                        color: var(--mainColor);
+                    }
+                }
+            }
+        }
         &.navbar-style-two {
             padding: {
                 top: 15px;
                 bottom: 15px;
             };
+            .others-option {
+
+                .search-icon {
+                    padding-top: 5px;
+                    color: var(--blackColor);
+    
+                    &:hover {
+                        color: var(--mainColor);
+                    }
+                }
+            }
         }
         &.navbar-style-three {
             .others-option {

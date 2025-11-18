@@ -1011,9 +1011,23 @@ Navbar Area CSS
     padding-top: 15px;
     padding-bottom: 15px;
   }
+  .navbar-area.navbar-style-one .others-option .search-icon {
+    color: var(--blackColor);
+    padding-top: 5px;
+  }
+  .navbar-area.navbar-style-one .others-option .search-icon:hover {
+    color: var(--mainColor);
+  }
   .navbar-area.navbar-style-two {
     padding-top: 15px;
     padding-bottom: 15px;
+  }
+  .navbar-area.navbar-style-two .others-option .search-icon {
+    padding-top: 5px;
+    color: var(--blackColor);
+  }
+  .navbar-area.navbar-style-two .others-option .search-icon:hover {
+    color: var(--mainColor);
   }
   .navbar-area.navbar-style-three .others-option .language-switcher .dropdown-toggle span {
     color: var(--whiteColor);
@@ -4250,7 +4264,7 @@ Blog Area CSS
   transition: var(--transition);
   height: 55px;
   bottom: -2px;
-  background-image: url(/images/shape/shape1.png);
+  background-image: url(/images/shape/shape2.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
