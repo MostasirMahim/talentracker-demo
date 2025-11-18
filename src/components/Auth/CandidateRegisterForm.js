@@ -90,11 +90,6 @@ function CandidateRegisterForm() {
       <button type="submit">
         {loading ? "Loading..." : "Register As Candidate"}
       </button>
-
-      <span className="dont-account">
-        Already have an account?{" "}
-        <Link href="/auth/candidate/login">Log In Now!</Link>
-      </span>
     </form>
   );
 }

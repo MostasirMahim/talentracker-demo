@@ -69,30 +69,30 @@ export default function CandidateLoginForm({ email: propEmail }) {
         />
       </div>
 
-      <div className="row align-items-center ">
-        <div className="col-lg-6 col-md-6 col-sm-6 ">
-          <div className="form-check">
-            <input className="form-check-input" type="checkbox" id="remember" />
-            <label className="form-check-label" htmlFor="remember">
-              Remember me
-            </label>
-          </div>
-        </div>
+      <div className="auth-row">
+  <div className="remember">
+    <div className="form-check">
+      <input className="form-check-input" type="checkbox" id="remember" />
+      <label className="form-check-label" htmlFor="remember">
+        Remember me
+      </label>
+    </div>
+  </div>
 
-        <div className="col-lg-6 col-md-6 col-sm-6 lost-your-password-wrap text-end">
-          <a
-            href="/auth/forget-password"
-            onClick={(e) => {
-              e.preventDefault();
-              setUserType("candidate");
-              router.push("/auth/forget-password");
-            }}
-            className="lost-your-password"
-          >
-            Lost your password?
-          </a>
-        </div>
-      </div>
+  <div className="lost-wrap">
+    <a
+      href="/auth/forget-password"
+      onClick={(e) => {
+        e.preventDefault();
+        setUserType("candidate");
+        router.push("/auth/forget-password");
+      }}
+      className="lost-your-password"
+    >
+      Lost your password?
+    </a>
+  </div>
+</div>
 
       <button
         type="submit"

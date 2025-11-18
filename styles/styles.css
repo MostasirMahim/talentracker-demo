@@ -6668,4 +6668,58 @@ Modal CSS
 .read-more-btn {
   display: flex;
   justify-content: center;
+}
+
+/* SCSS - add to your stylesheet (e.g. auth.scss) */
+.auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0px 5px;
+  /* larger screens: left / right alignment */
+}
+.auth-row .remember,
+.auth-row .lost-wrap {
+  display: flex;
+  align-items: center;
+}
+.auth-row .remember {
+  justify-content: flex-start;
+}
+.auth-row .lost-wrap {
+  justify-content: flex-end;
+}
+
+/* mobile: stack and center both items */
+@media (max-width: 640px) {
+  .auth-row {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    /* make the checkbox + label stay inline and centered */
+    /* slightly reduce link hit area on very small screens */
+  }
+  .auth-row .remember,
+  .auth-row .lost-wrap {
+    width: 90%;
+    justify-content: center; /* center horizontally */
+    text-align: center;
+  }
+  .auth-row .remember .form-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .auth-row .lost-wrap .lost-your-password {
+    display: inline-block;
+    padding: 6px 0;
+  }
+}
+/* optional: ensure checkbox doesn't push things weirdly when label wraps */
+.form-check-input {
+  flex: 0 0 auto;
 }/*# sourceMappingURL=styles.css.map */
