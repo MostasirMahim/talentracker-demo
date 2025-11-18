@@ -18,6 +18,7 @@ import {
   Flower,
   Contact,
   Quote,
+  UserCheck,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -118,6 +119,12 @@ export default function DashboardLayout({ children }) {
       href: "/dashboard/quotes/",
       label: "View all Quotes",
       icon: Quote,
+    },
+    {
+      icon: UserCheck,
+      label: "Registered candidates",
+      href: "/dashboard/candidates/",
+      urls: ["/dashboard/candidates/"],
     },
   ];
 
