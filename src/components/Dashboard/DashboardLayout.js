@@ -51,7 +51,7 @@ export default function DashboardLayout({ children }) {
   }, []);
 
   const navItems = [
-    { href: "#", label: "Home", icon: Home },
+    { href: "/dashboard", label: "Home", icon: Home },
     {
       icon: UserPlus,
       label: "Onboarding",
