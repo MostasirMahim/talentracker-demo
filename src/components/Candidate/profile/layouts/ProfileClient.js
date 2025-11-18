@@ -2,21 +2,20 @@
 
 import { useEffect, useState } from "react";
 import {
-  LayoutDashboard,
   User,
-  Mail,
-  Settings,
-  HelpCircle,
   LogOut,
+  UserPen,
+  BriefcaseBusiness,
 } from "lucide-react";
 import "./style.css";
 import { HeaderLayout } from "./HeaderLayout";
 import { SidebarLayout } from "./SidebarLayout";
 import { MobileSidebarLayout } from "./MobileSidebar";
 import { usePathname, useRouter } from "next/navigation";
-import { candidateLogOut, get_me } from "@/actions/auth";
+import { candidateLogOut } from "@/actions/auth";
 import { toast } from "react-toastify";
 import { useUserStore } from "@/stores/user_store";
+import { get_candidate_profile_data } from "@/actions/candidate";
 
 const navItems = [
   {
@@ -33,14 +32,14 @@ const navItems = [
       {
         id: "edit-profile",
         label: "Edit Profile",
-        icon: <User size={18} />,
+        icon: <UserPen size={18} />,
         href: "/candidate/profile/edit/",
       },
       {
         id: "applied-jobs",
         label: "Applied Jobs",
-        icon: <Mail size={18} />,
-        href: "/candidate/applied-jobs/",
+        icon: <BriefcaseBusiness size={18} />,
+        href: "/candidate/profile/applied-jobs/",
       },
     ],
   },
@@ -86,15 +85,14 @@ export default function ProfileClient({ children }) {
   const [data, setData] = useState(null);
 
   const handleFetchData = async () => {
-    const fetchedData = await get_me();
+    const fetchedData = await get_candidate_profile_data()
     setData(fetchedData);
   };
   useEffect(() => {
     handleFetchData();
   }, []);
-
-  const candidate_name = data?.data?.user
-    ? data?.data?.user?.first_name + " " + data?.data?.user?.last_name
+  const candidate_name = data?.data?.candidate
+    ? data?.data?.candidate?.full_name 
     : "Candidate Profile";
   const toggleSection = (sectionId) => {
     const newExpanded = new Set(expandedSections);

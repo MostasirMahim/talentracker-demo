@@ -14,25 +14,26 @@ import { job_Apply } from "@/actions/jobs";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { get_me } from "@/actions/auth";
+import { AlertModal } from "../alert_modal/AlertModal";
 
 export default function JobDetails({ job }) {
   const [isLoading, setIsLoading] = useState(false);
-    const [data, setData] = useState(null);
-    const user = data?.error === false ? true : "";
-    const router = useRouter();
-    const handleFetchData = async () => {
-      const fetchedData = await get_me();
-      setData(fetchedData);
-    };
-    useEffect(() => {
-      handleFetchData();
-    }, []);
-  const onApply = async (e) => {
-    e.preventDefault();
-    if(!user){
+  const [data, setData] = useState(null);
+  const user = data?.error === false ? true : "";
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleFetchData = async () => {
+    const fetchedData = await get_me();
+    setData(fetchedData);
+  };
+  useEffect(() => {
+    handleFetchData();
+  }, []);
+  const onApply = async () => {
+    if (!user) {
       toast.error("You must be logged in to apply for a job");
       router.push("/auth/candidate/login");
-      return
+      return;
     }
     setIsLoading(true);
     try {
@@ -56,6 +57,16 @@ export default function JobDetails({ job }) {
       setIsLoading(false);
     }
   };
+
+  const handleConfirm = () => {
+    onApply();
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   if (!job) return null;
   return (
     <div className="container my-5">
@@ -117,12 +128,18 @@ export default function JobDetails({ job }) {
 
         {/* Apply Button */}
         <div className="text-center mt-5">
-          <button onClick={(e) => onApply(e)} className="default-btn">
+          <button onClick={() => setIsModalOpen(true)} className="default-btn">
             {isLoading ? "Applying..." : "Apply Now"}
             <i className="ri-arrow-right-line"></i>
           </button>
         </div>
       </div>
+      <AlertModal
+        isOpen={isModalOpen}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+        confirmText="Confirm"
+      />
     </div>
   );
 }

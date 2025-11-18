@@ -1,3 +1,4 @@
+import { Eye } from "lucide-react";
 import React from "react";
 
 export default function JobCard({ id, job, status, applied_at, is_read }) {
@@ -32,7 +33,7 @@ export default function JobCard({ id, job, status, applied_at, is_read }) {
   };
 
   return (
-    <li className={`job-card ${!is_read ? "unread" : ""}`}>
+    <li className={`job-card ${!is_read ? "unread" : "read"}`}>
       <div className="job-card-header">
         <h3 className="job-title">{job}</h3>
         <span className={`job-status status-${status}`}>{status}</span>
@@ -44,7 +45,10 @@ export default function JobCard({ id, job, status, applied_at, is_read }) {
           <span className="job-detail-value">{formatDate(applied_at)}</span>
         </div>
         <div className="job-detail-item">
-          <span className="job-detail-label">Read Status:</span>
+          <div className="flex-d">
+            <Eye size={16} />
+            <span className="job-detail-label">Read Status:</span>
+          </div>
           <span className="job-detail-value">{is_read ? "Read" : "Unread"}</span>
         </div>
       </div>

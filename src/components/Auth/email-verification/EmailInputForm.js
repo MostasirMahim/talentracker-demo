@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { emailVerify_Send_OTP } from "@/actions/auth";
 import { useRegistrationStore } from "@/stores/regestration_steps_store";
+import Link from "next/link";
 
 export default function EmailInputForm() {
   const [loading, setLoading] = useState(false);
@@ -57,6 +58,10 @@ export default function EmailInputForm() {
       >
         {loading ? "Sending OTP..." : "Send OTP"}
       </button>
+      <span className="dont-account">
+        Already have an account?{" "}
+        <Link href="/auth/candidate/login">Log In Now!</Link>
+      </span>
     </form>
   );
 }

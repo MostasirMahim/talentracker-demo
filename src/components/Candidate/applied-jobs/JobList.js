@@ -1,5 +1,6 @@
 import React from "react";
 import JobCard from "./JobCard";
+import CarrerButton from "./CarrerButton";
 
 export default function JobsList({ jobs, loading = false, error = null }) {
   if (loading) {
@@ -9,7 +10,7 @@ export default function JobsList({ jobs, loading = false, error = null }) {
       </div>
     );
   }
-
+  
   if (error) {
     return (
       <div className="empty-state">
@@ -19,12 +20,15 @@ export default function JobsList({ jobs, loading = false, error = null }) {
     );
   }
 
-  if (!jobs || jobs.length === 0) {
+  if (!jobs?.data || jobs?.data?.length === 0) {
     return (
       <div className="empty-state">
         <div className="empty-state-icon">📋</div>
         <h2>No Applications Yet</h2>
         <p>Start applying to jobs to see your applications here</p>
+        <div className="flex-d">
+          <CarrerButton />
+        </div>
       </div>
     );
   }
