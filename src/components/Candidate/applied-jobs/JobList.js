@@ -10,7 +10,7 @@ export default function JobsList({ jobs, loading = false, error = null }) {
       </div>
     );
   }
-
+console.log(jobs, loading, error);
   if (error) {
     return (
       <div className="empty-state">
@@ -20,7 +20,7 @@ export default function JobsList({ jobs, loading = false, error = null }) {
     );
   }
 
-  if (!jobs || jobs.length === 0) {
+  if (!jobs?.data || jobs?.data?.length === 0) {
     return (
       <div className="empty-state">
         <div className="empty-state-icon">📋</div>

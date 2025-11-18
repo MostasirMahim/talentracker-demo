@@ -3,6 +3,7 @@ import RefreshButton from "./RefreshButton";
 import "./style.css";
 
 export const AppliedJobsPage = (sampleData) => {
+  console.log(sampleData);
   return (
     <div className="applied-jobs-container">
       <div className="applied-jobs-header">
