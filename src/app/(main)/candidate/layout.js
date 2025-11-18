@@ -1,6 +1,7 @@
 import { get_me } from "@/actions/auth";
 import ProfileClient from "@/components/Candidate/profile/layouts/ProfileClient";
 import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
+import { redirect } from "next/navigation";
 export const metadata = {
   title: "Client Dashboard",
   description: "Responsive client dashboard with sidebar",
