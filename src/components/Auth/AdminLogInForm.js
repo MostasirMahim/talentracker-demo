@@ -21,7 +21,6 @@ export default function AdminLogInForm() {
         password: values.password,
       };
       const res = await adminLogin(formData);
-      console.log(res);
       if (res?.error) {
         console.log(res);
         if (res?.data?.errors) {
