@@ -45,7 +45,7 @@ export default function JobCard({ id, job, status, applied_at, is_read }) {
           <span className="job-detail-value">{formatDate(applied_at)}</span>
         </div>
         <div className="job-detail-item">
-          <div className="flex-d">
+          <div className="flex-a">
             <Eye size={16} />
             <span className="job-detail-label">Read Status:</span>
           </div>
