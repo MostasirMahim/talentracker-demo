@@ -1,11 +1,12 @@
 export const dynamic = "force-dynamic";
 import JobTypeForm from "@/components/Dashboard/JobTypeForm/JobTypeForm";
 import React, { Suspense } from "react";
+import LoaderComponent from "../../../loading";
 
 function Page() {
   return (
     <>
-      <Suspense fallback={<h5>Loading...</h5>}>
+      <Suspense fallback={<LoaderComponent />}>
         <JobTypeForm />
       </Suspense>
     </>
