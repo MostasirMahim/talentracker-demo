@@ -108,6 +108,14 @@ export default function DashboardLayout({ children }) {
       href: "/dashboard/candidates/",
       urls: ["/dashboard/candidates/"],
     },
+    {
+      icon : UserCheck,
+      label : "View all Users",
+      href: "/dashboard/users/",
+      urls: ["/dashboard/users/"]
+    
+
+    },
   ];
 
   const handleParentClick = (e, item, index) => {
