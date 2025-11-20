@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, Home, LogOut, Bell, Search, ChevronRight, ChevronLeft, ChevronDown, FilePenLine, UserPlus, LinkIcon, Flower, Contact, Quote, UserCheck } from 'lucide-react';
+import { Menu, Home, LogOut, Bell, Search, ChevronRight, ChevronLeft, ChevronDown, FilePenLine, UserPlus, LinkIcon, Flower, Contact, Quote, UserCheck, ShieldIcon } from 'lucide-react';
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
 import { useUserStore } from "@/stores/user_store";
@@ -35,6 +35,12 @@ export default function DashboardLayout({ children }) {
 
   const navItems = [
     { href: "/dashboard", label: "Home", icon: Home },
+    {
+      icon: ShieldIcon,
+      label: "Roles",
+      href: "/dashboard/roles/",
+      urls: ["/dashboard/roles/"],
+    },
     {
       icon: UserPlus,
       label: "Onboarding",
