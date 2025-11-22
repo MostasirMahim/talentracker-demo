@@ -1,44 +1,58 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { Trash2 } from 'lucide-react';
-import DeleteModal from '@/components/Roles/DeleteModal';
-import RoleCard from '@/components/Roles/RoleCard';
+import { useState } from "react";
+import DeleteModal from "@/components/Roles/DeleteModal";
+import RoleCard from "@/components/Roles/RoleCard";
 import "../../../styles/role.css";
-import RolesHeader from './RolesHEader';
+import RolesHeader from "./RolesHEader";
+import { delete_role } from "@/actions/authorization";
+import { toast } from "react-toastify";
 
-
-
-export default function RolesPage({rolesData,permissions}) {
-
+export default function RolesPage({ rolesData, permissions }) {
   const [deleteModal, setDeleteModal] = useState({
     open: false,
     roleId: null,
   });
- 
 
+  const handleConfirmDelete = async (roleId) => {
+    try {
+      const result = await delete_role(roleId);
+      console.log(result);
+      if (result.success) {
+        toast.success(result.message);
+      } else {
+        toast.error(result.message || "Failed to delete role");
+      }
+    } catch (error) {
+      toast.error("An error occurred while deleting the role");
+      console.error("Delete role error:", error);
+    }
+  };
   const handleDeleteRole = (roleId) => {
-    setRoles(roles.filter((r) => r.id !== roleId));
+    handleConfirmDelete(roleId);
     setDeleteModal({ open: false, roleId: null });
-    console.log(`Role ${roleId} deleted`);
   };
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-   <RolesHeader allPermissions={permissions} onPermissionCreated={() => {}} onRoleCreated={() => {}} />
+      <RolesHeader
+        allPermissions={permissions}
+        onPermissionCreated={() => {}}
+        onRoleCreated={() => {}}
+      />
 
       {/* Content */}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {rolesData && rolesData?.map((role) => (
-            <RoleCard
-              key={role.id}
-              role={role}
-              onDelete={() => setDeleteModal({ open: true, roleId: role.id })}
-            />
-          ))}
+          {rolesData &&
+            rolesData?.map((role) => (
+              <RoleCard
+                key={role.id}
+                role={role}
+                onDelete={() => setDeleteModal({ open: true, roleId: role.id })}
+              />
+            ))}
         </div>
 
         {rolesData?.length === 0 && (
@@ -52,7 +66,9 @@ export default function RolesPage({rolesData,permissions}) {
       <DeleteModal
         open={deleteModal.open}
         onOpenChange={(open) => setDeleteModal({ ...deleteModal, open })}
-        onConfirm={() => deleteModal.roleId && handleDeleteRole(deleteModal.roleId)}
+        onConfirm={() =>
+          deleteModal.roleId && handleDeleteRole(deleteModal.roleId)
+        }
         title="Delete Role"
         description="Are you sure you want to delete this role? This action cannot be undone."
       />
