@@ -12,12 +12,8 @@ import EditRoleModal from "@/components/Roles/EditRoleModal";
 
 export default function RoleDetailsPage({ data, users, permissions:availablePermissions}) {
   const role = data?.role;
-
-  //const [permissions, setPermissions] = useState(role?.permissions || []);
   const permissions = data?.role?.permissions || [];
- // const [members, setMembers] = useState(role?.members || []);
   const members = data?.users || [];
- // const [roleName, setRoleName] = useState(role?.name || "");
   const roleName = data?.role?.name || "";
 
   const [showAddPermissionModal, setShowAddPermissionModal] = useState(false);
@@ -81,6 +77,7 @@ export default function RoleDetailsPage({ data, users, permissions:availablePerm
             members={members}
             onAddClick={() => setShowAddMembersModal(true)}
             onRemove={handleRemoveMember}
+            roleId={role?.id}
           />
         </div>
       </div>
@@ -92,6 +89,8 @@ export default function RoleDetailsPage({ data, users, permissions:availablePerm
         allPermissions={availablePermissions}
         assignedPermissions={permissions}
         onAdd={handleAddPermissions}
+        roleId={role.id}
+        roleName={roleName}
       />
 
       <AddMembersModal
@@ -100,12 +99,15 @@ export default function RoleDetailsPage({ data, users, permissions:availablePerm
         allMembers={users}
         assignedMembers={members}
         onAdd={handleAddMembers}
+        roleId={role.id}
       />
 
       <EditRoleModal
         open={showEditRoleModal}
         onOpenChange={setShowEditRoleModal}
         currentName={roleName}
+        roleId={role.id}
+        currentPermissions={permissions}
         onSave={handleEditRoleName}
       />
     </div>
