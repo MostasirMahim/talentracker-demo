@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { X, Search, User2 } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { add_members_to_role } from '@/actions/authorization';
 
 export default function AddMembersModal({
   open,
@@ -9,10 +11,11 @@ export default function AddMembersModal({
   allMembers,
   assignedMembers,
   onAdd,
+  roleId,
 }) {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false)
   const availableMembers = useMemo(
     () =>
       allMembers.filter((m) => !assignedMembers.some((am) => am.id === m.id)),
@@ -29,16 +32,37 @@ export default function AddMembersModal({
     [availableMembers, searchQuery]
   );
 
-  const handleDone = () => {
-    const selected = availableMembers
-  .filter(m => selectedMembers.includes(m.id))
-  .map(m => m.id);
-    onAdd(selected);
-    console.log('Members selected:', selected);
-    setSelectedMembers([]);
-    setSearchQuery('');
-    onOpenChange(false);
-  };
+    const handleDone = async () => {
+    if (selectedMembers.length === 0) {
+      toast.warning("Please select at least one member")
+      return
+    }
+
+    if (roleId) {
+      setIsLoading(true)
+      console.log(roleId, selectedMembers);
+      const result = await add_members_to_role(roleId, selectedMembers)
+      setIsLoading(false)
+
+      if (result.success) {
+        toast.success(result.message || "Members added successfully")
+        const selected = availableMembers.filter((m) => selectedMembers.includes(m.id))
+        onAdd(selected)
+        setSelectedMembers([])
+        setSearchQuery("")
+        onOpenChange(false)
+      } else {
+        console.log(result);
+        toast.error(result.message || "Failed to add members")
+      }
+    } else {
+      const selected = availableMembers.filter((m) => selectedMembers.includes(m.id))
+      onAdd(selected)
+      setSelectedMembers([])
+      setSearchQuery("")
+      onOpenChange(false)
+    }
+  }
 
   if (!open) return null;
 
@@ -130,9 +154,10 @@ export default function AddMembersModal({
           </button>
           <button
             onClick={handleDone}
+            disabled={isLoading}
             className="flex-1 rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Done
+            {isLoading ? "Adding..." : "Done"}
           </button>
         </div>
       </div>
