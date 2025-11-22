@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { X } from 'lucide-react';
+import { create_permission, update_role_permissions } from '@/actions/authorization';
+import { toast } from 'react-toastify';
 
 
 export default function AddPermissionModal({
@@ -10,32 +12,83 @@ export default function AddPermissionModal({
   onOpenChange,
   allPermissions,
   assignedPermissions,
+   roleId,
+  roleName = "",
   onAdd,
 }) {
   const [selectedPermissions, setSelectedPermissions] = useState([]);
   const [newPermissionName, setNewPermissionName] = useState('');
-  const { register, handleSubmit, reset } = useForm();
+    const [isLoading, setIsLoading] = useState(false)
+
 
   const availablePermissions = allPermissions.filter(
     (p) => !assignedPermissions.some((ap) => ap.id === p.id)
   );
 
-  const handleAddNewPermission = () => {
-    if (newPermissionName.trim()) {
-      console.log('[v0] New permission created:', newPermissionName);
-      setNewPermissionName('');
+ const handleAddNewPermission = async () => {
+    if (!newPermissionName.trim()) {
+      toast.error("Permission name is required")
+      return
     }
-  };
 
-  const handleDone = () => {
-    const selected = availablePermissions.filter((p) =>
-      selectedPermissions.includes(p.id)
-    ).map((p) => p.id);
-    onAdd(selected);
-    console.log('Permissions selected:', selected);
-    setSelectedPermissions([]);
-    onOpenChange(false);
-  };
+    setIsLoading(true)
+    try {
+      const result = await create_permission({
+        name: newPermissionName,
+      })
+
+      if (result.success) {
+        toast.success(result.message)
+        setNewPermissionName("")
+      } else {
+        toast.error(result.message || "Failed to create permission")
+      }
+    } catch (error) {
+      toast.error("An error occurred")
+      console.error("[v0] Create permission error:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDone = async () => {
+    if (selectedPermissions.length === 0) {
+      toast.error("Please select at least one permission")
+      return
+    }
+
+    if (!roleId || !roleName) {
+      toast.error("Role information is missing")
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      // Combine existing and newly selected permissions
+      const existingPermIds = assignedPermissions.map((p) => p.id)
+      const allPermIds = [...existingPermIds, ...selectedPermissions]
+
+      const result = await update_role_permissions(roleId, {
+        name: roleName,
+        permissions: allPermIds,
+      })
+
+      if (result.success) {
+        toast.success("Permissions added successfully")
+        const selected = availablePermissions.filter((p) => selectedPermissions.includes(p.id))
+        onAdd(selected)
+        setSelectedPermissions([])
+        onOpenChange(false)
+      } else {
+        toast.error(result.message || "Failed to add permissions")
+      }
+    } catch (error) {
+      toast.error("An error occurred")
+      console.error("[v0] Add permissions error:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   if (!open) return null;
 
@@ -132,9 +185,10 @@ export default function AddPermissionModal({
           </button>
           <button
             onClick={handleDone}
+            disabled={isLoading}
             className="flex-1 rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Done
+            {isLoading ? "Adding..." : "Done"}
           </button>
         </div>
       </div>
