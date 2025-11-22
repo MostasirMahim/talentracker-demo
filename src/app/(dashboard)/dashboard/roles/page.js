@@ -1,8 +1,9 @@
-import { get_role_list } from "@/actions/authorization";
+import { get_permissions, get_role_list } from "@/actions/authorization";
 import RolesPage from "@/components/Roles/RolesPage";
 import "../../../../../styles/role.css";
 async function page() {
   let rolesData = null;
+  let permissions = null;
   let error = null;
 
   try {
@@ -15,7 +16,17 @@ async function page() {
   } catch (err) {
     error = err?.message || "Unexpected error while fetching roles.";
   }
-
+try {
+      const res = await get_permissions();
+      if (res?.error) {
+        error = res?.message || "Something went wrong.";
+      } else {
+        permissions = res?.data;
+      }
+    } catch (err) {
+      error = err?.message || "Unexpected error while fetching roles.";
+    }
+  
   if (error) {
     return (
       <div className="p-10 text-center text-red-500 text-lg">
@@ -26,7 +37,7 @@ async function page() {
   }
   console.log(rolesData);
   return <div>
-    <RolesPage rolesData={rolesData} />
+    <RolesPage rolesData={rolesData} permissions={permissions} />
   </div>;
 }
 
