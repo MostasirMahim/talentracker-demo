@@ -6,8 +6,11 @@ import { Trash2 } from 'lucide-react';
 import DeleteModal from '@/components/Roles/DeleteModal';
 import RoleCard from '@/components/Roles/RoleCard';
 import "../../../styles/role.css";
+import RolesHeader from './RolesHEader';
 
-export default function RolesPage({rolesData}) {
+
+
+export default function RolesPage({rolesData,permissions}) {
 
   const [deleteModal, setDeleteModal] = useState({
     open: false,
@@ -24,12 +27,7 @@ export default function RolesPage({rolesData}) {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b border-primary ">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-foreground">Authorization Roles</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Manage roles and permissions for your system</p>
-        </div>
-      </div>
+   <RolesHeader allPermissions={permissions} onPermissionCreated={() => {}} onRoleCreated={() => {}} />
 
       {/* Content */}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
