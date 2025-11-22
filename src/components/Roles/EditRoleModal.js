@@ -3,25 +3,55 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { X } from 'lucide-react';
+import { update_role_permissions } from '@/actions/authorization';
+import { toast } from 'react-toastify';
 
 export default function EditRoleModal({
   open,
   onOpenChange,
   currentName,
+  roleId,
+  currentPermissions,
   onSave,
 }) {
   const [roleName, setRoleName] = useState(currentName);
-  const { register, handleSubmit, reset } = useForm();
+    const [isLoading, setIsLoading] = useState(false)
 
-  const handleSave = () => {
-    if (roleName.trim()) {
-      onSave(roleName);
-      console.log('[v0] Role name updated:', roleName);
-      onOpenChange(false);
+ const handleSave = async () => {
+    if (!roleName.trim()) {
+      toast.error("Role name is required")
+      return
     }
-  };
 
-  if (!open) return null;
+    if (!roleId) {
+      toast.error("Role ID is missing")
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      const permissionIds = currentPermissions.map((p) => p.id)
+      const result = await update_role_permissions(roleId, {
+        name: roleName,
+        permissions: permissionIds,
+      })
+
+      if (result.success) {
+        toast.success(result.message)
+        onSave(roleName)
+        onOpenChange(false)
+      } else {
+        toast.error(result.message || "Failed to update role")
+      }
+    } catch (error) {
+      toast.error("An error occurred while updating the role")
+      console.error("Edit role error:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  if (!open) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
@@ -64,9 +94,10 @@ export default function EditRoleModal({
           </button>
           <button
             onClick={handleSave}
+            disabled={isLoading}
             className="flex-1 rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Save
+            {isLoading ? "Saving..." : "Save"}
           </button>
         </div>
       </div>
