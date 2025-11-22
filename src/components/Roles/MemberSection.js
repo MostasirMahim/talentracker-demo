@@ -1,8 +1,40 @@
 "use client";
 
-import { Plus, User2, X } from "lucide-react";
+import { remove_member_from_role } from "@/actions/authorization";
+import { Loader2, Plus, User2, X } from "lucide-react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-export default function MembersSection({ members, onAddClick, onRemove }) {
+export default function MembersSection({
+  members,
+  onAddClick,
+  onRemove,
+  roleId,
+}) {
+  const [removingId, setRemovingId] = useState(null);
+
+  const handleRemoveMember = async (memberId) => {
+    if (!roleId) {
+      onRemove(memberId);
+      return;
+    }
+
+    setRemovingId(memberId);
+    try {
+      const result = await remove_member_from_role(memberId, roleId);
+
+      if (result.success) {
+        onRemove(memberId);
+        toast.success(result.message);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error("Failed to remove member");
+    } finally {
+      setRemovingId(null);
+    }
+  };
   return (
     <div className="rounded-lg border border-border bg-card p-6">
       <div className="mb-6 flex items-center justify-between">
@@ -25,22 +57,28 @@ export default function MembersSection({ members, onAddClick, onRemove }) {
             >
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                  
                   <User2 className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="font-medium text-foreground">{member?.first_name} {member?.last_name}</p>
+                  <p className="font-medium text-foreground">
+                    {member?.first_name} {member?.last_name}
+                  </p>
                   <p className="text-xs text-muted-foreground">
                     {member.email}
                   </p>
                 </div>
               </div>
               <button
-                onClick={() => onRemove(member.id)}
+                onClick={() => handleRemoveMember(member.id)}
+                disabled={removingId === member.id}
                 className="rounded p-1 transition-colors hover:bg-destructive/10 hover:text-destructive"
                 aria-label="Remove member"
               >
-                <X className="h-4 w-4" />
+                {removingId === member.id ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <X className="h-4 w-4" />
+                )}
               </button>
             </div>
           ))}
