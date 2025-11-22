@@ -363,3 +363,44 @@ export async function add_members_to_role(roleId, userIds) {
     }
   }
 }
+
+export async function remove_member_from_role(userId, roleId) {
+  const accessToken = cookies().get("access_token")?.value
+
+  try {
+    const res = await fetch(`${BASE_URL}/api/authorization/v1/assign_role_user/`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        Cookie: `access_token=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        role_id: roleId,
+      }),
+    })
+
+    const response = await res.json()
+
+    if (response.code === 200 && response.status === "success") {
+      return {
+        success: true,
+        message: "Member removed successfully",
+        data: null,
+      }
+    } else {
+      return {
+        success: false,
+        message: response.message || "Failed to remove member",
+        data: null,
+      }
+    }
+  } catch (err) {
+    return {
+      success: false,
+      message: err?.message || "Network error",
+      data: null,
+    }
+  }
+}
