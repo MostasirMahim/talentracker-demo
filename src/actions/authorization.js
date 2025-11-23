@@ -88,7 +88,7 @@ export async function get_all_users() {
 
   try {
     const res = await fetch(
-      `${BASE_URL}/api/authorization/v1/view_all_users/`,
+      `${BASE_URL}/api/authorization/v1/view_admin_users/`,
       {
         method: "GET",
         credentials: "include",
