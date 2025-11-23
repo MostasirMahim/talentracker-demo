@@ -6,8 +6,7 @@ import RoleCard from "@/components/Roles/RoleCard";
 import "../../../styles/role.css";
 import { delete_role } from "@/actions/authorization";
 import { toast } from "react-toastify";
-import RolesHeader from "./RolesHEader";
-
+import RolesHeader from "./RolesHeader";
 export default function RolesPage({ rolesData, permissions }) {
   const [deleteModal, setDeleteModal] = useState({
     open: false,
