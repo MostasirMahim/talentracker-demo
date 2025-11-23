@@ -35,7 +35,7 @@ try {
       </div>
     );
   }
-  console.log(rolesData);
+
   return <div>
     <RolesPage rolesData={rolesData} permissions={permissions} />
   </div>;

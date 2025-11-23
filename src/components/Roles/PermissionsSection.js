@@ -1,20 +1,51 @@
-'use client';
+"use client";
 
-import { Plus, X } from 'lucide-react';
+import { update_role_permissions } from "@/actions/authorization";
+import { Plus, X } from "lucide-react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function PermissionsSection({
   permissions,
   onAddClick,
   onRemove,
+  roleId,
+  roleName,
 }) {
   const permissionColors = [
-    'bg-blue-100 text-blue-700 border-blue-200',
-    'bg-purple-100 text-purple-700 border-purple-200',
-    'bg-indigo-100 text-indigo-700 border-indigo-200',
-    'bg-cyan-100 text-cyan-700 border-cyan-200',
-    'bg-violet-100 text-violet-700 border-violet-200',
+    "bg-blue-100 text-blue-700 border-blue-200",
+    "bg-purple-100 text-purple-700 border-purple-200",
+    "bg-indigo-100 text-indigo-700 border-indigo-200",
+    "bg-cyan-100 text-cyan-700 border-cyan-200",
+    "bg-violet-100 text-violet-700 border-violet-200",
   ];
+  const [removingId, setRemovingId] = useState(null);
+  const handleRemovePermission = async (permissionId) => {
+    try {
+      setRemovingId(permissionId);
+      const remainingPermissions = permissions
+        .filter((p) => p.id !== permissionId)
+        .map((p) => p.id);
+      const permissionData = {
+        name: roleName,
+        permissions: remainingPermissions,
+      };
+      const result = await update_role_permissions(roleId, permissionData);
 
+      if (result?.error) {
+        toast.error(result?.message || "Failed to remove permission");
+        setRemovingId(null);
+        return;
+      }
+
+      onRemove(permissionId);
+      toast.success("Permission removed successfully");
+    } catch (error) {
+      toast.error(error?.message || "Error removing permission");
+    } finally {
+      setRemovingId(null);
+    }
+  };
   return (
     <div className="rounded-lg border border-border bg-card p-6">
       <div className="mb-6 flex items-center justify-between">
@@ -42,11 +73,16 @@ export default function PermissionsSection({
                 <p className="text-xs opacity-75">{permission.code}</p>
               </div>
               <button
-                onClick={() => onRemove(permission.id)}
+                onClick={() => handleRemovePermission(permission.id)}
                 className="rounded p-1 transition-colors hover:bg-black/10"
+                disabled={removingId === permission.id}
                 aria-label="Remove permission"
               >
-                <X className="h-4 w-4" />
+                <X
+                  className={`h-4 w-4 ${
+                    removingId === permission.id ? "animate-spin" : ""
+                  }`}
+                />
               </button>
             </div>
           ))}

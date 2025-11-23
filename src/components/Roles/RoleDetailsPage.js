@@ -24,18 +24,18 @@ export default function RoleDetailsPage({ data, users, permissions:availablePerm
     const newPermissions = selectedPermissions.filter(
       (p) => !permissions.some((perm) => perm.id === p.id)
     );
-    console.log("[v0] Permissions added:", selectedPermissions);
+    console.log("Permissions added:", selectedPermissions);
   };
 
   const handleAddMembers = (selectedMembers) => {
     const newMembers = selectedMembers.filter(
       (m) => !members.some((mem) => mem.id === m.id)
     );
-    console.log("[v0] Members added:", selectedMembers);
+    console.log("Members added:", selectedMembers);
   };
 
   const handleEditRoleName = (newName) => {
-    console.log("[v0] Role name updated:", newName);
+    console.log("Role name updated:", newName);
   };
 
   const handleRemovePermission = (permissionId) => {
@@ -70,6 +70,8 @@ export default function RoleDetailsPage({ data, users, permissions:availablePerm
             permissions={permissions}
             onAddClick={() => setShowAddPermissionModal(true)}
             onRemove={handleRemovePermission}
+            roleId={role?.id}
+            roleName={roleName}
           />
 
           {/* Members Section */}

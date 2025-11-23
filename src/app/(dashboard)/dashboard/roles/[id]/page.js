@@ -51,7 +51,7 @@ async function page({params}) {
         </div>
       );
     }
-    console.log("permissions", permissions);
+    
   return (
     <div>
       <RoleDetailsPage data={rolesData} users={users} permissions={permissions}/>

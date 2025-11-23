@@ -4,9 +4,9 @@ import { useState } from "react";
 import DeleteModal from "@/components/Roles/DeleteModal";
 import RoleCard from "@/components/Roles/RoleCard";
 import "../../../styles/role.css";
-import RolesHeader from "./RolesHEader";
 import { delete_role } from "@/actions/authorization";
 import { toast } from "react-toastify";
+import RolesHeader from "./RolesHEader";
 
 export default function RolesPage({ rolesData, permissions }) {
   const [deleteModal, setDeleteModal] = useState({
@@ -17,7 +17,6 @@ export default function RolesPage({ rolesData, permissions }) {
   const handleConfirmDelete = async (roleId) => {
     try {
       const result = await delete_role(roleId);
-      console.log(result);
       if (result.success) {
         toast.success(result.message);
       } else {
