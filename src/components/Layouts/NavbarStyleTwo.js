@@ -109,7 +109,9 @@ const NavbarStyleTwo = () => {
                     <li className="nav-item">
                       <Link
                         href="/services/"
-                        className={`nav-link ${pathname.startsWith("/services/") ? "active" : ""}`}
+                        className={`nav-link ${
+                          pathname.startsWith("/services/") ? "active" : ""
+                        }`}
                       >
                         Services
                       </Link>
@@ -118,7 +120,9 @@ const NavbarStyleTwo = () => {
                     <li className="nav-item">
                       <Link
                         href="/career/"
-                        className={`nav-link ${pathname.startsWith("/career/") ? "active" : ""}`}
+                        className={`nav-link ${
+                          pathname.startsWith("/career/") ? "active" : ""
+                        }`}
                       >
                         Career
                       </Link>
@@ -193,6 +197,7 @@ const NavbarStyleTwo = () => {
                               ? "active"
                               : ""
                           }`}
+                          target="_blank"
                         >
                           {data?.data?.user?.user_type === "admin" ? (
                             <span
