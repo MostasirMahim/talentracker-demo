@@ -5,7 +5,6 @@ import { X } from "lucide-react"
 import { toast } from "react-toastify"
 import { create_role } from "@/actions/authorization"
 
-
 export default function CreateRoleModal({ open, onOpenChange, allPermissions, onRoleCreated }) {
   const [roleName, setRoleName] = useState("")
   const [selectedPermissions, setSelectedPermissions] = useState([])
@@ -14,11 +13,6 @@ export default function CreateRoleModal({ open, onOpenChange, allPermissions, on
   const handleCreate = async () => {
     if (!roleName.trim()) {
       toast.error("Role name is required")
-      return
-    }
-
-    if (selectedPermissions.length === 0) {
-      toast.error("Please select at least one permission")
       return
     }
 
@@ -40,7 +34,7 @@ export default function CreateRoleModal({ open, onOpenChange, allPermissions, on
       }
     } catch (error) {
       toast.error("An error occurred")
-      console.error("[v0] Create role error:", error)
+      console.error("Create role error:", error)
     } finally {
       setIsLoading(false)
     }
@@ -57,7 +51,7 @@ export default function CreateRoleModal({ open, onOpenChange, allPermissions, on
             setRoleName("")
             setSelectedPermissions([])
           }}
-          className="absolute right-4 top-4 rounded p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+          className="absolute cursor-pointer right-4 top-4 rounded p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
           aria-label="Close"
         >
           <X className="h-4 w-4" />
@@ -66,7 +60,7 @@ export default function CreateRoleModal({ open, onOpenChange, allPermissions, on
         <h2 className="text-lg font-bold text-foreground">Create Role</h2>
         <p className="mt-2 text-sm text-muted-foreground">Create a new role and assign permissions</p>
 
-        <div className="mt-6">
+        <div className="mt-4">
           <label className="block text-sm font-medium text-foreground mb-2">Role Name</label>
           <input
             type="text"
@@ -78,9 +72,9 @@ export default function CreateRoleModal({ open, onOpenChange, allPermissions, on
           />
         </div>
 
-        <div className="mt-6">
+        <div className="mt-2">
           <label className="block text-sm font-medium text-foreground mb-3">Permissions</label>
-          <div className="space-y-2 max-h-64 overflow-y-auto">
+          <div className="space-y-2 max-h-56 overflow-y-auto">
             {allPermissions.length > 0 ? (
               allPermissions.map((permission) => (
                 <label
@@ -120,14 +114,14 @@ export default function CreateRoleModal({ open, onOpenChange, allPermissions, on
               setSelectedPermissions([])
             }}
             disabled={isLoading}
-            className="flex-1 rounded-lg border border-border bg-card px-4 py-2 font-medium text-foreground transition-colors hover:bg-secondary disabled:opacity-50"
+            className="flex-1 cursor-pointer rounded-lg border border-border bg-card px-4 py-2 font-medium text-foreground transition-colors hover:bg-secondary disabled:opacity-50"
           >
             Cancel
           </button>
           <button
             onClick={handleCreate}
             disabled={isLoading}
-            className="flex-1 rounded-lg bg-primary px-4 py-2 font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+            className="flex-1 rounded-lg bg-primary cursor-pointer px-4 py-2 font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
           >
             {isLoading ? "Creating..." : "Create"}
           </button>
