@@ -37,10 +37,11 @@ export default function DashboardLayout({ children }) {
     { href: "/dashboard", label: "Home", icon: Home },
     {
       icon: ShieldIcon,
-      label: "Roles",
-      href: "/dashboard/roles/",
-      urls: ["/dashboard/roles/"],
+      label: "Roles Management",
+      href: "#",
+      urls: ["/dashboard/roles/", "/dashboard/roles/profile"],
         children: [
+        { href: "/dashboard/roles", label: "Roles" },
         { href: "/dashboard/roles/profile", label: "My Roles" },
         ]
     },
