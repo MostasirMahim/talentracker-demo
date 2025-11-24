@@ -5,8 +5,8 @@ import { ResetPasswordForm } from "@/components/Dashboard/reset_password/ResetPa
 import "../../../../../styles/role.css"
 export default function ChangePasswordPage() {
   return (
-    <main className="min-h-screen bg-linear-to-br from-blue-50 to-white flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-8">
+    <main className="min-h-screen  flex items-center justify-center">
+      <div className="w-full max-w-md space-y-4">
         <div className="text-center space-y-2">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-blue-100 rounded-lg">
