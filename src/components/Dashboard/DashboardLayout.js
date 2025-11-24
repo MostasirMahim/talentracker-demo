@@ -373,11 +373,23 @@ export default function DashboardLayout({ children }) {
 
               {profileDropdown && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-2 z-50">
-                  <button onClick={()=> {router.push("/dashboard/reset-password"); setProfileDropdown(false)}} className="w-full px-4 py-2 text-left text-slate-700 text-sm cursor-pointer hover:bg-slate-100 transition-colors flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      router.push("/dashboard/reset-password");
+                      setProfileDropdown(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-slate-700 text-sm cursor-pointer hover:bg-slate-100 transition-colors flex items-center gap-2"
+                  >
                     <Settings size={16} className="text-slate-500" />
                     Reset Password
                   </button>
-                  <button  onClick={() => {handleLogOut(); setProfileDropdown(false)}} className="w-full cursor-pointer px-4 py-2 text-left text-red-700 text-sm hover:bg-red-100 transition-colors flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      handleLogOut();
+                      setProfileDropdown(false);
+                    }}
+                    className="w-full cursor-pointer px-4 py-2 text-left text-red-700 text-sm hover:bg-red-100 transition-colors flex items-center gap-2"
+                  >
                     <LogOut size={16} className="text-red-500" />
                     Log Out
                   </button>
@@ -413,14 +425,44 @@ export default function DashboardLayout({ children }) {
               <Bell size={20} />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
             </button>
-            <div className="w-9 h-9 rounded-full border-2 border-blue-500 flex items-center justify-center text-white font-bold cursor-pointer hover:shadow-lg transition-shadow">
-              <Image
-                src="/images/TTL_Fav.png"
-                width={30}
-                height={30}
-                alt="User"
-                className="rounded-full"
-              />
+            <div className="relative">
+              <div
+                onClick={() => setProfileDropdown(!profileDropdown)}
+                className="w-9 h-9 rounded-full border-2 border-blue-500 flex items-center justify-center text-white font-bold cursor-pointer hover:shadow-lg transition-shadow"
+              >
+                <Image
+                  src="/images/TTL_Fav.png"
+                  width={30}
+                  height={30}
+                  alt="User"
+                  className="rounded-full"
+                />
+              </div>
+
+              {profileDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-2 z-50">
+                  <button
+                    onClick={() => {
+                      router.push("/dashboard/reset-password");
+                      setProfileDropdown(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-slate-700 text-sm cursor-pointer hover:bg-slate-100 transition-colors flex items-center gap-2"
+                  >
+                    <Settings size={16} className="text-slate-500" />
+                    Reset Password
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleLogOut();
+                      setProfileDropdown(false);
+                    }}
+                    className="w-full cursor-pointer px-4 py-2 text-left text-red-700 text-sm hover:bg-red-100 transition-colors flex items-center gap-2"
+                  >
+                    <LogOut size={16} className="text-red-500" />
+                    Log Out
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </header>
