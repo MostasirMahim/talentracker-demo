@@ -40,6 +40,9 @@ export default function DashboardLayout({ children }) {
       label: "Roles",
       href: "/dashboard/roles/",
       urls: ["/dashboard/roles/"],
+        children: [
+        { href: "/dashboard/roles/profile", label: "My Roles" },
+        ]
     },
     {
       icon: UserPlus,
