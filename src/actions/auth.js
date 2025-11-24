@@ -308,6 +308,38 @@ export async function forgetId_Reset(formData) {
     };
   }
 }
+export async function resetPassword(formData) {
+  const { current_password, new_password, confirm_password  } = formData;
+  const cookieStore = cookies();
+    const accessToken = cookieStore.get("access_token")?.value;
+  try {
+    const res = await axiosInstance.patch(
+      `/api/authentication/v1/reset_password/`,
+      { current_password, new_password, confirm_password }
+      , {
+        headers: { Cookie: `access_token=${accessToken}` },
+      }
+    );
+
+    const data = res.data;
+
+    if (data.code === 200 && data.status === "success") {
+      return data;
+    } else {
+      return {
+        error: true,
+        message: data.message || "Verification failed",
+        data,
+      };
+    }
+  } catch (err) {
+    return {
+      error: true,
+      message: err?.response?.data?.message || err?.message || "Network Error",
+      data: err?.response?.data || null,
+    };
+  }
+}
 
 export async function get_me() {
   const accessToken = cookies().get("access_token")?.value;
@@ -342,3 +374,4 @@ export async function get_me() {
     };
   }
 }
+
