@@ -1,4 +1,3 @@
-"use client";
 export const dynamic = "force-dynamic";
 import JobTypeListTable from "@/components/Dashboard/jobs/JobTypeListTable/jobTypeListTable";
 import axiosInstance from "@/lib/axiosIntance";

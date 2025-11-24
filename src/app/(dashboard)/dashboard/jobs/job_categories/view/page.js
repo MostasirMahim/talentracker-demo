@@ -1,4 +1,3 @@
-"use client";
 export const dynamic = "force-dynamic";
 import JobCategoriesListTable from "@/components/Dashboard/jobs/JobCategoriesListTable/JobCategoriesListTable";
 import JobTypeListTable from "@/components/Dashboard/jobs/JobTypeListTable/jobTypeListTable";
