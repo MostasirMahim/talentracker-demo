@@ -191,14 +191,14 @@ export async function create_permission(permissionData) {
       return {
         success: false,
         message: response.message || "Failed to create permission",
-        data: null,
+        data: response,
       };
     }
   } catch (err) {
     return {
       success: false,
       message: err?.message || "Network error",
-      data: null,
+      data: response,
     };
   }
 }
