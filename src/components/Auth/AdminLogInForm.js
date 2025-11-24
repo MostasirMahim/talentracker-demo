@@ -6,13 +6,14 @@ import { toast } from "react-toastify";
 import { adminLogin } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function AdminLogInForm() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const router = useRouter();
   const {setLayoutTransitionOn} = useLayoutTransitionStore();
-
+  const [showPassword, setShowPassword] = useState(false);
   async function onSubmit(values) {
     setLoading(true);
     try {
@@ -59,13 +60,20 @@ export default function AdminLogInForm() {
         />
       </div>
 
-      <div className="form-group mb-3">
+      <div className="form-group mb-3 position-relative">
         <input
-          type="password"
+         type={showPassword ? "text" : "password"}
           className="form-control"
           placeholder="Password"
           {...register("password", { required: true })}
         />
+             <span
+          className="position-absolute end-0 top-50 translate-middle-y me-3"
+          onClick={() => setShowPassword(!showPassword)}
+          style={{ cursor: "pointer" }}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </span>
       </div>
 
       <button

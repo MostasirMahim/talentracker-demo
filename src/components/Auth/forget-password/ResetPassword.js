@@ -6,11 +6,12 @@ import { toast } from "react-toastify";
 import { forgetId_Reset } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 import { useForgetPasswordStore } from "@/stores/forget_password_store";
-
+import { Eye, EyeOff } from "lucide-react";
 export default function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const router = useRouter();
+    const [showPassword, setShowPassword] = useState(false);
  const { email, reset, token, userType } = useForgetPasswordStore();
   if(!email) {
     toast.error("Email not found");
@@ -63,13 +64,21 @@ export default function ResetPassword() {
           disabled
         />
       </div>
-       <div className="form-group mb-3">
+
+      <div className="form-group mb-3 position-relative">
         <input
-          type="password"
+         type={showPassword ? "text" : "password"}
           className="form-control"
-          placeholder="Enter New Password"
+          placeholder="Password"
           {...register("password", { required: true })}
         />
+             <span
+          className="position-absolute end-0 top-50 translate-middle-y me-3"
+          onClick={() => setShowPassword(!showPassword)}
+          style={{ cursor: "pointer" }}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </span>
       </div>
 
       <button type="submit" className="btn btn-primary w-100" disabled={loading}>
