@@ -69,12 +69,11 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
 
           // Set image preview if exists
           if (blogData.featured_image) {
-            const imageUrl = blogData.featured_image.startsWith('http') 
-              ? blogData.featured_image 
+            const imageUrl = blogData.featured_image.startsWith("http")
+              ? blogData.featured_image
               : `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${blogData.featured_image}`;
             setImagePreview(imageUrl);
           }
-
         } catch (error) {
           console.error("Failed to load blog data:", error);
           toast.error("Failed to load blog data");
@@ -100,9 +99,6 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
       });
       setImagePreview(null);
     }
-
-   
-
   }, [blog_id, reset, router]);
 
   // Handle new image upload preview
@@ -117,21 +113,25 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
 
   // ReactQuill toolbar setup
   const modules = {
-  toolbar: [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }], 
-    [{ font: [] }], // Font family selector
-    [{ size: [] }], // Font size selector
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ color: [] }, { background: [] }], // Font & background color
-    [{ script: "sub" }, { script: "super" }], // Subscript / Superscript
-    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], // Indent controls
-    [{ align: [] }], // Alignment: left, center, right, justify
-    ["link", "image"], // Media (add video too)
-    ["code-block"], // Code block (useful for tech blogs)
-    ["clean"], // Clear formatting
-  ],
-};
-
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ font: [] }], // Font family selector
+      [{ size: [] }], // Font size selector
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ color: [] }, { background: [] }], // Font & background color
+      [{ script: "sub" }, { script: "super" }], // Subscript / Superscript
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ], // Indent controls
+      [{ align: [] }], // Alignment: left, center, right, justify
+      ["link", "image"], // Media (add video too)
+      ["code-block"], // Code block (useful for tech blogs)
+      ["clean"], // Clear formatting
+    ],
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -139,20 +139,20 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
       formData.append("title", data.title);
       formData.append("summary", data.summary);
       formData.append("content", data.content);
-      
+
       if (data.category) {
         formData.append("category", data.category);
       }
-      
+
       if (data.tags && data.tags.length > 0) {
-        data.tags.forEach((tag) => formData.append("tags", tag));
+        formData.append("tags", data.tags.join(","));
       }
-      
+
       // Only append image if a new file is selected
       if (data.featured_image && data.featured_image[0]) {
         formData.append("featured_image", data.featured_image[0]);
       }
-
+      console.log("form data", formData);
       let response;
       if (isEditMode && blog_id) {
         // Update existing blog
@@ -163,21 +163,18 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
             headers: { "Content-Type": "multipart/form-data" },
           }
         );
-        
+
         if (response.status === 200) {
           toast.success("Blog updated successfully!");
           router.push("/dashboard/blogs/");
         }
       } else {
         // Create new blog
-        response = await axiosInstance.post(
-          "/api/blogs/v1/blogs/",
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        );
-        
+
+        response = await axiosInstance.post("/api/blogs/v1/blogs/", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+
         if (response.status === 201) {
           toast.success("Blog created successfully!");
           reset();
@@ -188,7 +185,8 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
       }
     } catch (error) {
       console.error("Blog submission error:", error);
-      const errorMessage = error.response?.data?.message || "Failed to submit blog";
+      const errorMessage =
+        error.response?.data?.message || "Failed to submit blog";
       toast.error(errorMessage);
     }
   };
@@ -254,11 +252,7 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
             <div className="flex flex-wrap gap-3 mt-2">
               {tags.map((tag) => (
                 <label key={tag.id} className="flex items-center gap-1">
-                  <input 
-                    type="checkbox" 
-                    value={tag.id} 
-                    {...register("tags")}
-                  />
+                  <input type="checkbox" value={tag.id} {...register("tags")} />
                   <span>{tag.name}</span>
                 </label>
               ))}
@@ -312,9 +306,16 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
             <input
               type="file"
               accept="image/*"
-              {...register("featured_image")}
+              {...register("featured_image", {
+                required: !isEditMode && "Featured image is required",
+              })}
               className="w-full mt-2 border border-gray-300 p-2 rounded-md"
             />
+            {errors.featured_image && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.featured_image.message}
+              </p>
+            )}
             {imagePreview && (
               <div className="mt-3">
                 <img
@@ -323,8 +324,8 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
                   className="w-40 h-32 object-cover rounded-md border"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  {isEditMode && !featuredImageFile?.[0] 
-                    ? "Current image (upload new to replace)" 
+                  {isEditMode && !featuredImageFile?.[0]
+                    ? "Current image (upload new to replace)"
                     : "Image preview"}
                 </p>
               </div>

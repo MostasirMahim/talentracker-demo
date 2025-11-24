@@ -6,7 +6,6 @@ import Image from "next/image";
 import BlogSidebar from "@/components/Blog/BlogSidebar";
 
 const BlogDetailsContent = ({ blog }) => {
-  console.log(blog.featured_image, "blog featured_image");
   if (!blog) {
     return (
       <div className="container py-5 text-center">

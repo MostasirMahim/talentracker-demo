@@ -15,12 +15,12 @@ export default function ContactUsTable({ contacts }) {
   // Close menu when clicking outside
   React.useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.target.closest('.action-menu-container')) {
+      if (!event.target.closest(".action-menu-container")) {
         setOpenActionMenu(null);
       }
     };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   if (!contacts || !contacts.data || contacts.data.length === 0) {
@@ -167,7 +167,7 @@ export default function ContactUsTable({ contacts }) {
 
                     {/* Dropdown Menu */}
                     {openActionMenu === contact.id && (
-                      <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
                         <Link
                           href={`/dashboard/contacts/${contact.id}/`}
                           className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-green-50 transition-colors"

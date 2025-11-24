@@ -14,7 +14,7 @@ async function page({ searchParams }) {
   try {
     // Build query string with all search parameters
     const queryParams = new URLSearchParams();
-    queryParams.append('page_size', '10');
+    queryParams.append('page_size', '1');
     queryParams.append('page', currentPage);
     
     // Add filter parameters if they exist

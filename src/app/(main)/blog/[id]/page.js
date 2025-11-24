@@ -16,13 +16,10 @@ export default async function SingleBlogPage({ params } ) {
   try {
     const { data } = await axiosInstance.get(
       `/api/blogs/v1/blogs/${params.id}/`
-      // {
-      //   headers: {
-      //     Cookie: `access_token=${authToken}`,
-      //   },
-      // }
+      
     );
     blog = data.data;
+    console.log(blog);
   } catch (error) {
     console.error(`Failed to fetch blog ID: ${params.id}`, error);
   }
