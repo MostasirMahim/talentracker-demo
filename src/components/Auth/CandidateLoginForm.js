@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { candidateLogin } from "@/actions/auth";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForgetPasswordStore } from "@/stores/forget_password_store";
 
@@ -14,6 +15,7 @@ export default function CandidateLoginForm({ email: propEmail }) {
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { email: propEmail || "" },
   });
+   const [showPassword, setShowPassword] = useState(false);
   const email = watch("email");
   const router = useRouter();
   async function onSubmit(values) {
@@ -60,13 +62,20 @@ export default function CandidateLoginForm({ email: propEmail }) {
         />
       </div>
 
-      <div className="form-group mb-3">
+      <div className="form-group mb-3 position-relative">
         <input
-          type="password"
+         type={showPassword ? "text" : "password"}
           className="form-control"
           placeholder="Password"
           {...register("password", { required: true })}
         />
+             <span
+          className="position-absolute end-0 top-50 translate-middle-y me-3"
+          onClick={() => setShowPassword(!showPassword)}
+          style={{ cursor: "pointer" }}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </span>
       </div>
 
       <div className="auth-row">

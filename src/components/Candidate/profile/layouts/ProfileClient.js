@@ -6,6 +6,7 @@ import {
   LogOut,
   UserPen,
   BriefcaseBusiness,
+  Settings,
 } from "lucide-react";
 import "./style.css";
 import { HeaderLayout } from "./HeaderLayout";
@@ -42,6 +43,12 @@ const navItems = [
         href: "/candidate/profile/applied-jobs/",
       },
     ],
+  },
+  {
+    id: "chenge-password",
+    label: "Change Password",
+    href: "/candidate/profile/chenge-password/",
+    icon: <Settings size={18} />,
   },
   {
     id: "logout",
