@@ -150,7 +150,7 @@ const NavbarStyleTwo = () => {
                       <ul className="dropdown-menu">
                         <li className="nav-item">
                           <Link
-                            href="/coming_soon"
+                            href="/news/"
                             className={`nav-link ${
                               pathname == "/news/" && "active"
                             }`}

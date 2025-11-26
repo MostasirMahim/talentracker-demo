@@ -19,6 +19,7 @@ import {
   UserCheck,
   ShieldIcon,
   Settings,
+  Newspaper,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -115,6 +116,18 @@ export default function DashboardLayout({ children }) {
         },
         { href: "/dashboard/blogs/tags/view", label: "View Blog Tags" },
         { href: "/dashboard/blogs/", label: "View all Blogs" },
+      ],
+    },
+    {
+      href: "#",
+      label: "News Management",
+      icon: Newspaper,
+      children: [
+        {
+          href: "/dashboard/news/categories",
+          label: "News Category",
+        },
+        { href: "/dashboard/news/", label: "All News" },
       ],
     },
     {
