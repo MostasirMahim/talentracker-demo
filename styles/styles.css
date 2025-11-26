@@ -4256,7 +4256,17 @@ Blog Area CSS
   background-size: cover;
 }
 .single-news-post .post-image::after {
-  visibility: hidden;
+  position: absolute;
+  left: 0;
+  content: "";
+  transition: var(--transition);
+  right: 0;
+  height: 55px;
+  bottom: -2px;
+  background-image: url(/images/shape/shapeblue.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .single-news-post .post-image-2 {
   border-radius: 5px 5px 0 0;

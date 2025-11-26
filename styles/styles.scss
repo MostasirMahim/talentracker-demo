@@ -4913,7 +4913,19 @@ Blog Area CSS
             };
         }
         &::after {
-           visibility: hidden;
+           position: absolute;
+            left: 0;
+            content: '';
+            transition: var(--transition);
+            right: 0;
+            height: 55px;
+            bottom: -2px;
+            background: {
+                image: url(/images/shape/shapeblue.png);
+                position: center center;
+                repeat: no-repeat;
+                size: cover;
+            };
         }
     }
     .post-image-2 {

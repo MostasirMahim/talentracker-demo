@@ -40,7 +40,7 @@ const NewsDetails = ({ blog }) => {
                     </li>
                   </ul>
                 </div>
-                <h3 className="">{blog.title}</h3>
+                <h3 className="">&quot;{blog.title}&quot;</h3>
                 <div className="flex-b">
                   <i className="ri-chat-quote-line"></i>
                   <span className="text-muted">{blog.source}</span>
