@@ -3,11 +3,14 @@
 import React from "react";
 import Link from "next/link";
 import BlogSmartPagination from "../SmartPagination/BlogSmartPagination";
+import SmartPagination from "../SmartPagination/SmartPagination";
+import { useRouter } from "next/navigation";
 
 const AllNewsPost = ({ blogs }) => {
   const blogList = blogs?.data || [];
   const pagination = blogs?.pagination;
-
+  console.log(pagination);
+  const router = useRouter();
   const formatBDTime = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleString("en-BD", {
@@ -38,13 +41,23 @@ const AllNewsPost = ({ blogs }) => {
   return (
     <div className="blog-area ptb-70">
       <div className="container">
-        <div className="row justify-content-center gy-5">
+        <div className="row justify-content-center ">
           {blogList.map((blog) => (
-            <div className="col-lg-4 col-md-6" key={blog.id}>
+            <div onClick={()=> router.push(`/news/${blog.id}`)} className="col-md-6" key={blog.id}>
               <div className="single-news-post">
-                <div className="post-image-2"></div>
                 <div className="post-content">
-                  <ul className="meta">
+                  <h3 style={{ minHeight: "80px", maxHeight: "100px" }}>
+                    <Link href={`/news/${blog.id}`}>
+                      {truncateText(blog.title, 90)}
+                    </Link>
+                  </h3>
+                <ul className="meta">
+                    <li>
+                      <i className="ri-chat-quote-line"></i>{" "}
+                      {blog.source}
+                    </li>
+                    </ul>
+                    <ul className="meta" style={{ marginBottom: "50px" }}>
                     <li>
                       <i className="ri-calendar-2-line"></i>{" "}
                       {formatBDTime(blog.created_at)}
@@ -56,26 +69,14 @@ const AllNewsPost = ({ blogs }) => {
                       </Link>
                     </li>
                   </ul>
-                  <h3 style={{ minHeight: "100px", maxHeight: "100px" }}>
-                    <Link href={`/news/${blog.id}`}>
-                      {truncateText(blog.title, 90)}
-                    </Link>
-                  </h3>
 
-                  <Link
-                    style={{ marginTop: "20px", marginBottom: "30px" }}
-                    href={`/news/${blog.id}`}
-                    className="default-btn"
-                  >
-                    Read More <i className="ri-arrow-right-line"></i>
-                  </Link>
                 </div>
                 <div className="post-image"></div>
               </div>
             </div>
           ))}
         </div>
-        <BlogSmartPagination paginationData={pagination} />
+        <SmartPagination paginationData={pagination} />
       </div>
     </div>
   );

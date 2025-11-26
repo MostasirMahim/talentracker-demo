@@ -1,20 +1,20 @@
+export const dynamic = "force-dynamic";
 import TopHeaderStyleTwo from "@/components/Layouts/TopHeaderStyleTwo";
 import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import PageBanner from "@/components/Common/PageBanner";
 import Footer from "@/components/Layouts/Footer";
 import axiosInstance from "@/lib/axiosIntance";
-import NewsGridPost from "@/components/News/NewsGridPost";
+import AllNewsPost from "@/components/News/AllNewsPost";
 
-export default async function NewsPage() {
+export default async function AllNewsPage({ searchParams }) {
   let blogs = [];
-  let gallery = [];
+  const currentPage = searchParams?.page || 1;
   try {
-    const blogResponse = await axiosInstance.get("/api/news/v1/news/");
-    blogs = blogResponse.data.data?.slice(0, 6) || [];
+    const blogResponse = await axiosInstance.get(`/api/news/v1/news/?page_size=10&page=${currentPage}`, {});
+    blogs = blogResponse.data || [];
   } catch (err) {
     console.error(err);
     blogs = [];
-    gallery = [];
   }
 
   return (
@@ -22,12 +22,12 @@ export default async function NewsPage() {
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
       <PageBanner
-        pageTitle="Gallery & Blog"
+        pageTitle="News"
         homePageUrl="/"
         homePageText="Home"
-        activePageText="Gallery & Blog"
+        activePageText="News"
       />
-      <NewsGridPost blogs={blogs} />
+      <AllNewsPost blogs={blogs} />
       <Footer />
     </>
   );
