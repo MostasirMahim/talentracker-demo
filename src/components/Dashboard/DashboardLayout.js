@@ -157,6 +157,24 @@ export default function DashboardLayout({ children }) {
       href: "/dashboard/users/",
       urls: ["/dashboard/users/"],
     },
+    {
+      href: "#",
+      label: "Gallery",
+      icon: FilePenLine,
+      children: [
+        {
+          href: "/dashboard/gallery/categories/post",
+          label: "Set Gallery Category",
+        },
+        {
+          href: "/dashboard/gallery/categories/",
+          label: "View Gallery Categories",
+        },
+        { href: "/dashboard/gallery", label: "View all Gallery" },
+        
+      ],
+    },
+  
   ];
 
   const handleParentClick = (e, item, index) => {
