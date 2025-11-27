@@ -22,7 +22,10 @@ export default function GalleryTable({ gallery }) {
   // -----------------------
   const handleUpdate = (item) => {
     setGallery(item); // store selected gallery object
-    router.push(`/dashboard/gallery/update?gallery_id=${item.id}`);
+    router.push(`/dashboard/gallery/post/?gallery_id=${item.id}`);
+  };
+  const handleView = (id) => {
+    router.push(`/dashboard/gallery/images/?gallery_id=${id}`);
   };
 
   // -----------------------
@@ -54,7 +57,9 @@ export default function GalleryTable({ gallery }) {
     <div className="p-6 bg-gray-100 min-h-screen">
       {/* Header Section */}
       <div className="flex flex-wrap justify-between items-center mb-5">
-        <h2 className="text-3xl font-semibold text-gray-800 p-1">All Gallery</h2>
+        <h2 className="text-3xl font-semibold text-gray-800 p-1">
+          All Gallery
+        </h2>
 
         <Link href="/dashboard/gallery/post/">
           <button className="px-4  py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer">
@@ -125,7 +130,9 @@ export default function GalleryTable({ gallery }) {
                     </td>
 
                     <td className="px-6 py-4">{item.title}</td>
-                    <td className="px-6 py-4">{item.category}</td>
+                    <td className="px-6 py-4">
+                      {item.category?.name || "No category"}
+                    </td>
 
                     <td className="px-6 py-4">
                       {new Date(item.created_at).toLocaleString()}
@@ -136,6 +143,12 @@ export default function GalleryTable({ gallery }) {
 
                     {/* ACTION BUTTONS */}
                     <td className="px-6 py-4 flex gap-2">
+                      <button
+                        onClick={() => handleView(item.id)}
+                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 cursor-pointer"
+                      >
+                        Images
+                      </button>
                       <button
                         onClick={() => handleUpdate(item)}
                         className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 cursor-pointer"

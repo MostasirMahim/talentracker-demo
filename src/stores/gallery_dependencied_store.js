@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export const useGalleryCategory = create((set, get) => ({
   category: {},
@@ -10,13 +11,20 @@ export const useGalleryCategory = create((set, get) => ({
   clearGalleryCategory: () => set({ category: {} }),
 }));
 
+export const useGallery = create(
+  persist(
+    (set, get) => ({
+      gallery: {},
 
-export const useGallery = create((set, get) => ({
-  gallery: {},
+      setGallery: (gallery) => set({ gallery }),
 
-  setGallery: (gallery) => set({ gallery }),
+      getGallery: () => get().gallery,
 
-  getGallery: () => get().gallery,
-
-  clearGallery: () => set({ gallery: {} }),
-}));
+      clearGallery: () => set({ gallery: {} }),
+    }),
+    {
+      name: "gallery-storage", // localStorage key name
+    }
+  )
+);
+//

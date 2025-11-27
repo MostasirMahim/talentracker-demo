@@ -19,8 +19,6 @@ export default function GalleryCategoryForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const category_id = searchParams.get("category_id");
-  console.log(category_id);
-
   const getCategory = useGalleryCategory((state) => state.getGalleryCategory);
   const clearCategory = useGalleryCategory((state) => state.clearGalleryCategory);
 

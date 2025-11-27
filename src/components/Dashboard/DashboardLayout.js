@@ -170,6 +170,10 @@ export default function DashboardLayout({ children }) {
           href: "/dashboard/gallery/categories/",
           label: "View Gallery Categories",
         },
+        {
+          href: "/dashboard/gallery/images/",
+          label: "View Gallery images",
+        },
         { href: "/dashboard/gallery", label: "View all Gallery" },
         
       ],
