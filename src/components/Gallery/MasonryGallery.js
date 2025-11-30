@@ -1,13 +1,13 @@
 "use client";
-import { useState } from "react";
 import Masonry from "react-masonry-css";
 import "./masonry.css";
 import Image from "next/image";
-import Modal from "./ImageModal";
+import SmartPagination from "../SmartPagination/SmartPagination";
+import { useRouter } from "next/navigation";
+import { Layers2 } from "lucide-react";
 
-const MasonryGrid = ({ data: items }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
-
+const MasonryGrid = ({ data: items, pagination }) => {
+  const router = useRouter();
   const breakpointColumnsObj = {
     default: 3,
     1100: 3,
@@ -27,7 +27,7 @@ const MasonryGrid = ({ data: items }) => {
             <div
               key={index}
               className="grid-item"
-              onClick={() => setSelectedItem(item)}
+              onClick={() => router.push(`/gallery/${item.id}`)}
             >
               <div className="grid-item-wrapper">
                 <Image
@@ -40,17 +40,14 @@ const MasonryGrid = ({ data: items }) => {
                 />
                 <div className="grid-info">
                   <p className="grid-title">{item.title}</p>
-                  <p className="grid-category">{item.category?.name}</p>
+                  <p className="grid-category"><Layers2 className="grid-category-icon" size={14} /> {item.category?.name}</p>
                 </div>
               </div>
             </div>
           ))}
         </Masonry>
       </div>
-
-      {selectedItem && (
-        <Modal item={selectedItem} onClose={() => setSelectedItem(null)} />
-      )}
+      <SmartPagination paginationData={pagination} />
     </>
   );
 };
