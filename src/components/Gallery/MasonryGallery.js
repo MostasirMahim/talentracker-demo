@@ -1,0 +1,55 @@
+"use client";
+import Masonry from "react-masonry-css";
+import "./masonry.css";
+import Image from "next/image";
+import SmartPagination from "../SmartPagination/SmartPagination";
+import { useRouter } from "next/navigation";
+import { Layers2 } from "lucide-react";
+
+const MasonryGrid = ({ data: items, pagination }) => {
+  const router = useRouter();
+  const breakpointColumnsObj = {
+    default: 3,
+    1100: 3,
+    700: 2,
+    500: 1,
+  };
+
+  return (
+    <>
+      <div className="pt-70" style={{ width: "90%", margin: "auto" }}>
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className="grid-item"
+              onClick={() => router.push(`/gallery/${item.id}`)}
+            >
+              <div className="grid-item-wrapper">
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${item.cover_image}`}
+                  alt={item.title}
+                  width={400}
+                  height={300}
+                  style={{ width: "100%", height: "auto" }}
+                  className="grid-image"
+                />
+                <div className="grid-info">
+                  <p className="grid-title">{item.title}</p>
+                  <p className="grid-category"><Layers2 className="grid-category-icon" size={14} /> {item.category?.name}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Masonry>
+      </div>
+      <SmartPagination paginationData={pagination} />
+    </>
+  );
+};
+
+export default MasonryGrid;

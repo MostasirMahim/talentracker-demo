@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 const AllNewsPost = ({ blogs }) => {
   const blogList = blogs?.data || [];
   const pagination = blogs?.pagination;
-  console.log(pagination);
   const router = useRouter();
   const formatBDTime = (isoString) => {
     const date = new Date(isoString);
