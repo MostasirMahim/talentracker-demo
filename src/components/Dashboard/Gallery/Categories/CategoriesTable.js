@@ -43,8 +43,8 @@ export default function CategoriesTable({ categories }) {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen ">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800 text-center">
+    <div className="p-6  min-h-screen ">
+      <h2 className="text-2xl font-semibold mb-2 text-gray-800 text-center">
         Gallery Categories
       </h2>
       <Link href="/dashboard/gallery/categories/post/">

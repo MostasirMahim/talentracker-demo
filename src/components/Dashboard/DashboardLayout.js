@@ -171,8 +171,8 @@ export default function DashboardLayout({ children }) {
           label: "View Gallery Categories",
         },
         {
-          href: "/dashboard/gallery/images/",
-          label: "View Gallery images",
+          href: "/dashboard/gallery/images/post/",
+          label: "Set Gallery image",
         },
         { href: "/dashboard/gallery", label: "View all Gallery" },
         

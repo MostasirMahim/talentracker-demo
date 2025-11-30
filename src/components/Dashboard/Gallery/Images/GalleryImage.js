@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from "react";
 import axiosInstance from "@/lib/axiosIntance";
@@ -38,16 +38,16 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
+    <div className="p-6 min-h-screen ">
       {/* Header */}
       <div className="flex flex-wrap justify-between items-center mb-6">
         <h2 className="text-3xl font-semibold text-gray-800">Gallery Images</h2>
 
         <button
-          onClick={() => router.push("/dashboard/gallery/images/upload")}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          onClick={() => router.push(`/dashboard/gallery/images/post/?gallery_id=${gallery_id}`)}
+          className="px-4 py-2 bg-blue-600 cursor-pointer text-white rounded-md hover:bg-blue-700 transition"
         >
-          + Upload Image
+          + Add More Image
         </button>
       </div>
 
@@ -79,25 +79,6 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
                   fill
                   className="object-cover group-hover:scale-110 transition duration-300"
                 />
-
-                {/* Hover Actions */}
-                <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3">
-                  <button
-                    className="px-3 py-1 bg-white text-gray-800 rounded-md text-sm shadow hover:bg-gray-200"
-                    onClick={() =>
-                      router.push(`/dashboard/gallery/images/update?id=${item.id}`)
-                    }
-                  >
-                    Update
-                  </button>
-
-                  <button
-                    className="px-3 py-1 bg-red-500 text-white rounded-md text-sm shadow hover:bg-red-600"
-                    onClick={() => setDeleteId(item.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
               </div>
 
               {/* Metadata */}
@@ -113,6 +94,17 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
                   <span className="font-medium">Updated:</span>{" "}
                   {new Date(item.updated_at).toLocaleString()}
                 </p>
+              </div>
+              {/* Hover Actions */}
+              <div className=" mt-4  transition flex items-center justify-center gap-3">
+                
+
+                <button
+                  className="px-3 py-1 bg-red-500 text-white cursor-pointer rounded-sm text-sm shadow hover:bg-red-600"
+                  onClick={() => setDeleteId(item.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}

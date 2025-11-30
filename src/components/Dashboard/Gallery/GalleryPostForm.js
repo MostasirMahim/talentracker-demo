@@ -61,32 +61,26 @@ export default function GalleryPostForm() {
     fetchCategories();
   }, []);
 
- 
   useEffect(() => {
-    if (isUpdateMode && !loadingCategories && gallery && gallery.id) {
-      console.log("Populating form with:", gallery); // Debug log
+    if (!isUpdateMode) return;
 
-      setValue("title", gallery.title || "");
-      setValue("category_id", gallery.category?.id?.toString() || "");
-      setValue("description", gallery.description || "");
+    if (!gallery || !gallery.id) return; // gallery ready check
+    if (loadingCategories) return; // category loading wait
 
-      // Set existing image preview
-      if (gallery.cover_image) {
-        const img = gallery.cover_image.startsWith("http")
-          ? gallery.cover_image
-          : `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${gallery.cover_image}`;
+    // Populate form
+    setValue("title", gallery.title || "");
+    setValue("category_id", gallery.category?.id?.toString() || "");
+    setValue("description", gallery.description || "");
 
-        setImagePreview(img);
-      }
+    // Existing image
+    if (gallery.cover_image) {
+      const fullImg = gallery.cover_image.startsWith("http")
+        ? gallery.cover_image
+        : `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${gallery.cover_image}`;
+
+      setImagePreview(fullImg);
     }
-  }, [isUpdateMode, gallery_id, gallery, setValue, loadingCategories]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      clearGallery();
-    };
-  }, [clearGallery]);
+  }, [gallery, loadingCategories, isUpdateMode]);
 
   // Handle image preview for new uploads
   useEffect(() => {
@@ -173,7 +167,7 @@ export default function GalleryPostForm() {
               clearGallery();
               router.push("/dashboard/gallery");
             }}
-            className="text-blue-600 hover:text-blue-800 flex items-center gap-2 mb-4 transition-colors"
+            className="text-blue-600 cursor-pointer font-bold hover:text-blue-800 flex items-center gap-2 mb-4 transition-colors"
           >
             <svg
               className="w-5 h-5"
@@ -331,12 +325,19 @@ export default function GalleryPostForm() {
                 <input
                   type="file"
                   accept="image/*"
-                  {...register("cover_image", {
-                    required: !isUpdateMode ? "Cover image is required" : false,
-                  })}
-                  className="hidden"
                   id="cover_image"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setValue("cover_image", e.target.files);
+                      const reader = new FileReader();
+                      reader.onloadend = () => setImagePreview(reader.result);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
                 />
+
                 <label
                   htmlFor="cover_image"
                   className={`flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer transition-all hover:bg-gray-50 ${
@@ -346,14 +347,14 @@ export default function GalleryPostForm() {
                   }`}
                 >
                   {imagePreview ? (
-                    <div className="relative w-full h-full p-2">
+                    <div className="relative w-full h-48 rounded-b-md p-2">
                       <img
                         src={imagePreview}
                         alt="Preview"
                         className="w-full h-full object-contain rounded-lg"
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all rounded-lg flex items-center justify-center">
-                        <span className="text-white opacity-0 hover:opacity-100 transition-opacity font-semibold">
+                      <div className="absolute inset-0  bg-opacity-0 hover:bg-opacity-30 transition-all rounded-lg flex items-center justify-center">
+                        <span className="text-white text-1xl opacity-0 hover:opacity-100 hover:bg-blue-600 hover:px-2 hover:py-1 rounded-md transition-opacity font-semibold">
                           Click to change
                         </span>
                       </div>
