@@ -162,7 +162,7 @@ const NavbarStyleOne = () => {
                       </li>
                       <li className="nav-item">
                         <Link
-                          href="/coming_soon"
+                          href="/gallery/"
                           className={`nav-link ${
                             pathname == "/gallery/" && "active"
                           }`}

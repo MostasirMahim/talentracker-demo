@@ -167,9 +167,9 @@ const NavbarStyleTwo = () => {
                         </li>
                         <li className="nav-item">
                           <Link
-                            href="/coming_soon"
+                            href="/gallery/"
                             className={`nav-link ${
-                              pathname == "/blog/" && "active"
+                              pathname == "/gallery/" && "active"
                             }`}
                           >
                             Gallery
