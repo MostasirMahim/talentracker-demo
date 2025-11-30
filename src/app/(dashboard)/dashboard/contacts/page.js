@@ -14,21 +14,21 @@ async function page({ searchParams }) {
   try {
     // Build query string with all search parameters
     const queryParams = new URLSearchParams();
-    queryParams.append('page_size', '1');
-    queryParams.append('page', currentPage);
-    
+    queryParams.append("page_size", "20");
+    queryParams.append("page", currentPage);
+
     // Add filter parameters if they exist
     if (searchParams?.start_date) {
-      queryParams.append('start_date', searchParams.start_date);
+      queryParams.append("start_date", searchParams.start_date);
     }
     if (searchParams?.end_date) {
-      queryParams.append('end_date', searchParams.end_date);
+      queryParams.append("end_date", searchParams.end_date);
     }
     if (searchParams?.status) {
-      queryParams.append('status', searchParams.status);
+      queryParams.append("status", searchParams.status);
     }
     if (searchParams?.is_active) {
-      queryParams.append('is_active', searchParams.is_active);
+      queryParams.append("is_active", searchParams.is_active);
     }
 
     const contact_us_response = await axiosInstance.get(
@@ -44,7 +44,7 @@ async function page({ searchParams }) {
   } catch (error) {
     console.error("Error fetching contacts:", error);
   }
-  
+
   return (
     <div>
       <ContactUsTable contacts={contact_us} />
