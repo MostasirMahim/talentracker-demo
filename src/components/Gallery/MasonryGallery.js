@@ -38,8 +38,9 @@ const MasonryGrid = ({ data: items }) => {
                   style={{ width: "100%", height: "auto" }}
                   className="grid-image"
                 />
-                <div className="grid-overlay">
+                <div className="grid-info">
                   <p className="grid-title">{item.title}</p>
+                  <p className="grid-category">{item.category?.name}</p>
                 </div>
               </div>
             </div>
