@@ -6,17 +6,19 @@ import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import TopHeaderStyleTwo from "@/components/Layouts/TopHeaderStyleTwo";
 import React from "react";
 
-async function page() {
+async function page({ searchParams }) {
   let sampleData = null;
   let error = null;
-
+  let pagination = null;
+  const currentPage = searchParams?.page || 1;
   try {
-    const res = await get_gallery_images();
+    const res = await get_gallery_images(currentPage);
     if (res?.error) {
       error = res?.message || "Something went wrong.";
       console.log(error);
     } else {
-      sampleData = res?.data;
+      sampleData = res?.data?.data;
+      pagination = res?.data?.pagination;
     }
   } catch (err) {
     error = err?.message || "Unexpected error while fetching profile.";
@@ -41,7 +43,7 @@ async function page() {
         homePageText="Home"
         activePageText="Gallery"
       />
-      <MasonryGallery data={sampleData} />
+      <MasonryGallery data={sampleData} pagination={pagination} />
       <Footer />
     </div>
   );
