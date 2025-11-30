@@ -29,7 +29,7 @@ const GalleryDetails = ({ gallery, images }) => {
       <div
         className="gallery-header"
         style={{
-          backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_API_URL}${gallery.cover_image})`,
+          backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_API_URL}${gallery?.cover_image})`,
         }}
       >
         <div className="gallery-header-overlay"></div>
@@ -39,13 +39,13 @@ const GalleryDetails = ({ gallery, images }) => {
               size={14}
               style={{ display: "inline", marginRight: "6px" }}
             />
-            {gallery.category?.name}
+            {gallery?.category?.name}
           </p>
-          <h1 className="gallery-header-title">{gallery.title}</h1>
+          <h1 className="gallery-header-title">{gallery?.title}</h1>
           <div className="gallery-header-meta">
             <span className="gallery-header-date">
               <Calendar size={16} />
-              {formatDate(gallery.updated_at)}
+              {formatDate(gallery?.updated_at)}
             </span>
           </div>
         </div>
@@ -59,7 +59,7 @@ const GalleryDetails = ({ gallery, images }) => {
             </div>
             <div>
               <h2 className="gallery-section-title">Gallery Collection</h2>
-              <p className="gallery-section-subtitle">{gallery.description}</p>
+              <p className="gallery-section-subtitle">{gallery?.description}</p>
             </div>
           </div>
 
@@ -69,15 +69,15 @@ const GalleryDetails = ({ gallery, images }) => {
               className="gallery-masonry-grid"
               columnClassName="gallery-masonry-grid_column"
             >
-              {images.map((item, index) => (
+              {images?.map((item, index) => (
                 <div
                   key={index}
                   className="gallery-grid-item"
-                  onClick={() => setSelectedImage(item.image)}
+                  onClick={() => setSelectedImage(item?.image)}
                 >
                   <div className="gallery-grid-wrapper">
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${item.image}`}
+                      src={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${item?.image}`}
                       alt="Gallery image"
                       width={400}
                       height={300}
