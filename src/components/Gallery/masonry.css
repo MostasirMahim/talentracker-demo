@@ -15,7 +15,7 @@
   padding: 0;
   cursor: pointer;
   overflow: hidden;
-  border-radius: 0px;
+  border-radius: 6px;
   transition: all 0.3s ease;
   background: white;
 }
@@ -70,7 +70,15 @@
   font-weight: 500;
   letter-spacing: 0.3px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* space between icon and text */
   transition: color 0.3s ease;
+}
+
+.grid-category-icon {
+  stroke: currentColor;
+  flex-shrink: 0;
 }
 
 .grid-item:hover .grid-title {
