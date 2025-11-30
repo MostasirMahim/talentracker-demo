@@ -5,7 +5,7 @@ export async function get_gallery_images(currentPage = 1) {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/gallery/v1/gallery/?page_size=3&page=${currentPage}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/gallery/v1/gallery/?page_size=12&page=${currentPage}`,
       {
         credentials: "include",
         headers: { Cookie: `access_token=${accessToken}` },
