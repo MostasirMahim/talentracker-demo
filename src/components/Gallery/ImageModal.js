@@ -1,36 +1,28 @@
-"use client"
-import Image from "next/image"
-import "./modal.css"
+"use client";
+import Image from "next/image";
+import { X } from "lucide-react";
+import "./modal.css";
 
-const ImageModal = ({ item, onClose }) => {
+const ImageModal = ({ image, onClose }) => {
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
-          ×
+    <div className="image-modal-overlay" onClick={onClose}>
+      <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="image-modal-close" onClick={onClose}>
+          <X size={24} />
         </button>
 
-        <div className="modal-image-container">
-          <div className="modal-image-wrapper">
-            <Image
-              src={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${item.cover_image}`}
-              alt={item.title}
-              width={600}
-              height={400}
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
-              className="modal-image"
-            />
-          </div>
-        </div>
-
-        <div className="modal-info">
-          {item.category?.name && <p className="modal-category">{item.category.name}</p>}
-          <h2 className="modal-title">{item.title}</h2>
-          <p className="modal-description">{item.description || "No description available"}</p>
+        <div className="image-modal-container">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BACKEND_API_URL}${image}`}
+            alt="Gallery image"
+            width={1200}
+            height={800}
+            className="image-modal-image"
+          />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ImageModal
+export default ImageModal;
