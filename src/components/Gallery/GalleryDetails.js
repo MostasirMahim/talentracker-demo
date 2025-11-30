@@ -45,7 +45,7 @@ const GalleryDetails = ({ gallery, images }) => {
           <div className="gallery-header-meta">
             <span className="gallery-header-date">
               <Calendar size={16} />
-              {formatDate(gallery.created_at)}
+              {formatDate(gallery.updated_at)}
             </span>
           </div>
         </div>
