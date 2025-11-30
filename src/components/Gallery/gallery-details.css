@@ -15,7 +15,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(-135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(
+    -135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
   z-index: 1;
 }
 
@@ -241,10 +245,6 @@
 
   .gallery-grid-wrapper {
     height: 250px;
-  }
-
-  .gallery-masonry-grid {
-    margin-left: -15px;
   }
 
   .gallery-masonry-grid_column {

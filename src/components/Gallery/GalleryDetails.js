@@ -42,7 +42,6 @@ const GalleryDetails = ({ gallery, images }) => {
             {gallery.category?.name}
           </p>
           <h1 className="gallery-header-title">{gallery.title}</h1>
-          <p className="gallery-header-description">{gallery.description}</p>
           <div className="gallery-header-meta">
             <span className="gallery-header-date">
               <Calendar size={16} />
@@ -60,9 +59,7 @@ const GalleryDetails = ({ gallery, images }) => {
             </div>
             <div>
               <h2 className="gallery-section-title">Gallery Collection</h2>
-              <p className="gallery-section-subtitle">
-                Explore all images from this gallery
-              </p>
+              <p className="gallery-section-subtitle">{gallery.description}</p>
             </div>
           </div>
 

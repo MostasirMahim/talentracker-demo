@@ -7,8 +7,6 @@ export async function get_gallery_images(currentPage = 1) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/gallery/v1/gallery/?page_size=3&page=${currentPage}`,
       {
-        credentials: "include",
-        headers: { Cookie: `access_token=${accessToken}` },
         next: { tags: ["gallery"] },
       }
     );
@@ -40,14 +38,12 @@ export async function get_gallery_details(id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/gallery/v1/gallery/${id}/images/`,
       {
-        credentials: "include",
-        headers: { Cookie: `access_token=${accessToken}` },
         next: { tags: ["gallery-details"] },
       }
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
-        console.log(response);
+      console.log(response);
       return {
         error: false,
         data: response.data,
