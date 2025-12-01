@@ -31,8 +31,6 @@ export async function middleware(req) {
   let user_permissions = [];
   const cacheKey = `user_${token}`;
 
-  console.log("Middleware Running");
-
   const cachedData = permissionCache.get(cacheKey);
   const now = Date.now();
   const oneMinute = 60 * 1000;
@@ -75,7 +73,7 @@ export async function middleware(req) {
   const section = parts[2];
 
   const matchedRoute = protected_routes.find((route) => route.path === section);
-  
+
   if (
     matchedRoute?.permission_name &&
     !user_permissions.includes(matchedRoute.permission_name)
