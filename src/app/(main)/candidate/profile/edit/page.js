@@ -20,7 +20,7 @@ async function page() {
   if (error) {
     return (
       <div className="p-10 text-center text-red-500 text-lg">
-        <p>⚠️ Failed to load profile.</p>
+        <p> Failed to load profile.</p>
         <p>{error}</p>
       </div>
     );
