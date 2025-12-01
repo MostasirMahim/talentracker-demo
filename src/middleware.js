@@ -43,16 +43,13 @@ export async function middleware(req) {
     try {
       const baseURL =
         process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:8000";
-      const apiRes = await fetch(
-        `${baseURL}/api/authorization/v1/me/`,
-        {
-          headers: {
-            cookie: `access_token=${token};`,
-          },
-          cache: "no-store",
-          credentials: "include",
-        }
-      );
+      const apiRes = await fetch(`${baseURL}/api/authorization/v1/me/`, {
+        headers: {
+          cookie: `access_token=${token};`,
+        },
+        cache: "no-store",
+        credentials: "include",
+      });
 
       const json = await apiRes.json();
       if (json.code !== 200) {
@@ -73,9 +70,12 @@ export async function middleware(req) {
       return NextResponse.redirect(url);
     }
   }
-  const matchedRoute = protected_routes.find(
-    (route) => pathname === route.path || pathname.startsWith(`${route.path}/`)
-  );
+
+  const parts = pathname.split("/");
+  const section = parts[2];
+
+  const matchedRoute = protected_routes.find((route) => route.path === section);
+  
   if (
     matchedRoute?.permission_name &&
     !user_permissions.includes(matchedRoute.permission_name)
@@ -88,6 +88,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher:["/dashboard/:path*",
-  ],
+  matcher: ["/dashboard/:path*"],
 };
