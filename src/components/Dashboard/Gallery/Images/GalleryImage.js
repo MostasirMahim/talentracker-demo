@@ -44,7 +44,11 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
         <h2 className="text-3xl font-semibold text-gray-800">Gallery Images</h2>
 
         <button
-          onClick={() => router.push(`/dashboard/gallery/images/post/?gallery_id=${gallery_id}`)}
+          onClick={() =>
+            router.push(
+              `/dashboard/gallery/images/post/?gallery_id=${gallery_id}`
+            )
+          }
           className="px-4 py-2 bg-blue-600 cursor-pointer text-white rounded-md hover:bg-blue-700 transition"
         >
           + Add More Image
@@ -97,10 +101,18 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
               </div>
               {/* Hover Actions */}
               <div className=" mt-4  transition flex items-center justify-center gap-3">
-                
-
                 <button
-                  className="px-3 py-1 bg-red-500 text-white cursor-pointer rounded-sm text-sm shadow hover:bg-red-600"
+                  onClick={() =>
+                    router.push(
+                      `/gallery/${gallery_id}/`
+                    )
+                  }
+                  className="px-3 py-1 font-bold bg-sky-500 text-white cursor-pointer rounded-sm text-sm shadow hover:bg-sky-600"
+                >
+                  View
+                </button>
+                <button
+                  className="px-3 py-1 font-bold bg-red-500 text-white cursor-pointer rounded-sm text-sm shadow hover:bg-red-600"
                   onClick={() => setDeleteId(item.id)}
                 >
                   Delete

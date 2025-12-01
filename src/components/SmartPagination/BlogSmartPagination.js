@@ -15,8 +15,8 @@ export default function BlogSmartPagination({ paginationData, className = "" }) 
       const params = new URLSearchParams(searchParams.toString());
       params.set("page", page);
       const newUrl = `?${params.toString()}`;
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
       router.push(newUrl);
     }
   };
@@ -27,62 +27,49 @@ export default function BlogSmartPagination({ paginationData, className = "" }) 
       rangeWithDots.push(1);
       if (current_page > 3) rangeWithDots.push("...");
     }
+
     const delta = 1;
     for (let i = Math.max(1, current_page - delta); i <= Math.min(total_pages, current_page + delta); i++) {
       rangeWithDots.push(i);
     }
+
     if (current_page < total_pages - 1) {
       if (current_page < total_pages - 2) rangeWithDots.push("...");
       rangeWithDots.push(total_pages);
     }
+
     return rangeWithDots;
   };
 
   return (
-    <div className={`py-12 ${className}`}>
-      <nav aria-label="Blog pagination">
-        <ul className="flex flex-wrap justify-center items-center gap-2 mb-4">
+    <div className={`py-4 ${className}`}>
+      <nav aria-label="Page navigation">
+        <ul className="pagination justify-content-center flex-wrap gap-1">
           {/* Previous Button */}
-          <li>
+          <li className={`page-item ${!previous ? "disabled" : ""}`}>
             <button
-              className="inline-flex items-center gap-2 px-6 py-2 border-2 border-blue-600 rounded-xl font-semibold text-blue-600 transition-transform duration-300 hover:bg-blue-600 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+              className="page-link bg-light border-0 text-primary fw-bold px-3 py-2 shadow-sm"
               onClick={() => previous && goToPage(current_page - 1)}
-              disabled={!previous}
-              aria-label="Previous page"
+              aria-label="Previous"
             >
-              <svg 
-                width="20" 
-                height="20" 
-                viewBox="0 0 20 20" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="transition-transform duration-300"
-              >
-                <path 
-                  d="M12.5 15L7.5 10L12.5 5" 
-                  stroke="currentColor" 
-                  strokeWidth="2.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="hidden sm:inline">Previous</span>
+              &laquo; Previous
             </button>
           </li>
 
           {/* Page Numbers */}
-          {generatePageLinks().map((page, i) =>
+          {generatePageLinks().map((page, idx) =>
             page === "..." ? (
-              <li key={`ellipsis-${i}`} className="w-10 h-10 flex items-center justify-center text-gray-400 font-semibold text-lg">
-                ···
+              <li key={`ellipsis-${idx}`} className="page-item disabled">
+                <span className="page-link bg-transparent border-0 text-secondary">…</span>
               </li>
             ) : (
-              <li key={page}>
+              <li
+                key={page}
+                className={`page-item ${page === current_page ? "active" : ""}`}
+              >
                 <button
-                  className={`w-11 h-11 flex items-center justify-center rounded-lg border-2 border-gray-200 font-semibold text-gray-700 transition-transform duration-300 hover:border-blue-600 hover:text-blue-600 ${page === current_page ? "bg-gradient-to-tr from-blue-500 to-blue-700 text-white shadow-lg scale-105" : ""}`}
+                  className={`page-link px-3 py-2 ${page === current_page ? "bg-primary text-white border-primary shadow-sm" : "bg-white text-primary border-primary"}`}
                   onClick={() => goToPage(page)}
-                  aria-label={`Go to page ${page}`}
-                  aria-current={page === current_page ? "page" : undefined}
                 >
                   {page}
                 </button>
@@ -91,39 +78,22 @@ export default function BlogSmartPagination({ paginationData, className = "" }) 
           )}
 
           {/* Next Button */}
-          <li>
+          <li className={`page-item ${!next ? "disabled" : ""}`}>
             <button
-              className="inline-flex items-center gap-2 px-6 py-2 border-2 border-blue-600 rounded-xl font-semibold text-blue-600 transition-transform duration-300 hover:bg-blue-600 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+              className="page-link bg-light border-0 text-primary fw-bold px-3 py-2 shadow-sm"
               onClick={() => next && goToPage(current_page + 1)}
-              disabled={!next}
-              aria-label="Next page"
+              aria-label="Next"
             >
-              <span className="hidden sm:inline">Next</span>
-              <svg 
-                width="20" 
-                height="20" 
-                viewBox="0 0 20 20" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="transition-transform duration-300"
-              >
-                <path 
-                  d="M7.5 15L12.5 10L7.5 5" 
-                  stroke="currentColor" 
-                  strokeWidth="2.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-              </svg>
+              Next &raquo;
             </button>
           </li>
         </ul>
 
         {/* Page Info */}
-        <div className="flex justify-center">
-          <div className="px-6 py-3 bg-gray-100 rounded-lg border-2 border-gray-200 text-gray-700 font-medium shadow-sm">
-            Page <span className="text-blue-600 font-bold">{current_page}</span> of <span className="text-blue-600 font-bold">{total_pages}</span>
-          </div>
+        <div className="text-center mt-3">
+          <span className="badge bg-primary fs-6 px-3 py-2 shadow-sm">
+            Page <strong>{current_page}</strong> of <strong>{total_pages}</strong>
+          </span>
         </div>
       </nav>
     </div>

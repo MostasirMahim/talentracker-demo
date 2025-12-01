@@ -83,18 +83,17 @@ export default function JobDetails({ job }) {
             />
             <div>
               <h2 className="fw-bold text-main mb-1">{job.title}</h2>
-              <div className="text-muted small d-flex flex-wrap gap-3">
-                <span className="d-flex align-items-center">
-                  <Briefcase size={14} className="me-1 text-main" />
-                  {job.job_type?.name}
+              <div className="text-muted mt-2 small d-flex flex-wrap gap-3">
+                <span className="minimal-badge badge-type">
+                  <Briefcase size={14} /> {job.job_type?.name}
                 </span>
-                <span className="d-flex align-items-center">
-                  <MapPin size={14} className="me-1 text-main" />
-                  {job.job_location?.city}, {job.job_location?.country}
+
+                <span className="minimal-badge badge-location">
+                  <MapPin size={14} /> {job.job_location?.city},{" "}
+                  {job.job_location?.country}
                 </span>
-                <span className="d-flex align-items-center">
-                  <Calendar size={14} className="me-1 text-main" />
-                  Deadline: {job.deadline}
+                <span className="minimal-badge badge-deadline">
+                  <CalendarArrowUp size={14} /> Deadline: {job.deadline}
                 </span>
               </div>
             </div>
@@ -109,11 +108,11 @@ export default function JobDetails({ job }) {
 
         {/* Salary & Meta */}
         <div className="mb-4 border-top border-bottom py-3 d-flex flex-wrap gap-4">
-          <div className="d-flex align-items-center text-secondary">
+          <div className="d-flex align-items-center text-secondary minimal-badge badge-salary">
             <Wallet size={18} className="me-2 text-main" />
-            <strong className="me-1">Salary:</strong> {job.salary}
+            <strong className="me-1 ">Salary:</strong> {job.salary}
           </div>
-          <div className="d-flex align-items-center text-secondary">
+          <div className="d-flex align-items-center minimal-badge badge-date text-secondary">
             <Calendar size={18} className="me-2 text-main" />
             <strong className="me-1">Posted:</strong>{" "}
             {new Date(job.created_at).toLocaleDateString()}

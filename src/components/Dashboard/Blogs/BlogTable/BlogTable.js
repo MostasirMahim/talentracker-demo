@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import BlogSmartPagination from "@/components/SmartPagination/BlogSmartPagination";
+import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import Link from "next/link";
 import axiosInstance from "@/lib/axiosIntance";
 import { toast } from "react-toastify";
@@ -177,7 +177,7 @@ export default function BlogTable({ blogs }) {
 
         {/* Pagination */}
         <div className="mt-6 flex justify-center">
-          <BlogSmartPagination paginationData={paginationData} />
+          <AdminSmartPagination paginationData={paginationData} />
         </div>
       </div>
     </>
