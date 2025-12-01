@@ -18,3 +18,43 @@ function filterActiveJobs(jobs) {
 }
 
 export { format_date, filterActiveJobs };
+
+export const navigationPermissions = {
+  Home: null, 
+  "Roles Management": "roles_management",
+  "Jobs": "job_management", 
+  "Blogs": "blog_management",
+  "News Management": "news_management",
+  Onboarding: "employee_management",
+  "View all Hooks": "hooks_management",
+  "View all Contacts": "contact_management",
+  "View all Quotes": "quote_management",
+  "Registered candidates": null,
+  "View all Users": "view_all_users",
+  "Gallery": "gallery_management",
+};
+
+export const filterNavigationByPermissions = (
+  navArray,
+  userPermissions,
+) => {
+console.log(userPermissions,"users");
+  return navArray.filter((item) => {
+    const requiredPermission = navigationPermissions[item.label];
+    const hasPermissionForItem =
+      requiredPermission === null ||
+      userPermissions.includes(requiredPermission);
+
+    if (item.children && item.children.length > 0) {
+      const filteredSubItems = filterNavigationByPermissions(
+        item.children,
+        userPermissions,
+      );
+      if (hasPermissionForItem || filteredSubItems.length > 0) {
+        return { ...item, children: filteredSubItems };
+      }
+      return false;
+    }
+    return hasPermissionForItem;
+  });
+};

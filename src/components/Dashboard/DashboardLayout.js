@@ -29,10 +29,136 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import "./style.css";
 import { useRouter } from "next/navigation";
-export default function DashboardLayout({ children }) {
+import { filterNavigationByPermissions } from "@/lib/utility_functions";
+const navItems = [
+  { href: "/dashboard", label: "Home", icon: Home },
+  {
+    icon: ShieldIcon,
+    label: "Roles Management",
+    href: "#",
+    urls: ["/dashboard/roles/", "/dashboard/roles/profile"],
+    children: [
+      { href: "/dashboard/roles", label: "Roles" },
+      { href: "/dashboard/roles/profile", label: "My Roles" },
+    ],
+  },
+  {
+    icon: UserPlus,
+    label: "Onboarding",
+    href: "/dashboard/registration/email",
+    urls: ["/dashboard/registration/"],
+  },
+  {
+    href: "#",
+    label: "Jobs",
+    icon: Flower,
+    children: [
+      { href: "/dashboard/jobs/job_types/create", label: "Set Job type" },
+      {
+        href: "/dashboard/jobs/job_categories/create",
+        label: "Set Job category",
+      },
+      {
+        href: "/dashboard/jobs/job_locations/create",
+        label: "Set Job locations",
+      },
+      { href: "/dashboard/jobs/post", label: "Post Job" },
+      { href: "/dashboard/jobs/job_types/view", label: "View job types" },
+      {
+        href: "/dashboard/jobs/job_categories/view",
+        label: "View job category",
+      },
+      {
+        href: "/dashboard/jobs/job_locations/view",
+        label: "View job locations",
+      },
+      { href: "/dashboard/jobs/", label: "View all jobs" },
+    ],
+  },
+  {
+    href: "#",
+    label: "Blogs",
+    icon: FilePenLine,
+    children: [
+      {
+        href: "/dashboard/blogs/categories/create",
+        label: "Set Blog Category",
+      },
+      { href: "/dashboard/blogs/tags/create", label: "Set Blog Tags" },
+      { href: "/dashboard/blogs/post", label: "Post Blog" },
+      {
+        href: "/dashboard/blogs/categories/view",
+        label: "View Blog Categories",
+      },
+      { href: "/dashboard/blogs/tags/view", label: "View Blog Tags" },
+      { href: "/dashboard/blogs/", label: "View all Blogs" },
+    ],
+  },
+  {
+    href: "#",
+    label: "News Management",
+    icon: Newspaper,
+    children: [
+      {
+        href: "/dashboard/news/categories",
+        label: "News Category",
+      },
+      { href: "/dashboard/news/", label: "All News" },
+    ],
+  },
+  {
+    href: "/dashboard/hooks/",
+    label: "View all Hooks",
+    icon: LinkIcon,
+  },
+  {
+    href: "/dashboard/contacts/",
+    label: "View all Contacts",
+    icon: Contact,
+  },
+  {
+    href: "/dashboard/quotes/",
+    label: "View all Quotes",
+    icon: Quote,
+  },
+  {
+    icon: UserCheck,
+    label: "Registered candidates",
+    href: "/dashboard/candidates/",
+    urls: ["/dashboard/candidates/"],
+  },
+  {
+    icon: UserCheck,
+    label: "View all Users",
+    href: "/dashboard/users/",
+    urls: ["/dashboard/users/"],
+  },
+  {
+    href: "#",
+    label: "Gallery",
+    icon: FilePenLine,
+    children: [
+      {
+        href: "/dashboard/gallery/categories/post",
+        label: "Set Gallery Category",
+      },
+      {
+        href: "/dashboard/gallery/categories/",
+        label: "View Gallery Categories",
+      },
+      {
+        href: "/dashboard/gallery/images/post/",
+        label: "Set Gallery image",
+      },
+      { href: "/dashboard/gallery", label: "View all Gallery" },
+    ],
+  },
+];
+export default function DashboardLayout({ children, permissions }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
   const [expandedItems, setExpandedItems] = useState({});
+  const [navigation, setNavigation] = useState([]);
   const [profileDropdown, setProfileDropdown] = useState(false);
   const { layoutTransition, setLayoutTransitionOff } =
     useLayoutTransitionStore();
@@ -52,134 +178,9 @@ export default function DashboardLayout({ children }) {
   };
   useEffect(() => {
     handleFetchData();
+    const filteredNav = filterNavigationByPermissions(navItems, permissions);
+    setNavigation(filteredNav);
   }, []);
-
-  const navItems = [
-    { href: "/dashboard", label: "Home", icon: Home },
-    {
-      icon: ShieldIcon,
-      label: "Roles Management",
-      href: "#",
-      urls: ["/dashboard/roles/", "/dashboard/roles/profile"],
-      children: [
-        { href: "/dashboard/roles", label: "Roles" },
-        { href: "/dashboard/roles/profile", label: "My Roles" },
-      ],
-    },
-    {
-      icon: UserPlus,
-      label: "Onboarding",
-      href: "/dashboard/registration/email",
-      urls: ["/dashboard/registration/"],
-    },
-    {
-      href: "#",
-      label: "Jobs",
-      icon: Flower,
-      children: [
-        { href: "/dashboard/jobs/job_types/create", label: "Set Job type" },
-        {
-          href: "/dashboard/jobs/job_categories/create",
-          label: "Set Job category",
-        },
-        {
-          href: "/dashboard/jobs/job_locations/create",
-          label: "Set Job locations",
-        },
-        { href: "/dashboard/jobs/post", label: "Post Job" },
-        { href: "/dashboard/jobs/job_types/view", label: "View job types" },
-        {
-          href: "/dashboard/jobs/job_categories/view",
-          label: "View job category",
-        },
-        {
-          href: "/dashboard/jobs/job_locations/view",
-          label: "View job locations",
-        },
-        { href: "/dashboard/jobs/", label: "View all jobs" },
-      ],
-    },
-    {
-      href: "#",
-      label: "Blogs",
-      icon: FilePenLine,
-      children: [
-        {
-          href: "/dashboard/blogs/categories/create",
-          label: "Set Blog Category",
-        },
-        { href: "/dashboard/blogs/tags/create", label: "Set Blog Tags" },
-        { href: "/dashboard/blogs/post", label: "Post Blog" },
-        {
-          href: "/dashboard/blogs/categories/view",
-          label: "View Blog Categories",
-        },
-        { href: "/dashboard/blogs/tags/view", label: "View Blog Tags" },
-        { href: "/dashboard/blogs/", label: "View all Blogs" },
-      ],
-    },
-    {
-      href: "#",
-      label: "News Management",
-      icon: Newspaper,
-      children: [
-        {
-          href: "/dashboard/news/categories",
-          label: "News Category",
-        },
-        { href: "/dashboard/news/", label: "All News" },
-      ],
-    },
-    {
-      href: "/dashboard/hooks/",
-      label: "View all Hooks",
-      icon: LinkIcon,
-    },
-    {
-      href: "/dashboard/contacts/",
-      label: "View all Contacts",
-      icon: Contact,
-    },
-    {
-      href: "/dashboard/quotes/",
-      label: "View all Quotes",
-      icon: Quote,
-    },
-    {
-      icon: UserCheck,
-      label: "Registered candidates",
-      href: "/dashboard/candidates/",
-      urls: ["/dashboard/candidates/"],
-    },
-    {
-      icon: UserCheck,
-      label: "View all Users",
-      href: "/dashboard/users/",
-      urls: ["/dashboard/users/"],
-    },
-    {
-      href: "#",
-      label: "Gallery",
-      icon: FilePenLine,
-      children: [
-        {
-          href: "/dashboard/gallery/categories/post",
-          label: "Set Gallery Category",
-        },
-        {
-          href: "/dashboard/gallery/categories/",
-          label: "View Gallery Categories",
-        },
-        {
-          href: "/dashboard/gallery/images/post/",
-          label: "Set Gallery image",
-        },
-        { href: "/dashboard/gallery", label: "View all Gallery" },
-        
-      ],
-    },
-  
-  ];
 
   const handleParentClick = (e, item, index) => {
     if (item.children && item.children.length > 0) {
@@ -226,7 +227,6 @@ export default function DashboardLayout({ children }) {
   };
 
   const hasChildren = (item) => item.children && item.children.length > 0;
-
   return (
     <div className="flex h-screen w-screen bg-linear-to-b from-blue-50 to-white overflow-hidden">
       {sidebarOpen && (
@@ -259,7 +259,7 @@ export default function DashboardLayout({ children }) {
           </button>
         </div>
         <nav className="flex-1 overflow-y-auto sidebar-scrollbar py-6 px-0 overflow-x-hidden">
-          {navItems.map((item, i) => (
+          {navigation?.map((item, i) => (
             <div key={i}>
               {!hasChildren(item) ? (
                 <Link

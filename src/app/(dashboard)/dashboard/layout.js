@@ -23,7 +23,7 @@ export default async function DashboardLayout({ children }) {
   return (
     <>
       <ToastContainer />
-      <DashboardLayoutClient>{children}</DashboardLayoutClient>
+      <DashboardLayoutClient permissions={authUser?.data?.permissions}>{children}</DashboardLayoutClient>
     </>
   );
 }
