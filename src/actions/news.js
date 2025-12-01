@@ -3,11 +3,11 @@
 import { cookies } from "next/headers"
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL
 
-export async function get_all_news() {
+export async function get_all_news(currentPage=1) {
   const accessToken = cookies().get("access_token")?.value
 
   try {
-    const res = await fetch(`${BASE_URL}/api/news/v1/news/`, {
+    const res = await fetch(`${BASE_URL}/api/news/v1/news/?page_size=1&page=${currentPage}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -17,11 +17,10 @@ export async function get_all_news() {
     })
 
     const response = await res.json()
-
     if (response.code === 200 && response.status === "success") {
       return {
         error: false,
-        data: response.data,
+        data: response,
       }
     } else {
       return {
