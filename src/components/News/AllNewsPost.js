@@ -25,7 +25,7 @@ const AllNewsPost = ({ blogs }) => {
       <div className="blog-area ptb-100">
         <div className="container">
           <div className="text-center">
-            <h3>No blogs found</h3>
+            <h3>No News found</h3>
           </div>
         </div>
       </div>
