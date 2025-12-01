@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axiosIntance";
-import BlogSmartPagination from "@/components/SmartPagination/BlogSmartPagination";
+import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import Link from "next/link";
 import ContactFilterPage from "./ContactFilter";
 
@@ -248,7 +248,7 @@ export default function ContactUsTable({ contacts }) {
 
       {/* Pagination */}
       <div className="mt-6  justify-center">
-        <BlogSmartPagination paginationData={paginationData} />
+        <AdminSmartPagination paginationData={paginationData} />
       </div>
     </div>
   );

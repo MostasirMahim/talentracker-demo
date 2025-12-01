@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import SmartPagination from "@/components/SmartPagination/BlogSmartPagination";
+import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import axiosInstance from "@/lib/axiosIntance";
 import { toast } from "react-toastify";
 import Link from "next/link";
@@ -62,7 +62,7 @@ export default function GalleryTable({ gallery }) {
         </h2>
 
         <Link href="/dashboard/gallery/post/">
-          <button className="px-4  py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer">
+          <button className="px-4  py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition cursor-pointer">
             + Create Gallery
           </button>
         </Link>
@@ -145,20 +145,20 @@ export default function GalleryTable({ gallery }) {
                     <td className="px-6 py-4 flex gap-2">
                       <button
                         onClick={() => handleView(item.id)}
-                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 cursor-pointer"
+                        className="bg-blue-500 text-white px-3 py-1 rounded-sm hover:bg-blue-600 cursor-pointer"
                       >
                         Images
                       </button>
                       <button
                         onClick={() => handleUpdate(item)}
-                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 cursor-pointer"
+                        className="bg-blue-500 text-white px-3 py-1 rounded-sm hover:bg-blue-600 cursor-pointer"
                       >
                         Update
                       </button>
 
                       <button
                         onClick={() => setDeleteId(item.id)}
-                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 cursor-pointer"
+                        className="bg-red-500 text-white px-3 py-1 rounded-sm hover:bg-red-600 cursor-pointer"
                       >
                         Delete
                       </button>
@@ -171,7 +171,7 @@ export default function GalleryTable({ gallery }) {
 
           {/* Pagination */}
           <div className="mt-6 flex justify-center">
-            <SmartPagination paginationData={paginationData} />
+            <AdminSmartPagination paginationData={paginationData} />
           </div>
         </>
       )}
@@ -188,7 +188,7 @@ export default function GalleryTable({ gallery }) {
               <button
                 onClick={handleDelete}
                 disabled={loading}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                className="bg-blue-500 hover:bg-sky-600 text-white px-4 py-2 rounded"
               >
                 {loading ? "Deleting..." : "Yes, Delete"}
               </button>

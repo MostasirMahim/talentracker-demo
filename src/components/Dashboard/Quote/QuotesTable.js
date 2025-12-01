@@ -3,7 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axiosIntance";
-import BlogSmartPagination from "@/components/SmartPagination/BlogSmartPagination";
+import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 
 export default function QuotesTable({ quotes }) {
   const router = useRouter();
@@ -138,7 +138,7 @@ export default function QuotesTable({ quotes }) {
                 <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => handleMarkAsRead(quote.id, quote.is_read)}
-                    className={`px-4 py-2 rounded-md transition-colors font-medium ${
+                    className={`px-4 py-2 cursor-pointer rounded-md transition-colors font-medium ${
                       quote.is_read
                         ? "bg-yellow-600 hover:bg-yellow-700 text-white"
                         : "bg-green-600 hover:bg-green-700 text-white"
@@ -156,7 +156,7 @@ export default function QuotesTable({ quotes }) {
 
       {/* Pagination */}
       <div className="mt-6 flex justify-center">
-        <BlogSmartPagination paginationData={paginationData} />
+        <AdminSmartPagination paginationData={paginationData} />
       </div>
     </div>
   );

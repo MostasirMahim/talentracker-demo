@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import axiosInstance from "@/lib/axiosIntance";
+import { toast } from "react-toastify";
 
 export default function ImagePostForm({ gallery }) {
   const router = useRouter();
@@ -77,18 +78,10 @@ export default function ImagePostForm({ gallery }) {
     try {
       const fd = new FormData();
       fd.append("gallery", String(selectedGallery));
-
-      // FIX: Append each image file individually
-      // Django REST Framework needs them as separate entries, not as an array
       files.forEach((fObj) => {
         fd.append("images", fObj.file);
       });
 
-      // Debug — will show exact data
-      console.log("=== FormData Contents ===");
-      for (let pair of fd.entries()) {
-        console.log(pair[0] + ": ", pair[1]);
-      }
 
       const res = await axiosInstance.post(apiEndpoint, fd, {
         headers: {
@@ -96,12 +89,12 @@ export default function ImagePostForm({ gallery }) {
         },
       });
 
-      alert("Upload successful");
+      toast.success("Images uploaded successfully!");
       setFiles([]);
     } catch (err) {
       console.error("Upload error:", err);
       const msg = err?.response?.data?.message || err.message;
-      alert("Upload failed: " + msg);
+      toast.error(msg);
     }
   };
 
@@ -155,7 +148,7 @@ export default function ImagePostForm({ gallery }) {
                   <button
                     type="button"
                     onClick={() => slotInputRefs.current[idx]?.click()}
-                    className="bg-white/90 px-2 py-1 rounded-md shadow text-sm"
+                    className="bg-white/90 font-bold px-2 cursor-pointer py-1 rounded-md shadow text-sm"
                   >
                     Replace
                   </button>
@@ -163,7 +156,7 @@ export default function ImagePostForm({ gallery }) {
                   <button
                     type="button"
                     onClick={() => handleRemoveAt(idx)}
-                    className="bg-red-600 text-white px-2 py-1 rounded-md shadow text-sm"
+                    className="bg-red-600 font-bold cursor-pointer text-white px-2 py-1 rounded-md shadow text-sm"
                   >
                     Remove
                   </button>
@@ -204,7 +197,7 @@ export default function ImagePostForm({ gallery }) {
           <button
             type="submit"
             disabled={files.length === 0}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md disabled:opacity-60"
+            className="px-12 py-3 bg-blue-600 cursor-pointer font-bold text-white rounded-md shadow-md disabled:opacity-60"
           >
             Upload
           </button>

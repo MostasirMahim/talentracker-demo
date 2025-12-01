@@ -8,6 +8,7 @@ import SmartPagination from "../SmartPagination/SmartPagination";
 import { format_date } from "@/lib/utility_functions";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { color } from "framer-motion";
 
 const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
   const router = useRouter();
@@ -78,6 +79,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
           <div className="col-md-4 col-sm-6">
             <select
               className="form-select"
+              style={{ fontWeight: 600 }}
               value={category || "None"}
               onChange={(e) => setCategory(e.target.value)}
             >
@@ -93,6 +95,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
             <select
               className="form-select"
               value={jobType || "None"}
+              style={{ fontWeight: 600 }}
               onChange={(e) => setJobType(e.target.value)}
             >
               <option value={"None"}>Job Types</option>
@@ -105,7 +108,8 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
           </div>
           <div className="col-md-3 col-sm-6">
             <select
-              className="form-select"
+              className="form-select "
+              style={{ fontWeight: 600 }}
               value={location || "None"}
               onChange={(e) => setLocation(e.target.value)}
             >
@@ -120,9 +124,14 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
           <div className="col-md-1 col-sm-6 d-grid">
             <button
               onClick={handleSearch}
-              className="btn btn-secondary d-flex align-items-center justify-content-center"
+              style={{
+                backgroundColor: "rgb(20, 137, 188)",
+                color: "#fff",
+                fontWeight: 600,
+              }}
+              className="btn d-flex align-items-center justify-content-center "
             >
-              <Search size={16} /> Search
+              <Search size={16} className="me-2 " /> Search
             </button>
           </div>
         </div>
@@ -130,7 +139,12 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
         <div>
           {(category || jobType || location || keyword) && (
             <button
-              className="btn btn-secondary mt-2"
+              className="btn mt-2 "
+              style={{
+                backgroundColor: "rgb(20, 137, 188)",
+                color: "#fff",
+                fontWeight: 600,
+              }}
               onClick={handleClearFilters}
             >
               Clear Filters
@@ -156,23 +170,33 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
 
               <div className="flex-grow-1">
                 <Link href={`jobs/${job?.id}/`}>
-                  <h5 className="job-title text-main mb-1">{job?.title}</h5>
+                  <h5 className="job-title text-main mb-2 ">{job?.title}</h5>
                 </Link>
-                <div className="text-muted small d-flex flex-wrap gap-3">
-                  <span className="d-flex align-items-center">
-                    <Briefcase size={14} className="me-1 text-main" />
-                    {job?.job_type?.name}
-                  </span>
-                  <span className="d-flex align-items-center">
-                    <MapPin size={14} className="me-1 text-main" />
-                    {job?.job_location?.city}, {job?.job_location?.country}
-                  </span>
-                  <span className="d-flex align-items-center">
-                    <Calendar size={14} className="me-1 text-main" />
-                    {format_date(job?.created_at)}
-                  </span>
+
+                <div className="d-flex flex-wrap gap-2 mb-2 mt-2">
+                  {job?.job_type?.name && (
+                    <span className="minimal-badge badge-type d-flex align-items-center">
+                      <Briefcase size={14} className="me-1" />
+                      {job?.job_type?.name}
+                    </span>
+                  )}
+
+                  {job?.job_location?.city && (
+                    <span className="minimal-badge badge-location d-flex align-items-center">
+                      <MapPin size={14} className="me-1" />
+                      {job?.job_location?.city}, {job?.job_location?.country}
+                    </span>
+                  )}
+
+                  {job?.created_at && (
+                    <span className="minimal-badge badge-date d-flex align-items-center">
+                      <Calendar size={14} className="me-1" />
+                      {format_date(job?.created_at)}
+                    </span>
+                  )}
                 </div>
-                <p className="mt-2 mb-0 text-secondary small">
+
+                <p className="mt-2 mb-0 text-secondary small fw-bold">
                   {job?.short_description}
                 </p>
               </div>

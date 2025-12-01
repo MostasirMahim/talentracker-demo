@@ -132,7 +132,7 @@ export default function DashboardLayout({ children }) {
     },
     {
       href: "/dashboard/hooks/",
-      label: "View all Hooks",
+      label: "View Hooks Data",
       icon: LinkIcon,
     },
     {
@@ -167,13 +167,18 @@ export default function DashboardLayout({ children }) {
           label: "Set Gallery Category",
         },
         {
-          href: "/dashboard/gallery/categories/",
-          label: "View Gallery Categories",
+          href: "/dashboard/gallery/post",
+          label: "Set Gallery",
         },
-        {
+         {
           href: "/dashboard/gallery/images/post/",
           label: "Set Gallery image",
         },
+        {
+          href: "/dashboard/gallery/categories/",
+          label: "View Gallery Categories",
+        },
+       
         { href: "/dashboard/gallery", label: "View all Gallery" },
         
       ],
