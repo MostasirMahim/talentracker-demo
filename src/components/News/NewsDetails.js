@@ -6,7 +6,7 @@ const NewsDetails = ({ blog }) => {
   if (!blog) {
     return (
       <div className="container py-5 text-center">
-        <h4>Blog not found </h4>
+        <h4>News not found </h4>
       </div>
     );
   }
