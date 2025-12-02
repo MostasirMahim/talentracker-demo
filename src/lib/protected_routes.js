@@ -8,7 +8,7 @@ export const protected_routes = [
   { path: "hooks", permission_name: "hooks_management" },
   { path: "contacts", permission_name: "contact_management" },
   { path: "quotes", permission_name: "quote_management" },
-  { path: "candidates", permission_name: null },
+  { path: "candidates", permission_name: "job_management" },
   { path: "users", permission_name: "view_all_users" },
   { path: "gallery", permission_name: "gallery_management" },
 ];
