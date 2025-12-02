@@ -5,6 +5,7 @@ import Image from "next/image";
 import axiosInstance from "@/lib/axiosIntance";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useExpertTrainerProfile } from "@/stores/expert_trainer_profile_dependencies_update_store";
 
 // --- CUSTOM THEME COLORS ---
 const PRIMARY_COLOR = "#1489bc"; // --mainColor
@@ -185,6 +186,7 @@ const ProfileCard = ({ profile, onDelete, onUpdate }) => {
 const ExpertProfileList = ({ data }) => {
   const [profiles, setProfiles] = useState(data);
   const router = useRouter();
+  const setProfile = useExpertTrainerProfile((state) => state.setProfile);
 
   const handleDelete = async (id) => {
     if (window.confirm(`Are you sure you want to delete the profile?`)) {
@@ -204,6 +206,7 @@ const ExpertProfileList = ({ data }) => {
   };
 
   const handleUpdate = (id) => {
+    setProfile(profiles.find((p) => p.id === id));
     router.push(`/dashboard/expert_trainer_profiles/create/?id=${id}`);
   };
 

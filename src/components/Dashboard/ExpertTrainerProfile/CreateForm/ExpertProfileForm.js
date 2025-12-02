@@ -1,7 +1,9 @@
 "use client";
 import axiosInstance from "@/lib/axiosIntance";
-import React, { useState, useEffect, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useExpertTrainerProfile } from "@/stores/expert_trainer_profile_dependencies_update_store";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState, useEffect, useCallback, use } from "react";
+import { useForm, Controller, set } from "react-hook-form";
 import { toast } from "react-toastify";
 
 // --- CUSTOM THEME COLORS ---
@@ -18,14 +20,16 @@ const ErrorMessage = ({ message }) => (
 );
 
 // The main form component
-const ExpertProfileForm = ({
-  initialData = null,
-  baseUrl = "http://localhost:3000",
-}) => {
-  const isUpdateMode = !!initialData;
+const ExpertProfileForm = ({ initialData = null }) => {
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const getProfile = useExpertTrainerProfile((state) => state.getProfile);
+  const clearProfile = useExpertTrainerProfile((state) => state.clear);
+  const router = useRouter();
 
   // 1. Initialize useForm hook
   const {
@@ -42,10 +46,18 @@ const ExpertProfileForm = ({
 
   // Reset form data if initialData changes (useful for dynamic updates)
   useEffect(() => {
-    if (initialData) {
-      reset(initialData);
+    if (id) {
+      setIsUpdateMode(true);
+      const profile = getProfile();
+      delete profile["profile_picture"];
+      if (profile) {
+        reset(profile);
+      }
+    } else {
+      setIsUpdateMode(false);
+      reset();
     }
-  }, [initialData, reset]);
+  }, [id, getProfile, reset]);
 
   // 2. Form Submission Handler
   const onSubmit = useCallback(
@@ -58,15 +70,6 @@ const ExpertProfileForm = ({
       const formData = new FormData();
 
       Object.keys(data).forEach((key) => {
-        // Skip the profile_picture field if we are updating and no new file was selected
-        if (
-          isUpdateMode &&
-          key === "profile_picture" &&
-          (!data[key] || data[key].length === 0)
-        ) {
-          return;
-        }
-
         // Handle the FileList for profile_picture
         if (key === "profile_picture" && data[key] && data[key].length > 0) {
           formData.append(key, data[key][0]); // Append the file object
@@ -77,21 +80,35 @@ const ExpertProfileForm = ({
       });
 
       // Determine the API endpoint and method
-      const url = `/api/expert_trainer_profiles/v1/expert_trainer_profiles/${
-        isUpdateMode ? initialData.id : ""
-      }`;
-      const method = isUpdateMode ? "PATCH" : "POST";
-
+      let url = `/api/expert_trainer_profiles/v1/expert_trainer_profiles/`;
       try {
-        const response = await axiosInstance.post(url, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        if (!isUpdateMode) {
+          const response = await axiosInstance.post(url, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
 
-        if (response.status == 201) {
-          toast.success("Profile setup successfully");
-          reset();
+          if (response.status == 201) {
+            toast.success("Profile setup successfully");
+            reset();
+          }
+        } else {
+          url += `${id}/`;
+          const response = await axiosInstance.patch(url, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+          if (response.status == 200) {
+            toast.success("Profile updated successfully");
+            reset();
+            clearProfile();
+            setIsUpdateMode(false);
+            router.refresh();
+            router.push("/dashboard/expert_trainer_profiles");
+          }
         }
       } catch (error) {
         console.log(error);
@@ -118,7 +135,7 @@ const ExpertProfileForm = ({
         setLoading(false);
       }
     },
-    [isUpdateMode, initialData, reset]
+    [isUpdateMode, reset, setError, clearProfile, id, router]
   );
 
   // --- Reusable Input Component for Styling ---
