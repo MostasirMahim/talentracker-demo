@@ -16,7 +16,7 @@ function cleanupExpiredCache() {
 }
 
 if (typeof setInterval !== "undefined") {
-  setInterval(cleanupExpiredCache, 5 * 60 * 1000);
+  setInterval(cleanupExpiredCache, 60 * 1000);
 }
 export async function middleware(req) {
   const url = req.nextUrl.clone();
