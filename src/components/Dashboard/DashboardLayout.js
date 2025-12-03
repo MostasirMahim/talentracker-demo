@@ -156,6 +156,25 @@ const navItems = [
   },
   {
     href: "#",
+    label: "Training Solutions",
+    icon: UserPlus2,
+    children: [
+      {
+        href: "/dashboard/training_solutions/training_category",
+        label: "View Training Category",
+      },
+      {
+        href: "/dashboard/training_solutions/training_catalog",
+        label: "View Training Catalog",
+      },
+      {
+        href: "/dashboard/training_solutions/training_detail",
+        label: "View Training Detail",
+      },
+    ],
+  },
+  {
+    href: "#",
     label: "Expert Trainer profile",
     icon: UserPlus2,
     children: [
