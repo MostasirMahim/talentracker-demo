@@ -7,7 +7,7 @@ export async function get_all_news(currentPage=1) {
   const accessToken = cookies().get("access_token")?.value
 
   try {
-    const res = await fetch(`${BASE_URL}/api/news/v1/news/?page_size=1&page=${currentPage}`, {
+    const res = await fetch(`${BASE_URL}/api/news/v1/news/?page_size=10&page=${currentPage}`, {
       method: "GET",
       credentials: "include",
       headers: {
