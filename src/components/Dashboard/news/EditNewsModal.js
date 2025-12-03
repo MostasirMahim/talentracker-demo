@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react"
 import { X, Loader } from "lucide-react"
 import dynamic from "next/dynamic"
-import { update_news } from "@/actions/news"
 import { toast } from "react-toastify"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 import "react-quill/dist/quill.snow.css"
+import axiosInstance from "@/lib/axiosIntance"
 
 export default function EditNewsModal({ open, onOpenChange, news, categories, onNewsUpdated }) {
   const [title, setTitle] = useState("")
@@ -33,21 +33,23 @@ export default function EditNewsModal({ open, onOpenChange, news, categories, on
 
     setIsLoading(true)
     try {
-      const result = await update_news(news.id, {
+  const result = await axiosInstance.patch(`/api/news/v1/news/update/${news.id}/`,
+        {
         title,
         source,
         description,
         category_id: categoryId,
       })
-
-      if (result.success) {
-        toast.success(result.message)
+      if (result.data.code === 200) {
+        toast.success(result.data.message)
         onOpenChange(false)
         onNewsUpdated?.()
       } else {
-        toast.error(result.message)
+        console.log(result);
+        toast.error(result.data.message)
       }
     } catch (error) {
+      console.log(error);
       toast.error("Error updating news")
     } finally {
       setIsLoading(false)

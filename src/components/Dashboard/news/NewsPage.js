@@ -27,19 +27,16 @@ export default function NewsPage({ news, categories }) {
 
   const handleNewsCreated = () => {
     setCreateModalOpen(false)
-    fetchData()
   }
 
   const handleNewsUpdated = () => {
     setEditModalOpen(false)
-    fetchData()
   }
 
   const handleNewsDeleted = () => {
     setDeleteModalOpen(false)
-    fetchData()
   }
-  console.log("news", news, categories);
+
   return (
     <div>
       <NewsHeader onCreateClick={() => setCreateModalOpen(true)} />
