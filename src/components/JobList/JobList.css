@@ -2,6 +2,7 @@
 .job-card {
   border-radius: 10px;
 }
+
 .job-logo {
   width: 80px;
   height: 80px;
@@ -10,14 +11,16 @@
   object-fit: cover;
   flex-shrink: 0;
 }
+
 .job-title {
   font-weight: 700;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+
   /* Stack image + text vertically */
-  .job-card .card-body > .d-flex:first-child {
+  .job-card .card-body>.d-flex:first-child {
     flex-direction: column !important;
     align-items: flex-start !important;
   }
@@ -66,4 +69,58 @@
   .search-bar .row {
     row-gap: 10px;
   }
+}
+
+
+/* Base minimal badge */
+.minimal-badge {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 50rem;
+  /* makes it pill shaped */
+
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid transparent;
+}
+
+/* Job Type Badge — uses PRIMARY color border */
+.badge-type {
+  background-color: rgba(20, 138, 188, 0.146);
+  color: rgb(38, 46, 46);
+  border-color: rgba(38, 46, 46, 0.3);
+}
+
+/* Location Badge — uses SECONDARY color border */
+.badge-location {
+  background-color: rgba(20, 138, 188, 0.146);
+  color: rgb(20, 137, 188);
+  border-color: rgba(20, 137, 188, 0.3);
+}
+
+/* Date Badge — neutral but minimal */
+.badge-date {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgb(80, 80, 80);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+/* Salary Badge */
+.badge-salary {
+  background-color: rgba(0, 180, 85, 0.1);
+  color: rgb(0, 140, 70);
+  border-color: rgba(0, 140, 70, 0.3);
+}
+/* Deadline Badge (warning) */
+.badge-deadline {
+  background-color: rgba(255, 149, 0, 0.12);
+  color: rgb(200, 115, 0);
+  border-color: rgba(200, 115, 0, 0.3);
+}
+/* Hover effect (premium minimal) */
+.minimal-badge:hover {
+  transform: translateY(-1px);
+  transition: 0.2s ease;
+  cursor: default;
 }

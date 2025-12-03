@@ -21,7 +21,7 @@ async function page() {
       <div className="p-10 text-center text-red-500 text-lg">
         <p className="text-lg">
           {" "}
-          🚩 Failed to load your applications. Try once again!
+           Failed to load your applications. Try once again!
         </p>
         <p>{error}</p>
       </div>

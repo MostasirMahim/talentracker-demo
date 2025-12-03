@@ -19,7 +19,6 @@ export default async function SingleBlogPage({ params } ) {
       
     );
     blog = data.data;
-    console.log(blog);
   } catch (error) {
     console.error(`Failed to fetch blog ID: ${params.id}`, error);
   }

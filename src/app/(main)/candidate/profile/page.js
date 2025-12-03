@@ -22,7 +22,7 @@ async function page() {
       <div className="p-10 text-center text-red-500 text-lg">
         <p className="text-lg">
           {" "}
-          🚩 Failed to load profile. Please Register & Set Your Profile First
+           Failed to load profile. Please Register & Set Your Profile First
         </p>
         <p>{error}</p>
       </div>

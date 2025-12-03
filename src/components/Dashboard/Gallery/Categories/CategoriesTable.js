@@ -48,8 +48,8 @@ export default function CategoriesTable({ categories }) {
         Gallery Categories
       </h2>
       <Link href="/dashboard/gallery/categories/post/">
-        <button className="px-4 py-2 mb-3 cursor-pointer bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-          + Create New Gallery Category
+        <button className="px-4 py-2 mb-3  cursor-pointer bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+          + Create New Category
         </button>
       </Link>
 

@@ -63,7 +63,8 @@ export default function GalleryCategoryForm() {
           reset();
         }
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error(error);
 
       const backendErrors = error.response?.data?.errors;
@@ -121,7 +122,7 @@ export default function GalleryCategoryForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white font-medium py-2.5 rounded-lg hover:bg-blue-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full bg-blue-600 cursor-pointer text-white font-medium py-2.5 rounded-lg hover:bg-blue-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>

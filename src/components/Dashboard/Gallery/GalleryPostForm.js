@@ -15,7 +15,6 @@ export default function GalleryPostForm() {
   // Access the gallery directly from store
   const gallery = useGallery((state) => state.gallery);
   const clearGallery = useGallery((state) => state.clearGallery);
-  console.log("GALLERY DATA ->", JSON.stringify(gallery, null, 2));
 
   const [loading, setLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);

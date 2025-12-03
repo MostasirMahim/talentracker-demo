@@ -22,7 +22,6 @@ async function page({ searchParams }) {
     );
 
     gallery = galleryResponse.data || [];
-    console.log(gallery);
   } catch (error) {
     console.error(error);
   }

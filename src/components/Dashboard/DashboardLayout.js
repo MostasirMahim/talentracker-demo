@@ -20,6 +20,7 @@ import {
   ShieldIcon,
   Settings,
   Newspaper,
+  UserPlus2,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -151,6 +152,21 @@ const navItems = [
         label: "Set Gallery image",
       },
       { href: "/dashboard/gallery", label: "View all Gallery" },
+    ],
+  },
+  {
+    href: "#",
+    label: "Expert Trainer profile",
+    icon: UserPlus2,
+    children: [
+      {
+        href: "/dashboard/expert_trainer_profiles",
+        label: "Trainer Profiles",
+      },
+      {
+        href: "/dashboard/expert_trainer_profiles/create",
+        label: "Create Trainer Profile",
+      },
     ],
   },
 ];
