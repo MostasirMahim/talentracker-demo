@@ -12,7 +12,7 @@ export default function LearningSegmentList({ data, pagination }) {
   const router = useRouter();
 
   const handleUpdate = (id) => {
-    setSelectedId(id);
+    router.push("/dashboard/learning_segment/create/?segment_id=" + id);
   };
 
   const handleDelete = async (id) => {

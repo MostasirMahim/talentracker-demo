@@ -185,6 +185,7 @@ export default function LearningSegmentPostForm({ blogCategories }) {
           setImagePreview(null);
           // Optionally redirect to blog list
           router.push("/dashboard/learning_segment/");
+          router.refresh();
         }
       }
     } catch (error) {
