@@ -39,12 +39,13 @@ export default function useTrainingCategory() {
   };
 
   // Update
-  const handleUpdate = async (id, title) => {
+  const handleUpdate = async (id, name) => {
     try {
-      await updateTrainingCategory(id, { title });
+      await updateTrainingCategory(id, { name });
       toast.success("Updated successfully");
       fetchData();
     } catch {
+      console.log("error");
       toast.error("Update failed");
     }
   };
@@ -56,6 +57,7 @@ export default function useTrainingCategory() {
       toast.success("Deleted successfully");
       fetchData();
     } catch {
+      console.log("error");
       toast.error("Delete failed");
     }
   };

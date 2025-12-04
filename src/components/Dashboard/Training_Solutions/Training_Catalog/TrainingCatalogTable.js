@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function TrainingCatalogTable({training_categories}) {
-  console.log(training_categories)
+export default function TrainingCatalogTable({trainingCatalog}) {
+  console.log(trainingCatalog)
   return (
     <div>TrainingCatalogTable</div>
   )
