@@ -21,6 +21,7 @@ import {
   Settings,
   Newspaper,
   UserPlus2,
+  BookMarked,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -185,6 +186,21 @@ const navItems = [
       {
         href: "/dashboard/expert_trainer_profiles/create",
         label: "Create Trainer Profile",
+      },
+    ],
+  },
+  {
+    href: "#",
+    label: "Learning segment",
+    icon: BookMarked,
+    children: [
+      {
+        href: "/dashboard/learning_segment/categories",
+        label: "Categories",
+      },
+      {
+        href: "/dashboard/learning_segment/categories/create",
+        label: "Add categories",
       },
     ],
   },

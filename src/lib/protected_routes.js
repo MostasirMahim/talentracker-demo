@@ -1,5 +1,6 @@
 export const protected_routes = [
   { path: "dashboard", permission_name: null },
+  { path: "learning_segment", permission_name: null },
   { path: "expert_trainer_profiles", permission_name: null },
   { path: "roles", permission_name: "roles_management" },
   { path: "registration", permission_name: "employee_management" },
