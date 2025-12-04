@@ -202,6 +202,14 @@ const navItems = [
         href: "/dashboard/learning_segment/categories/create",
         label: "Add categories",
       },
+      {
+        href: "/dashboard/learning_segment/",
+        label: "Segments",
+      },
+      {
+        href: "/dashboard/learning_segment/create",
+        label: "Add segments",
+      },
     ],
   },
 ];
