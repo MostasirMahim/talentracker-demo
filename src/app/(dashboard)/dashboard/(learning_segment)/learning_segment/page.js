@@ -9,7 +9,7 @@ async function page({ searchParams }) {
   let pagination = {};
   try {
     const response = await axiosInstance(
-      `/api/learning_segments/v1/learning_segments/?page=${page}&page_size=1`
+      `/api/learning_segments/v1/learning_segments/?page=${page}&page_size=20`
     );
     data = response?.data?.data;
     pagination = response?.data?.pagination;

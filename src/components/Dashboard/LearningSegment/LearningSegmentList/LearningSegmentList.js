@@ -3,9 +3,13 @@ import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import Image from "next/image";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
+import axiosInstance from "@/lib/axiosIntance";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function LearningSegmentList({ data, pagination }) {
   const [selectedId, setSelectedId] = useState(null);
+  const router = useRouter();
 
   const handleUpdate = (id) => {
     setSelectedId(id);
@@ -13,6 +17,19 @@ export default function LearningSegmentList({ data, pagination }) {
 
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this item?")) {
+      try {
+        const response = await axiosInstance.delete(
+          `/api/learning_segments/v1/learning_segments/${id}/`
+        );
+        if (response.status == 200) {
+          toast.success("Deleted successfully");
+          setSelectedId(null);
+          router.refresh();
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Something went wrong");
+      }
     }
   };
 
