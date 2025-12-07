@@ -21,6 +21,8 @@ import {
   Settings,
   Newspaper,
   UserPlus2,
+  BookMarked,
+  Logs,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -156,6 +158,25 @@ const navItems = [
   },
   {
     href: "#",
+    label: "Training Solutions",
+    icon: UserPlus2,
+    children: [
+      {
+        href: "/dashboard/training_solutions/training_category",
+        label: "View Training Category",
+      },
+      {
+        href: "/dashboard/training_solutions/training_catalog",
+        label: "View Training Catalog",
+      },
+      {
+        href: "/dashboard/training_solutions/training_detail",
+        label: "View Training Detail",
+      },
+    ],
+  },
+  {
+    href: "#",
     label: "Expert Trainer profile",
     icon: UserPlus2,
     children: [
@@ -166,6 +187,40 @@ const navItems = [
       {
         href: "/dashboard/expert_trainer_profiles/create",
         label: "Create Trainer Profile",
+      },
+    ],
+  },
+  {
+    href: "#",
+    label: "Learning segment",
+    icon: BookMarked,
+    children: [
+      {
+        href: "/dashboard/learning_segment/categories",
+        label: "Categories",
+      },
+      {
+        href: "/dashboard/learning_segment/categories/create",
+        label: "Add categories",
+      },
+      {
+        href: "/dashboard/learning_segment/",
+        label: "Segments",
+      },
+      {
+        href: "/dashboard/learning_segment/create",
+        label: "Add segments",
+      },
+    ],
+  },
+  {
+    href: "#",
+    label: "Activity logs",
+    icon: Logs,
+    children: [
+      {
+        href: "/dashboard/activity_logs/",
+        label: "Activity logs",
       },
     ],
   },

@@ -1,15 +1,14 @@
 "use client";
 
-import { ChevronDown, ChevronRight, Command, HatGlasses, User, User2Icon } from "lucide-react";
+import { ChevronDown, ChevronRight, HatGlasses } from "lucide-react";
 import "./style.css";
 
-export function SidebarLayout({
+export function SidebarLayoutTrainer({
   navItems,
   expandedSections,
   activeItemId,
   onToggleSection,
   onItemClick,
-  candidate_name,
 }) {
   const renderNavItems = (items, depth = 0) => {
     return items.map((item) => {
@@ -70,8 +69,8 @@ export function SidebarLayout({
       className="sidebar"
     >
       <div className="sidebar-header">
-        <Command size={20} />
-        <span>Candidate Dashboard</span>
+        <HatGlasses size={20} />
+        <span>Trainer Dashboard</span>
       </div>
       <div className="sidebar-content">{renderNavItems(navItems)}</div>
     </aside>

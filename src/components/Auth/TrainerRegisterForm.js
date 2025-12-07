@@ -7,11 +7,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { trainerRegister } from "@/actions/auth";
 import { useRegistrationStore } from "@/stores/regestration_steps_store";
+import { Eye, EyeOff } from "lucide-react";
 
 function TrainerRegisterForm() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const { email, reset, setStep } = useRegistrationStore();
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   if (!email) {
     toast.error("Email not found");
@@ -78,13 +80,20 @@ function TrainerRegisterForm() {
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group mb-3 position-relative">
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           className="form-control"
           placeholder="Password"
           {...register("password", { required: true })}
         />
+        <span
+          className="position-absolute end-0 top-50 translate-middle-y me-3"
+          onClick={() => setShowPassword(!showPassword)}
+          style={{ cursor: "pointer" }}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </span>
       </div>
 
       <button type="submit">
