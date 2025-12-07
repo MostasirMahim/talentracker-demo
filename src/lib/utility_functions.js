@@ -22,6 +22,8 @@ export { format_date, filterActiveJobs };
 export const navigationPermissions = {
   Home: null,
   "Expert Trainer profile": null,
+  "Learning segment": null,
+  "Activity logs": null,
   "Roles Management": "roles_management",
   Jobs: "job_management",
   Blogs: "blog_management",
@@ -33,6 +35,7 @@ export const navigationPermissions = {
   "Registered candidates": "job_management",
   "View all Users": "view_all_users",
   Gallery: "gallery_management",
+  "Training Solutions": "training_solutions_management",
 };
 
 export const filterNavigationByPermissions = (navArray, userPermissions) => {
