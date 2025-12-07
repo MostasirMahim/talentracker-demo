@@ -75,8 +75,8 @@ export default function TrainerLoginForm({ email: propEmail }) {
         </span>
       </div>
 
-      <div className="row align-items-center ">
-        <div className="col-lg-6 col-md-6 col-sm-6 ">
+      <div className="auth-row">
+        <div className="remember">
           <div className="form-check">
             <input className="form-check-input" type="checkbox" id="remember" />
             <label className="form-check-label" htmlFor="remember">
@@ -85,7 +85,7 @@ export default function TrainerLoginForm({ email: propEmail }) {
           </div>
         </div>
 
-        <div className="col-lg-6 col-md-6 col-sm-6 lost-your-password-wrap text-end">
+        <div className="lost-wrap">
           <a
             href="/auth/forget-password"
             onClick={(e) => {
