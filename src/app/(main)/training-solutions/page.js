@@ -10,14 +10,12 @@ export default function Page() {
       <TopHeaderStyleTwo />
 
       <NavbarStyleOne />
-
       <PageBanner
         pageTitle="Training Solutions"
         homePageUrl="/"
         homePageText="Home"
         activePageText="Training Solutions"
       />
-
       <ProjectsThreeColumn />
 
       <Footer />
