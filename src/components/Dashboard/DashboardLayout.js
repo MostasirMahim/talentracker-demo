@@ -22,6 +22,7 @@ import {
   Newspaper,
   UserPlus2,
   BookMarked,
+  Logs,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -209,6 +210,17 @@ const navItems = [
       {
         href: "/dashboard/learning_segment/create",
         label: "Add segments",
+      },
+    ],
+  },
+  {
+    href: "#",
+    label: "Activity logs",
+    icon: Logs,
+    children: [
+      {
+        href: "/dashboard/activity_logs/",
+        label: "Activity logs",
       },
     ],
   },

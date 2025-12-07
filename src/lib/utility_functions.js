@@ -23,6 +23,7 @@ export const navigationPermissions = {
   Home: null,
   "Expert Trainer profile": null,
   "Learning segment": null,
+  "Activity logs": null,
   "Roles Management": "roles_management",
   Jobs: "job_management",
   Blogs: "blog_management",
