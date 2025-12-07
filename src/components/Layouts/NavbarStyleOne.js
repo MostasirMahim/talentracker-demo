@@ -223,7 +223,7 @@ const NavbarStyleOne = () => {
                         </li>
 
                         <li className="nav-item">
-                          <Link href="/coming_soon" className={`nav-link`}>
+                          <Link href="/auth/trainer/login/" className={`nav-link`}>
                             Login as Trainer
                           </Link>
                         </li>
