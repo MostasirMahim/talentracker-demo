@@ -1,116 +1,45 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { get_all_news, get_all_categories } from "@/actions/news"
-import { toast } from "react-toastify"
-import NewsHeader from "@/components/Dashboard/news/NewsHeader"
-import NewsTable from "@/components/Dashboard/news/NewsTable"
-import CreateNewsModal from "@/components/Dashboard/news/CreateNewsModal"
-import EditNewsModal from "@/components/Dashboard/news/EditNewsModal"
-import DeleteNewsModal from "@/components/Dashboard/news/DeleteNewsModal"
-import "../../../../../styles/role.css"
-
-export default function NewsPage() {
-  const [news, setNews] = useState([])
-  const [categories, setCategories] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [createModalOpen, setCreateModalOpen] = useState(false)
-  const [editModalOpen, setEditModalOpen] = useState(false)
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
-  const [selectedNews, setSelectedNews] = useState(null)
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  async function fetchData() {
-    setLoading(true)
+import { get_all_categories, get_all_news } from '@/actions/news';
+import NewsPage from '@/components/Dashboard/news/NewsPage';
+import React from 'react'
+import "../../../../../styles/role.css";
+async function NewsAllPage({searchParams}) {
+    const currentPage = searchParams?.page || 1;
+   let newsData = null;
+    let category_data = null;
+    let error = null;
+  
     try {
-      const [newsRes, catRes] = await Promise.all([get_all_news(), get_all_categories()])
-
-      if (!newsRes.error && newsRes.data) {
-        setNews(newsRes.data)
+      const res = await get_all_news(currentPage);
+      if (res?.error) {
+        error = res?.message || "Something went wrong.";
       } else {
-        toast.error(newsRes.message || "Failed to fetch news")
+        newsData = res?.data;
       }
-
-      if (!catRes.error && catRes.data) {
-        setCategories(catRes.data)
-      }
-    } catch (error) {
-      toast.error("Error fetching data")
-    } finally {
-      setLoading(false)
+    } catch (err) {
+      error = err?.message || "Unexpected error while fetching roles.";
     }
-  }
-
-  const handleEdit = (item) => {
-    setSelectedNews(item)
-    setEditModalOpen(true)
-  }
-
-  const handleDelete = (item) => {
-    setSelectedNews(item)
-    setDeleteModalOpen(true)
-  }
-
-  const handleNewsCreated = () => {
-    setCreateModalOpen(false)
-    fetchData()
-  }
-
-  const handleNewsUpdated = () => {
-    setEditModalOpen(false)
-    fetchData()
-  }
-
-  const handleNewsDeleted = () => {
-    setDeleteModalOpen(false)
-    fetchData()
-  }
-
+  try {
+        const res = await get_all_categories();
+        if (res?.error) {
+          error = res?.message || "Something went wrong.";
+        } else {
+          category_data = res?.data;
+        }
+      } catch (err) {
+        error = err?.message || "Unexpected error while fetching roles.";
+      }
+    
+    if (error) {
+      return (
+        <div className="p-10 text-center text-red-500 text-lg">
+          <p className="text-lg">Failed to load news data. Please try again.</p>
+          <p>{error}</p>
+        </div>
+      );
+    }
   return (
-    <div>
-      <NewsHeader onCreateClick={() => setCreateModalOpen(true)} />
-
-      <div className="mx-auto max-w-7xl px-2 py-8 sm:px-6 lg:px-6">
-        {loading ? (
-          <div className="flex items-center justify-center h-64">
-            <div className="text-center">
-              <div className="h-12 w-12 rounded-full border-4 border-border border-t-primary animate-spin mx-auto mb-4" />
-              <p className="text-muted-foreground">Loading news...</p>
-            </div>
-          </div>
-        ) : (
-          <NewsTable news={news} onEdit={handleEdit} onDelete={handleDelete} />
-        )}
-      </div>
-
-      <CreateNewsModal
-        open={createModalOpen}
-        onOpenChange={setCreateModalOpen}
-        categories={categories}
-        onNewsCreated={handleNewsCreated}
-      />
-
-      {selectedNews && (
-        <>
-          <EditNewsModal
-            open={editModalOpen}
-            onOpenChange={setEditModalOpen}
-            news={selectedNews}
-            categories={categories}
-            onNewsUpdated={handleNewsUpdated}
-          />
-
-          <DeleteNewsModal
-            open={deleteModalOpen}
-            onOpenChange={setDeleteModalOpen}
-            news={selectedNews}
-            onNewsDeleted={handleNewsDeleted}
-          />
-        </>
-      )}
-    </div>
+    <NewsPage news={newsData} categories={category_data} />
   )
 }
+
+export default NewsAllPage

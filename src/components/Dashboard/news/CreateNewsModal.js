@@ -3,11 +3,11 @@
 import { useState } from "react"
 import { X, Loader } from "lucide-react"
 import dynamic from "next/dynamic"
-import { create_news } from "@/actions/news"
 import { toast } from "react-toastify"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 import "react-quill/dist/quill.snow.css"
+import axiosInstance from "@/lib/axiosIntance"
 
 export default function CreateNewsModal({ open, onOpenChange, categories, onNewsCreated }) {
   const [title, setTitle] = useState("")
@@ -23,15 +23,15 @@ export default function CreateNewsModal({ open, onOpenChange, categories, onNews
     }
     setIsLoading(true)
     try {
-      const result = await create_news({
+      const result = await axiosInstance.post("/api/news/v1/news/",
+        {
         title,
         source,
         description,
         category_id: categoryId,
       })
-
-      if (result.success) {
-        toast.success(result.message)
+      if (result.data.code === 201) {
+        toast.success(result.data.message)
         setTitle("")
         setSource("")
         setDescription("")
@@ -39,10 +39,12 @@ export default function CreateNewsModal({ open, onOpenChange, categories, onNews
         onOpenChange(false)
         onNewsCreated?.()
       } else {
-        toast.error(result.message)
+        toast.error(result.data.message)
+        console.log(result);
       }
     } catch (error) {
-      toast.error("Error creating news")
+      console.log(error.message);
+      toast.error(error.message)
     } finally {
       setIsLoading(false)
     }

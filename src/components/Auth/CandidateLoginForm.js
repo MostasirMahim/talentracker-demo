@@ -15,7 +15,7 @@ export default function CandidateLoginForm({ email: propEmail }) {
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { email: propEmail || "" },
   });
-   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const email = watch("email");
   const router = useRouter();
   async function onSubmit(values) {
@@ -37,10 +37,10 @@ export default function CandidateLoginForm({ email: propEmail }) {
         }
       } else {
         toast.success("Login successful");
-        if(propEmail) {
+        if (propEmail) {
           router.push("/candidate/profile/edit");
         } else {
-           router.push("/candidate/profile/");
+          router.push("/candidate/profile/");
         }
       }
     } catch (err) {
@@ -64,12 +64,12 @@ export default function CandidateLoginForm({ email: propEmail }) {
 
       <div className="form-group mb-3 position-relative">
         <input
-         type={showPassword ? "text" : "password"}
+          type={showPassword ? "text" : "password"}
           className="form-control"
           placeholder="Password"
           {...register("password", { required: true })}
         />
-             <span
+        <span
           className="position-absolute end-0 top-50 translate-middle-y me-3"
           onClick={() => setShowPassword(!showPassword)}
           style={{ cursor: "pointer" }}
@@ -79,29 +79,29 @@ export default function CandidateLoginForm({ email: propEmail }) {
       </div>
 
       <div className="auth-row">
-  <div className="remember">
-    <div className="form-check">
-      <input className="form-check-input" type="checkbox" id="remember" />
-      <label className="form-check-label" htmlFor="remember">
-        Remember me
-      </label>
-    </div>
-  </div>
+        <div className="remember">
+          <div className="form-check">
+            <input className="form-check-input" type="checkbox" id="remember" />
+            <label className="form-check-label" htmlFor="remember">
+              Remember me
+            </label>
+          </div>
+        </div>
 
-  <div className="lost-wrap">
-    <a
-      href="/auth/forget-password"
-      onClick={(e) => {
-        e.preventDefault();
-        setUserType("candidate");
-        router.push("/auth/forget-password");
-      }}
-      className="lost-your-password"
-    >
-      Lost your password?
-    </a>
-  </div>
-</div>
+        <div className="lost-wrap">
+          <a
+            href="/auth/forget-password"
+            onClick={(e) => {
+              e.preventDefault();
+              setUserType("candidate");
+              router.push("/auth/forget-password");
+            }}
+            className="lost-your-password"
+          >
+            Lost your password?
+          </a>
+        </div>
+      </div>
 
       <button
         type="submit"

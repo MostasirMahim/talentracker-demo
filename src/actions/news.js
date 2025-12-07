@@ -3,11 +3,11 @@
 import { cookies } from "next/headers"
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL
 
-export async function get_all_news() {
+export async function get_all_news(currentPage=1) {
   const accessToken = cookies().get("access_token")?.value
 
   try {
-    const res = await fetch(`${BASE_URL}/api/news/v1/news/`, {
+    const res = await fetch(`${BASE_URL}/api/news/v1/news/?page_size=10&page=${currentPage}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -17,11 +17,10 @@ export async function get_all_news() {
     })
 
     const response = await res.json()
-
     if (response.code === 200 && response.status === "success") {
       return {
         error: false,
-        data: response.data,
+        data: response,
       }
     } else {
       return {
@@ -75,86 +74,6 @@ export async function get_news(newsId) {
     }
   }
 }
-
-export async function create_news(newsData) {
-  const accessToken = cookies().get("access_token")?.value
-
-  try {
-    const res = await fetch(`${BASE_URL}/api/news/v1/news/`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Cookie: `access_token=${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newsData),
-    })
-
-    const response = await res.json()
-
-    if ((response.code === 200 || response.code === 201) && response.status === "success") {
-      return {
-        success: true,
-        message: "News created successfully",
-        data: response.data,
-      }
-    } else {
-      return {
-        success: false,
-        message: response.message || "Failed to create news",
-        data: response.data,
-      }
-    }
-  } catch (err) {
-    return {
-      success: false,
-      message: err?.message || "Network error",
-      data: err?.data,
-    }
-  }
-}
-
-export async function update_news(
-  newsId,
-  newsData
-) {
-  const accessToken = cookies().get("access_token")?.value
-
-  try {
-    const res = await fetch(`${BASE_URL}/api/news/v1/news/update/${newsId}/`, {
-      method: "PATCH",
-      credentials: "include",
-      headers: {
-        Cookie: `access_token=${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newsData),
-    })
-
-    const response = await res.json()
-
-    if ((response.code === 200 || response.code === 201) && response.status === "success") {
-      return {
-        success: true,
-        message: "News updated successfully",
-        data: response.data,
-      }
-    } else {
-      return {
-        success: false,
-        message: response.message || "Failed to update news",
-        data: response.data,
-      }
-    }
-  } catch (err) {
-    return {
-      success: false,
-      message: err?.message || "Network error",
-      data: err?.data,
-    }
-  }
-}
-
 
 export async function delete_news(newsId) {
   const accessToken = cookies().get("access_token")?.value
