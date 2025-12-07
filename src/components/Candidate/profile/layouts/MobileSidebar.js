@@ -67,7 +67,7 @@ export function MobileSidebarLayout({
       aria-labelledby="offcanvasSidebar"
     >
       <div className="sidebar-header">
-        <span>{candidate_name}</span>
+        <span>Dashboard</span>
         <button
           type="button"
           className="btn-close"

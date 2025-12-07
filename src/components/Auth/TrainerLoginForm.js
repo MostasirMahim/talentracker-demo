@@ -38,7 +38,7 @@ export default function TrainerLoginForm({ email: propEmail }) {
         }
       } else {
         toast.success("Login successful");
-        router.push("/");
+        router.push("/trainer/profile");
       }
     } catch (err) {
       toast.error(err.message || "Login failed");
