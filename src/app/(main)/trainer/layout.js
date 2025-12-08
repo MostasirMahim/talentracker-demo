@@ -1,6 +1,6 @@
 import { get_me } from "@/actions/auth";
 import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
-import TrainerLayoutClient from "@/components/Trainer/TrainerLayoutClient";
+import TrainerLayoutClient from "@/components/Trainer/layouts/TrainerLayoutClient";
 import { redirect } from "next/navigation";
 export const metadata = {
   title: "Trainer Dashboard",
