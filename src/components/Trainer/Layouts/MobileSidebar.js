@@ -1,7 +1,5 @@
 "use client";
-
-import { ChevronDown, ChevronRight, HatGlasses } from "lucide-react";
-export function SidebarLayoutTrainer({
+export function TrainerMobileSidebarLayout({
   navItems,
   expandedSections,
   activeItemId,
@@ -29,13 +27,6 @@ export function SidebarLayoutTrainer({
                 )}
                 <span>{item.label}</span>
               </div>
-              <span className="sidebar-chevron">
-                {isExpanded ? (
-                  <ChevronDown size={16} />
-                ) : (
-                  <ChevronRight size={16} />
-                )}
-              </span>
             </div>
             <div
               className={`sidebar-section-items ${
@@ -53,6 +44,7 @@ export function SidebarLayoutTrainer({
           key={item.id}
           className={`sidebar-item ${isActive ? "active" : ""}`}
           onClick={() => onItemClick(item)}
+          data-bs-dismiss="offcanvas"
           style={{ cursor: "pointer" }}
         >
           {item.icon && <span className="sidebar-item-icon">{item.icon}</span>}
@@ -64,11 +56,19 @@ export function SidebarLayoutTrainer({
 
   return (
     <aside
-      className="sidebar"
+      className="sidebar offcanvas offcanvas-start"
+      tabIndex="-1"
+      id="offcanvasSidebar"
+      aria-labelledby="offcanvasSidebar"
     >
       <div className="sidebar-header">
-        <HatGlasses size={20} />
-        <span>Trainer Dashboard</span>
+        <span>Dashboard</span>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
       </div>
       <div className="sidebar-content">{renderNavItems(navItems)}</div>
     </aside>
