@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, ChevronRight, User2Icon } from "lucide-react";
+import { ChevronDown, ChevronRight, Command, HatGlasses, User, User2Icon } from "lucide-react";
 import "./style.css";
 
 export function SidebarLayout({
@@ -70,7 +70,8 @@ export function SidebarLayout({
       className="sidebar"
     >
       <div className="sidebar-header">
-        <span>{candidate_name}</span>
+        <Command size={20} />
+        <span>Candidate Dashboard</span>
       </div>
       <div className="sidebar-content">{renderNavItems(navItems)}</div>
     </aside>

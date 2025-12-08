@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import BlogSmartPagination from "../SmartPagination/BlogSmartPagination";
 import SmartPagination from "../SmartPagination/SmartPagination";
 import { useRouter } from "next/navigation";
 

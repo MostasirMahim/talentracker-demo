@@ -7,10 +7,12 @@ import { trainerLogin } from "@/actions/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForgetPasswordStore } from "@/stores/forget_password_store";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function TrainerLoginForm({ email: propEmail }) {
   const [loading, setLoading] = useState(false);
   const { setUserType } = useForgetPasswordStore();
+  const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { email: propEmail || "" },
   });
@@ -36,7 +38,7 @@ export default function TrainerLoginForm({ email: propEmail }) {
         }
       } else {
         toast.success("Login successful");
-        router.push("/");
+        router.push("/trainer/profile");
       }
     } catch (err) {
       toast.error(err.message || "Login failed");
@@ -57,17 +59,24 @@ export default function TrainerLoginForm({ email: propEmail }) {
         />
       </div>
 
-      <div className="form-group mb-3">
+      <div className="form-group mb-3 position-relative">
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           className="form-control"
           placeholder="Password"
           {...register("password", { required: true })}
         />
+        <span
+          className="position-absolute end-0 top-50 translate-middle-y me-3"
+          onClick={() => setShowPassword(!showPassword)}
+          style={{ cursor: "pointer" }}
+        >
+          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+        </span>
       </div>
 
-      <div className="row align-items-center ">
-        <div className="col-lg-6 col-md-6 col-sm-6 ">
+      <div className="auth-row">
+        <div className="remember">
           <div className="form-check">
             <input className="form-check-input" type="checkbox" id="remember" />
             <label className="form-check-label" htmlFor="remember">
@@ -76,7 +85,7 @@ export default function TrainerLoginForm({ email: propEmail }) {
           </div>
         </div>
 
-        <div className="col-lg-6 col-md-6 col-sm-6 lost-your-password-wrap text-end">
+        <div className="lost-wrap">
           <a
             href="/auth/forget-password"
             onClick={(e) => {

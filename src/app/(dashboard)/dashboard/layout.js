@@ -3,7 +3,7 @@ import "../../../../styles/tailwind.css";
 import DashboardLayoutClient from "@/components/Dashboard/DashboardLayout";
 import { get_me } from "@/actions/auth";
 import { redirect } from "next/navigation";
-
+export const experimental_styleIsolation = true;
 export const metadata = {
   title: "TalenTracker Limited - Creating Shared Experiences !!",
   description:

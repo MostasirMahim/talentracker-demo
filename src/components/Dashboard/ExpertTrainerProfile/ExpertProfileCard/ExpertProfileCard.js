@@ -97,7 +97,7 @@ const ProfileCard = ({ profile, onDelete, onUpdate }) => {
               Biography
             </p>
             <p className="text-sm mt-0.5" style={{ color: TEXT_COLOR }}>
-              {profile.biography.length > 150
+              {profile.biography?.length > 150
                 ? `${profile.biography.substring(0, 150)}...`
                 : profile.biography}
             </p>
@@ -219,10 +219,10 @@ const ExpertProfileList = ({ data }) => {
         className="text-4xl font-extrabold text-center mb-10"
         style={{ color: DARK_PRIMARY_COLOR }}
       >
-        Expert Trainer Profiles ({profiles.length})
+        Expert Trainer Profiles ({profiles?.length})
       </h1>
 
-      {profiles.length === 0 ? (
+      {profiles?.length === 0 ? (
         <div
           className="text-center p-12 border-2 border-dashed border-gray-300 rounded-xl"
           style={{ color: OPTIONAL_TEXT_COLOR }}
@@ -232,7 +232,7 @@ const ExpertProfileList = ({ data }) => {
       ) : (
         /* Responsive Grid Container */
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8">
-          {profiles.map((profile) => (
+          {profiles?.map((profile) => (
             <ProfileCard
               key={profile.id}
               profile={profile}
