@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User, LogOut, UserPen, Settings } from "lucide-react";
-import "./style.css";
 import { usePathname, useRouter } from "next/navigation";
 import { candidateLogOut } from "@/actions/auth";
 import { toast } from "react-toastify";
 import { useUserStore } from "@/stores/user_store";
-import { MobileSidebarLayout } from "../Candidate/profile/layouts/MobileSidebar";
-import { HeaderLayout } from "../Candidate/profile/layouts/HeaderLayout";
-import { SidebarLayoutTrainer } from "./Layouts/SidebarLayout";
+import { TrainerMobileSidebarLayout } from "./MobileSidebar";
+import { SidebarLayoutTrainer } from "./SidebarLayout";
+import { TrainerHeaderLayout } from "./HeaderLayout";
+
 
 const navItems = [
   {
@@ -45,6 +45,16 @@ const navItems = [
 ];
 
 export default function TrainerLayoutClient({ children }) {
+   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    import("./style.css").then(() => {
+      setIsLoaded(true);
+    });
+  }, []);
+
+
+
   const [expandedSections, setExpandedSections] = useState(
     new Set(navItems.map((item) => item.id))
   );
@@ -109,10 +119,10 @@ export default function TrainerLayoutClient({ children }) {
       }
     }
   };
-
+  if (!isLoaded) return null;
   return (
-    <div className="client-layout">
-      <MobileSidebarLayout
+    <div className="client-layout base-styles">
+      <TrainerMobileSidebarLayout
         navItems={navItems}
         expandedSections={expandedSections}
         activeItemId={activeItemId}
@@ -130,7 +140,7 @@ export default function TrainerLayoutClient({ children }) {
       </div>
 
       <div className="main-content">
-        <HeaderLayout title={headerTitle} />
+        <TrainerHeaderLayout title={headerTitle} />
         <main className="content">{children}</main>
       </div>
     </div>
