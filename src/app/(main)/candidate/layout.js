@@ -3,10 +3,10 @@ import ProfileClient from "@/components/Candidate/profile/layouts/ProfileClient"
 import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
 import { redirect } from "next/navigation";
 export const metadata = {
-  title: "Client Dashboard",
-  description: "Responsive client dashboard with sidebar",
+  title: "Candidate Dashboard",
+  description: "Responsive candidate dashboard with sidebar",
 };
-export default async function RootLayout({ children }) {
+export default async function CandidateLayout({ children }) {
    const authUser = await get_me();
     if (!authUser?.error) {
       if (authUser?.data?.user.user_type !== "candidate") {
