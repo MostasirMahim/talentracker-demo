@@ -1,28 +1,28 @@
-import React from "react";
-import { cookies } from "next/headers";
+
+
+
+"use client";
+import useTrainingCatalog from "@/hooks/useTrainingCatalog";
 import TrainingCatalogTable from "@/components/Dashboard/Training_Solutions/Training_Catalog/TrainingCatalogTable";
-import { getTrainingCatalog } from "@/services/trainingCatalogService";
 
-async function Page({ searchParams }) {
-  const currentPage = searchParams?.page || 1;
+export default function TrainingCatalogPage() {
+  const {
+    catalogs,
+    pagination,
+    loading,
+    handleUpdate,
+    handleDelete,
+  } = useTrainingCatalog();
 
-  const cookieStore = cookies();
-  const authToken = cookieStore.get("access_token")?.value || "";
-
-  let trainingCatalog = null;
-
-  try {
-    const response = await getTrainingCatalog(currentPage, authToken);
-    trainingCatalog = response.data;
-  } catch (error) {
-    console.error("Training catalog fetch error:", error);
+  if (loading) {
+    return <div className="text-center py-10">Loading...</div>;
   }
 
   return (
-    <div className="p-8">
-      <TrainingCatalogTable trainingCatalog={trainingCatalog} />
-    </div>
+    <TrainingCatalogTable
+      trainingCatalog={{ data: catalogs, pagination }}
+      onUpdate={handleUpdate}
+      onDelete={handleDelete}
+    />
   );
 }
-
-export default Page;

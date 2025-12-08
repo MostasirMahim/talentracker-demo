@@ -1,28 +1,48 @@
-// services/trainingCategoryService.js
+// services/trainingCatalogService.js
 import axiosInstance from "@/lib/axiosIntance";
 
-export const getTrainingCatalog = (current_page = 1, token = "") => {
+// GET Catalog With Pagination
+export const getTrainingCatalog = (page = 1, token = "") => {
   return axiosInstance.get(
-    `/api/training_solutions/v1/training_catalog/?page_size=10&page=${current_page}`,
+    `/api/training_solutions/v1/training_catalog/?page_size=10&page=${page}`,
     {
       headers: {
-        Cookie: `access_token=${token}`,
+        Authorization: token ? `Bearer ${token}` : "",
       },
     }
   );
 };
 
-// Create
+// CREATE
 export const createTrainingCatalog = (payload) => {
-  return axiosInstance.post("/api/training_solutions/v1/training_catalog/", payload);
+  return axiosInstance.post(
+    "/api/training_solutions/v1/training_catalog/",
+    payload,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 };
 
-// Update / Patch
+// UPDATE
 export const updateTrainingCatalog = (id, payload) => {
-  return axiosInstance.patch(`/api/training_solutions/v1/training_catalog/${id}/`, payload);
+  return axiosInstance.patch(
+    `/api/training_solutions/v1/training_catalog/${id}/`,
+    payload,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+
+  );
 };
 
-// Delete
+// DELETE
 export const deleteTrainingCatalog = (id) => {
-  return axiosInstance.delete(`/api/training_solutions/v1/training_catalog/${id}/`);
+  return axiosInstance.delete(
+    `/api/training_solutions/v1/training_catalog/${id}/`
+  );
 };
