@@ -1,3 +1,4 @@
+import DashBoardHealth from "@/components/Dashboard/home/DashBoardHealth/DashBoardHealth";
 import DashboardHome from "@/components/Dashboard/home/DashboardHome";
 import DashboardRecentActivity from "@/components/Dashboard/home/DashboardRecentActivity/DashboardRecentActivity";
 import { Suspense } from "react";
@@ -19,8 +20,10 @@ function DashboardPage() {
         <Suspense fallback={<div>Loading...</div>}>
           <DashboardRecentActivity />
         </Suspense>
-        <div className="bg-white rounded-xl shadow-sm border border-blue-100 p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Stats</h2>
+        <div className="bg-white rounded-xl shadow-sm border border-blue-100 p-6 mt-5">
+          <Suspense fallback={<div>Loading...</div>}>
+            <DashBoardHealth />
+          </Suspense>
         </div>
       </div>
     </div>
