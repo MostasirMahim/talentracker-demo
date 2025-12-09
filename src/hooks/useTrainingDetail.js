@@ -7,6 +7,7 @@ import {
   updateTrainingDetail,
   deleteTrainingDetail,
 } from "@/services/TrainingDetailService";
+import { useRouter } from "next/navigation";
 
 import { toast } from "react-toastify";
 import { get } from "http";
@@ -18,6 +19,7 @@ export default function useTrainingDetail() {
   const [training_detail, setTrainingDetail] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   // Fetch Catalog List
   const fetchData = async (page = 1) => {
@@ -27,7 +29,7 @@ export default function useTrainingDetail() {
       setTrainingDetail(res.data.data);
       setPagination(res.data.pagination);
     } catch (error) {
-      toast.error("Failed to load catalog");
+      toast.error("Failed to load training detail");
       console.error(error);
     } finally {
       setLoading(false);
@@ -38,7 +40,7 @@ export default function useTrainingDetail() {
   const handleCreate = async (payload) => {
     try {
       await createTrainingDetail(payload);
-      toast.success("Catalog created successfully");
+      toast.success("Training detail created successfully");
       fetchData(currentPage);
     } catch {
       toast.error("Create failed");
@@ -61,6 +63,8 @@ export default function useTrainingDetail() {
     try {
       await deleteTrainingDetail(id);
       toast.success("Deleted successfully");
+      router.refresh();
+      router.push("/dashboard/training_solutions/training_detail/");
       // If current page becomes empty after delete, go to previous page
       if (catalogs.length === 1 && currentPage > 1) {
         // This will be handled by the page component redirecting
@@ -68,8 +72,14 @@ export default function useTrainingDetail() {
       } else {
         fetchData(currentPage);
       }
-    } catch {
-      toast.error("Delete failed");
+    } catch (error) {
+      if (error.response && (error.response.status === 400 || error.response.status === 404 ||error.response.status === 500)) {
+        toast.error("Cannot delete: Training detail is in use.");
+      }
+      else {
+        console.error(error);
+      }
+    
     }
   };
 

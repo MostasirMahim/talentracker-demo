@@ -12,7 +12,16 @@ export default function TrainingDetailPage() {
     handleUpdate,
   } = useTrainingDetail();
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 font-medium">Loading ...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <TrainingDetailTable

@@ -1,61 +1,127 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter, useSearchParams, useParams } from "next/navigation";
-import { useCatalogDetail } from "@/stores/training_solution_store";
+import { useRouter, useSearchParams } from "next/navigation";
+import dynamic from "next/dynamic";
+import { useTrainingDetail } from "@/stores/training_solution_store";
 import {
-  createTrainingCatalogDetail,
-  updateTrainingCatalogDetail,
+  createTrainingDetail,
+  updateTrainingDetail,
 } from "@/services/TrainingDetailService";
 import { toast } from "react-toastify";
-import Image from "next/image";
+import axiosInstance from "@/lib/axiosIntance";
 
-export default function TrainingCatalogDetailPost() {
+// Dynamically import ReactQuill to avoid SSR issues
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
+
+export default function TrainingDetailPost() {
   const router = useRouter();
-  const params = useParams();
   const searchParams = useSearchParams();
-  
-  const catalogId = params.catalogId; // from URL params
-  const detailId = searchParams.get("detail_id");
+  const detail_id = searchParams.get("detail_id");
 
-  const { catalogDetail, clearCatalogDetail } = useCatalogDetail();
+  const { trainingDetail, clearTrainingDetail } = useTrainingDetail();
 
-  const [loading, setLoading] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
-
+  // Form state
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    image: null,
-    status: "",
+    expert_trainer_profile: "",
+    training_catalog: "",
+    full_description: "",
+    full_curriculum: "",
+    duration: "",
+    delivery_mode: "",
+    target_audience: "",
+    cta_request_link: "",
+    cta_enroll_link: "",
   });
 
-  // Populate form if editing (detail_id exists)
-  useEffect(() => {
-    if (detailId && catalogDetail && Object.keys(catalogDetail).length > 0) {
-      setFormData({
-        title: catalogDetail.title || "",
-        description: catalogDetail.description || "",
-        image: null,
-        status: catalogDetail.status || "",
-      });
+  // Dropdown data
+  const [expertTrainers, setExpertTrainers] = useState([]);
+  const [trainingCatalogs, setTrainingCatalogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [quillLoaded, setQuillLoaded] = useState(false);
 
-      // Set existing image preview
-      if (catalogDetail.image) {
-        setImagePreview(
-          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${catalogDetail.image}`
-        );
-      }
-    } else {
-      // Reset form for create mode
-      setFormData({
-        title: "",
-        description: "",
-        image: null,
-        status: "",
-      });
-      setImagePreview(null);
+  // ReactQuill modules (excluding image/video)
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ script: "sub" }, { script: "super" }],
+      [{ indent: "-1" }, { indent: "+1" }],
+      [{ direction: "rtl" }],
+      [{ size: ["small", false, "large", "huge"] }],
+      [{ color: [] }, { background: [] }],
+      [{ font: [] }],
+      [{ align: [] }],
+      ["blockquote", "code-block"],
+      ["link"],
+      ["clean"],
+    ],
+  };
+
+  // Fetch expert trainers
+  const fetchExpertTrainers = async () => {
+    try {
+      const res = await axiosInstance.get(
+        "/api/expert_trainer_profiles/v1/expert_trainer_profiles/"
+      );
+      setExpertTrainers(res.data.data || []);
+    } catch (error) {
+      toast.error("Failed to load expert trainers");
+      console.error(error);
     }
-  }, [detailId, catalogDetail]);
+  };
+
+  // Fetch training catalogs
+  const fetchTrainingCatalogs = async () => {
+    try {
+      const res = await axiosInstance.get(
+        "/api/training_solutions/v1/training_catalog/"
+      );
+      setTrainingCatalogs(res.data.data || []);
+    } catch (error) {
+      toast.error("Failed to load training catalogs");
+      console.error(error);
+    }
+  };
+
+  // Initial data load
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      await Promise.all([fetchExpertTrainers(), fetchTrainingCatalogs()]);
+      setQuillLoaded(true);
+      setLoading(false);
+    };
+    loadData();
+  }, []);
+
+  // Populate form if editing - runs after data is loaded
+  useEffect(() => {
+    if (
+      !loading &&
+      detail_id &&
+      trainingDetail &&
+      Object.keys(trainingDetail).length > 0
+    ) {
+      console.log("Populating form with:", trainingDetail);
+
+      setFormData({
+        expert_trainer_profile: parseInt(
+          trainingDetail.expert_trainer_profile.id || ""
+        ),
+        training_catalog: parseInt(trainingDetail.training_catalog.id || ""),
+        full_description: trainingDetail.full_description || "",
+        full_curriculum: trainingDetail.full_curriculum || "",
+        duration: trainingDetail.duration || "",
+        delivery_mode: trainingDetail.delivery_mode || "",
+        target_audience: trainingDetail.target_audience || "",
+        cta_request_link: trainingDetail.cta_request_link || "",
+        cta_enroll_link: trainingDetail.cta_enroll_link || "",
+      });
+    }
+  }, [loading, detail_id, trainingDetail]);
 
   // Handle input change
   const handleChange = (e) => {
@@ -63,242 +129,300 @@ export default function TrainingCatalogDetailPost() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle image upload with preview
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData((prev) => ({ ...prev, image: file }));
+  // Handle ReactQuill change
+  const handleQuillChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
-      // Create preview
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+  // Validate form
+  const validateForm = () => {
+    if (!formData.expert_trainer_profile) {
+      toast.error("Expert Trainer is required");
+      return false;
     }
+    if (!formData.training_catalog) {
+      toast.error("Training Catalog is required");
+      return false;
+    }
+
+    // Strip HTML tags for validation
+    const stripHtml = (html) => {
+      const tmp = document.createElement("div");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    };
+
+    if (!stripHtml(formData.full_description).trim()) {
+      toast.error("Full Description is required");
+      return false;
+    }
+    if (!stripHtml(formData.full_curriculum).trim()) {
+      toast.error("Full Curriculum is required");
+      return false;
+    }
+    if (!formData.duration?.trim()) {
+      toast.error("Duration is required");
+      return false;
+    }
+    if (!formData.delivery_mode?.trim()) {
+      toast.error("Delivery Mode is required");
+      return false;
+    }
+    if (!formData.target_audience?.trim()) {
+      toast.error("Target Audience is required");
+      return false;
+    }
+    return true;
   };
 
-  // Remove image
-  const handleRemoveImage = () => {
-    setFormData((prev) => ({ ...prev, image: null }));
-    setImagePreview(null);
-  };
-
-  // Handle form submit
+  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation
-    if (!formData.title || !formData.description) {
-      toast.error("Please fill all required fields");
-      return;
-    }
+    if (!validateForm()) return;
 
-    if (!detailId && !formData.image) {
-      toast.error("Please upload an image");
-      return;
-    }
-
-    setLoading(true);
+    setSubmitting(true);
 
     try {
-      // Prepare FormData for file upload
-      const payload = new FormData();
-      payload.append("title", formData.title);
-      payload.append("description", formData.description);
+      const payload = {
+        expert_trainer_profile: parseInt(formData.expert_trainer_profile),
+        training_catalog: parseInt(formData.training_catalog),
+        full_description: formData.full_description,
+        full_curriculum: formData.full_curriculum,
+        duration: formData.duration,
+        delivery_mode: formData.delivery_mode,
+        target_audience: formData.target_audience,
+        cta_request_link: formData.cta_request_link || undefined,
+        cta_enroll_link: formData.cta_enroll_link || undefined,
+      };
 
-      if (detailId && formData.status) {
-        payload.append("status", formData.status);
-      }
-
-      // Only append image if new one is selected
-      if (formData.image) {
-        payload.append("image", formData.image);
-      }
-
-      if (detailId) {
-        // Update existing detail
-        await updateTrainingCatalogDetail(catalogId, detailId, payload);
-        toast.success("Detail updated successfully");
+      if (detail_id) {
+        // Update existing
+        await updateTrainingDetail(detail_id, payload);
+        toast.success("Training Detail updated successfully");
       } else {
-        // Create new detail
-        await createTrainingCatalogDetail(catalogId, payload);
-        toast.success("Detail created successfully");
+        // Create new
+        await createTrainingDetail(payload);
+        toast.success("Training Detail created successfully");
       }
 
-      // Clear store and redirect
-      clearCatalogDetail();
-      router.push(
-        `/dashboard/training_solutions/training_catalog/${catalogId}/details/`
-      );
+      clearTrainingDetail();
+      router.push("/dashboard/training_solutions/training_detail/");
     } catch (error) {
-      console.error(error);
+      if (error.response?.data?.errors) {
+        const backendErrors = error.response.data.errors;
+
+        Object.keys(backendErrors).forEach((field) => {
+          backendErrors[field].forEach((msg) => {
+            toast.error(`${msg}`);
+          });
+        });
+
+        return;
+      }
       toast.error(
-        detailId ? "Failed to update detail" : "Failed to create detail"
+        detail_id
+          ? "Failed to update training detail"
+          : "Failed to create training detail"
       );
+      console.error(error);
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">
-          {detailId ? "Edit Catalog Detail" : "Create Catalog Detail"}
-        </h1>
-        <p className="text-gray-600 mt-2">
-          {detailId
-            ? "Update the details of your catalog item"
-            : "Add a new detail to your catalog"}
-        </p>
+  // Handle cancel
+  const handleCancel = () => {
+    clearTrainingDetail();
+    router.push("/dashboard/training_solutions/training_detail/");
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 font-medium">Loading...</p>
+        </div>
       </div>
+    );
+  }
+
+  return (
+    <div className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">
+        {detail_id ? "Edit Training Detail" : "Create Training Detail"}
+      </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Title */}
+        {/* Expert Trainer Profile */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Title <span className="text-red-500">*</span>
+          <label className="block text-sm font-medium mb-2">
+            Expert Trainer Profile <span className="text-red-500">*</span>
           </label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
+          <select
+            name="expert_trainer_profile"
+            value={formData.expert_trainer_profile}
             onChange={handleChange}
-            placeholder="Enter detail title"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-          />
+          >
+            {expertTrainers.map((item) => (
+              <option key={item.id} value={String(item.id)}>
+                {item.name}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* Description */}
+        {/* Training Catalog */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Description <span className="text-red-500">*</span>
+          <label className="block text-sm font-medium mb-2">
+            Training Catalog <span className="text-red-500">*</span>
           </label>
-          <textarea
-            name="description"
-            value={formData.description}
+          <select
+            name="training_catalog"
+            value={formData.training_catalog}
             onChange={handleChange}
-            placeholder="Enter a description"
-            rows="6"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-          />
+          >
+            {/* <option value="">Select Training Catalog</option> */}
+            {trainingCatalogs.map((catalog) => (
+              <option key={catalog.id} value={String(catalog.id)}>
+                {catalog.title} ({catalog.training_id})
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* Image Upload with Preview */}
+        {/* Full Description */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Image <span className="text-red-500">*</span>
+          <label className="block text-sm font-medium mb-2">
+            Full Description <span className="text-red-500">*</span>
           </label>
-
-          {imagePreview ? (
-            <div className="relative inline-block">
-              <Image
-                src={imagePreview}
-                alt="Preview"
-                width={300}
-                height={200}
-                className="rounded-lg border-2 border-gray-300"
-                style={{ objectFit: "cover" }}
-              />
-              <button
-                type="button"
-                onClick={handleRemoveImage}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center justify-center w-full">
-              <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg
-                    className="w-10 h-10 mb-3 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                    />
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500">
-                    <span className="font-semibold">Click to upload</span> or
-                    drag and drop
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    PNG, JPG or JPEG (MAX. 5MB)
-                  </p>
-                </div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="hidden"
-                />
-              </label>
-            </div>
+          {quillLoaded && (
+            <ReactQuill
+              theme="snow"
+              value={formData.full_description}
+              onChange={(value) => handleQuillChange("full_description", value)}
+              modules={modules}
+              className="bg-white"
+            />
           )}
         </div>
 
-        {/* Status Dropdown (Show only on Update) */}
-        {detailId && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Status
-            </label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="">Select Status</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
-        )}
+        {/* Full Curriculum */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Full Curriculum <span className="text-red-500">*</span>
+          </label>
+          {quillLoaded && (
+            <ReactQuill
+              theme="snow"
+              value={formData.full_curriculum}
+              onChange={(value) => handleQuillChange("full_curriculum", value)}
+              modules={modules}
+              className="bg-white"
+            />
+          )}
+        </div>
 
-        {/* Submit Buttons */}
-        <div className="flex gap-4 pt-4">
+        {/* Duration */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Duration <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="duration"
+            value={formData.duration}
+            onChange={handleChange}
+            placeholder="e.g., 1 Day"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        {/* Delivery Mode */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Delivery Mode <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="delivery_mode"
+            value={formData.delivery_mode}
+            onChange={handleChange}
+            placeholder="e.g., On-Site, Online"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        {/* Target Audience */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Target Audience <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="target_audience"
+            value={formData.target_audience}
+            onChange={handleChange}
+            placeholder="e.g., Analysts, Officers"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        {/* CTA Request Link (Optional) */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            CTA Request Link (Optional)
+          </label>
+          <input
+            type="url"
+            name="cta_request_link"
+            value={formData.cta_request_link}
+            onChange={handleChange}
+            placeholder="https://example.com/request"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* CTA Enroll Link (Optional) */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            CTA Enroll Link (Optional)
+          </label>
+          <input
+            type="url"
+            name="cta_enroll_link"
+            value={formData.cta_enroll_link}
+            onChange={handleChange}
+            placeholder="https://example.com/enroll"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-4">
           <button
             type="submit"
-            disabled={loading}
-            className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={submitting}
+            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
-            {loading
-              ? "Processing..."
-              : detailId
+            {submitting
+              ? "Submitting..."
+              : detail_id
               ? "Update Detail"
               : "Create Detail"}
           </button>
           <button
             type="button"
-            onClick={() => {
-              clearCatalogDetail();
-              router.push(
-                `/dashboard/training_solutions/training_catalog/${catalogId}/details/`
-              );
-            }}
-            className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition"
+            onClick={handleCancel}
+            className="px-6 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
           >
             Cancel
           </button>

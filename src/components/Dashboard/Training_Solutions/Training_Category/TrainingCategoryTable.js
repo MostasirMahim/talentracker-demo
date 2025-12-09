@@ -6,6 +6,17 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
   const [newTitle, setNewTitle] = useState("");
   const [editId, setEditId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
+  const formatBDTime = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleString("en-BD", {
+      timeZone: "Asia/Dhaka",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   return (
     <div className=" mx-auto p-6">
@@ -59,8 +70,8 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
                     item.name
                   )}
                 </td>
-                <td className="p-3">{item.created_at}</td>
-                <td className="p-3">{item.updated_at}</td>
+                <td className="p-3">{formatBDTime(item.created_at)}</td>
+                <td className="p-3">{formatBDTime(item.updated_at)}</td>
 
 
                 <td className="p-3 flex gap-2 justify-end">

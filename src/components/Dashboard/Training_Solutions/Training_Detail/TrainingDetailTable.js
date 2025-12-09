@@ -4,14 +4,16 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
-import { useCatalogDetail } from "@/stores/training_solution_store";
+import { useTrainingDetail } from "@/stores/training_solution_store";
+import axiosInstance from "@/lib/axiosIntance";
+
 
 export default function TrainingCatalogDetailTable({
   trainingDetail,
   onDelete,
 }) {
   const router = useRouter();
-  const { setCatalogDetail } = useCatalogDetail();
+  const { setTrainingDetail } = useTrainingDetail();
 
   const data = trainingDetail.data || [];
   const paginationData = trainingDetail.pagination;
@@ -20,10 +22,25 @@ export default function TrainingCatalogDetailTable({
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
-  // Edit Handler
-  const handleEdit = (item) => {
-    setCatalogDetail(item);
-    router.push(`/dashboard/training_solutions/training_catalog/${item.id}/edit/`);
+  // Handle Edit
+  const handleEdit = async (item) => {
+    try {
+      // FULL DETAIL FETCH
+      const res = await axiosInstance.get(
+        `/api/training_solutions/v1/training_detail/${item.id}/`
+      );
+
+      const fullDetail = res.data.data;
+
+      setTrainingDetail(fullDetail);
+
+      // Navigate
+      router.push(
+        `/dashboard/training_solutions/training_detail/post/?detail_id=${item.id}`
+      );
+    } catch (error) {
+      console.error("Failed to fetch detail:", error);
+    }
   };
 
   // Show Confirm Delete Modal
@@ -46,7 +63,7 @@ export default function TrainingCatalogDetailTable({
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">Training Detail List</h2>
         <Link
-          href="/dashboard/training_solutions/training_catalog/post/"
+          href="/dashboard/training_solutions/training_detail/post/"
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
         >
           + Create Detail
@@ -71,10 +88,7 @@ export default function TrainingCatalogDetailTable({
             {data.length > 0 ? (
               data.map((item) => (
                 <tr key={item.id} className="border-b hover:bg-gray-100">
-                 
-                  <td className="px-4 py-2">
-                    {item.id}
-                    </td>
+                  <td className="px-4 py-2">{item.id}</td>
                   <td className="px-4 py-2">
                     <span className="inline-block px-2 py-1 text-sm font-semibold rounded-full bg-sky-100">
                       {item.training_catalog}
@@ -82,47 +96,31 @@ export default function TrainingCatalogDetailTable({
                   </td>
 
                   <td className="px-4 py-2">{item.expert_trainer_profile}</td>
-                  <td className="px-4 py-2">
-                    {item.duration}
-                  </td>
+                  <td className="px-4 py-2 ">{item.duration}</td>
 
-                  <td className="px-4 py-2 max-w-xs truncate">
+                  <td className="px-4 py-2 max-w-xs truncate inline-block text-sm font-semibold rounded-full bg-blue-100 mt-1 ms-5">
                     {item.delivery_mode}
                   </td>
-
-                  {/* <td className="px-4 py-2">
-                    <span
-                      className={`inline-block px-2 py-1 text-sm font-semibold rounded-full ${
-                        item.status === "Active"
-                          ? "bg-green-100 text-green-700"
-                          : item.status === "Inactive"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-yellow-100 text-yellow-700"
-                      }`}
-                    >
-                      {item.status}
-                    </span>
-                  </td> */}
 
                   <td className="px-4 py-2">
                     <div className="flex gap-2 flex-wrap">
                       <Link
                         href={`/dashboard/training_solutions/training_catalog/${item.id}/details/`}
-                        className="px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 transition"
+                        className="px-3 py-1 bg-blue-500 text-white  rounded-sm hover:bg-blue-600 cursor-pointer transition"
                       >
                         Details
                       </Link>
 
                       <button
                         onClick={() => handleEdit(item)}
-                        className="px-3 py-1 bg-sky-500 text-white rounded hover:bg-sky-600 transition"
+                        className="px-3 py-1 bg-sky-500 text-white cursor-pointer rounded-sm hover:bg-sky-600 transition"
                       >
                         Edit
                       </button>
 
                       <button
                         onClick={() => confirmDelete(item.id)}
-                        className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                        className="px-3 py-1 bg-red-600 text-white cursor-pointer rounded-sm hover:bg-red-700 transition"
                       >
                         Delete
                       </button>

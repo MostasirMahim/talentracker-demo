@@ -225,7 +225,6 @@ export default function TrainingCatalogPost() {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             required
           >
-            <option value="">Select a category</option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
@@ -261,15 +260,15 @@ export default function TrainingCatalogPost() {
               <Image
                 src={imagePreview}
                 alt="Preview"
-                width={300}
-                height={200}
+                width={200}
+                height={150}
                 className="rounded-lg border-2 border-gray-300"
                 style={{ objectFit: "cover" }}
               />
               <button
                 type="button"
                 onClick={handleRemoveImage}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition"
+                className="absolute top-2 right-2 cursor-pointer bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -345,7 +344,7 @@ export default function TrainingCatalogPost() {
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 bg-blue-600 cursor-pointer text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading
               ? "Processing..."
@@ -359,7 +358,7 @@ export default function TrainingCatalogPost() {
               clearCatalog();
               router.push("/dashboard/training_solutions/training_catalog/");
             }}
-            className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition"
+            className="px-6 py-3 border-2 cursor-pointer border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition"
           >
             Cancel
           </button>

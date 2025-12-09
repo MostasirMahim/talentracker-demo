@@ -1,4 +1,5 @@
 // services/trainingCatalogService.js
+"use client"
 import axiosInstance from "@/lib/axiosIntance";
 
 // GET Catalog With Pagination
@@ -23,6 +24,7 @@ export const createTrainingDetail = (payload) => {
 
 // UPDATE
 export const updateTrainingDetail = (id, payload) => {
+  console.log("payload", payload);
   return axiosInstance.patch(
     `/api/training_solutions/v1/training_detail/${id}/`,
     payload

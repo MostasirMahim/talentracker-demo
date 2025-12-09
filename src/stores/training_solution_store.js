@@ -20,23 +20,23 @@ export const useCatalog = create(
     }
   )
 );
-//
-export const useCatalogDetail = create(
+
+export const useTrainingDetail = create(
   persist(
     (set, get) => ({
-      catalogDetail: {},
+      trainingDetail: {},
 
       // Set detail
-      setCatalogDetail: (detail) => set({ catalogDetail: detail }),
+      setTrainingDetail: (detail) => set({ trainingDetail: detail }),
 
       // Get detail
-      getCatalogDetail: () => get().catalogDetail,
+      getTrainingDetail: () => get().trainingDetail,
 
       // Clear detail
-      clearCatalogDetail: () => set({ catalogDetail: {} }),
+      clearTrainingDetail: () => set({ trainingDetail: {} }),
     }),
     {
-      name: "catalog-detail-storage", 
+      name: "training-detail-storage", 
     }
   )
 );
