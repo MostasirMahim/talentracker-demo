@@ -266,7 +266,8 @@ export default function TrainingDetailPost() {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-          >
+          > 
+            <option value="">Select Expert Trainer</option>
             {expertTrainers.map((item) => (
               <option key={item.id} value={String(item.id)}>
                 {item.name}
@@ -287,7 +288,7 @@ export default function TrainingDetailPost() {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            {/* <option value="">Select Training Catalog</option> */}
+            <option value="">Select Training Catalog</option>
             {trainingCatalogs.map((catalog) => (
               <option key={catalog.id} value={String(catalog.id)}>
                 {catalog.title} ({catalog.training_id})

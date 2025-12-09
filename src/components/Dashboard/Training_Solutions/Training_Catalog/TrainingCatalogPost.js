@@ -53,7 +53,7 @@ export default function TrainingCatalogPost() {
       setFormData({
         training_id: catalog.training_id || "",
         title: catalog.title || "",
-        category: catalog.category?.id || catalog.category || "",
+        category: catalog.category?.id || "",
         short_description: catalog.short_description || "",
         thumbnail_image: null,
         status: catalog.status || "",
@@ -137,7 +137,7 @@ export default function TrainingCatalogPost() {
       payload.append("short_description", formData.short_description);
       if (catalogId) {
         payload.append("status", formData.status);
-        }
+      }
 
       // Only append image if new one is selected
       if (formData.thumbnail_image) {
@@ -158,10 +158,23 @@ export default function TrainingCatalogPost() {
       clearCatalog();
       router.push("/dashboard/training_solutions/training_catalog/");
     } catch (error) {
-      console.error(error);
+      if (error.response?.data?.errors) {
+        const backendErrors = error.response.data.errors;
+
+        Object.keys(backendErrors).forEach((field) => {
+          backendErrors[field].forEach((msg) => {
+            toast.error(`${msg}`);
+          });
+        });
+
+        return;
+      }
       toast.error(
-        catalogId ? "Failed to update catalog" : "Failed to create catalog"
+        catalogId
+          ? "Failed to update catalog"
+          : "Failed to create catalog"
       );
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -219,12 +232,14 @@ export default function TrainingCatalogPost() {
             Category <span className="text-red-500">*</span>
           </label>
           <select
-            name="category"
             value={formData.category}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            required
+            onChange={(e) =>
+              setFormData({ ...formData, category: Number(e.target.value) })
+            }
+            className="border px-3 py-2 rounded w-full"
           >
+            <option value="">Select Category</option>
+
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
