@@ -7,14 +7,14 @@ export const metadata = {
   description: "Responsive trainer dashboard with sidebar",
 };
 export default async function RootLayout({ children }) {
-   const authUser = await get_me();
-    if (!authUser?.error) {
-      if (authUser?.data?.user.user_type !== "trainer") {
-        redirect("/");
-      }
-    } else {
+  const authUser = await get_me();
+  if (!authUser?.error) {
+    if (authUser?.data?.user.user_type !== "trainer") {
       redirect("/");
     }
+  } else {
+    redirect("/");
+  }
   return (
     <div>
       <NavbarStyleTwo />
