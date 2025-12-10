@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   ClockIcon,
@@ -9,66 +10,6 @@ import {
   ServerCrashIcon,
 } from "lucide-react";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
-
-// Mock API response structure provided by the user
-const mockApiResponse = {
-  code: 200,
-  status: "success",
-  message: "Activity log fetched successfully",
-  data: [
-    {
-      id: 4226,
-      user: "admin2@gmail.com",
-      timestamp: "2025-12-07T11:36:00.007413+06:00",
-      ip_address: "127.0.0.1",
-      location: "BD",
-      user_agent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-      request_method: "POST",
-      referrer_url: "http://localhost:3000/",
-      device: "LAPTOP-L0CRCIMB",
-      path: "/api/blogs/v1/categories/",
-      verb: "Category created",
-      severity_level: "info",
-      description: "Category 'raymond_pearson' created successfully",
-      response_status_code: 201,
-    },
-    {
-      id: 4225,
-      user: "admin2@gmail.com",
-      timestamp: "2025-12-07T11:32:00.012035+06:00",
-      ip_address: "127.0.0.1",
-      location: "BD",
-      user_agent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-      request_method: "POST",
-      referrer_url: "http://localhost:3000/",
-      device: "LAPTOP-L0CRCIMB",
-      path: "/api/blogs/v1/categories/",
-      verb: "Category created",
-      severity_level: "warning",
-      description: "Category 'andrew_watson' already exists",
-      response_status_code: 409,
-    },
-    {
-      id: 4224,
-      user: null,
-      timestamp: "2025-12-07T11:29:49.133175+06:00",
-      ip_address: "127.0.0.1",
-      location: "BD",
-      user_agent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-      request_method: "POST",
-      referrer_url: "http://localhost:3000/",
-      device: "LAPTOP-L0CRCIMB",
-      path: "/api/internal/health/",
-      verb: "Internal server error",
-      severity_level: "error",
-      description: "Database connection timeout during health check",
-      response_status_code: 500,
-    },
-  ],
-};
 
 // --- Helper Components ---
 

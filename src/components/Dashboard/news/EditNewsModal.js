@@ -157,7 +157,6 @@ export default function EditNewsModal({
               onChange={setDescription}
               modules={modules}
               className="bg-background"
-              s
               style={{ height: "300px" }}
             />
           </div>

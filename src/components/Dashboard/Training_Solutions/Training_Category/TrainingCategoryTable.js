@@ -6,9 +6,20 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
   const [newTitle, setNewTitle] = useState("");
   const [editId, setEditId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
+  const formatBDTime = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleString("en-BD", {
+      timeZone: "Asia/Dhaka",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className=" mx-auto p-6">
       {/* Create Section */}
       <div className="flex items-center gap-3 mb-5">
         <input
@@ -19,11 +30,11 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
         />
         <button
           onClick={() => {
-            if (!newTitle.trim()) return toast.error("Title required");
+            if (!newTitle.trim()) return toast.error("Category name is required");
             onCreate(newTitle);
             setNewTitle("");
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Create
         </button>
@@ -32,7 +43,7 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
       {/* Table */}
       <div className="overflow-x-auto bg-white shadow rounded-lg">
         <table className="w-full text-left">
-          <thead className="bg-gray-100 border-b">
+          <thead className="bg-blue-600 text-white border-b">
             <tr>
               <th className="p-3">SL</th>
               <th className="p-3">Name</th>
@@ -44,7 +55,7 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
 
           <tbody>
             {categories?.map((item, index) => (
-              <tr key={item.id} className="border-b hover:bg-gray-50">
+              <tr key={item.id} className="border-b hover:bg-gray-100">
                 <td className="p-3">{index + 1}</td>
 
                 {/* Editable cell */}
@@ -59,14 +70,14 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
                     item.name
                   )}
                 </td>
-                <td className="p-3">{item.created_at}</td>
-                <td className="p-3">{item.updated_at}</td>
+                <td className="p-3">{formatBDTime(item.created_at)}</td>
+                <td className="p-3">{formatBDTime(item.updated_at)}</td>
 
 
                 <td className="p-3 flex gap-2 justify-end">
                   {editId === item.id ? (
                     <button
-                      className="bg-green-500 text-white px-3 py-1 rounded"
+                      className="bg-green-500 cursor-pointer text-white px-3 py-1 rounded"
                       onClick={() => {
                         onUpdate(item.id, editTitle);
                         setEditId(null);
@@ -76,7 +87,7 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
                     </button>
                   ) : (
                     <button
-                      className="bg-yellow-500 text-white px-3 py-1 rounded"
+                      className="bg-sky-600 hover:bg-sky-700 cursor-pointer text-white px-3 py-1 rounded"
                       onClick={() => {
                         setEditId(item.id);
                         setEditTitle(item.name);
@@ -87,7 +98,7 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
                   )}
 
                   <button
-                    className="bg-red-600 text-white px-3 py-1 rounded"
+                    className="bg-red-600 cursor-pointer hover:bg-red-700 text-white px-3 py-1 rounded"
                     onClick={() => onDelete(item.id)}
                   >
                     Delete
