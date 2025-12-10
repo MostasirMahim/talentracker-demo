@@ -63,8 +63,8 @@
 }
 
 .apex-btn-enroll {
-  background-color: #000 !important; /* High contrast for enrollment */
-  border-color: #000 !important;
+  background-color: #0e4c89 !important; /* High contrast for enrollment */
+  border-color: #0e4c89 !important;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -114,4 +114,43 @@
   .apex-cta-block {
     margin-top: 2rem;
   }
+}
+
+/* styles/TrainingDetailApex.css (Additions for soft colors) */
+
+/* Base badge styling (removes default Bootstrap rounded corners if desired, or just sets text color) */
+.apex-badge {
+  padding: 0.5rem 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  border-radius: 0.35rem; /* Softened corners */
+}
+
+/* 1. Category Badge (Soft Blue/Periwinkle) */
+.apex-category {
+  background-color: #e0f2f7; /* Soft pastel blue */
+  color: #007099; /* Darker blue text for readability */
+}
+
+/* 2. Mode Badge (Soft Yellow/Cream) */
+.apex-mode {
+  background-color: #fff9e0; /* Soft pastel yellow */
+  color: #997c00; /* Darker yellow/brown text */
+}
+
+/* 3. Duration Badge (Soft Green/Mint) */
+.apex-duration {
+  background-color: #e0f7e9; /* Soft pastel green */
+  color: #00884d; /* Darker green text */
+}
+
+/* 4. Status Badge (Soft Gray/Lavender) */
+.apex-status {
+  background-color: #f0eaf7; /* Soft pastel lavender/gray */
+  color: #664d99; /* Darker purple text */
+}
+
+/* Make sure the text is visible against the light background */
+.apex-badge:not(.text-dark) {
+  color: inherit; /* Inherit the specific color set above */
 }

@@ -39,16 +39,16 @@ const TrainingDetailApex = ({ data }) => {
             </p>
 
             <div className="apex-metadata-badges d-flex flex-wrap gap-3 mt-3">
-              <span className="badge bg-primary apex-badge-primary">
+              <span className="badge apex-badge apex-category">
                 Category: {training?.category}
               </span>
-              <span className="badge bg-info text-dark apex-badge-info">
+              <span className="badge apex-badge apex-mode">
                 Mode: {detail?.delivery_mode}
               </span>
-              <span className="badge bg-secondary apex-badge-secondary">
+              <span className="badge apex-badge apex-duration">
                 Duration: {detail?.duration}
               </span>
-              <span className="badge bg-success apex-badge-success">
+              <span className="badge apex-badge apex-status">
                 Status: {training?.status}
               </span>
             </div>
@@ -69,7 +69,7 @@ const TrainingDetailApex = ({ data }) => {
               )}
               {detail?.cta_request_link && (
                 <a
-                  className="btn btn-outline-dark w-100 apex-btn-request"
+                  className="btn btn-outline-secondary w-100 apex-btn-request"
                   target="_blank"
                 >
                   Request Custom Info
