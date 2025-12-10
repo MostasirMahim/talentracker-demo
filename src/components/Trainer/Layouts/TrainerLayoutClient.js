@@ -10,7 +10,6 @@ import { TrainerMobileSidebarLayout } from "./MobileSidebar";
 import { SidebarLayoutTrainer } from "./SidebarLayout";
 import { TrainerHeaderLayout } from "./HeaderLayout";
 
-
 const navItems = [
   {
     id: "manage-profile",
@@ -45,15 +44,13 @@ const navItems = [
 ];
 
 export default function TrainerLayoutClient({ children }) {
-   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     import("./style.css").then(() => {
       setIsLoaded(true);
     });
   }, []);
-
-
 
   const [expandedSections, setExpandedSections] = useState(
     new Set(navItems.map((item) => item.id))

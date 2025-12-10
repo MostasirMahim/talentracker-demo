@@ -27,12 +27,22 @@ async function page({ searchParams }) {
 
   if (error) {
     return (
-      <div className="p-10 text-center text-red-500 text-lg">
-        <p className="text-lg"> 🚩 Failed to load gallery. Try once again!</p>
+      <div
+        style={{
+          padding: "2.5rem",
+          textAlign: "center",
+          color: "#ef4444",
+          fontSize: "1.125rem",
+        }}
+      >
+        <p style={{ marginBottom: "0.5rem" }}>
+          🚩 Failed to load gallery. Try once again!
+        </p>
         <p>{error}</p>
       </div>
     );
   }
+
   return (
     <div>
       <TopHeaderStyleTwo />
