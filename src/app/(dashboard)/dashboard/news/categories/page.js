@@ -215,21 +215,21 @@ export default function CategoriesPage() {
       ) : (
         <div className="overflow-x-auto rounded-lg border border-border">
           <table className="w-full">
-            <thead className="border-b border-border bg-secondary">
+            <thead className="bg-blue-600 text-white font-bold text-xs uppercase ">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-bold text-foreground">
+                <th className="px-6 py-3 text-left text-sm font-bold ">
                   ID
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-foreground">
+                <th className="px-6 py-3 text-left text-sm font-bold ">
                   Name
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-foreground">
+                <th className="px-6 py-3 text-left text-sm font-bold ">
                   Created
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-foreground">
+                <th className="px-6 py-3 text-left text-sm font-bold ">
                   Updated
                 </th>
-                <th className="px-6 py-3 text-right text-sm font-bold text-foreground">
+                <th className="px-6 py-3 text-right text-sm font-bold ">
                   Actions
                 </th>
               </tr>

@@ -132,6 +132,12 @@ const navItems = [
   },
   {
     icon: UserCheck,
+    label: "Registered trainers",
+    href: "/dashboard/training_solutions/trainers/",
+    urls: ["/dashboard/training_solutions/trainers/"],
+  },
+  {
+    icon: UserCheck,
     label: "View all Users",
     href: "/dashboard/users/",
     urls: ["/dashboard/users/"],

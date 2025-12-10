@@ -169,7 +169,6 @@ export default function LearningSegmentPostForm({ blogCategories }) {
           router.refresh();
         }
       } else {
-        // Create new blog
 
         response = await axiosInstance.post(
           "/api/learning_segments/v1/learning_segments/",
@@ -227,7 +226,7 @@ export default function LearningSegmentPostForm({ blogCategories }) {
     <div className="max-w-5xl mx-auto py-10">
       <div className="bg-white rounded-xl shadow p-8">
         <h2 className="text-2xl font-bold mb-6">
-          {isEditMode ? "Edit Blog Post" : "Create New Blog"}
+          {isEditMode ? "Edit Segment " : "Create New Segment"}
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

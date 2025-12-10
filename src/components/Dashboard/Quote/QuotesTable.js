@@ -85,7 +85,7 @@ export default function QuotesTable({ quotes }) {
       {/* Table */}
       <div className="overflow-x-auto rounded-2xl shadow-md border border-gray-200 bg-white">
         <table className="w-full text-sm text-left text-gray-700">
-          <thead className="text-xs uppercase bg-gray-100 text-gray-700">
+          <thead className="text-xs uppercase bg-blue-600 text-white font-bold ">
             <tr>
               <th className="px-6 py-3">ID</th>
               <th className="px-6 py-3">Name</th>

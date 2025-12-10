@@ -88,20 +88,20 @@ const ActivityLogTable = ({ logs }) => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-extrabold text-gray-900 mb-6">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">
         System Activity Log
       </h1>
 
       {/* Table Container - Uses overflow-x-auto for responsiveness */}
       <div className="bg-white shadow-xl rounded-xl ring-1 ring-gray-200 overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50 sticky top-0">
+          <thead className="bg-blue-600  sticky top-0">
             <tr>
-              {["Time", "User", "Action", "API Path", "Severity", "Status"].map(
+              {["Time", "User", "Action", "API Path","Referrer URL",  "Severity",  "Status"].map(
                 (header) => (
                   <th
                     key={header}
-                    className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider min-w-[100px]"
+                    className="px-6 py-3 text-left text-xs font-bold text-white  uppercase tracking-wider min-w-[100px]"
                   >
                     {header}
                   </th>
@@ -150,6 +150,12 @@ const ActivityLogTable = ({ logs }) => {
                     title={log.path}
                   >
                     {log.path}
+                  </td>
+                  <td
+                    className="px-6 py-4 text-sm text-indigo-600 truncate max-w-xs min-w-48"
+                    title={log.referrer_url}
+                  >
+                    {log.referrer_url}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <SeverityBadge level={log.severity_level} />

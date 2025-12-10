@@ -63,7 +63,7 @@ export default function HooksTableList({ hooks }) {
       </div>
 
       <table className="min-w-full border border-gray-200 text-sm">
-        <thead className="bg-gray-100">
+        <thead className="bg-blue-600 text-white font-bold text-xs uppercase ">
           <tr>
             <th className="text-left py-3 px-4 border-b">Statistic Name</th>
             <th className="text-left py-3 px-4 border-b">Value</th>
