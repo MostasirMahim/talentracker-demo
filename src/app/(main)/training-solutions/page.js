@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import TopHeaderStyleTwo from "@/components/Layouts/TopHeaderStyleTwo";
 import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import PageBanner from "@/components/Common/PageBanner";
