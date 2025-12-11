@@ -168,8 +168,8 @@ export default function TrainingCatalogTable({ trainingCatalog, onDelete }) {
 
       {/* Delete Confirmation Modal */}
       {showModal && (
-        <div className="fixed inset-0  bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-80">
+        <div className="fixed inset-0   flex items-center justify-center z-50">
+          <div className="bg-white shadow-xl/30 rounded-lg p-9 w-80">
             <h2 className="text-lg font-semibold mb-4">
               Are you sure you want to delete?
             </h2>
@@ -177,13 +177,13 @@ export default function TrainingCatalogTable({ trainingCatalog, onDelete }) {
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-4 py-2 bg-gray-200 cursor-pointer rounded hover:bg-gray-300"
               >
                 No
               </button>
               <button
                 onClick={handleDeleteConfirm}
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                className="px-4 py-2 cursor-pointer bg-red-600 text-white rounded hover:bg-red-700"
               >
                 Yes, Delete
               </button>

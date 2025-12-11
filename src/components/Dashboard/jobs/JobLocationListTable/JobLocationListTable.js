@@ -40,7 +40,7 @@ const JobLocationListTable = ({ jobLocation = {} }) => {
         <p className="text-gray-500 text-center py-4">No locations found.</p>
       ) : (
         <table className="min-w-full border border-gray-200 text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-blue-600 text-white uppercase text-sm font-semibold">
             <tr>
               <th className="text-left py-3 px-4 border-b">ID</th>
               <th className="text-left py-3 px-4 border-b">City</th>
@@ -67,13 +67,13 @@ const JobLocationListTable = ({ jobLocation = {} }) => {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleUpdate(type.id)}
-                      className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                      className="px-3 py-1 cursor-pointer bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                     >
                       Update
                     </button>
                     <button
                       onClick={() => handleDelete(type.id)}
-                      className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                      className="px-3 py-1 cursor-pointer  bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
                     >
                       Delete
                     </button>

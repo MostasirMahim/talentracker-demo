@@ -44,7 +44,7 @@ const JobListTable = ({ jobs = {} }) => {
       ) : (
         <>
           <table className="min-w-full border border-gray-200 text-sm">
-            <thead className="bg-gray-100">
+            <thead className="bg-blue-600 text-white uppercase text-sm font-semibold">
               <tr>
                 <th className="text-left py-3 px-4 border-b">ID</th>
                 <th className="text-left py-3 px-4 border-b">Title</th>
@@ -60,8 +60,8 @@ const JobListTable = ({ jobs = {} }) => {
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
                   <td className="py-3 px-4 border-b">{job.id}</td>
-                  <td className="py-3 px-4 border-b capitalize">
-                    <a href={`/career/jobs/${job.id}/`} target="_blank">
+                  <td className="py-3 px-4 border-b capitalize font-bold">
+                    <a href={`/career/jobs/${job.id}/`} target="_blank" className="hover:text-sky-500">
                       {job.title}
                     </a>
                   </td>
@@ -73,19 +73,19 @@ const JobListTable = ({ jobs = {} }) => {
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleUpdate(job.id)}
-                        className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                        className="px-3 py-1 bg-blue-600 cursor-pointer text-white rounded-md hover:bg-blue-700 transition-colors"
                       >
                         Update
                       </button>
                       <button
                         onClick={() => handleDelete(job.id)}
-                        className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                        className="px-3 py-1 bg-red-600 text-white cursor-pointer rounded-md hover:bg-red-700 transition-colors"
                       >
                         Delete
                       </button>
                       <button
                         onClick={() => handleApplications(job.id)}
-                        className="px-3 py-1 bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-colors"
+                        className="px-3 py-1 bg-sky-700 cursor-pointer text-white rounded-md hover:bg-sky-800 transition-colors"
                       >
                         applications
                       </button>
