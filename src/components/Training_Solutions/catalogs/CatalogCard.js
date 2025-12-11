@@ -1,13 +1,15 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import styled from "styled-components";
 
 function CatalogCard({ catalog }) {
+  const router = useRouter();
   return (
     <StyledWrapper>
-      <div className="card">
+      <div className="card" onClick={() => router.push(`/training-solutions/${catalog.id}`)}>
         <div className="card__shine" />
         <div className="card__glow" />
         <div className="card__content">
