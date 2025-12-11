@@ -61,7 +61,7 @@ const BlogsCategoriesListTable = ({ categories = {} }) => {
         <p className="text-gray-500 text-center py-4">No blog Category found.</p>
       ) : (
         <table className="min-w-full border border-gray-200 text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-blue-600 text-white uppercase text-sm font-semibold">
             <tr>
               <th className="text-left py-3 px-4 border-b">ID</th>
               <th className="text-left py-3 px-4 border-b">Name</th>
@@ -77,7 +77,7 @@ const BlogsCategoriesListTable = ({ categories = {} }) => {
                 className="hover:bg-gray-50 transition-colors duration-150"
               >
                 <td className="py-3 px-4 border-b">{type.id}</td>
-                <td className="py-3 px-4 border-b capitalize">{type.name}</td>
+                <td className="py-3 px-4 border-b capitalize font-bold">{type.name}</td>
                 <td className="py-3 px-4 border-b">
                   {formatBDTime(type.created_at)}
                 </td>

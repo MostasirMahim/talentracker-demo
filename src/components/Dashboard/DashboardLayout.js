@@ -23,6 +23,8 @@ import {
   UserPlus2,
   BookMarked,
   Logs,
+  Briefcase,
+  Image as ImageIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
@@ -54,7 +56,7 @@ const navItems = [
   {
     href: "#",
     label: "Jobs",
-    icon: Flower,
+    icon: Briefcase,
     children: [
       { href: "/dashboard/jobs/job_types/create", label: "Set Job type" },
       {
@@ -81,7 +83,7 @@ const navItems = [
   {
     href: "#",
     label: "Blogs",
-    icon: FilePenLine,
+    icon:   FilePenLine,
     children: [
       {
         href: "/dashboard/blogs/categories/create",
@@ -145,7 +147,7 @@ const navItems = [
   {
     href: "#",
     label: "Gallery",
-    icon: FilePenLine,
+    icon: ImageIcon,
     children: [
       {
         href: "/dashboard/gallery/categories/post",

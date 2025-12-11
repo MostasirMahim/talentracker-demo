@@ -146,8 +146,8 @@ export default function TrainingCatalogDetailTable({
 
       {/* Delete Confirm Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-md shadow-lg w-80">
+        <div className="fixed inset-0  flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-md shadow-xl/20 w-80">
             <h3 className="text-lg font-semibold mb-4">Are you sure?</h3>
             <p className="text-sm mb-6">
               Do you really want to delete this catalog?
@@ -156,14 +156,14 @@ export default function TrainingCatalogDetailTable({
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                className="px-4 py-2 cursor-pointer bg-gray-300 rounded hover:bg-gray-400"
               >
                 Cancel
               </button>
 
               <button
                 onClick={handleDelete}
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                className="px-4 py-2 cursor-pointer bg-red-600 text-white rounded hover:bg-red-700"
               >
                 Yes, Delete
               </button>

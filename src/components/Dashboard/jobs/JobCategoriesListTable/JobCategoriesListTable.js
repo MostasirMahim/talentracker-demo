@@ -11,6 +11,14 @@ const JobCategoriesListTable = ({ categories = {} }) => {
   const setCategory = useJobCategory((state) => state.setCategory);
 
   const handleDelete = async (id) => {
+    // alert confirmation dialog
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job category?"
+    );
+    if (!confirmDelete) {
+      toast.info("Job category deletion cancelled");
+      return;
+    }
     try {
       const response = await axiosInstance.delete(
         `/api/jobs/v1/job_categories/${id}/`
@@ -32,15 +40,15 @@ const JobCategoriesListTable = ({ categories = {} }) => {
   };
 
   return (
-    <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg p-6">
       <h2 className="text-xl font-semibold mb-4 text-gray-700">
         Job Categories
       </h2>
       {categories?.data.length === 0 ? (
         <p className="text-gray-500 text-center py-4">No job Category found.</p>
       ) : (
-        <table className="min-w-full border border-gray-200 text-sm">
-          <thead className="bg-gray-100">
+        <table className="min-w-full border border-gray-200 text-sm ">
+          <thead className="bg-blue-600 text-white uppercase text-sm font-semibold">
             <tr>
               <th className="text-left py-3 px-4 border-b">ID</th>
               <th className="text-left py-3 px-4 border-b">Name</th>

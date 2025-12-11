@@ -90,7 +90,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
         </h2>
         <button
           onClick={() => handleRefresh()}
-          className="px-3  bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+          className="px-3  bg-sky-600 text-white cursor-pointer rounded-md hover:bg-sky-700 transition-colors"
         >
           Refresh
         </button>
@@ -102,7 +102,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
       ) : (
         <>
           <table className="min-w-full border border-gray-200 text-sm">
-            <thead className="bg-gray-100">
+            <thead className="bg-blue-600 text-white uppercase text-xs ">
               <tr>
                 <th className="text-left py-3 px-4 border-b">ID</th>
                 <th className="text-left py-3 px-4 border-b">Candidate name</th>
@@ -110,7 +110,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
                   Career Start Date
                 </th>
                 <th className="text-left py-3 px-4 border-b">
-                  field_of_specialization
+                  field of specialization
                 </th>
                 <th className="text-left py-3 px-4 border-b">email</th>
                 <th className="text-left py-3 px-4 border-b">status</th>
@@ -175,13 +175,13 @@ const JobApplicationsListTable = ({ data = {} }) => {
                         onClick={() =>
                           handleViewProfile(app?.id, app?.candidate?.id)
                         }
-                        className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                        className="px-3 py-1 bg-blue-600 cursor-pointer text-white rounded-md hover:bg-blue-700 transition-colors"
                       >
                         Profile
                       </button>
                       <button
                         onClick={() => handleDownloadResume(app?.candidate?.id)}
-                        className="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                        className="px-3 py-1 cursor-pointer bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
                       >
                         Resume
                       </button>

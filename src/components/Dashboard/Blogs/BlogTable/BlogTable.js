@@ -60,7 +60,7 @@ export default function BlogTable({ blogs }) {
 
   return (
     <>
-      <div className="w-full px-4 md:px-8 py-6">
+      <div className="w-full lg:px-3 md:px-6 py-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">All Blogs</h2>
           
@@ -77,7 +77,7 @@ export default function BlogTable({ blogs }) {
         {/* Table container */}
         <div className="overflow-x-auto rounded-2xl shadow-md border border-gray-200 bg-white">
           <table className="w-full text-sm text-left text-gray-700">
-            <thead className="text-xs uppercase bg-gray-100 text-gray-700">
+            <thead className="bg-blue-600 text-white uppercase text-sm font-semibold">
               <tr>
                 <th className="px-4 py-3">Id</th>
                 <th className="px-4 py-3">Image</th>
