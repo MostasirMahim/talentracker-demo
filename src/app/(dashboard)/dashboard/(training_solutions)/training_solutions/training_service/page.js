@@ -1,33 +1,33 @@
 
-import TrainersTable from "@/components/Dashboard/Training_Solutions/Trainers/TrainersTable";
+import TrainingServiceRequestTable from "@/components/Dashboard/Training_Solutions/TrainingService/TrainingServiceRequestTable";
 import axiosInstance from "@/lib/axiosIntance";
 import React from "react";
 import { cookies } from "next/headers";
 
 
-
 async function page({ searchParams }) {
   const currentPage = searchParams?.page || 1;
+
+  let requests = [];
   const cookieStore = cookies();
   const authToken = cookieStore.get("access_token")?.value || "";
-  let trainers = [];
+
 
   try {
     // Pass page parameter to API
-    const trainersResponse = await axiosInstance.get(`/api/training_solutions/v1/trainers/list/?page_size=10&page=${currentPage}`, {
-     
+    const requestsResponse = await axiosInstance.get(`/api/training_solutions/v1/training_service_requests/?page_size=10&page=${currentPage}`, {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
     });
 
-    trainers = trainersResponse.data || [];
+    requests = requestsResponse.data || [];
   } catch (error) {
     console.error(error);
   }
   return (
     <div>
-      <TrainersTable trainers={trainers} />
+      <TrainingServiceRequestTable requests={requests} />
     </div>
   );
 }

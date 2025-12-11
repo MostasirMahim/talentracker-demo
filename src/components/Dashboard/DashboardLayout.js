@@ -168,6 +168,11 @@ const navItems = [
     icon: UserPlus2,
     children: [
       {
+        href: "/dashboard/training_solutions/training_service",
+        label: "Training Service",
+      },
+
+      {
         href: "/dashboard/training_solutions/training_category",
         label: "View Training Category",
       },
