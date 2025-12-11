@@ -425,7 +425,7 @@ export default function DashboardLayout({ children, permissions }) {
           }`}
         >
           {!collapsed ? (
-            <div className="flex items-center gap-4 w-full hover:bg-blue-500/50 px-4 py-3 rounded-lg transition-colors">
+            <div className="flex items-center gap-2 w-full hover:bg-blue-500/50 overflow-x-hidden px-1 py-3 rounded-lg transition-colors">
               <button
                 onClick={handleLogOut}
                 className="w-10 h-10 cursor-pointer rounded-full bg-white/30 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors"
