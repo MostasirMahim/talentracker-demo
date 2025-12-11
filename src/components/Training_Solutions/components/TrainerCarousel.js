@@ -35,7 +35,7 @@ function TrainerCarousel({ trainers }) {
             <article
               onClick={() => router.push(`/trainers/${card.id}`)}
               key={`${card.id}-1`}
-              className="card"
+              className="card-x card-content-x"
             >
               <div className="author">
                 <div className="avatar">
@@ -57,7 +57,7 @@ function TrainerCarousel({ trainers }) {
             <article
               onClick={() => router.push(`/trainers/${card.id}`)}
               key={`${card.id}-1`}
-              className="card"
+              className="card-x card-content-x"
             >
               <div className="author">
                 <div className="avatar">

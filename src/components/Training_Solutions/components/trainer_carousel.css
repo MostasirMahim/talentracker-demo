@@ -75,7 +75,7 @@
   }
 }
 
-.card {
+.card-x {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,7 +90,7 @@
   cursor: pointer;
 }
 
-.card-content {
+.card-content-x {
   display: flex;
   flex-direction: column;
   align-items: center;
