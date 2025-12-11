@@ -282,13 +282,13 @@ export default function CandidateProfileForApplication({
       <div className="flex justify-end gap-4 pt-4 border-t">
         <button
           onClick={() => handleDownloadResume()}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          className="flex items-center gap-2 cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
         >
           <Download size={18} /> Download Resume
         </button>
         <button
           onClick={() => handleUpdateStatus()}
-          className="flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition"
+          className="flex items-center cursor-pointer gap-2 bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition"
         >
           {showUpdateStatusForm ? (
             <>Cancel</>

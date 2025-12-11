@@ -12,6 +12,14 @@ const JobListTable = ({ jobs = {} }) => {
   const setJob = useJob((state) => state.setJob);
 
   const handleDelete = async (id) => {
+    // alert confirmation dialog
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job?"
+    );
+    if (!confirmDelete) {
+      toast.info("Job deletion cancelled");
+      return;
+    }
     try {
       const response = await axiosInstance.delete(`/api/jobs/v1/jobs/${id}/`);
       if (response.status == 200) {

@@ -11,6 +11,14 @@ const JobCategoriesListTable = ({ categories = {} }) => {
   const setCategory = useJobCategory((state) => state.setCategory);
 
   const handleDelete = async (id) => {
+    // alert confirmation dialog
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job category?"
+    );
+    if (!confirmDelete) {
+      toast.info("Job category deletion cancelled");
+      return;
+    }
     try {
       const response = await axiosInstance.delete(
         `/api/jobs/v1/job_categories/${id}/`

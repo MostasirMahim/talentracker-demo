@@ -11,6 +11,14 @@ const JobLocationListTable = ({ jobLocation = {} }) => {
   const setLocation = useJobLocation((state) => state.setLocation);
 
   const handleDelete = async (id) => {
+    // alert confirmation dialog
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job location?"
+    );
+    if (!confirmDelete) {
+      toast.info("Job location deletion cancelled");
+      return;
+    }
     try {
       const response = await axiosInstance.delete(
         `/api/jobs/v1/job_locations/${id}/`
