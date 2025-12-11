@@ -165,16 +165,12 @@ export async function get_course_details(id) {
 }
 
 export async function create_service_request(data) {
-  const accessToken = cookies().get("access_token")?.value;
-
   try {
     const res = await fetch(
       `${BASE_URL}/api/training_solutions/v1/training_service_requests/`,
       {
         method: "POST",
-        credentials: "include",
         headers: {
-          Cookie: `access_token=${accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),

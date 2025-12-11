@@ -99,7 +99,7 @@ function CandidateList({ data }) {
         ) : (
           <>
             <table className="min-w-full border border-gray-200 text-sm">
-              <thead className="bg-gray-100">
+              <thead className="bg-blue-600 text-white font-bold text-xs uppercase ">
                 <tr>
                   <th className="text-left py-3 px-4 border-b">ID</th>
                   <th className="text-left py-3 px-4 border-b">
@@ -109,9 +109,9 @@ function CandidateList({ data }) {
                     Career Start Date
                   </th>
                   <th className="text-left py-3 px-4 border-b">
-                    field_of_specialization
+                    Field of Specialization
                   </th>
-                  <th className="text-left py-3 px-4 border-b">email</th>
+                  <th className="text-left py-3 px-4 border-b">Email</th>
 
                   <th className="text-left py-3 px-4 border-b">Actions</th>
                 </tr>

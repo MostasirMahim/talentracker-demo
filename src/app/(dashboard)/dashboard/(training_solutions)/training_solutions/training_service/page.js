@@ -1,34 +1,33 @@
-export const dynamic = "force-dynamic";
 
-import BlogTable from "@/components/Dashboard/Blogs/BlogTable/BlogTable";
+import TrainingServiceRequestTable from "@/components/Dashboard/Training_Solutions/TrainingService/TrainingServiceRequestTable";
 import axiosInstance from "@/lib/axiosIntance";
 import React from "react";
 import { cookies } from "next/headers";
 
 
-
 async function page({ searchParams }) {
   const currentPage = searchParams?.page || 1;
+
+  let requests = [];
   const cookieStore = cookies();
   const authToken = cookieStore.get("access_token")?.value || "";
 
-  let blogs = [];
 
   try {
     // Pass page parameter to API
-    const blogResponse = await axiosInstance.get(`/api/blogs/v1/blogs/?page_size=10&page=${currentPage}`, {
+    const requestsResponse = await axiosInstance.get(`/api/training_solutions/v1/training_service_requests/?page_size=10&page=${currentPage}`, {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
     });
 
-    blogs = blogResponse.data || [];
+    requests = requestsResponse.data || [];
   } catch (error) {
     console.error(error);
   }
   return (
     <div>
-      <BlogTable blogs={blogs} />
+      <TrainingServiceRequestTable requests={requests} />
     </div>
   );
 }

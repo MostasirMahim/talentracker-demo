@@ -44,12 +44,12 @@ const LearningSegmentCategoryList = ({ categories = {} }) => {
         <p className="text-gray-500 text-center py-4">No job Category found.</p>
       ) : (
         <table className="min-w-full border border-gray-200 text-sm">
-          <thead className="bg-gray-100">
+          <thead className="bg-blue-600 text-white font-bold text-xs uppercase ">
             <tr>
-              <th className="text-left py-3 px-4 border-b">ID</th>
-              <th className="text-left py-3 px-4 border-b">Name</th>
-              <th className="text-left py-3 px-4 border-b">Created At</th>
-              <th className="text-left py-3 px-4 border-b">Actions</th>
+              <th className="text-left py-3 px-6 border-b">ID</th>
+              <th className="text-left py-3 px-6 border-b">Name</th>
+              <th className="text-left py-3 px-6 border-b">Created At</th>
+              <th className="text-left py-3 px-6 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>

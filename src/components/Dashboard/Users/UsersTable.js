@@ -285,7 +285,7 @@ export default function UsersTable({ users = {} }) {
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gradient-to-r from-blue-700 to-blue-800 text-white">
+              <thead className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
                 <tr>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                     #

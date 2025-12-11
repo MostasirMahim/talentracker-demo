@@ -123,8 +123,8 @@ export default function ContactUsTable({ contacts }) {
 
       {/* Table */}
       <div className="overflow-x-auto rounded-2xl shadow-md border border-gray-200 bg-white">
-        <table className="w-full text-sm text-left text-gray-700">
-          <thead className="text-xs uppercase bg-gray-100 text-gray-700">
+        <table className="w-full ">
+          <thead className="text-xs uppercase bg-blue-600 text-white">
             <tr>
               <th className="px-6 py-3">ID</th>
               <th className="px-6 py-3">Email</th>
@@ -134,7 +134,7 @@ export default function ContactUsTable({ contacts }) {
               <th className="px-6 py-3 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {contacts_data.map((contact) => (
               <tr
                 key={contact.id}

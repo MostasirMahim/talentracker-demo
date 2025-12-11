@@ -53,20 +53,22 @@ async function Page({ searchParams }) {
     error = err?.message || "Unexpected error while fetching profile.";
   }
   if (error) {
-  return (
-    <div
-      style={{
-        padding: '2.5rem',
-        textAlign: 'center',
-        color: '#ef4444',
-        fontSize: '1.125rem',
-      }}
-    >
-      <p style={{ marginBottom: '0.5rem' }}>🚩 Failed to load data. Try once again!</p>
-      <p>{error}</p>
-    </div>
-  );
-}
+    return (
+      <div
+        style={{
+          padding: "2.5rem",
+          textAlign: "center",
+          color: "#ef4444",
+          fontSize: "1.125rem",
+        }}
+      >
+        <p style={{ marginBottom: "0.5rem" }}>
+          🚩 Failed to load data. Try once again!
+        </p>
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <>

@@ -36,6 +36,7 @@ export const navigationPermissions = {
   "View all Users": "view_all_users",
   Gallery: "gallery_management",
   "Training Solutions": "training_solutions_management",
+  "Registered trainers": "training_solutions_management",
 };
 
 export const filterNavigationByPermissions = (navArray, userPermissions) => {

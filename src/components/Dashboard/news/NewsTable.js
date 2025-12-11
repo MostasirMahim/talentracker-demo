@@ -20,15 +20,15 @@ export default function NewsTable({ news, onEdit, onDelete }) {
   return (
     <div className="overflow-x-auto rounded-lg border border-border">
       <table className="w-full">
-        <thead className="border-b border-border bg-secondary">
+        <thead className="bg-blue-600 text-white font-bold text-xs uppercase ">
           <tr>
-            <th className="px-6 py-3 text-left text-sm font-bold text-foreground">ID</th>
-            <th className="px-6 py-3 text-left text-sm font-bold text-foreground">Title</th>
-            <th className="px-6 py-3 text-left text-sm font-bold text-foreground hidden md:table-cell">Source</th>
-            <th className="px-6 py-3 text-left text-sm font-bold text-foreground hidden lg:table-cell">Category</th>
-            <th className="px-6 py-3 text-left text-sm font-bold text-foreground hidden lg:table-cell">Created</th>
-            <th className="px-6 py-3 text-left text-sm font-bold text-foreground hidden xl:table-cell">Updated</th>
-            <th className="px-6 py-3 text-right text-sm font-bold text-foreground">Actions</th>
+            <th className="px-6 py-3 text-left text-sm font-bold ">ID</th>
+            <th className="px-6 py-3 text-left text-sm font-bold text-fo">Title</th>
+            <th className="px-6 py-3 text-left text-sm font-bold hidden md:table-cell">Source</th>
+            <th className="px-6 py-3 text-left text-sm font-bold hidden lg:table-cell">Category</th>
+            <th className="px-6 py-3 text-left text-sm font-bold hidden lg:table-cell">Created</th>
+            <th className="px-6 py-3 text-left text-sm font-bold hidden xl:table-cell">Updated</th>
+            <th className="px-6 py-3 text-right text-sm font-bold">Actions</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-border">
