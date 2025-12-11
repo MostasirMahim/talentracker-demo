@@ -1,0 +1,156 @@
+/* styles/TrainingDetailApex.css or similar CSS module */
+
+.apex-training-container {
+  /* Using max-width for control, standard Bootstrap container */
+  max-width: 1200px;
+}
+
+/* === Typography & Titles === */
+.apex-title {
+  font-size: 2.5rem; /* Larger font for main title */
+  font-weight: 700;
+  color: #171a1d; /* Deep charcoal for authority */
+}
+
+.apex-short-desc {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.apex-section-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #333;
+  border-color: #eee !important; /* Light separator */
+}
+
+/* Enhancing rich-text content from backend */
+.apex-full-description h2,
+.apex-full-curriculum h2,
+.apex-full-description h3,
+.apex-full-curriculum h3 {
+  font-weight: 600;
+  margin-top: 1.5rem;
+  color: #007bff; /* Primary color for section headers within content */
+}
+
+.apex-full-description ul,
+.apex-full-curriculum ol {
+  padding-left: 20px;
+}
+
+/* === Image & Media === */
+.apex-thumbnail-wrapper {
+  height: 350px; /* Fixed height for visual consistency */
+  position: relative;
+}
+
+.apex-thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image fills the container without distortion */
+}
+
+/* === CTA Block === */
+.apex-cta-block {
+  border: 2px solid #007bff; /* Highlight the CTA block */
+  transition: all 0.3s ease;
+}
+
+.apex-cta-block:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+.apex-btn-enroll {
+  background-color: #0e4c89 !important; /* High contrast for enrollment */
+  border-color: #0e4c89 !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* === Trainer Profile Card === */
+.apex-trainer-card {
+  border: none;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05) !important;
+}
+
+.apex-card-header {
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.apex-trainer-img-wrapper {
+  width: 120px;
+  height: 120px;
+}
+
+.apex-trainer-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.apex-trainer-name {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.apex-trainer-expertise {
+  font-style: italic;
+  color: #6c757d !important;
+}
+
+/* === Responsiveness === */
+@media (max-width: 991.98px) {
+  /* For tablets and smaller (Bootstrap lg breakpoint) */
+  .apex-training-header {
+    text-align: center;
+  }
+  .apex-metadata-badges {
+    justify-content: center;
+  }
+  .apex-cta-block {
+    margin-top: 2rem;
+  }
+}
+
+/* styles/TrainingDetailApex.css (Additions for soft colors) */
+
+/* Base badge styling (removes default Bootstrap rounded corners if desired, or just sets text color) */
+.apex-badge {
+  padding: 0.5rem 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  border-radius: 0.35rem; /* Softened corners */
+}
+
+/* 1. Category Badge (Soft Blue/Periwinkle) */
+.apex-category {
+  background-color: #e0f2f7; /* Soft pastel blue */
+  color: #007099; /* Darker blue text for readability */
+}
+
+/* 2. Mode Badge (Soft Yellow/Cream) */
+.apex-mode {
+  background-color: #fff9e0; /* Soft pastel yellow */
+  color: #997c00; /* Darker yellow/brown text */
+}
+
+/* 3. Duration Badge (Soft Green/Mint) */
+.apex-duration {
+  background-color: #e0f7e9; /* Soft pastel green */
+  color: #00884d; /* Darker green text */
+}
+
+/* 4. Status Badge (Soft Gray/Lavender) */
+.apex-status {
+  background-color: #f0eaf7; /* Soft pastel lavender/gray */
+  color: #664d99; /* Darker purple text */
+}
+
+/* Make sure the text is visible against the light background */
+.apex-badge:not(.text-dark) {
+  color: inherit; /* Inherit the specific color set above */
+}

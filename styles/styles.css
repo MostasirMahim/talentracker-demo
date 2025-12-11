@@ -1045,6 +1045,9 @@ Navbar Area CSS
     padding-top: 15px;
     padding-bottom: 15px;
   }
+  .single-banner-item {
+    margin-top: 0;
+  }
 }
 /*================================================
 Search Overlay CSS
@@ -1293,6 +1296,9 @@ Main Banner Area CSS
   z-index: 1;
   position: relative;
   padding-top: 180px;
+  margin-top: 142px;
+  display: flex;
+  align-items: end;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1303,10 +1309,10 @@ Main Banner Area CSS
   left: 0;
   z-index: -1;
   right: 0;
-  opacity: 0.9;
+  opacity: 0;
   top: 0;
   bottom: 0;
-  background-color: var(--whiteColor);
+  background-color: transparent;
 }
 
 .banner-item-content .sub-title {
@@ -1379,6 +1385,8 @@ Main Banner Area CSS
 
 .banner-item-image {
   text-align: center;
+  display: hidden;
+  opacity: 0;
 }
 
 .home-slides {
@@ -7086,6 +7094,28 @@ Modal CSS
   .auth-row .lost-wrap .lost-your-password {
     display: inline-block;
     padding: 6px 0;
+  }
+  .single-banner-item {
+    margin-top: 0;
+    display: block;
+  }
+  .banner-item-content {
+    text-align: center;
+  }
+  .banner-item-content .btn-box {
+    justify-content: center;
+  }
+}
+@media (max-width: 991px) {
+  .single-banner-item {
+    margin-top: 0;
+    display: block;
+  }
+  .banner-item-content {
+    text-align: center;
+  }
+  .banner-item-content .btn-box {
+    justify-content: center;
   }
 }
 /* optional: ensure checkbox doesn't push things weirdly when label wraps */

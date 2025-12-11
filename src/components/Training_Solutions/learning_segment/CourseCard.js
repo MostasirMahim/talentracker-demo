@@ -33,8 +33,6 @@ export default function CourseCard({ course }) {
         <div className="course-card-content">
           <span className="card-category">{course.category}</span>
           <h3 className="card-title">{course.program_title}</h3>
-          <p className="card-description">{course.description.substring(0, 80)}...</p>
-
           <div className="card-footer">
             <button className="card-view-btn">View Details</button>
           </div>

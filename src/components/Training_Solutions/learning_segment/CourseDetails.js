@@ -30,6 +30,7 @@ export default function CourseDetail({ course: courseData }) {
                   }`}
                   alt={courseData.program_title}
                   fill
+                  className="course-thumbnail"
                 />
               ) : (
                 <div className="placeholder-content">
