@@ -131,7 +131,7 @@ const NavbarStyleTwo = () => {
                       <Link
                         href="/training-solutions/"
                         className={`nav-link ${
-                          pathname == "/training_solutions/" && "active"
+                          pathname.startsWith("/training-solutions/") && "active"
                         }`}
                       >
                         Training Solutions

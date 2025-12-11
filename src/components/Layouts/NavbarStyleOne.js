@@ -49,7 +49,6 @@ const NavbarStyleOne = () => {
   const classTwo = menu
     ? "navbar-toggler navbar-toggler-right collapsed"
     : "navbar-toggler navbar-toggler-right";
-
   return (
     <>
       <div id="navbar" className="navbar-area">
@@ -126,7 +125,7 @@ const NavbarStyleOne = () => {
                     <Link
                       href="/training-solutions/"
                       className={`nav-link ${
-                        pathname == "/training_solutions/" && "active"
+                        pathname.startsWith("/training-solutions/") && "active"
                       }`}
                     >
                       Training solutions

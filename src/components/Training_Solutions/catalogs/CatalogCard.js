@@ -9,23 +9,35 @@ function CatalogCard({ catalog }) {
   const router = useRouter();
   return (
     <StyledWrapper>
-      <div className="card" onClick={() => router.push(`/training-solutions/${catalog.id}`)}>
-        <div className="card__shine" />
-        <div className="card__glow" />
-        <div className="card__content">
-          <div className="card__badge">NEW</div>
+      <div
+        className="card-x"
+        onClick={() =>
+          router.push(`/training-solutions/${catalog.id}`)
+        }
+      >
+        <div className="card__shine-x" />
+        <div className="card__glow-x" />
+        <div className="card__content-x">
+          <div className="card__badge-x">NEW</div>
+
           <div
             style={{
               backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_API_URL}${catalog.thumbnail_image})`,
             }}
             className="card__image"
           />
+
           <div className="card__text">
             <p className="card__title">{catalog.title}</p>
-            <p className="card__description">{catalog.short_description}</p>
+            <p className="card__description">
+              {catalog.short_description}
+            </p>
           </div>
+
           <div className="card__footer">
-            <div className="card__price">{catalog?.category?.name}</div>
+            <div className="card__price">
+              {catalog?.category?.name}
+            </div>
             <div className="card__button">
               <ArrowRight />
             </div>
@@ -37,7 +49,7 @@ function CatalogCard({ catalog }) {
 }
 
 const StyledWrapper = styled.div`
-  .card {
+  .card-x {
     --card-bg: #ffffff;
     --card-accent: #1489bc;
     --card-text: #1e293b;
@@ -56,7 +68,7 @@ const StyledWrapper = styled.div`
       Ubuntu, Cantarell, sans-serif;
   }
 
-  .card__shine {
+  .card__shine-x {
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -69,19 +81,19 @@ const StyledWrapper = styled.div`
     transition: opacity 0.3s ease;
   }
 
-  .card__glow {
+  .card__glow-x {
     position: absolute;
     inset: -10px;
     background: radial-gradient(
       circle at 50% 0%,
       rgba(59, 130, 246, 0.35) 0%,
-      /* blue-500 */ rgba(59, 130, 246, 0) 70%
+      rgba(59, 130, 246, 0) 70%
     );
     opacity: 0;
     transition: opacity 0.5s ease;
   }
 
-  .card__content {
+  .card__content-x {
     width: 100%;
     height: 100%;
     display: flex;
@@ -92,7 +104,7 @@ const StyledWrapper = styled.div`
     justify-content: flex-start;
   }
 
-  .card__badge {
+  .card__badge-x {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -113,7 +125,7 @@ const StyledWrapper = styled.div`
     border-radius: 12px;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat; /* IMPORTANT */
+    background-repeat: no-repeat;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
@@ -151,7 +163,7 @@ const StyledWrapper = styled.div`
     font-weight: 700;
     transition: all 0.3s ease;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* ADD */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -163,7 +175,7 @@ const StyledWrapper = styled.div`
     opacity: 0.7;
     transition: all 0.3s ease;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* ADD */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -197,59 +209,59 @@ const StyledWrapper = styled.div`
   }
 
   /* Hover Effects */
-  .card:hover {
+  .card-x:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border-color: rgba(124, 58, 237, 0.2);
   }
 
-  .card:hover .card__shine {
+  .card-x:hover .card__shine-x {
     opacity: 1;
     animation: shine 3s infinite;
   }
 
-  .card:hover .card__glow {
+  .card-x:hover .card__glow-x {
     opacity: 1;
   }
 
-  .card:hover .card__badge {
+  .card-x:hover .card__badge-x {
     transform: scale(1);
     opacity: 1;
     z-index: 1;
   }
 
-  .card:hover .card__image {
+  .card-x:hover .card__image {
     transform: translateY(-5px) scale(1.03);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
-  .card:hover .card__title {
+  .card-x:hover .card__title {
     color: var(--card-accent);
     transform: translateX(2px);
   }
 
-  .card:hover .card__description {
+  .card-x:hover .card__description {
     opacity: 1;
     transform: translateX(2px);
   }
 
-  .card:hover .card__price {
+  .card-x:hover .card__price {
     color: var(--card-accent);
     transform: translateX(2px);
   }
 
-  .card:hover .card__button {
+  .card-x:hover .card__button {
     transform: scale(1);
     box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.25);
   }
 
-  .card:hover .card__button svg {
+  .card-x:hover .card__button svg {
     animation: pulse 1.5s infinite;
   }
 
-  /* Active State */
-  .card:active {
+  /* Active */
+  .card-x:active {
     transform: translateY(-5px) scale(0.98);
   }
 
