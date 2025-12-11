@@ -23,7 +23,7 @@ function CatalogCard({ catalog }) {
             <p className="card__description">{catalog.short_description}</p>
           </div>
           <div className="card__footer">
-            <div className="card__price">{catalog.category}</div>
+            <div className="card__price">{catalog?.category?.name}</div>
             <div className="card__button">
               <ArrowRight />
             </div>
