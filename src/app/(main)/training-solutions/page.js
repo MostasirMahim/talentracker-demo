@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import { unstable_noStore } from "next/cache";
 import TopHeaderStyleTwo from "@/components/Layouts/TopHeaderStyleTwo";
 import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import PageBanner from "@/components/Common/PageBanner";
@@ -13,6 +14,7 @@ import TrainerCarousel from "@/components/Training_Solutions/components/TrainerC
 import CatalogPage from "@/components/Training_Solutions/catalogs/CatalogPage";
 
 async function Page({ searchParams }) {
+  unstable_noStore(); 
   const currentPage = searchParams?.page || 1;
   let courseData = null;
   let trainersData = null;
