@@ -6,7 +6,6 @@ import "./TrainingCatelog.css";
 // NOTE: Assumes Bootstrap CSS is imported globally in your Next.js application.
 
 const TrainingDetailApex = ({ data }) => {
-  // Strategic validation and extraction
   if (!data || data?.status !== "success" || !data?.data) {
     return (
       <div className="apex-training-error">
@@ -101,10 +100,10 @@ const TrainingDetailApex = ({ data }) => {
             <h2 className="apex-section-title border-bottom pb-2 mb-3">
               Overview
             </h2>
-            <div
-              className="apex-full-description"
-              dangerouslySetInnerHTML={renderHTML(detail?.full_description)}
-            />
+      {detail?.full_description &&  <div
+  className="apex-full-description"
+  dangerouslySetInnerHTML={{ __html: detail?.full_description }}
+></div>}
           </section>
 
           {/* Curriculum Section */}
@@ -112,10 +111,12 @@ const TrainingDetailApex = ({ data }) => {
             <h2 className="apex-section-title border-bottom pb-2 mb-3">
               Curriculum Insight
             </h2>
-            <div
+        { detail?.full_curriculum &&   <div
               className="apex-full-curriculum"
-              dangerouslySetInnerHTML={renderHTML(detail?.full_curriculum)}
-            />
+              dangerouslySetInnerHTML={{
+                __html: detail?.full_curriculum,
+              }}
+            ></div>}
           </section>
         </main>
 

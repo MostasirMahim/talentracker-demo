@@ -1,9 +1,27 @@
-import React from 'react'
+import Footer from "@/components/Layouts/Footer";
+import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
+import TrainingDetailApex from "@/components/TrainingCatelog/TrainingCatelogDetails";
+import axiosInstance from "@/lib/axiosIntance";
 
-function TrainingSolutionDetails() {
+async function TrainingSolutionDetails({ params }) {
+  const { id } = params;
+  let data = {};
+  try {
+    const response = await axiosInstance.get(
+      `/api/training_solutions/v1/training_catalog/${id}/`
+    );
+    data = response.data;
+  } catch (error) {
+    console.log(error);
+  }
+
   return (
-    <div>TrainingSolutionDetails</div>
-  )
+    <div>
+      <NavbarStyleOne />
+      <TrainingDetailApex data={data} />
+      <Footer />
+    </div>
+  );
 }
 
-export default TrainingSolutionDetails
+export default TrainingSolutionDetails;
