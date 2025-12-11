@@ -139,7 +139,7 @@ const TrainingDetailApex = ({ data }) => {
                   />
                 </div>
               )}
-              <h4 className="apex-trainer-name">{trainer?.name}</h4>
+              <h4 className="apex-trainer-name"><a href={`/trainers/${trainer?.id}/`} target="_blank" rel="noopener noreferrer">{trainer?.name}</a></h4>
               <p className="apex-trainer-expertise text-muted mb-2">
                 {trainer?.expertise}
               </p>
