@@ -13,7 +13,7 @@ export default function CandidateLoginForm({ email: propEmail }) {
   const [loading, setLoading] = useState(false);
   const { setUserType } = useForgetPasswordStore();
   const { register, handleSubmit, setValue, watch } = useForm({
-    defaultValues: { email: propEmail || "" },
+    defaultValues: { email: propEmail || "",  remember_me: false, },
   });
   const [showPassword, setShowPassword] = useState(false);
   const email = watch("email");
@@ -24,6 +24,7 @@ export default function CandidateLoginForm({ email: propEmail }) {
       const formData = {
         email: values.email,
         password: values.password,
+        remember_me: !!values.remember_me,
       };
       const res = await candidateLogin(formData);
       if (res?.error) {
@@ -81,7 +82,7 @@ export default function CandidateLoginForm({ email: propEmail }) {
       <div className="auth-row">
         <div className="remember">
           <div className="form-check">
-            <input className="form-check-input" type="checkbox" id="remember" />
+            <input className="form-check-input" type="checkbox" id="remember"   {...register("remember_me")} />
             <label className="form-check-label" htmlFor="remember">
               Remember me
             </label>
