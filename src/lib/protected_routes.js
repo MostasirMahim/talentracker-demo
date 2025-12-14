@@ -1,8 +1,14 @@
 export const protected_routes = [
   { path: "dashboard", permission_name: null },
-  { path: "learning_segment", permission_name: null },
-  { path: "activity_logs", permission_name: null },
-  { path: "expert_trainer_profiles", permission_name: null },
+  {
+    path: "learning_segment",
+    permission_name: "training_solutions_management",
+  },
+  { path: "activity_logs", permission_name: "activity_log_management" },
+  {
+    path: "expert_trainer_profiles",
+    permission_name: "training_solutions_management",
+  },
   { path: "roles", permission_name: "roles_management" },
   { path: "registration", permission_name: "employee_management" },
   { path: "jobs", permission_name: "job_management" },
@@ -14,4 +20,5 @@ export const protected_routes = [
   { path: "candidates", permission_name: "job_management" },
   { path: "users", permission_name: "view_all_users" },
   { path: "gallery", permission_name: "gallery_management" },
+  { path: "trainers", permission_name: "trainer_management" },
 ];
