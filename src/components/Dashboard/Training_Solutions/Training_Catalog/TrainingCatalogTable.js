@@ -168,7 +168,7 @@ export default function TrainingCatalogTable({ trainingCatalog, onDelete }) {
 
       {/* Delete Confirmation Modal */}
       {showModal && (
-        <div className="fixed inset-0   flex items-center justify-center z-50">
+        <div className="fixed inset-0   flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm">
           <div className="bg-white shadow-xl/30 rounded-lg p-9 w-80">
             <h2 className="text-lg font-semibold mb-4">
               Are you sure you want to delete?

@@ -90,6 +90,8 @@ export default function TrainingServiceRequestTable({ requests }) {
                   <th className="px-6 py-4 text-left">Company</th>
                   <th className="px-6 py-4 text-left">Email</th>
                   <th className="px-6 py-4 text-left">Cell Number</th>
+                  <th className="px-6 py-4 text-left">Additional Info</th>
+
                   <th className="px-6 py-4 text-left">Created At</th>
                   <th className="px-6 py-4 text-left">Is Read</th>
                   <th className="px-6 py-4 text-center">Action</th>
@@ -113,6 +115,7 @@ export default function TrainingServiceRequestTable({ requests }) {
                     <td className="px-6 py-4 text-sm font-bold">{item.company_name}</td>
                     <td className="px-6 py-4 text-sm">{item.email}</td>
                     <td className="px-6 py-4 text-sm">{item.cell_number}</td>
+                    <td className="px-6 py-4 text-sm">{item.additional_information}</td>
                     <td className="px-6 py-4 text-sm">
                       {new Date(item.created_at).toLocaleString()}
                     </td>
@@ -174,8 +177,8 @@ export default function TrainingServiceRequestTable({ requests }) {
 
       {/* DELETE CONFIRMATION MODAL */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center ">
-          <div className="bg-white p-6 rounded-lg shadow-xl/20 w-96">
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/40 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl/20  w-96">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">
               Are you sure?
             </h3>

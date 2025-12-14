@@ -146,7 +146,7 @@ export default function TrainingCatalogDetailTable({
 
       {/* Delete Confirm Modal */}
       {showModal && (
-        <div className="fixed inset-0  flex items-center justify-center z-50">
+        <div className="fixed inset-0  flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-md shadow-xl/20 w-80">
             <h3 className="text-lg font-semibold mb-4">Are you sure?</h3>
             <p className="text-sm mb-6">

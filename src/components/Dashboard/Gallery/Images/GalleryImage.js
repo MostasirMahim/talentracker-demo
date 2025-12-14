@@ -13,6 +13,17 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
   const [loading, setLoading] = useState(false);
 
   // ---------------------------
+  // View Gallery (New Tab)
+  // ---------------------------
+  const handleView = (id) => {
+    if (!id) return;
+
+    const url = `/gallery/${id}`;
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  // ---------------------------
   // Delete Image
   // ---------------------------
   const handleDelete = async () => {
@@ -102,15 +113,12 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
               {/* Hover Actions */}
               <div className=" mt-4  transition flex items-center justify-center gap-3">
                 <button
-                  onClick={() =>
-                    router.push(
-                      `/gallery/${gallery_id}/`
-                    )
-                  }
+                  onClick={() => handleView(gallery_id)}
                   className="px-3 py-1 font-bold bg-sky-500 text-white cursor-pointer rounded-sm text-sm shadow hover:bg-sky-600"
                 >
                   View
                 </button>
+
                 <button
                   className="px-3 py-1 font-bold bg-red-500 text-white cursor-pointer rounded-sm text-sm shadow hover:bg-red-600"
                   onClick={() => setDeleteId(item.id)}
@@ -125,8 +133,14 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
 
       {/* Delete Modal */}
       {deleteId && (
-        <div className="fixed inset-0 bg-blue-700 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow w-96 text-center">
+        <div
+          className="
+      fixed inset-0 z-50 
+      flex items-center justify-center
+      bg-black/40 backdrop-blur-sm
+    "
+        >
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center relative">
             <h3 className="text-lg font-semibold mb-4">
               Are you sure you want to delete this image?
             </h3>
@@ -135,14 +149,14 @@ export default function GalleryImage({ gallery_images, gallery_id = null }) {
               <button
                 onClick={handleDelete}
                 disabled={loading}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                className="bg-red-500 text-white cursor-pointer px-4 py-2 rounded hover:bg-red-600"
               >
                 {loading ? "Deleting..." : "Yes, Delete"}
               </button>
 
               <button
                 onClick={() => setDeleteId(null)}
-                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+                className="bg-gray-300 px-4 py-2 cursor-pointer rounded hover:bg-gray-400"
               >
                 Cancel
               </button>

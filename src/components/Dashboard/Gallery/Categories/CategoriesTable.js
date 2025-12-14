@@ -122,7 +122,7 @@ export default function CategoriesTable({ categories }) {
 
       {/* Delete confirmation modal */}
       {deleteId && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
           <div className="bg-white p-6 rounded-lg shadow-md w-96 text-center">
             <h3 className="text-lg font-semibold mb-4">
               Are you sure you want to delete this category?
@@ -131,13 +131,13 @@ export default function CategoriesTable({ categories }) {
               <button
                 onClick={handleDelete}
                 disabled={loading}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                className="bg-red-500 cursor-pointer hover:bg-red-600 text-white px-4 py-2 rounded"
               >
                 {loading ? "Deleting..." : "Yes, Delete"}
               </button>
               <button
                 onClick={() => setDeleteId(null)}
-                className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded"
+                className="bg-gray-300 cursor-pointer hover:bg-gray-400 px-4 py-2 rounded"
               >
                 Cancel
               </button>

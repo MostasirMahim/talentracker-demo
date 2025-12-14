@@ -110,9 +110,9 @@ export default function QuotesTable({ quotes }) {
                   {quote.id}
                 </td>
                 <td className="px-6 py-4 font-medium">{quote.name}</td>
-                <td className="px-6 py-4">{quote.email}</td>
+                <td className="px-6 py-4 font-bold">{quote.email}</td>
                 <td className="px-6 py-4">{quote.phone}</td>
-                <td className="px-6 py-4">{quote.service}</td>
+                <td className="px-6 py-4 font-bold">{quote.service}</td>
                 <td className="px-6 py-4">
                   <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${

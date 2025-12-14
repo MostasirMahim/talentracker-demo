@@ -89,7 +89,7 @@ function CandidateList({ data }) {
           </h2>
           <button
             onClick={() => handleRefresh()}
-            className="px-3  bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+            className="px-3 py-1 bg-sky-600 font-bold text-white rounded-md cursor-pointer hover:bg-sky-700 transition-colors"
           >
             Refresh
           </button>
@@ -138,13 +138,13 @@ function CandidateList({ data }) {
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleViewProfile(app?.id)}
-                          className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                          className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer font-bold "
                         >
                           Profile
                         </button>
                         <button
                           onClick={() => handleDownloadResume(app?.id)}
-                          className="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                          className="px-3 py-1 bg-sky-700 text-white rounded-md hover:bg-sky-800 cursor-pointer transition-colors font-bold text-sm"
                         >
                           Resume
                         </button>

@@ -13,6 +13,11 @@ const LearningSegmentCategoryList = ({ categories = {} }) => {
   );
 
   const handleDelete = async (id) => {
+    // delete confirmation
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this category?"
+    );
+    if (!confirmDelete) return;
     try {
       const response = await axiosInstance.delete(
         `/api/learning_segments/v1/learning_segment_categories/${id}/`

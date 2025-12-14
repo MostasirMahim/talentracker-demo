@@ -47,6 +47,7 @@ export default function BlogTable({ blogs }) {
     }
   };
 
+
   const handleUpdate = (id) => {
     const blogId = parseInt(id);
     const blog = blogList.find((blog) => blog.id === blogId);
@@ -141,9 +142,9 @@ export default function BlogTable({ blogs }) {
                   <td className="px-4 py-3">
                     <div className="flex justify-center gap-2">
                       {/* View Button */}
-                      <Link href={`/blog/${blog.id}`}>
+                      <Link href={`/blog/${blog.id}`} target="_blank">
                         <button
-                          className="px-3 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition cursor-pointer"
+                          className="px-3 py-1.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition cursor-pointer"
                           title="View"
                         >
                           View
@@ -152,7 +153,7 @@ export default function BlogTable({ blogs }) {
 
                       {/* Edit Button */}
                       <button
-                        className="px-3 py-1.5 cursor-pointer bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                        className="px-3 py-1.5 cursor-pointer bg-sky-700 text-white rounded-md hover:bg-sky-800 transition"
                         title="Edit"
                         onClick={() => handleUpdate(blog.id)}
                       >
@@ -161,7 +162,7 @@ export default function BlogTable({ blogs }) {
 
                       {/* Delete Button */}
                       <button
-                        className="px-3 py-1.5 cursor-pointer bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                        className="px-3 py-1.5 cursor-pointer bg-red-500 text-white rounded-md hover:bg-red-600 transition"
                         title="Delete"
                         onClick={() => handleDelete(blog.id)}
                       >

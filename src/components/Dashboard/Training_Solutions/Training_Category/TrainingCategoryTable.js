@@ -2,7 +2,12 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-export default function TrainingCategoryTable({ categories, onCreate, onUpdate, onDelete }) {
+export default function TrainingCategoryTable({
+  categories,
+  onCreate,
+  onUpdate,
+  onDelete,
+}) {
   const [newTitle, setNewTitle] = useState("");
   const [editId, setEditId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
@@ -30,7 +35,8 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
         />
         <button
           onClick={() => {
-            if (!newTitle.trim()) return toast.error("Category name is required");
+            if (!newTitle.trim())
+              return toast.error("Category name is required");
             onCreate(newTitle);
             setNewTitle("");
           }}
@@ -73,7 +79,6 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
                 <td className="p-3">{formatBDTime(item.created_at)}</td>
                 <td className="p-3">{formatBDTime(item.updated_at)}</td>
 
-
                 <td className="p-3 flex gap-2 justify-end">
                   {editId === item.id ? (
                     <button
@@ -99,7 +104,15 @@ export default function TrainingCategoryTable({ categories, onCreate, onUpdate, 
 
                   <button
                     className="bg-red-600 cursor-pointer hover:bg-red-700 text-white px-3 py-1 rounded"
-                    onClick={() => onDelete(item.id)}
+                    onClick={() => {
+                      const confirmDelete = window.confirm(
+                        "Are you sure you want to delete this category?"
+                      );
+
+                      if (confirmDelete) {
+                        onDelete(item.id);
+                      }
+                    }}
                   >
                     Delete
                   </button>

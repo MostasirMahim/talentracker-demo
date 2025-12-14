@@ -143,15 +143,15 @@ export default function ContactUsTable({ contacts }) {
                 <td className="px-6 py-4 font-medium text-gray-900">
                   {contact.id}
                 </td>
-                <td className="px-6 py-4">{contact.email}</td>
+                <td className="px-6 py-4 font-bold ">{contact.email}</td>
                 <td className="px-6 py-4">{contact.phone_number}</td>
-                <td className="px-6 py-4">{contact.company}</td>
+                <td className="px-6 py-4 font-bold ">{contact.company}</td>
                 <td className="px-6 py-4">{contact.subject}</td>
                 <td className="px-6 py-4 text-center">
                   <div className="action-menu-container relative inline-block">
                     <button
                       onClick={() => toggleActionMenu(contact.id)}
-                      className="p-2 hover:bg-gray-200 rounded-md transition-colors"
+                      className="p-2 hover:bg-gray-200 rounded-md cursor-pointer transition-colors"
                       title="Actions"
                     >
                       <svg
@@ -219,7 +219,7 @@ export default function ContactUsTable({ contacts }) {
                             setOpenActionMenu(null);
                             handleDelete(contact.id);
                           }}
-                          className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 transition-colors rounded-b-lg"
+                          className="flex items-center cursor-pointer gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 transition-colors rounded-b-lg"
                         >
                           <svg
                             className="w-4 h-4 text-red-600"
