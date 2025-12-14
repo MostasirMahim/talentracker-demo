@@ -3,7 +3,6 @@ import React from "react";
 const CompanyOverview2 = () => {
   return (
     <div className="py-5" style={{
-      // backgroundcolor: sky and navy blue 1000
       background: 'linear-gradient(135deg, rgb(20, 137, 188) 0%, rgb(30,27,75) 100%)',
       minHeight: '100vh',
       display: 'flex',
