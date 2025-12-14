@@ -1234,9 +1234,6 @@ Navbar Area CSS
             };
         }
     }
-    .single-banner-item {
-    margin-top: 0
-    }
 }
 
 /*================================================
@@ -1503,17 +1500,11 @@ Main Banner Area CSS
     z-index: 1;
     position: relative;
     padding-top: 180px;
-    margin-top: 142px;
-    display: flex; // enable vertical centering
-    align-items: end;
-
     background: {
         position: center center;
         repeat: no-repeat;
         size: cover;
-    }
-
-    ;
+    };
     &::before {
         content: '';
         position: absolute;
@@ -1523,10 +1514,11 @@ Main Banner Area CSS
         opacity: 0;
         top: 0;
         bottom: 0;
-        background-color: transparent;
+        background-color: var(--whiteColor);
     }
 }
 .banner-item-content {
+    padding-bottom: 50px;
     .sub-title {
         display: block;
         margin-bottom: 12px;
@@ -8167,10 +8159,6 @@ Modal CSS
       padding: 6px 0;
     }
   }
-    .single-banner-item {
-    margin-top: 0;
-     display: block;
-    }
     .banner-item-content {
     text-align: center;
 
@@ -8180,10 +8168,6 @@ Modal CSS
   }
 }
 @media (max-width: 991px) {
-    .single-banner-item {
-        margin-top: 0;
-        display: block;
-    }
 
     .banner-item-content {
         text-align: center;
