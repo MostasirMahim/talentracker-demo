@@ -83,7 +83,7 @@ const navItems = [
   {
     href: "#",
     label: "Blogs",
-    icon:   FilePenLine,
+    icon: FilePenLine,
     children: [
       {
         href: "/dashboard/blogs/categories/create",
@@ -135,8 +135,8 @@ const navItems = [
   {
     icon: UserCheck,
     label: "Registered trainers",
-    href: "/dashboard/training_solutions/trainers/",
-    urls: ["/dashboard/training_solutions/trainers/"],
+    href: "/dashboard/trainers/",
+    urls: ["/dashboard/trainers/"],
   },
   {
     icon: UserCheck,
