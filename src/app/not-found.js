@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { hover } from "framer-motion";
 
 export default function NotFound() {
   return (
@@ -19,7 +20,7 @@ export default function NotFound() {
               changed or is temporarily unavailable.
             </p>
 
-            <Link href="/" className="default-btn">
+            <Link href="/" className="default-btn" >
               Back To Home <i className="ri-arrow-right-line"></i>
             </Link>
           </div>
