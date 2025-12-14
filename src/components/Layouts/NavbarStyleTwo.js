@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
 import Image from "next/image";
 import SideCanvas from "./SideCanvas";
@@ -16,6 +16,8 @@ const NavbarStyleTwo = () => {
   const [menu, setMenu] = React.useState(true);
   const { setUser, user: data } = useUserStore();
   const user = data?.error === false ? true : "";
+  const [searchText, setSearchText] = useState("");
+  const router = useRouter();
   const handleFetchData = async () => {
     const fetchedData = await get_me();
     setUser(fetchedData);
@@ -43,6 +45,14 @@ const NavbarStyleTwo = () => {
   const handleToggleSearchModal = () => {
     setActiveSearchModal(!isActiveSearchModal);
   };
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!searchText.trim()) return;
+    router.push(`/services/?searchText=${encodeURIComponent(searchText)}`);
+    setSearchText("");
+    setActiveSearchModal("false");
+  };
+
 
   const classOne = menu
     ? "collapse navbar-collapse"
@@ -282,11 +292,12 @@ const NavbarStyleTwo = () => {
             </div>
 
             <div className="search-overlay-form">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <input
                   type="text"
                   className="input-search"
                   placeholder="Enter your keywords..."
+                  onChange={(e) => setSearchText(e.target.value)}
                 />
                 <button type="submit">
                   <i className="ri-search-line"></i>

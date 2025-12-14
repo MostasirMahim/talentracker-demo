@@ -1,5 +1,6 @@
 "use client";
 
+import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import SmartPagination from "@/components/SmartPagination/SmartPagination";
 import axiosInstance from "@/lib/axiosIntance";
 import { useJob } from "@/stores/job_dependencies_update_store";
@@ -69,7 +70,11 @@ const JobListTable = ({ jobs = {} }) => {
                 >
                   <td className="py-3 px-4 border-b">{job.id}</td>
                   <td className="py-3 px-4 border-b capitalize font-bold">
-                    <a href={`/career/jobs/${job.id}/`} target="_blank" className="hover:text-sky-500">
+                    <a
+                      href={`/career/jobs/${job.id}/`}
+                      target="_blank"
+                      className="hover:text-sky-500"
+                    >
                       {job.title}
                     </a>
                   </td>
@@ -103,7 +108,7 @@ const JobListTable = ({ jobs = {} }) => {
               ))}
             </tbody>
           </table>
-          <SmartPagination paginationData={jobs?.pagination} />
+          <AdminSmartPagination paginationData={jobs?.pagination} />
         </>
       )}
     </div>
