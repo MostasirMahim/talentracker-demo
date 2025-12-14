@@ -2,6 +2,8 @@ export const dynamic = "force-dynamic";
 import DashBoardHealth from "@/components/Dashboard/home/DashBoardHealth/DashBoardHealth";
 import DashboardHome from "@/components/Dashboard/home/DashboardHome";
 import DashboardRecentActivity from "@/components/Dashboard/home/DashboardRecentActivity/DashboardRecentActivity";
+import DashBoardCardLoader from "@/components/Loaders/DashBoardCardLoader/DashBoardCardLoader";
+import DashBoardSErverLoader from "@/components/Loaders/DashBoardServerLoader/DashBoardServerLoader";
 import { Suspense } from "react";
 
 function DashboardPage() {
@@ -14,15 +16,33 @@ function DashboardPage() {
           Here what happening with your dashboard today.
         </p>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div>
+            <DashBoardCardLoader />
+          </div>
+        }
+      >
         <DashboardHome />
       </Suspense>
       <div>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div>
+              <DashBoardCardLoader />
+            </div>
+          }
+        >
           <DashboardRecentActivity />
         </Suspense>
         <div className="bg-white rounded-xl shadow-sm border border-blue-100 p-6 mt-5">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="m-auto">
+                <DashBoardSErverLoader />
+              </div>
+            }
+          >
             <DashBoardHealth />
           </Suspense>
         </div>
