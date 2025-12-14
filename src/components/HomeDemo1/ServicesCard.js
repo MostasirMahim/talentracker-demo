@@ -67,7 +67,7 @@ const ServicesCard = () => {
       <div className="services-">
         <div className="container">
           <div className="section-title">
-            <span className="sub-title">SERVICES</span>
+            <span className="sub-title mt-5">SERVICES</span>
             <h2>See All of Our Services </h2>
           </div>
 
