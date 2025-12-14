@@ -51,7 +51,7 @@ const NavbarStyleOne = () => {
     : "navbar-toggler navbar-toggler-right";
   return (
     <>
-      <div id="navbar" className="navbar-area">
+      <div id="navbar" className="navbar-area navbar-style-one">
         <div className="zixon-nav">
           <div className="container-fluid">
             <nav className="navbar navbar-expand-md navbar-light">
