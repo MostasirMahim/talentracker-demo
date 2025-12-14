@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import DashBoardHealth from "@/components/Dashboard/home/DashBoardHealth/DashBoardHealth";
 import DashboardHome from "@/components/Dashboard/home/DashboardHome";
 import DashboardRecentActivity from "@/components/Dashboard/home/DashboardRecentActivity/DashboardRecentActivity";
