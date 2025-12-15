@@ -5,7 +5,8 @@ const CompanyOverview2 = () => {
   return (
     <div>
       <div className="mt-5 section-title   text-center">
-        <span className="sub-title">COMPANY OVERVIEW</span>
+        <span className="sub-title">OVERVIEW</span>
+         <h3>Company Overview</h3>
       </div>
       <div
         className=""
