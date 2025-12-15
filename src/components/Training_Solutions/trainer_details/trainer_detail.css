@@ -191,12 +191,20 @@
   background-color: rgba(0, 188, 212, 0.2);
   border: 1px solid var(--accent-cyan);
   color: var(--accent-cyan);
+
+  
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.5;
 }
 
 .badge-gray {
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: var(--white);
+  display: flex;
+  align-items: center;
 }
 
 .social-links {
@@ -490,6 +498,10 @@
     text-align: center;
     gap: 2rem;
   }
+  .info-badges {
+    gap: 0.5rem;
+     justify-content: center;
+  }
 
   .profile-image {
     width: 150px;
@@ -511,6 +523,16 @@
 
   .social-links {
     justify-content: center;
+  }
+  .badge-blue {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    line-height: 1.5; 
   }
 }
 
@@ -553,7 +575,16 @@
     padding: 0.4rem 1rem;
     font-size: 0.75rem;
   }
+   .badge-blue {
+    display: block;
+    width: 100%;
+    max-width: 100%;
 
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    line-height: 1.5; 
+  }
   .content-section {
     padding: 1.5rem;
   }
