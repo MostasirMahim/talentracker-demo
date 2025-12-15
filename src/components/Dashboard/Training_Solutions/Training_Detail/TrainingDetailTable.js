@@ -104,12 +104,7 @@ export default function TrainingCatalogDetailTable({
 
                   <td className="px-4 py-2">
                     <div className="flex gap-2 flex-wrap">
-                      <Link
-                        href={`/dashboard/training_solutions/training_catalog/${item.id}/details/`}
-                        className="px-3 py-1 bg-blue-500 text-white  rounded-sm hover:bg-blue-600 cursor-pointer transition"
-                      >
-                        Details
-                      </Link>
+                     
 
                       <button
                         onClick={() => handleEdit(item)}

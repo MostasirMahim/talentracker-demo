@@ -1,6 +1,4 @@
 
-
-
 "use client";
 import useTrainingCatalog from "@/hooks/useTrainingCatalog";
 import TrainingCatalogTable from "@/components/Dashboard/Training_Solutions/Training_Catalog/TrainingCatalogTable";

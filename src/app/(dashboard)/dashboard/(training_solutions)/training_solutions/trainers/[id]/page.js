@@ -1,19 +1,28 @@
-export const dynamic = "force-dynamic";
 
 import axiosInstance from "@/lib/axiosIntance";
 import TrainersDetails from "@/components/Dashboard/Training_Solutions/Trainers/TrainersDetails";
 import React from "react";
+import { cookies } from "next/headers";
+
 
 export default async function Page({ params }) {
   const { id } = params;
 
   let trainer = null;
   let errorMessage = null;
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("access_token")?.value || "";
+
 
   try {
     // Fetch Trainer Details
     const response = await axiosInstance.get(
       `/api/training_solutions/v1/trainers/list/${id}/`
+      , {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
     );
 
     if (response?.data?.status === "success") {
