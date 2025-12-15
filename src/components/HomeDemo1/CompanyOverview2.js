@@ -36,7 +36,7 @@ const CompanyOverview2 = () => {
                         overflow: "hidden",
                         justifyContent: "center",
                         alignItems: "center",
-                        background: "#e6f0ff", // Light Blue Background
+                        backgroundImage: "linear-gradient(to right, #1489bc, #0e4c89)",
                         borderRadius: "24px 0 0 24px", // Rounded corners for the left side
                       }}
                     >
@@ -61,20 +61,20 @@ const CompanyOverview2 = () => {
                           }}
                         >
                           <img
-                            src="/images/company_overview/image1.svg"
+                            src="/images/company_overview/image2.svg"
                             alt="Overview Icon"
                             style={{ width: "100%", height: "100%" }}
                           />
                         </div>
 
                         <h3
-                          className="text-black fw-bold mb-3"
+                          className="text-white fw-bold mb-3"
                           style={{ fontSize: "1.5rem" }}
                         >
-                          Building Tomorrow's Workforce
+                          Building Tomorrow&apos;s Workforce
                         </h3>
                         <p
-                          className="text-black"
+                          className="text-white "
                           style={{ opacity: 0.9, lineHeight: "1.6" }}
                         >
                           Strategic HR solutions that transform businesses
