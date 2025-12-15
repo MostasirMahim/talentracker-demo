@@ -6,7 +6,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 export async function get_training_service_categories() {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/training_solutions/v1/training_categories/`
+      `${BASE_URL}/api/training_solutions/v1/training_categories/`,
+      {
+        cache: "no-store",
+      }
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
