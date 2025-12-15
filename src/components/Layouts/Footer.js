@@ -1,3 +1,4 @@
+// Footer.jsx
 "use client";
 
 import React from "react";
@@ -12,24 +13,30 @@ const Footer = () => {
       <footer className="footer-area">
         <div className="container">
           <div className="row justify-content-center">
+            {/* First Column: Logo, Company Name, Map */}
             <div className="col-lg-4 col-sm-8 col-md-8">
               <div className="single-footer-widget">
                 <Link href="/" className="logo">
                   <Image
                     src="/images/logos/logo_white.png"
-                    alt="image"
+                    alt="TalenTracker Logo"
                     width={300}
                     height={50}
                   />
                 </Link>
-                <p>TalenTracker Limited.</p>
-                <div className="footer-contact-info">
+                {/* Repositioned Company Name */}
+                <p className="company-tagline">TalenTracker Limited.</p>
+
+                <div className="footer-contact-info footer-map-snippet">
                   <h5>Google Map:</h5>
-                  <GoogleMap />
+                  <div className="map-wrapper">
+                    <GoogleMap />
+                  </div>
                 </div>
               </div>
             </div>
 
+            {/* Second Column: Quick Links */}
             <div className="col-lg-4 col-sm-8 col-md-8">
               <div className="single-footer-widget pl-4">
                 <h3>Quick Links</h3>
@@ -41,7 +48,10 @@ const Footer = () => {
                     <Link href="/career">Available Jobs</Link>
                   </li>
                   <li>
-                    <Link href="/coming_soon">Training Services</Link>
+                    <Link href="/training-solutions">Training Solutions</Link>
+                  </li>
+                  <li>
+                    <Link href="/news">News</Link>
                   </li>
                   <li>
                     <Link href="/about-us">About Us</Link>
@@ -56,26 +66,28 @@ const Footer = () => {
               </div>
             </div>
 
+            {/* Third Column: Reach Out */}
             <div className="col-lg-4 col-sm-8 col-md-8">
               <div className="single-footer-widget pl-2">
                 <h3>Reach Out</h3>
                 <div className="footer-contact-info">
                   <ul>
                     <li>
-                      <span>Call:</span>{" "}
+                      <span>Call :</span>{" "}
                       <a href="tel:+8801847293000">+880 184 7293 000</a>
                     </li>
                     <li>
-                      <span>Email:</span>{" "}
+                      <span>Email :</span>{" "}
                       <a href="mailto:care@talentracker.net">
                         care@talentracker.net
                       </a>
                     </li>
+                    {/* *** CHANGE HERE: Removed className="location-li" *** */}
                     <li>
-                      <span>Location:</span>{" "}
+                      <span>Location :</span>{" "}
                       <a>
                         House 1(Level 2), Road 3, Block A, Mirpur 11, Begum
-                        Rokeya Avenue, Dhaka-1216
+                        Rokeya Avenue, Dhaka-1216.
                       </a>
                     </li>
                   </ul>
@@ -85,6 +97,7 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Copyright Area */}
         <div className="copyright-area">
           <div className="container">
             <div className="row align-items-center">

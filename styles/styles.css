@@ -59,6 +59,8 @@ Default CSS
   --optionalColor: #666666;
   --whiteColor: #ffffff;
   --blackColor: #262E2E;
+  --lightColor: #05b4ff;
+  --lightColor2: #05ffff;
   --fontSize: 16px;
   --transition: .5s;
 }
@@ -6635,6 +6637,11 @@ Footer Area CSS
   position: relative;
   z-index: 1;
 }
+@media only screen and (max-width: 991px) {
+  .footer-area {
+    padding-top: 80px;
+  }
+}
 .footer-area.style-two {
   padding-top: 100px;
   background-color: var(--blackColor);
@@ -6656,16 +6663,33 @@ Footer Area CSS
 }
 
 .single-footer-widget {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 .single-footer-widget .logo {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+}
+.single-footer-widget .company-tagline {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
 }
 .single-footer-widget p {
   color: #ffffff;
   font-size: 20px;
   font-weight: 600;
+}
+.single-footer-widget .footer-map-snippet .map-wrapper {
+  border: 3px solid var(--lightColor);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 200px;
+  box-shadow: 0 4px 10px rgba(6, 221, 254, 0.3);
+}
+.single-footer-widget .footer-map-snippet .map-wrapper > div {
+  height: 100%;
+  width: 100%;
 }
 .single-footer-widget .footer-contact-info {
   margin-top: 20px;
@@ -6682,18 +6706,47 @@ Footer Area CSS
 }
 .single-footer-widget .footer-contact-info ul li {
   color: var(--whiteColor);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .single-footer-widget .footer-contact-info ul li span {
   color: var(--whiteColor);
   font-weight: 600;
+  display: inline-block;
+  margin-right: 5px;
 }
 .single-footer-widget .footer-contact-info ul li a {
-  display: inline-block;
+  display: inline;
   color: var(--whiteColor);
+  transition: color 0.3s ease-in-out;
+  position: relative;
+  text-decoration: none;
+}
+.single-footer-widget .footer-contact-info ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--lightColor);
+  transition: width 0.3s ease-in-out;
 }
 .single-footer-widget .footer-contact-info ul li a:hover {
-  color: var(--mainColor);
+  color: var(--lightColor2);
+}
+.single-footer-widget .footer-contact-info ul li a:hover::after {
+  width: 100%;
+}
+.single-footer-widget .footer-contact-info ul li.location-li {
+  display: flex;
+  align-items: flex-start;
+}
+.single-footer-widget .footer-contact-info ul li.location-li span {
+  flex-shrink: 0;
+}
+.single-footer-widget .footer-contact-info ul li.location-li a {
+  flex-grow: 1;
+  line-height: 1.5;
 }
 .single-footer-widget .footer-contact-info ul li:last-child {
   margin-bottom: 0;
@@ -6702,6 +6755,18 @@ Footer Area CSS
   color: var(--whiteColor);
   margin-bottom: 25px;
   font-size: 22px;
+  text-align: left;
+  position: relative;
+}
+.single-footer-widget h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 50px;
+  height: 3px;
+  background-color: var(--lightColor);
+  bottom: -10px;
 }
 .single-footer-widget .links-list {
   padding-left: 0;
@@ -6714,9 +6779,25 @@ Footer Area CSS
 .single-footer-widget .links-list li a {
   display: inline-block;
   color: var(--whiteColor);
+  position: relative;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.single-footer-widget .links-list li a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--lightColor);
+  transition: width 0.3s ease-in-out;
 }
 .single-footer-widget .links-list li a:hover {
-  color: var(--mainColor);
+  color: var(--lightColor2);
+}
+.single-footer-widget .links-list li a:hover::after {
+  width: 100%;
 }
 .single-footer-widget .links-list li:last-child {
   margin-bottom: 0;
@@ -6724,8 +6805,20 @@ Footer Area CSS
 .single-footer-widget.pl-4 {
   padding-left: 4rem;
 }
+@media only screen and (max-width: 991px) {
+  .single-footer-widget.pl-4 {
+    padding-left: 0;
+    margin-top: 30px;
+  }
+}
 .single-footer-widget.pl-2 {
   padding-left: 2rem;
+}
+@media only screen and (max-width: 991px) {
+  .single-footer-widget.pl-2 {
+    padding-left: 0;
+    margin-top: 30px;
+  }
 }
 .single-footer-widget .opening-hours {
   padding-left: 0;
@@ -6758,6 +6851,7 @@ Footer Area CSS
 .copyright-area p a {
   color: var(--whiteColor);
   font-weight: 700;
+  transition: var(--transition);
 }
 .copyright-area p a:hover {
   color: var(--mainColor);
@@ -6768,6 +6862,12 @@ Footer Area CSS
   margin-bottom: 0;
   list-style-type: none;
 }
+@media only screen and (max-width: 767px) {
+  .copyright-area .social-links {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
 .copyright-area .social-links li {
   display: inline-block;
   color: var(--whiteColor);
@@ -6775,13 +6875,23 @@ Footer Area CSS
   margin-right: 5px;
 }
 .copyright-area .social-links li a {
-  display: inline-block;
+  display: block;
   color: var(--whiteColor);
   line-height: 1;
   font-size: 20px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
 }
 .copyright-area .social-links li a:hover {
-  color: var(--mainColor);
+  color: var(--whiteColor);
+  background-color: var(--mainColor);
+  border-color: var(--mainColor);
+  box-shadow: 0 0 10px var(--mainColor), 0 0 20px var(--mainColor);
 }
 .copyright-area .social-links li:first-child {
   margin-left: 0;

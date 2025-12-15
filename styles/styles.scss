@@ -60,6 +60,8 @@ Default CSS
     --optionalColor: #666666;
     --whiteColor: #ffffff;
     --blackColor: #262E2E;
+    --lightColor: #05b4ff;
+    --lightColor2: #05ffff;
     --fontSize: 16px;
     --transition: .5s; 
 }
@@ -7643,6 +7645,11 @@ Footer Area CSS
     position: relative;
     z-index: 1;
 
+    // Responsive adjustment for smaller screens
+    @media only screen and (max-width: 991px) {
+        padding-top: 80px;
+    }
+
     &.style-two {
         padding-top: 100px;
         background-color: var(--blackColor);
@@ -7667,17 +7674,41 @@ Footer Area CSS
     }
 }
 .single-footer-widget {
-    margin-bottom: 20px;
-
+    margin-bottom: 50px; 
     .logo {
         display: inline-block;
-        margin-bottom: 20px;
+        margin-bottom: 5px; 
     }
+
+    .company-tagline {
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 25px; 
+    }
+
     p {
         color: #ffffff;
         font-size: 20px;
         font-weight: 600;
     }
+
+    // Map Snippet Styling
+    .footer-map-snippet {
+        .map-wrapper {
+            border: 3px solid var(--lightColor); 
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px; 
+            box-shadow: 0 4px 10px rgba(6, 221, 254, 0.3); 
+
+            > div { 
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
     .footer-contact-info {
         margin-top: 20px;
 
@@ -7693,20 +7724,62 @@ Footer Area CSS
 
             li {
                 color: var(--whiteColor);
-                margin-bottom: 10px;
+                margin-bottom: 15px; 
+
+                // Removed .contact-icon styling
 
                 span {
                     color: var(--whiteColor);
                     font-weight: 600;
-                }
-                a {
                     display: inline-block;
+                    margin-right: 5px;
+                }
+                
+                // --- Start: Apply bottom bar effect to 'Reach Out' links ---
+                a {
+                    display: inline;
                     color: var(--whiteColor);
+                    transition: color 0.3s ease-in-out;
+                    position: relative; // Needed for the pseudo-element bar
+                    text-decoration: none; 
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 0; 
+                        height: 2px;
+                        background-color: var(--lightColor); 
+                        transition: width 0.3s ease-in-out; 
+                    }
 
                     &:hover {
-                        color: var(--mainColor);
+                        color: var(--lightColor2);
+                    }
+
+                    &:hover::after {
+                        width: 100%;
                     }
                 }
+                // --- End: Apply bottom bar effect to 'Reach Out' links ---
+
+                &.location-li {
+                    display: flex;
+                    align-items: flex-start;
+                    
+                    span {
+                        flex-shrink: 0;
+                    }
+                    a {
+                        flex-grow: 1;
+                        line-height: 1.5;
+                        // For the location link, we might want the bar effect only on the text, 
+                        // so we keep the standard hover block, but it needs to be set inline-block in JSX
+                        // which we already did for the <a> element. 
+                    }
+                }
+
                 &:last-child {
                     margin-bottom: 0;
                 }
@@ -7717,6 +7790,18 @@ Footer Area CSS
         color: var(--whiteColor);
         margin-bottom: 25px;
         font-size: 22px;
+        text-align: left; 
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px; 
+            width: 50px;
+            height: 3px;
+            background-color: var(--lightColor);
+            bottom: -10px;
+        }
     }
     .links-list {
         padding-left: 0;
@@ -7729,9 +7814,28 @@ Footer Area CSS
             a {
                 display: inline-block;
                 color: var(--whiteColor);
+                position: relative; 
+                line-height: 1.5;
+                text-decoration: none; 
+
+                // This is the original Quick Links hover effect
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px; 
+                    left: 0;
+                    width: 0; 
+                    height: 2px;
+                    background-color: var(--lightColor); 
+                    transition: width 0.3s ease-in-out; 
+                }
 
                 &:hover {
-                    color: var(--mainColor);
+                    color: var(--lightColor2);
+                }
+
+                &:hover::after {
+                    width: 100%;
                 }
             }
             &:last-child {
@@ -7739,12 +7843,23 @@ Footer Area CSS
             }
         }
     }
+    
+    // Responsive Padding Adjustments
     &.pl-4 {
         padding-left: 4rem;
+        @media only screen and (max-width: 991px) {
+             padding-left: 0;
+             margin-top: 30px;
+        }
     }
     &.pl-2 {
         padding-left: 2rem;
+        @media only screen and (max-width: 991px) {
+             padding-left: 0; 
+             margin-top: 30px;
+        }
     }
+
     .opening-hours {
         padding-left: 0;
         margin-bottom: 0;
@@ -7779,6 +7894,7 @@ Footer Area CSS
         a {
             color: var(--whiteColor);
             font-weight: 700;
+            transition: var(--transition);
 
             &:hover {
                 color: var(--mainColor);
@@ -7791,6 +7907,11 @@ Footer Area CSS
         margin-bottom: 0;
         list-style-type: none;
 
+        @media only screen and (max-width: 767px) {
+            text-align: center;
+            margin-top: 10px;
+        }
+
         li {
             display: inline-block;
             color: var(--whiteColor);
@@ -7799,13 +7920,23 @@ Footer Area CSS
                 right: 5px;
             };
             a {
-                display: inline-block;
+                display: block; 
                 color: var(--whiteColor);
                 line-height: 1;
                 font-size: 20px;
-
+                height: 40px;
+                width: 40px;
+                text-align: center;
+                line-height: 40px;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.3); 
+                transition: all 0.3s ease-in-out;
+                
                 &:hover {
-                    color: var(--mainColor);
+                    color: var(--whiteColor);
+                    background-color: var(--mainColor);
+                    border-color: var(--mainColor);
+                    box-shadow: 0 0 10px var(--mainColor), 0 0 20px var(--mainColor); 
                 }
             }
             &:first-child {
@@ -7817,7 +7948,6 @@ Footer Area CSS
         }
     }
 }
-
 /*================================================
 Go Top CSS
 =================================================*/
