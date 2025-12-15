@@ -134,8 +134,13 @@
 
 /* 2. Mode Badge (Soft Yellow/Cream) */
 .apex-mode {
-  background-color: #fff9e0; /* Soft pastel yellow */
-  color: #997c00; /* Darker yellow/brown text */
+  background-color: #fff9e0;
+  color: #997c00;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  white-space: normal;
+  overflow: visible;
 }
 
 /* 3. Duration Badge (Soft Green/Mint) */
