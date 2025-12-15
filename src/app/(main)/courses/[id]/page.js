@@ -68,7 +68,6 @@ if (error) {
       <NavbarStyleOne />
       <CourseDetail course={courseData} />
       <TrainerCarousel trainers={trainersData}/>
-      <CoursesPage courses={coursesData}/>
       <Footer />
     </div>
   )

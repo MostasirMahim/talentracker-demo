@@ -35,7 +35,10 @@ export async function get_training_service_categories() {
 export async function get_learning_segments() {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/learning_segments/v1/learning_segments/`
+      `${BASE_URL}/api/learning_segments/v1/learning_segments/`,
+      {
+        cache: "no-store",
+      }
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
@@ -61,7 +64,10 @@ export async function get_learning_segments() {
 export async function get_trainers() {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/expert_trainer_profiles/v1/expert_trainer_profiles/`
+      `${BASE_URL}/api/expert_trainer_profiles/v1/expert_trainer_profiles/`,
+      {
+        cache: "no-store",
+      }
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
