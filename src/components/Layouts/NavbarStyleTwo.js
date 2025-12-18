@@ -75,8 +75,8 @@ const NavbarStyleTwo = () => {
                   <Image
                     src="/images/ttl_logo.png"
                     alt="logo"
-                    width={154}
-                    height={33}
+                    width={180}
+                    height={50}
                   />
                 </Link>
 
