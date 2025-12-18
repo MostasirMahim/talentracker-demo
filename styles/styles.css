@@ -1294,10 +1294,13 @@ Main Banner Area CSS
 .single-banner-item {
   z-index: 1;
   position: relative;
+  height: 100vh;
+  width: 100%;
   padding-top: 180px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-max-height: 100vh;
 }
 .single-banner-item::before {
   content: "";
@@ -1313,6 +1316,8 @@ Main Banner Area CSS
 
 .banner-item-content {
   padding-bottom: 50px;
+  padding-top: 100px;
+  padding-left: 50px;
 }
 .banner-item-content .sub-title {
   display: block;
@@ -1322,7 +1327,7 @@ Main Banner Area CSS
   font-weight: 700;
 }
 .banner-item-content h1 {
-  font-size: 58px;
+  font-size: 54px;
   margin-bottom: 20px;
 }
 .banner-item-content p {
@@ -1398,7 +1403,7 @@ Main Banner Area CSS
   background-color: var(--whiteColor);
   transition: var(--transition);
   color: var(--blackColor);
-  transform: translateY(-55%);
+  transform: translateY(30%);
   box-shadow: 0 7px 30px -10px rgba(133, 153, 162, 0.3);
   border-radius: 4px;
   display: flex;
@@ -1973,7 +1978,7 @@ Funfacts Area CSS
 }
 .single-funfacts-box h3 .sign {
   position: relative;
-  top: 3px;
+  top: 1px;
 }
 .single-funfacts-box p {
   line-height: 1;
@@ -2039,7 +2044,7 @@ Funfacts Area CSS
 }
 .funfacts-box h3 .sign {
   position: relative;
-  top: 3px;
+  top: 0px;
 }
 .funfacts-box p {
   line-height: 1;
@@ -6461,6 +6466,7 @@ Widget Area CSS
   display: block;
   position: relative;
   color: var(--blackColor);
+  max-width: calc(100% - 20px);
 }
 .widget-area .widget_service_categories ul li a i {
   top: 50%;
@@ -7204,17 +7210,30 @@ Modal CSS
   }
   .banner-item-content {
     text-align: center;
+    padding-bottom: 50px;
+    padding-top: 0px;
+    padding-left: 0px;
   }
   .banner-item-content .btn-box {
     justify-content: center;
+  }
+  .banner-item-content .single-banner-item {
+    height: 100vh;
+    width: 100%;
   }
 }
 @media (max-width: 991px) {
   .banner-item-content {
     text-align: center;
+    padding-top: 0px;
+    padding-left: 0px;
   }
   .banner-item-content .btn-box {
     justify-content: center;
+  }
+  .single-banner-item {
+    height: 100vh;
+    width: 100%;
   }
 }
 /* optional: ensure checkbox doesn't push things weirdly when label wraps */

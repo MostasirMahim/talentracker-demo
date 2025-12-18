@@ -1500,11 +1500,14 @@ Main Banner Area CSS
 .single-banner-item {
     z-index: 1;
     position: relative;
+    height: 100vh; 
+    width: 100%;
     padding-top: 180px;
     background: {
         position: center center;
         repeat: no-repeat;
         size: cover;
+        max-height: 100vh;
     };
     &::before {
         content: '';
@@ -1520,6 +1523,8 @@ Main Banner Area CSS
 }
 .banner-item-content {
     padding-bottom: 50px;
+    padding-top: 100px;
+    padding-left: 50px;
     .sub-title {
         display: block;
         margin-bottom: 12px;
@@ -1530,7 +1535,7 @@ Main Banner Area CSS
         };
     }
     h1 {
-        font-size: 58px;
+        font-size: 54px;
         margin-bottom: 20px;
     }
     p {
@@ -1611,7 +1616,7 @@ Main Banner Area CSS
     background-color: var(--whiteColor);
     transition: var(--transition);
     color: var(--blackColor);
-    transform: translateY(-55%);
+    transform: translateY(30%);
     box-shadow: 0 7px 30px -10px rgba(133, 153, 162, 0.3);
     border-radius: 4px;
     display: flex;
@@ -1712,6 +1717,7 @@ Main Banner Area CSS
         border-radius: 20px;
     }
 }
+
 
 /*================================================
 Services Area CSS
@@ -2272,7 +2278,7 @@ Funfacts Area CSS
 
         .sign {
             position: relative;
-            top: 3px;
+            top: 1px;
         }
     }
     p {
@@ -2349,7 +2355,7 @@ Funfacts Area CSS
 
         .sign {
             position: relative;
-            top: 3px;
+            top: 0px;
         }
     }
     p {
@@ -7451,6 +7457,7 @@ Widget Area CSS
                     display: block;
                     position: relative;
                     color: var(--blackColor);
+                    max-width: calc(100% - 20px);
 
                     i {
                         top: 50%;
@@ -8290,20 +8297,32 @@ Modal CSS
   }
     .banner-item-content {
     text-align: center;
+    padding-bottom: 50px;
+    padding-top: 0px;
+    padding-left: 0px;
 
     .btn-box {
       justify-content: center;   // center the buttons
     }
+    .single-banner-item {
+    height: 100vh; 
+    width: 100%;
+    }
   }
 }
 @media (max-width: 991px) {
-
     .banner-item-content {
         text-align: center;
+        padding-top: 0px;
+        padding-left: 0px;
 
         .btn-box {
             justify-content: center; // center the buttons
         }
+    }
+    .single-banner-item {
+    height: 100vh; 
+    width: 100%;
     }
 }
 
