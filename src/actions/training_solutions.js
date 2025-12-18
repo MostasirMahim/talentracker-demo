@@ -64,7 +64,7 @@ export async function get_learning_segments() {
 export async function get_trainers() {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/expert_trainer_profiles/v1/expert_trainer_profiles/`,
+      `${BASE_URL}/api/expert_trainer_profiles/v1/expert_trainer_profiles/?slider_filter=true`,
       {
         cache: "no-store",
       }
