@@ -49,12 +49,7 @@ export default async function SingleBlogPage({ params } ) {
      <>
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
-      
-
-      
       <BlogDetailsContent blog={blog} />
-    
-
       <Footer />
     </>
   );
