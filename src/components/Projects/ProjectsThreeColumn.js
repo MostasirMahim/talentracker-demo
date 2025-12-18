@@ -12,7 +12,7 @@ const ProjectsThreeColumn = () => {
   const searchText = searchParams.get("searchText");
   const filteredProjects = searchText
     ? projects.filter((project) =>
-        project.title.toLowerCase().includes(searchText.toLowerCase())
+        project.title.toLowerCase().includes(searchText.toLowerCase()) || project.category.toLowerCase().includes(searchText.toLowerCase())
       )
     : projects;
 
