@@ -3,6 +3,9 @@ import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import Footer from "@/components/Layouts/Footer";
 import Image from "next/image";
 import { projects } from "@/lib/service_static_data";
+import BlogSidebar from "@/components/Blog/BlogSidebar";
+import ServiceSidebar from "@/components/Services/ServiceSidebar";
+import ServiceQuoteButton from "@/components/Services/ServiceQuoteButton";
 
 export default function Page() {
   const service = projects.find((item) => item.id === 1);
@@ -15,7 +18,15 @@ export default function Page() {
         className="service-detail-section py-5"
         style={{ backgroundColor: "var(--whiteColor)" }}
       >
-        <div className="container">
+        <div className="container row">
+          <div className="col-lg-8 col-md-12">
+            <Image
+            src={service.image}
+            alt={service.altText}
+            width={1260}
+            height={380}
+            className="rounded-4"
+          />
           <div className="card border-0 shadow-sm p-4 p-md-5 rounded-4 service-card">
             {/* Title */}
             <h2
@@ -122,13 +133,12 @@ export default function Page() {
                 </p>
               </blockquote>
             </div>
+            <ServiceQuoteButton />
           </div>
-          <Image
-            src={service.image}
-            alt={service.altText}
-            width={1260}
-            height={380}
-          />
+          </div>
+           <div className="col-lg-4 col-md-12">
+            <ServiceSidebar id={1} />
+          </div>
         </div>
       </section>
       <Footer />
