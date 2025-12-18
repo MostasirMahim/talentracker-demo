@@ -1,6 +1,7 @@
 "use client";
 
 import axiosInstance from "@/lib/axiosIntance";
+import { Clock2, Hourglass } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
 
@@ -16,28 +17,28 @@ const Funfacts = () => {
     },
     {
       id: 2,
-      icon: "ri-book-open-line",
+      icon: "ri-id-card-line",
       number: 0,
       sign: "K",
       title: "Access Profiles",
     },
     {
       id: 3,
-      icon: "ri-team-fill",
+      icon: "ri-presentation-line",
       number: 0,
-      sign: "+",
+      sign: <Hourglass size={28} strokeWidth={3} />,
       title: "Trained Employee",
     },
     {
       id: 4,
-      icon: "ri-user-settings-line",
+      icon: "ri-shake-hands-fill",
       number: 0,
       sign: "+",
       title: "MNC & Local Clients",
     },
     {
       id: 5,
-      icon: "ri-user-settings-line",
+      icon: "ri-user-star-line",
       number: 0,
       sign: "+",
       title: "Outsource Employee",
@@ -69,28 +70,28 @@ const Funfacts = () => {
         },
         {
           id: 2,
-          icon: "ri-book-open-line",
+          icon: "ri-id-card-line",
           number: hooks?.data?.access_to_profile,
           sign: "K",
           title: "Access Profiles",
         },
         {
           id: 3,
-          icon: "ri-team-fill",
+          icon: "ri-presentation-line",
           number: hooks?.data?.trained_employee,
-          sign: "+",
+          sign: "h+",
           title: "Trained Employee",
         },
         {
           id: 4,
-          icon: "ri-user-settings-line",
+          icon: "ri-shake-hands-fill",
           number: hooks?.data?.mnc_and_local_clients,
           sign: "+",
           title: "MNC & Local Clients",
         },
         {
           id: 5,
-          icon: "ri-user-settings-line",
+          icon: "ri-user-star-line",
           number: hooks?.data?.out_source_employee,
           sign: "+",
           title: "Outsource Employee",
@@ -104,8 +105,8 @@ const Funfacts = () => {
       <div className="funfacts-area ptb-70">
         <div className="container">
           <div className="section-title">
-            <span className="sub-title">FUN FACTS</span>
-            <h2>Let&apos;s Meet Up With Our Fun Facts And Introduce To Us</h2>
+            <span className="sub-title">MILESTONES</span>
+            <h2>Here are our milestones we have achieved so far</h2>
           </div>
 
           <div className="row justify-content-center">
