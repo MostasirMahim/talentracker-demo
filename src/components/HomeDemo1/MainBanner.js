@@ -17,7 +17,7 @@ const MainBanner = () => {
           crossFade: true,
         }}
         autoplay={{
-          delay: 2000,
+          delay: 3000,
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
         }}
@@ -33,11 +33,11 @@ const MainBanner = () => {
             }}
           >
             <div className="container">
-              <div className="row align-items-center">
+              <div className="row">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
-                    <span className="sub-title">RIGHT PEOPLE RIGHT FIT</span>
-                    <h1>Partner Modern HR Solutions</h1>
+                    <span className="sub-title">PARTNER MORDERN HR SOLUTION</span>
+                    <h1>RIGHT PEOPLE RIGHT FIT</h1>
                     <div className="btn-box">
                       <Link href="/contact" className="default-btn">
                         Employer <i className="ri-arrow-right-line"></i>
@@ -67,7 +67,7 @@ const MainBanner = () => {
             }}
           >
             <div className="container">
-              <div className="row align-items-center">
+              <div className="row">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
                     <span className="sub-title">GROW YOUR BUSINESS WITH US</span>
@@ -101,7 +101,7 @@ const MainBanner = () => {
             }}
           >
             <div className="container">
-              <div className="row align-items-center">
+              <div className="row">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
                     <span className="sub-title">MAKE YOUR VISION TO REALITY</span>
