@@ -23,7 +23,7 @@ export default function IndustriesWeServe() {
     },
     {
       icon: <Factory size={32} className="text-warning" />,
-      title: "Manufacturing, Garments & Supply Chain",
+      title: "Manufacturing, RMG & Supply Chain",
     },
     {
       icon: <Building2 size={32} className="text-success" />,
@@ -39,7 +39,7 @@ export default function IndustriesWeServe() {
     },
     {
       icon: <Rocket size={32} className="text-orange" />,
-      title: "Startup and SME Segment",
+      title: "FMCG, CPG, Startup and SME Segment",
     },
     {
       icon: <Globe size={32} className="text-secondary" />,
