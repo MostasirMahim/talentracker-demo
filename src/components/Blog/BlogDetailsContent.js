@@ -53,7 +53,7 @@ const BlogDetailsContent = ({ blog }) => {
                   <ul>
                     <li>
                       <i className="ri-shield-user-line"></i>
-                      <Link href="#">{blog.author}</Link>
+                      <Link href="#">{blog.author_name}</Link>
                     </li>
                     <li>
                       <i className="ri-calendar-2-line"></i>
