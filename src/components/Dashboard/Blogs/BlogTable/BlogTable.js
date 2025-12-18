@@ -126,9 +126,9 @@ export default function BlogTable({ blogs }) {
                       ? `${blog.title.slice(0, 40)}...`
                       : blog.title}
                   </td>
-                  
-                  <td className="px-4 py-3">{blog.author || "Anonymous"}</td>
-                  
+
+                  <td className="px-4 py-3">{blog.author_name || "Anonymous"}</td>
+
                   <td className="px-4 py-3 hidden md:table-cell text-gray-600">
                     {blog.summary.length > 50
                       ? `${blog.summary.slice(0, 50)}...`
