@@ -1025,7 +1025,7 @@ Navbar Area CSS
     padding-bottom: 15px;
   }
   .navbar-area.navbar-style-two .others-option .search-icon {
-    padding-top: 5px;
+    padding-top: 9px;
     color: var(--blackColor);
   }
   .navbar-area.navbar-style-two .others-option .search-icon:hover {
