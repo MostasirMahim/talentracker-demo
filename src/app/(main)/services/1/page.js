@@ -15,10 +15,10 @@ export default function Page() {
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
       <section
-        className="service-detail-section py-5"
+        className="container service-detail-section py-5"
         style={{ backgroundColor: "var(--whiteColor)" }}
       >
-        <div className="container row">
+        <div className="row">
           <div className="col-lg-8 col-md-12">
             <Image
               src={service.image}

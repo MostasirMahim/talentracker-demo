@@ -14,10 +14,10 @@ export default function Page() {
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
       <section
-        className="service-detail-section py-5"
+        className="container service-detail-section py-5"
         style={{ backgroundColor: "var(--whiteColor)" }}
       >
-        <div className="container row">
+        <div className="row">
           <div className="col-lg-8 col-md-12">
             {/* Service Image */}
             {service?.image && (
@@ -52,8 +52,8 @@ export default function Page() {
               <div className="mb-4">
                 <p className="text-secondary mb-3">
                   We guide organizations through transitions such as
-                  restructuring, mergers, leadership change, and business process
-                  transformation —{" "}
+                  restructuring, mergers, leadership change, and business
+                  process transformation —{" "}
                   <b>with people at the center of the journey.</b>
                 </p>
 

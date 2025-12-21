@@ -14,10 +14,10 @@ export default function Page() {
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
       <section
-        className="service-detail-section py-5"
+        className="container  service-detail-section py-5"
         style={{ backgroundColor: "var(--whiteColor)" }}
       >
-        <div className="container row">
+        <div className="row">
           <div className="col-lg-8 col-md-12">
             {/* Service Image */}
             {service?.image && (
@@ -42,8 +42,8 @@ export default function Page() {
               {/* Intro Paragraph */}
               <p className="text-secondary mb-4" style={{ lineHeight: "1.8" }}>
                 Your people strategy is your business strategy. We help
-                organizations build strong HR structures that support performance,
-                culture, and scalability.
+                organizations build strong HR structures that support
+                performance, culture, and scalability.
               </p>
 
               {/* Content Section */}

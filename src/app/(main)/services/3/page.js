@@ -14,10 +14,10 @@ export default function Page() {
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
       <section
-        className="service-detail-section py-5"
+        className="container service-detail-section py-5"
         style={{ backgroundColor: "var(--whiteColor)" }}
       >
-        <div className="container row">
+        <div className="row">
           <div className="col-lg-8 col-md-12">
             {/* Service Image */}
             {service?.image && (
@@ -42,16 +42,16 @@ export default function Page() {
               {/* Intro Paragraph */}
               <p className="text-secondary mb-4" style={{ lineHeight: "1.8" }}>
                 A strong workforce begins with trusted, credible employees. Our
-                thorough pre-employment screening protects your organization from
-                fraud, misconduct, and reputational risks.
+                thorough pre-employment screening protects your organization
+                from fraud, misconduct, and reputational risks.
               </p>
 
               {/* Content Section */}
               <div className="mb-4">
                 <p className="text-secondary mb-3">
                   We verify identity, qualifications, employment history,
-                  references, and legal/trustworthiness indicators to ensure every
-                  candidate meets your organization’s standards.
+                  references, and legal/trustworthiness indicators to ensure
+                  every candidate meets your organization’s standards.
                 </p>
 
                 {/* Benefits */}
