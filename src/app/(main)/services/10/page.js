@@ -41,8 +41,8 @@ export default function Page() {
 
               {/* Intro Paragraph */}
               <p className="text-secondary mb-4" style={{ lineHeight: "1.8" }}>
-                We ensure timely, accurate, and fully compliant payroll processing
-                with complete confidentiality.
+                We ensure timely, accurate, and fully compliant payroll
+                processing with complete confidentiality.
               </p>
 
               {/* Content Section */}

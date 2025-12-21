@@ -1183,7 +1183,7 @@ Navbar Area CSS
             .others-option {
                 .search-icon {
                     color: var(--blackColor);
-                     padding-top: 5px;
+                     padding-top: 9px;
                     &:hover {
                         color: var(--mainColor);
                     }
@@ -7461,7 +7461,7 @@ Widget Area CSS
 
                     i {
                         top: 50%;
-                        right: 5px;
+                        right: 1px;
                         position: absolute;
                         font-size: var(--fontSize);
                         transform: translateY(-50%);
@@ -8295,22 +8295,60 @@ Modal CSS
       padding: 6px 0;
     }
   }
-    .banner-item-content {
-    text-align: center;
-    padding-bottom: 50px;
-    padding-top: 0px;
-    padding-left: 0px;
 
-    .btn-box {
-      justify-content: center;   // center the buttons
+   .single-banner-item {
+       width: 100%;
+       height: 60vh;
+       display: flex; 
+       align-items: center; 
+       justify-content: center;
+       padding-top: 0 !important;
+   }
+    .widget_service_categories {
+        ul {
+            li {
+                max-width: 95%;
+            }
+        }
     }
-    .single-banner-item {
-    height: 100vh; 
-    width: 100%;
+
+   .banner-item-image {
+       margin-top: 20px;
+       text-align: center;
+
+       img {
+           max-width: 250px;
+           height: auto !important;
+           max-height: 60vh !important;
+           margin: 0 auto;
+       }
+   }
+    .banner-item-content {
+        text-align: center;
+        padding-bottom: 50px;
+        padding-top: 0px;
+        padding-left: 0px;
+
+        .btn-box {
+            justify-content: center;
+        }
     }
-  }
+
+    .home-slides .swiper-button-prev,
+    .home-slides .swiper-button-next {
+        top: auto;
+        bottom: 200px;
+    }
 }
 @media (max-width: 991px) {
+    .single-banner-item {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 0 !important;
+        }
     .banner-item-content {
         text-align: center;
         padding-top: 0px;
@@ -8320,13 +8358,8 @@ Modal CSS
             justify-content: center; // center the buttons
         }
     }
-    .single-banner-item {
-    height: 100vh; 
-    width: 100%;
-    }
 }
 
-/* optional: ensure checkbox doesn't push things weirdly when label wraps */
 .form-check-input {
   flex: 0 0 auto;
 }

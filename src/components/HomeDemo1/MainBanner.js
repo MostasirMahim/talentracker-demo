@@ -48,12 +48,6 @@ const MainBanner = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="col-lg-6 col-md-12">
-                  <div className="banner-item-image">
-                    <Image src="/images/banner_images/slide1.png" alt="image" width={655} height={810} />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -83,11 +77,6 @@ const MainBanner = () => {
                   </div>
                 </div>
 
-                <div className="col-lg-6 col-md-12">
-                  <div className="banner-item-image">
-                    <Image src="/images/banner_images/slide2.png" alt="image" width={655} height={810} />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -102,7 +91,7 @@ const MainBanner = () => {
           >
             <div className="container">
               <div className="row">
-                <div className="col-lg-6 col-md-12">
+                <div className="col-lg-9 col-md-12">
                   <div className="banner-item-content">
                     <span className="sub-title">MAKE YOUR VISION TO REALITY</span>
                     <h1>Elevate Your Business with Our Tailored HR Solution</h1>
@@ -114,12 +103,6 @@ const MainBanner = () => {
                         Applicant<i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
-                  </div>
-                </div>
-
-                <div className="col-lg-6 col-md-12">
-                  <div className="banner-item-image">
-                    <Image src="/images/banner_images/slide3.png" alt="image" width={655} height={810} />
                   </div>
                 </div>
               </div>

@@ -107,7 +107,7 @@ export default function Page() {
                   </p>
                 </blockquote>
               </div>
-                 <ServiceQuoteButton />
+              <ServiceQuoteButton />
             </div>
           </div>
           <div className="col-lg-4 col-md-12">

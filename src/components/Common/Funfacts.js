@@ -26,7 +26,7 @@ const Funfacts = () => {
       id: 3,
       icon: "ri-presentation-line",
       number: 0,
-      sign: <Hourglass size={28} strokeWidth={3} />,
+      sign: "H+",
       title: "Trained Employee",
     },
     {
@@ -79,7 +79,7 @@ const Funfacts = () => {
           id: 3,
           icon: "ri-presentation-line",
           number: hooks?.data?.trained_employee,
-          sign: "h+",
+          sign: "H+",
           title: "Trained Employee",
         },
         {
