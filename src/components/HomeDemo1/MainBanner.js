@@ -1,10 +1,10 @@
-"use client"
-import Link from "next/link"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { EffectFade, Navigation, Autoplay } from "swiper/modules"
-import Image from "next/image"
-import "swiper/css"
-import "swiper/css/effect-fade"
+"use client";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectFade, Navigation, Autoplay } from "swiper/modules";
+import Image from "next/image";
+import "swiper/css";
+import "swiper/css/effect-fade";
 
 const MainBanner = () => {
   return (
@@ -29,22 +29,24 @@ const MainBanner = () => {
           <div
             className="single-banner-item"
             style={{
-            backgroundImage: `url(/images/new_banner_images/slide_1.png)`,
+              backgroundImage: `url(/images/new_banner_images/slide_1.png)`,
             }}
           >
             <div className="container">
               <div className="row">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
-                    <span className="sub-title">PARTNER MORDERN HR SOLUTION</span>
-                    <h1>RIGHT PEOPLE RIGHT FIT</h1>
+                    <span className="sub-title">
+                      PARTNER MORDERN HR SOLUTION
+                    </span>
+                    <h1>Right People Right Fit</h1>
                     <div className="btn-box">
                       <Link href="/contact" className="default-btn">
                         Employer <i className="ri-arrow-right-line"></i>
-                      </Link>                    
+                      </Link>
                       <Link href="/career" className="default-btn">
                         Applicant <i className="ri-arrow-right-line"></i>
-                      </Link>                   
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -64,19 +66,20 @@ const MainBanner = () => {
               <div className="row">
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-item-content">
-                    <span className="sub-title">GROW YOUR BUSINESS WITH US</span>
+                    <span className="sub-title">
+                      GROW YOUR BUSINESS WITH US
+                    </span>
                     <h1>Start Excellence Here</h1>
                     <div className="btn-box">
                       <Link href="/contact" className="default-btn">
                         Employer <i className="ri-arrow-right-line"></i>
-                      </Link>                    
+                      </Link>
                       <Link href="/career" className="default-btn">
                         Applicant <i className="ri-arrow-right-line"></i>
                       </Link>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -93,12 +96,14 @@ const MainBanner = () => {
               <div className="row">
                 <div className="col-lg-9 col-md-12">
                   <div className="banner-item-content">
-                    <span className="sub-title">MAKE YOUR VISION TO REALITY</span>
+                    <span className="sub-title">
+                      MAKE YOUR VISION TO REALITY
+                    </span>
                     <h1>Elevate Your Business with Our Tailored HR Solution</h1>
-                <div className="btn-box">
+                    <div className="btn-box">
                       <Link href="/contact" className="default-btn">
-                       Employer <i className="ri-arrow-right-line"></i>
-                      </Link>                    
+                        Employer <i className="ri-arrow-right-line"></i>
+                      </Link>
                       <Link href="/career" className="default-btn">
                         Applicant<i className="ri-arrow-right-line"></i>
                       </Link>
@@ -111,7 +116,7 @@ const MainBanner = () => {
         </SwiperSlide>
       </Swiper>
     </>
-  )
-}
+  );
+};
 
-export default MainBanner
+export default MainBanner;
