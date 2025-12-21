@@ -5,10 +5,20 @@ import "swiper/css/bundle";
 import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "TalenTracker Limited",
-  description: "TalenTracker",
-};
+export async function generateMetadata() {
+  return {
+    title: "TalenTracker Limited",
+    description: "TalenTracker Limited is a full-service Human Resources Business Partnering and Consultancy firm.",
+    icons: {
+      icon: [
+        {
+          url: "/favicon.ico",
+          href: "/favicon.ico",
+        },
+      ],
+    },
+  };
+}
 
 export default function RootLayout({ children }) {
   return (
