@@ -25,6 +25,7 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
   } = useForm({
     defaultValues: {
       title: "",
+      author_name: "",
       summary: "",
       content: "",
       category: "",
@@ -57,14 +58,27 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
           );
           const blogData = response.data.data;
 
+          // Find category ID from category name
+          const categoryId =
+            categories.find((cat) => cat.name === blogData.category)?.id || "";
+
+          // Find tag IDs from tag names
+          const tagIds = blogData.tags
+            .map((tagName) => {
+              const tag = tags.find((t) => t.name === tagName);
+              return tag ? tag.id : null;
+            })
+            .filter((id) => id !== null);
+
           // Populate form with complete blog data
           reset({
             title: blogData.title || "",
+            author_name: blogData.author_name || "",
             summary: blogData.summary || "",
             content: blogData.content || "",
-            category: blogData.category?.id || "",
-            tags: blogData.tags?.map((t) => t.id) || [],
-            featured_image: null, // Don't set file input
+            category: categoryId,
+            tags: tagIds,
+            featured_image: null,
           });
 
           // Set image preview if exists
@@ -77,7 +91,6 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
         } catch (error) {
           console.error("Failed to load blog data:", error);
           toast.error("Failed to load blog data");
-          // Redirect back to blog list on error
           router.push("/dashboard/blogs/");
         } finally {
           setIsLoading(false);
@@ -91,6 +104,7 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
       setIsLoading(false);
       reset({
         title: "",
+        author_name: "",
         summary: "",
         content: "",
         category: "",
@@ -99,8 +113,7 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
       });
       setImagePreview(null);
     }
-  }, [blog_id, reset, router]);
-
+  }, [blog_id, reset, router, categories, tags]);
   // Handle new image upload preview
   useEffect(() => {
     if (featuredImageFile && featuredImageFile[0]) {
@@ -137,6 +150,7 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
     try {
       const formData = new FormData();
       formData.append("title", data.title);
+      formData.append("author_name", data.author_name);
       formData.append("summary", data.summary);
       formData.append("content", data.content);
 
@@ -152,7 +166,6 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
       if (data.featured_image && data.featured_image[0]) {
         formData.append("featured_image", data.featured_image[0]);
       }
-      console.log("form data", formData);
       let response;
       if (isEditMode && blog_id) {
         // Update existing blog
@@ -184,13 +197,20 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
         }
       }
     } catch (error) {
-      console.error("Blog submission error:", error);
-      const errorMessage =
-        error.response?.data?.message || "Failed to submit blog";
-      toast.error(errorMessage);
+      // Show response error messages and field errors
+      if (error.response?.data?.errors) {
+        const fieldErrors = error.response.data.errors;
+        Object.keys(fieldErrors).forEach((field) => {
+          toast.error(`${field}: ${fieldErrors[field].join(" ")}`);
+        });
+      } else {
+        console.error("Blog submission error:", error);
+        const errorMessage =
+          error.response?.data?.message || "Failed to submit blog";
+        toast.error(errorMessage);
+      }
     }
   };
-
   // Show loading state
   if (isLoading) {
     return (
@@ -226,6 +246,23 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
               <p className="text-red-500 text-sm">{errors.title.message}</p>
             )}
           </div>
+          {/* Author Name */}
+          <div>
+            <label className="font-semibold">Author Name</label>
+            <input
+              type="text"
+              {...register("author_name", {
+                required: "Author name is required",
+              })}
+              className="w-full mt-2 border border-gray-300 p-3 rounded-md"
+              placeholder="Enter author name"
+            />
+            {errors.author_name && (
+              <p className="text-red-500 text-sm">
+                {errors.author_name.message}
+              </p>
+            )}
+          </div>
 
           {/* Category */}
           <div>
@@ -249,16 +286,32 @@ export default function BlogPostForm({ blogTags, blogCategories }) {
           {/* Tags */}
           <div>
             <label className="font-semibold">Tags</label>
-            <div className="flex flex-wrap gap-3 mt-2">
-              {tags.map((tag) => (
-                <label key={tag.id} className="flex items-center gap-1">
-                  <input type="checkbox" value={tag.id} {...register("tags")} />
-                  <span>{tag.name}</span>
-                </label>
-              ))}
-            </div>
+            <Controller
+              name="tags"
+              control={control}
+              defaultValue={[]}
+              render={({ field }) => (
+                <div className="flex flex-wrap gap-3 mt-2">
+                  {tags.map((tag) => (
+                    <label key={tag.id} className="flex items-center gap-1">
+                      <input
+                        type="checkbox"
+                        value={tag.id}
+                        checked={field.value?.includes(tag.id)}
+                        onChange={(e) => {
+                          const newValue = e.target.checked
+                            ? [...(field.value || []), tag.id]
+                            : (field.value || []).filter((id) => id !== tag.id);
+                          field.onChange(newValue);
+                        }}
+                      />
+                      <span>{tag.name}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+            />
           </div>
-
           {/* Summary */}
           <div>
             <label className="font-semibold">Summary</label>

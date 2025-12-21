@@ -315,6 +315,15 @@ const ExpertProfileForm = ({ initialData = null }) => {
               })}
             />
           </Field>
+          {/*  Show to slide */}
+          <Field label="Show trainer to slide" name="show_to_slide">
+            <input
+              type="checkbox"
+              id="show_to_slide"
+              className="w-5 h-5"
+              {...register("show_to_slide")}
+            />
+          </Field>
         </div>
 
         {/* --- SUBMIT BUTTON --- */}
