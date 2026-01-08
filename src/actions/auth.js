@@ -362,7 +362,7 @@ export async function get_me() {
     } else {
       return {
         error: true,
-        message: data.message || "Verification failed",
+        message: response.data.message || "Verification failed",
         data: response.data,
       };
     }
