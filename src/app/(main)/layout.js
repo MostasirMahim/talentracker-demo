@@ -15,6 +15,9 @@ export const metadata = {
   title: "TalenTracker Limited - Creating Shared Experiences !!",
   description:
     "TalenTracker Limited is a full-service Human Resources Business Partnering and Consultancy firm.",
+  icons: {
+    icon: "/images/TTL_Fav.png",
+  },
 };
 
 export default function MainLayout({ children }) {
