@@ -29,7 +29,7 @@ const MainBanner = () => {
           <div
             className="single-banner-item"
             style={{
-              backgroundImage: `url(/images/new_banner_images/slide_1.png)`,
+              backgroundImage: `url(/images/new_banner_images/banner1.jpeg)`,
             }}
           >
             <div className="container">
@@ -59,7 +59,7 @@ const MainBanner = () => {
           <div
             className="single-banner-item"
             style={{
-              backgroundImage: `url(/images/new_banner_images/slide_3.png)`,
+              backgroundImage: `url(/images/new_banner_images/banner2.jpeg)`,
             }}
           >
             <div className="container">
