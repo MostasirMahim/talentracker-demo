@@ -40,7 +40,6 @@ export const navigationPermissions = {
 };
 
 export const filterNavigationByPermissions = (navArray, userPermissions) => {
-  console.log(userPermissions, "users");
   return navArray.filter((item) => {
     const requiredPermission = navigationPermissions[item.label];
     const hasPermissionForItem =
