@@ -482,7 +482,7 @@ Top Header Area CSS
   font-weight: 600;
 }
 .top-header-contact-info li a:hover {
-  color: var(--mainColor2);
+  color: gainsboro;
 }
 
 /*================================================
