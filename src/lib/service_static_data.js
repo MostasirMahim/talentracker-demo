@@ -95,7 +95,7 @@ const projects = [
     id: 11,
     altText: "Project Image",
     image: "/images/services_images/10_Payroll_Management.jpg",
-    title: "BIDA/BEGA/Investment Advisory",
+    title: "BIDA/BEZA/Investment Advisory",
     category: "Strategy",
     linkText: "Read More",
     detailsUrl: "/services/11",

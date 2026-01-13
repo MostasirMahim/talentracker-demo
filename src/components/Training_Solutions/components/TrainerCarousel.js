@@ -26,7 +26,7 @@ function TrainerCarousel({ trainers }) {
   return (
     <div className="page">
       <div className="trainer-header">
-        <h1 className="trainer-title">Our Expert Trainer</h1>
+        <h1 className="trainer-title">Our Expert Trainers</h1>
         <p className="trainer-subtitle">Meet our team of industry experts</p>
       </div>
       <div className="marquee">
