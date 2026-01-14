@@ -122,5 +122,20 @@
 .minimal-badge:hover {
   transform: translateY(-1px);
   transition: 0.2s ease;
-  cursor: default;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  transform: translateY(-1px);
+  transition: 0.2s ease;
+  cursor: pointer;
+  background-color: #0e4c89 !important;
+  border-color: #0e4c89 !important;
+}
+.hover:hover {
+  transform: translateY(-1px);
+  transition: 0.2s ease;
+  cursor: pointer;
+  border-color: #0e4c89 !important;
+  color: #0e4c89 !important;
 }
