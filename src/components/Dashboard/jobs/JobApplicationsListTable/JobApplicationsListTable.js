@@ -286,17 +286,10 @@ const JobApplicationsListTable = ({ data = {} }) => {
                 <div className="px-6 py-3 border-t bg-gray-50 flex justify-end gap-3">
                   <button
                     onClick={handleCloseModal}
-                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 rounded-lg transition-colors"
+                    className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
                   >
                     Close
                   </button>
-                  <a
-                    href={selectedResumeUrl}
-                    download="resume.pdf"
-                    className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
-                  >
-                    Download Resume
-                  </a>
                 </div>
               </div>
             </div>
