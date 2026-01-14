@@ -16,7 +16,7 @@ export const metadata = {
   description:
     "TalenTracker Limited is a full-service Human Resources Business Partnering and Consultancy firm.",
   icons: {
-    icon: "/images/TTL_Fav.png",
+    icon: "/images/new_favicon_ttl.png",
   },
 };
 

@@ -5,9 +5,12 @@ import { get_me } from "@/actions/auth";
 import { redirect } from "next/navigation";
 export const experimental_styleIsolation = true;
 export const metadata = {
-  title: "TalenTracker Limited - Creating Shared Experiences !!",
+  title: "TalenTracker Limited - Right People,Right Fit",
   description:
     "TalenTracker Limited is a full-service Human Resources Business Partnering and Consultancy firm.",
+  icons: {
+    icon: "/images/new_favicon_ttl.png",
+  },
 };
 
 export default async function DashboardLayout({ children }) {
@@ -23,7 +26,9 @@ export default async function DashboardLayout({ children }) {
   return (
     <>
       <ToastContainer />
-      <DashboardLayoutClient permissions={authUser?.data?.permissions}>{children}</DashboardLayoutClient>
+      <DashboardLayoutClient permissions={authUser?.data?.permissions}>
+        {children}
+      </DashboardLayoutClient>
     </>
   );
 }
