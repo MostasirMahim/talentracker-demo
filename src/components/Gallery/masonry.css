@@ -21,8 +21,8 @@
 }
 
 .grid-item:hover {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  border-color: #999;
+  box-shadow: 0 15px 40px rgba(20, 154, 238, 0.15);
+  border-color: #0e4c89;
   transform: scale(1.03);
 }
 
