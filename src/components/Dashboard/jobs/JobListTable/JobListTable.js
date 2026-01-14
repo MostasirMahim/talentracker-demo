@@ -59,6 +59,8 @@ const JobListTable = ({ jobs = {} }) => {
                 <th className="text-left py-3 px-4 border-b">Title</th>
                 <th className="text-left py-3 px-4 border-b">Deadline</th>
                 <th className="text-left py-3 px-4 border-b">Rank</th>
+                <th className="text-left py-3 px-4 border-b">Total Applications</th>
+                <th className="text-left py-3 px-4 border-b">New Applications</th>
                 <th className="text-left py-3 px-4 border-b">Actions</th>
               </tr>
             </thead>
@@ -82,6 +84,8 @@ const JobListTable = ({ jobs = {} }) => {
                     {job.deadline}
                   </td>
                   <td className="py-3 px-4 border-b capitalize">{job.rank}</td>
+                  <td className="py-3 px-4 border-b capitalize font-bold">{job.total_applications}</td>
+                  <td className="py-3 px-4 border-b capitalize font-bold">{job.new_applications}</td>
                   <td className="py-3 px-4 border-b">
                     <div className="flex gap-2">
                       <button
