@@ -109,6 +109,7 @@
 }
 
 .gallery-section-icon {
+  min-width: 60px;
   width: 60px;
   height: 60px;
   display: flex;
@@ -133,6 +134,8 @@
   color: #999;
   margin: 0;
   font-weight: 400;
+  letter-spacing: 0.3px;
+  overflow-x: hidden;
 }
 
 .gallery-no-images {
@@ -189,6 +192,7 @@
 
 .gallery-grid-item:hover .gallery-grid-wrapper {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid #0e4c89;
 }
 
 /* Responsive */
