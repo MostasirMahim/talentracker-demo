@@ -43,7 +43,6 @@ export async function get_gallery_details(id) {
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
-      console.log(response);
       return {
         error: false,
         data: response.data,
