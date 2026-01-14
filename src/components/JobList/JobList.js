@@ -76,9 +76,9 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
 
         {/* Row 2: Filters */}
         <div className="row g-2 align-items-center">
-          <div className="col-md-3 col-sm-6">
+          <div className="col-md-4 col-sm-6">
             <select
-              className="form-select hover"
+              className="form-select"
               style={{ fontWeight: 600 }}
               value={category || "None"}
               onChange={(e) => setCategory(e.target.value)}
@@ -91,9 +91,9 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
               ))}
             </select>
           </div>
-          <div className="col-md-3 col-sm-6">
+          <div className="col-md-4 col-sm-6">
             <select
-              className="form-select hover"
+              className="form-select"
               value={jobType || "None"}
               style={{ fontWeight: 600 }}
               onChange={(e) => setJobType(e.target.value)}
@@ -106,9 +106,9 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
               ))}
             </select>
           </div>
-          <div className="col-md-4 col-sm-6">
+          <div className="col-md-3 col-sm-6">
             <select
-              className="form-select hover"
+              className="form-select "
               style={{ fontWeight: 600 }}
               value={location || "None"}
               onChange={(e) => setLocation(e.target.value)}
@@ -121,7 +121,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
               ))}
             </select>
           </div>
-          <div className="col-md-2 col-sm-6 d-grid">
+          <div className="col-md-1 col-sm-6 d-grid">
             <button
               onClick={handleSearch}
               style={{
@@ -129,29 +129,27 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
                 color: "#fff",
                 fontWeight: 600,
               }}
-              className="btn d-flex align-items-center justify-content-center search-button"
+              className="btn d-flex align-items-center justify-content-center "
             >
               <Search size={16} className="me-2 " /> Search
             </button>
           </div>
         </div>
 
-        <div className="row g-2 align-items-end justify-content-end bg-yellow-300">
-          <div className="col-2 d-grid">
-            {(category || jobType || location || keyword) && (
-              <button
-                className="btn mt-2  search-button"
-                style={{
-                  backgroundColor: "rgb(20, 137, 188)",
-                  color: "#fff",
-                  fontWeight: 600,
-                }}
-                onClick={handleClearFilters}
-              >
-                Clear Filters
-              </button>
-            )}
-          </div>
+        <div>
+          {(category || jobType || location || keyword) && (
+            <button
+              className="btn mt-2 "
+              style={{
+                backgroundColor: "rgb(20, 137, 188)",
+                color: "#fff",
+                fontWeight: 600,
+              }}
+              onClick={handleClearFilters}
+            >
+              Clear Filters
+            </button>
+          )}
         </div>
       </div>
 
