@@ -7,16 +7,16 @@ import React from "react";
 async function page({ params, searchParams }) {
   const allSearchParams = await searchParams;
   const { id } = await params;
-  
+
   const queryParams = new URLSearchParams();
   queryParams.set("job", id);
-  
+
   Object.keys(allSearchParams).forEach((key) => {
     if (key !== "job") {
       queryParams.set(key, allSearchParams[key]);
     }
   });
-  
+
   // Ensure defaults
   if (!queryParams.has("page")) {
     queryParams.set("page", "1");
@@ -28,7 +28,7 @@ async function page({ params, searchParams }) {
   const cookieStore = cookies();
   const authToken = cookieStore.get("access_token")?.value || "";
   let applications;
-  
+
   try {
     const response = await axiosInstance.get(
       `/api/jobs/v1/job_applications/?${queryParams.toString()}`,
@@ -36,7 +36,7 @@ async function page({ params, searchParams }) {
         headers: {
           Cookie: `access_token=${authToken}`,
         },
-      }
+      },
     );
     applications = response.data;
   } catch (error) {

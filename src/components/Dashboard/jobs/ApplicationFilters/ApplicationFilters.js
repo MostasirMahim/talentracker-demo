@@ -9,7 +9,7 @@ import SkillsModal from "../SkillsModal/SkillsModal";
 const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   // Filter states
   const [isRead, setIsRead] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -34,7 +34,7 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
 
   const handleFilter = () => {
     const params = new URLSearchParams(searchParams.toString());
-    
+
     // Always keep job, page_size, and reset page to 1
     params.set("job", jobId);
     params.set("page", "1");
@@ -99,8 +99,8 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
     if (appliedAt) {
       // Format date in local timezone to avoid timezone shift issues
       const year = appliedAt.getFullYear();
-      const month = String(appliedAt.getMonth() + 1).padStart(2, '0');
-      const day = String(appliedAt.getDate()).padStart(2, '0');
+      const month = String(appliedAt.getMonth() + 1).padStart(2, "0");
+      const day = String(appliedAt.getDate()).padStart(2, "0");
       const formattedDate = `${year}-${month}-${day}`;
       params.set("applied_at", formattedDate);
     } else {
@@ -135,7 +135,7 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
     params.set("page", "1");
     const pageSize = searchParams.get("page_size") || "25";
     params.set("page_size", pageSize);
-    
+
     router.push(`?${params.toString()}`);
   };
 
@@ -160,7 +160,9 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Filter className="w-5 h-5 text-white" />
-              <h3 className="text-base font-bold text-white">Filter Applications</h3>
+              <h3 className="text-base font-bold text-white">
+                Filter Applications
+              </h3>
             </div>
             <button
               onClick={handleClear}
@@ -175,7 +177,6 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
         {/* Filter Fields */}
         <div className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            
             {/* Is Read Toggle */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
@@ -255,14 +256,22 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
               <div className="bg-linear-to-br from-blue-50 to-sky-50 p-4 rounded-lg border border-blue-100">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium text-gray-600">Min:</span>
-                    <span className={`text-xl font-bold ${experienceMin > 0 ? 'text-blue-600' : 'text-gray-400'}`}>
+                    <span className="text-xs font-medium text-gray-600">
+                      Min:
+                    </span>
+                    <span
+                      className={`text-xl font-bold ${experienceMin > 0 ? "text-blue-600" : "text-gray-400"}`}
+                    >
                       {experienceMin}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium text-gray-600">Max:</span>
-                    <span className={`text-xl font-bold ${experienceMax > 0 ? 'text-sky-600' : 'text-gray-400'}`}>
+                    <span className="text-xs font-medium text-gray-600">
+                      Max:
+                    </span>
+                    <span
+                      className={`text-xl font-bold ${experienceMax > 0 ? "text-sky-600" : "text-gray-400"}`}
+                    >
                       {experienceMax}
                     </span>
                   </div>
@@ -283,7 +292,7 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
                       }}
                       className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer slider-thumb-blue"
                       style={{
-                        background: `linear-gradient(to right, #2563eb ${experienceMin}%, #dbeafe ${experienceMin}%)`
+                        background: `linear-gradient(to right, #2563eb ${experienceMin}%, #dbeafe ${experienceMin}%)`,
                       }}
                     />
                   </div>
@@ -302,7 +311,7 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
                       }}
                       className="w-full h-2 bg-sky-200 rounded-lg appearance-none cursor-pointer slider-thumb-sky"
                       style={{
-                        background: `linear-gradient(to right, #0ea5e9 ${experienceMax}%, #e0f2fe ${experienceMax}%)`
+                        background: `linear-gradient(to right, #0ea5e9 ${experienceMax}%, #e0f2fe ${experienceMax}%)`,
                       }}
                     />
                   </div>
@@ -333,7 +342,13 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
                 onClick={() => setShowSkillsModal(true)}
                 className="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg hover:border-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 bg-white text-left flex items-center justify-between group"
               >
-                <span className={selectedSkills.length > 0 ? "text-gray-700 font-medium" : "text-gray-400"}>
+                <span
+                  className={
+                    selectedSkills.length > 0
+                      ? "text-gray-700 font-medium"
+                      : "text-gray-400"
+                  }
+                >
                   {getSelectedSkillsDisplay()}
                 </span>
                 <Search className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
@@ -435,14 +450,14 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
           border-radius: 50%;
           background: #2563eb;
           cursor: pointer;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
           transition: all 0.2s;
         }
-        
+
         .slider-thumb-blue::-webkit-slider-thumb:hover {
           background: #1d4ed8;
           transform: scale(1.1);
-          box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .slider-thumb-sky::-webkit-slider-thumb {
@@ -452,14 +467,14 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
           border-radius: 50%;
           background: #0ea5e9;
           cursor: pointer;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
           transition: all 0.2s;
         }
-        
+
         .slider-thumb-sky::-webkit-slider-thumb:hover {
           background: #0284c7;
           transform: scale(1.1);
-          box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .react-datepicker-wrapper {
@@ -470,7 +485,7 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
           font-family: inherit;
           border: 2px solid #e5e7eb;
           border-radius: 0.75rem;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
         .react-datepicker__header {
