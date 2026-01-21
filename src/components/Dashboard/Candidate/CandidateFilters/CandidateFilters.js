@@ -7,7 +7,7 @@ import SkillsModal from "../../jobs/SkillsModal/SkillsModal";
 const CandidateFilters = ({ isOpen, onToggle }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   // Filter states
   const [phoneNumber, setPhoneNumber] = useState("");
   const [experienceMin, setExperienceMin] = useState(0);
@@ -21,10 +21,10 @@ const CandidateFilters = ({ isOpen, onToggle }) => {
 
   const handleFilter = () => {
     const params = new URLSearchParams(searchParams.toString());
-    
+
     // Reset page to 1
     params.set("page", "1");
-    const pageSize = searchParams.get("page_size") || "10";
+    const pageSize = searchParams.get("page_size") || "25";
     params.set("page_size", pageSize);
 
     // Add filters only if they have values
@@ -94,7 +94,7 @@ const CandidateFilters = ({ isOpen, onToggle }) => {
     params.set("page", "1");
     const pageSize = searchParams.get("page_size") || "10";
     params.set("page_size", pageSize);
-    
+
     router.push(`?${params.toString()}`);
   };
 

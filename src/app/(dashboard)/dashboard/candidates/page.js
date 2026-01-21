@@ -3,7 +3,7 @@ import CandidateFiltersWrapper from "@/components/Dashboard/Candidate/CandidateF
 import axiosInstance from "@/lib/axiosIntance";
 import { cookies } from "next/headers";
 import React from "react";
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 async function page({ searchParams }) {
@@ -11,16 +11,16 @@ async function page({ searchParams }) {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("access_token")?.value;
   const queryParams = new URLSearchParams();
-  
+
   Object.keys(allSearchParams).forEach((key) => {
     queryParams.set(key, allSearchParams[key]);
   });
-  
+
   if (!queryParams.has("page")) {
     queryParams.set("page", "1");
   }
   if (!queryParams.has("page_size")) {
-    queryParams.set("page_size", "10");
+    queryParams.set("page_size", "25");
   }
 
   let candidateData;
@@ -31,7 +31,7 @@ async function page({ searchParams }) {
         headers: {
           Cookie: accessToken ? `access_token=${accessToken}` : "",
         },
-      }
+      },
     );
     console.log("res", response);
     candidateData = response.data;
