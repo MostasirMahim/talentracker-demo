@@ -1,31 +1,37 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
-export default function PersonalDetailsForm({ initialData, onSubmit, isLoading }) {
+export default function PersonalDetailsForm({
+  initialData,
+  onSubmit,
+  isLoading,
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: initialData || {},
-  })
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="profile-form">
       <div className="form-group">
-        <label className="form-label">Full Name *</label>
+        <label className="form-label">Full Name </label>
         <input
           {...register("full_name", { required: "Full name is required" })}
           type="text"
           className="form-input"
           placeholder="Enter your full name"
         />
-        {errors.full_name && <span className="form-error">{errors.full_name.message}</span>}
+        {errors.full_name && (
+          <span className="form-error">{errors.full_name.message}</span>
+        )}
       </div>
 
       <div className="form-group">
-        <label className="form-label">Primary Phone Number *</label>
+        <label className="form-label">Primary Phone Number </label>
         <input
           {...register("primary_phone_number", {
             required: "Phone number is required",
@@ -34,7 +40,11 @@ export default function PersonalDetailsForm({ initialData, onSubmit, isLoading }
           className="form-input"
           placeholder="Enter primary phone number"
         />
-        {errors.primary_phone_number && <span className="form-error">{errors.primary_phone_number.message}</span>}
+        {errors.primary_phone_number && (
+          <span className="form-error">
+            {errors.primary_phone_number.message}
+          </span>
+        )}
       </div>
 
       <div className="form-group">
@@ -49,12 +59,21 @@ export default function PersonalDetailsForm({ initialData, onSubmit, isLoading }
 
       <div className="form-group">
         <label className="form-label">National ID</label>
-        <input {...register("national_id")} type="text" className="form-input" placeholder="Enter national ID" />
+        <input
+          {...register("national_id")}
+          type="text"
+          className="form-input"
+          placeholder="Enter national ID"
+        />
       </div>
 
       <div className="form-group">
         <label className="form-label">Career Start Date</label>
-        <input {...register("career_start_date")} type="date" className="form-input" />
+        <input
+          {...register("career_start_date")}
+          type="date"
+          className="form-input"
+        />
       </div>
 
       <div className="form-group">
@@ -81,5 +100,5 @@ export default function PersonalDetailsForm({ initialData, onSubmit, isLoading }
         {isLoading ? "Saving..." : "Save & Continue"}
       </button>
     </form>
-  )
+  );
 }
