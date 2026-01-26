@@ -235,6 +235,13 @@ export default function UsersTable({ users = {} }) {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">User Management</h1>
           <p className="text-gray-600">Manage and view all users by their roles</p>
+          {/* total user count */}
+          <div className="mt-4 text-gray-700 text-[20px]">
+            Total Users:{" "}
+            <span className="font-semibold text-gray-900">
+              {users.pagination?.count || 0}
+            </span>
+          </div>
         </div>
 
         {/* Type Filter Cards */}
