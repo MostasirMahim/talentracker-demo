@@ -149,34 +149,43 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
     return `${selectedSkills.length} skills selected`;
   };
 
-  if (!isOpen) return null;
-
   return (
     <>
-      {/* Filter Panel */}
-      <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden mb-6">
+      {/* Overlay */}
+      <div 
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => onToggle()}
+      />
+
+      {/* Sidebar Panel */}
+      <div 
+        className={`fixed inset-y-0 right-0 z-50 w-full md:w-[400px] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         {/* Header */}
-        <div className="bg-linear-to-r from-blue-600 to-sky-600 px-4 py-2.5">
+        <div className="flex-none bg-linear-to-r from-blue-600 to-sky-600 px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Filter className="w-5 h-5 text-white" />
-              <h3 className="text-base font-bold text-white">
+              <h3 className="text-lg font-bold text-white">
                 Filter Applications
               </h3>
             </div>
             <button
-              onClick={handleClear}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 backdrop-blur-sm text-sm"
+              onClick={() => onToggle()}
+              className="p-1 text-white hover:bg-white/20 rounded-full transition-colors"
             >
-              <X className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium">Clear All</span>
+              <X className="w-6 h-6" />
             </button>
           </div>
         </div>
 
-        {/* Filter Fields */}
-        <div className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+          <div className="space-y-5">
             {/* Is Read Toggle */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
@@ -249,7 +258,7 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
             </div>
 
             {/* Experience Range */}
-            <div className="space-y-2 md:col-span-2 lg:col-span-3">
+            <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
                 Experience Range (Years)
               </label>
@@ -276,7 +285,7 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
                     </span>
                   </div>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div>
                     <input
                       type="range"
@@ -412,21 +421,23 @@ const ApplicationFilters = ({ jobId, isOpen, onToggle }) => {
               />
             </div>
           </div>
+        </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-2 mt-5">
+        {/* Footer Actions */}
+        <div className="flex-none p-4 border-t border-gray-200 bg-gray-50/50">
+          <div className="flex flex-col gap-3">
             <button
               onClick={handleFilter}
-              className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 bg-linear-to-r from-blue-600 to-sky-600 text-white rounded-lg hover:from-blue-700 hover:to-sky-700 transition-all duration-300 shadow-md hover:shadow-lg font-semibold text-sm"
+              className="w-full flex items-center justify-center gap-2 px-5 py-3 bg-linear-to-r from-blue-600 to-sky-600 text-white rounded-lg hover:from-blue-700 hover:to-sky-700 transition-all duration-300 shadow-md hover:shadow-lg font-bold"
             >
-              <Filter className="w-4 h-4" />
+              <Filter className="w-5 h-5" />
               Apply Filters
             </button>
             <button
               onClick={handleClear}
-              className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-300 font-semibold text-sm border border-gray-200"
+              className="w-full flex items-center justify-center gap-2 px-5 py-3 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-300 font-semibold border border-gray-300 hover:border-gray-400"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
               Clear Filters
             </button>
           </div>

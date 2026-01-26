@@ -44,7 +44,7 @@ async function page({ params, searchParams }) {
   }
 
   return (
-    <div className="p-4 md:p-6 bg-gray-50 min-h-screen">
+    <div className="min-h-screen">
       <ApplicationFiltersWrapper jobId={id} />
       <JobApplicationsListTable data={applications} />
     </div>
