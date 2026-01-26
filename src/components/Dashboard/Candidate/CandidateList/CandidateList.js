@@ -1,6 +1,7 @@
 "use client";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import axiosInstance from "@/lib/axiosIntance";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
@@ -84,12 +85,12 @@ function CandidateList({ data }) {
     <div>
       <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
         <div className="flex justify-between mb-3 align-baseline">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700">
-            Candidates
+          <h2 className="text-2xl font-bold mb-4 text-gray-700">
+            Candidates List
           </h2>
           <button
             onClick={() => handleRefresh()}
-            className="px-3 py-1 bg-sky-600 font-bold text-white rounded-md cursor-pointer hover:bg-sky-700 transition-colors"
+            className="px-2 py-1 bg-blue-600 font-semibold text-sm text-white rounded-md cursor-pointer hover:bg-blue-700 transition-colors"
           >
             Refresh
           </button>

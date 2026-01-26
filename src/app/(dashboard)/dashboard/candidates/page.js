@@ -33,14 +33,13 @@ async function page({ searchParams }) {
         },
       },
     );
-    console.log("res", response);
     candidateData = response.data;
   } catch (error) {
     console.log(error);
   }
 
   return (
-    <div className="p-4 md:p-6 bg-gray-50 min-h-screen">
+    <div className="min-h-screen">
       <CandidateFiltersWrapper />
       <CandidateList data={candidateData} />
     </div>
