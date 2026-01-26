@@ -106,36 +106,24 @@
   color: rgb(80, 80, 80);
   border-color: rgba(0, 0, 0, 0.2);
 }
+
 /* Salary Badge */
 .badge-salary {
   background-color: rgba(0, 180, 85, 0.1);
   color: rgb(0, 140, 70);
   border-color: rgba(0, 140, 70, 0.3);
 }
+
 /* Deadline Badge (warning) */
 .badge-deadline {
   background-color: rgba(255, 149, 0, 0.12);
   color: rgb(200, 115, 0);
   border-color: rgba(200, 115, 0, 0.3);
 }
+
 /* Hover effect (premium minimal) */
 .minimal-badge:hover {
   transform: translateY(-1px);
   transition: 0.2s ease;
-  cursor: pointer;
-}
-
-.search-button:hover {
-  transform: translateY(-1px);
-  transition: 0.2s ease;
-  cursor: pointer;
-  background-color: #0e4c89 !important;
-  border-color: #0e4c89 !important;
-}
-.hover:hover {
-  transform: translateY(-1px);
-  transition: 0.2s ease;
-  cursor: pointer;
-  border-color: #0e4c89 !important;
-  color: #0e4c89 !important;
+  cursor: default;
 }

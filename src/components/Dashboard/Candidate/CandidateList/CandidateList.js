@@ -1,5 +1,5 @@
 "use client";
-import SmartPagination from "@/components/SmartPagination/SmartPagination";
+import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import axiosInstance from "@/lib/axiosIntance";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -15,7 +15,7 @@ function CandidateList({ data }) {
         `/api/candidates/v1/candidates/download_resume/${id}/`,
         {
           responseType: "blob",
-        }
+        },
       );
       if (response.status === 200) {
         // Extract filename if provided by the backend
@@ -66,14 +66,14 @@ function CandidateList({ data }) {
         }
       } else {
         toast.error(
-          error.response?.data?.message || "Network error. Please try again."
+          error.response?.data?.message || "Network error. Please try again.",
         );
       }
     }
   };
   const handleViewProfile = (candidate_id) => {
     router.push(
-      `/dashboard/candidates/view_profile/?candidate=${candidate_id}`
+      `/dashboard/candidates/view_profile/?candidate=${candidate_id}`,
     );
   };
 
@@ -154,7 +154,7 @@ function CandidateList({ data }) {
                 ))}
               </tbody>
             </table>
-            <SmartPagination paginationData={data?.pagination} />
+            <AdminSmartPagination paginationData={data?.pagination} />
           </>
         )}
       </div>

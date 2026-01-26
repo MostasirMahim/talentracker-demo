@@ -47,7 +47,7 @@ export default function EmploymentHistoryForm({
 
   useEffect(() => {
     const currentIndex = employmentData?.findIndex(
-      (item) => item.is_current === true
+      (item) => item.is_current === true,
     );
 
     if (currentIndex !== -1) {
@@ -89,7 +89,7 @@ export default function EmploymentHistoryForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Company Name *</label>
+            <label className="form-label">Company Name </label>
             <input
               {...register(`employment.${index}.company_name`, {
                 required: "Company name is required",
@@ -106,7 +106,7 @@ export default function EmploymentHistoryForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Designation *</label>
+            <label className="form-label">Designation </label>
             <input
               {...register(`employment.${index}.designation`, {
                 required: "Designation is required",
@@ -123,7 +123,7 @@ export default function EmploymentHistoryForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Joining Date *</label>
+            <label className="form-label">Joining Date </label>
             <input
               {...register(`employment.${index}.joining_date`, {
                 required: "Joining date is required",

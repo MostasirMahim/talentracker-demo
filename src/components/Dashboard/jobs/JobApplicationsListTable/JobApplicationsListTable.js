@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { LucideFileText, X } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 
 const JobApplicationsListTable = ({ data = {} }) => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
         `/api/candidates/v1/candidates/download_resume/${id}/`,
         {
           responseType: "blob",
-        }
+        },
       );
       if (response.status === 200) {
         const contentDisposition = response.headers["content-disposition"];
@@ -70,7 +71,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
         }
       } else {
         toast.error(
-          error.response?.data?.message || "Network error. Please try again."
+          error.response?.data?.message || "Network error. Please try again.",
         );
       }
     }
@@ -83,7 +84,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
         `/api/candidates/v1/candidates/download_resume/${id}/`,
         {
           responseType: "blob",
-        }
+        },
       );
       if (response.status === 200) {
         const blob = new Blob([response.data], { type: "application/pdf" });
@@ -111,7 +112,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
       setIsLoadingProfile(true);
       setSelectedJobAppId(job_application_id);
       const response = await axiosInstance.get(
-        `/api/candidates/v1/candidates/${candidate_id}/?job_application=${job_application_id}`
+        `/api/candidates/v1/candidates/${candidate_id}/?job_application=${job_application_id}`,
       );
       if (response.status === 200) {
         setCandidateData(response.data);
@@ -197,12 +198,12 @@ const JobApplicationsListTable = ({ data = {} }) => {
       app?.status === "pending"
         ? "text-yellow-600 bg-yellow-50"
         : app?.status === "accepted"
-        ? "text-green-600 bg-green-50"
-        : app?.status === "rejected"
-        ? "text-red-600 bg-red-50"
-        : app?.status === "reached"
-        ? "text-blue-600 bg-blue-50"
-        : ""
+          ? "text-green-600 bg-green-50"
+          : app?.status === "rejected"
+            ? "text-red-600 bg-red-50"
+            : app?.status === "reached"
+              ? "text-blue-600 bg-blue-50"
+              : ""
     }`}
                   >
                     {app?.status}
@@ -254,7 +255,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
               ))}
             </tbody>
           </table>
-          <SmartPagination paginationData={data?.pagination} />
+          <AdminSmartPagination paginationData={data?.pagination} />
 
           {showResumeModal && (
             <div className="fixed inset-0 z-1050 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
