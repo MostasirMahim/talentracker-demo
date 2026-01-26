@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Ban } from "lucide-react";
 
 const UserTypeCard = ({ type, count, isActive, onClick, icon, color }) => (
   <button
@@ -38,6 +39,10 @@ const UserTypeCard = ({ type, count, isActive, onClick, icon, color }) => (
 );
 
 const UserRow = ({ user, index }) => {
+  const banUserHandler = (userId) => {
+    console.log("banUserHandler", userId);
+  };
+
   const getUserTypeStyle = (type) => {
     switch (type?.toLowerCase()) {
       case "admin":
@@ -105,6 +110,15 @@ const UserRow = ({ user, index }) => {
           month: "short",
           day: "numeric",
         })}
+      </td>
+      <td className="px-6 py-4">
+        <button
+          onClick={() => banUserHandler(user.id)}
+          className="p-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 transition-all duration-200 cursor-pointer"
+          title="Ban User"
+        >
+          <Ban className="w-5 h-5" />
+        </button>
       </td>
     </tr>
   );
@@ -312,6 +326,9 @@ export default function UsersTable({ users = {} }) {
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                     Joined
                   </th>
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -325,7 +342,7 @@ export default function UsersTable({ users = {} }) {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="6" className="px-6 py-12 text-center">
+                    <td colSpan="7" className="px-6 py-12 text-center">
                       <div className="flex flex-col items-center gap-3">
                         <div className="text-5xl">🔍</div>
                         <p className="text-gray-500 font-medium">No users found</p>
