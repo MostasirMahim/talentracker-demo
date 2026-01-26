@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axiosIntance";
@@ -65,8 +65,13 @@ export default function QuotesTable({ quotes }) {
     });
   };
 
+  const handleExport = () => {
+    console.log("click");
+    // Excel export logic will go here
+  };
+
   return (
-    <div className="w-full px-4 md:px-8 py-6">
+    <div className="w-full px-2 md:px-4 py-2">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Quote Requests</h2>
@@ -79,13 +84,33 @@ export default function QuotesTable({ quotes }) {
             <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
             <span className="text-sm text-gray-600">Unread</span>
           </div>
+          <button
+            onClick={handleExport}
+            className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors font-medium shadow-sm"
+            title="Export to Excel"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Export
+          </button>
         </div>
       </div>
-
       {/* Table */}
-      <div className="overflow-x-auto rounded-2xl shadow-md border border-gray-200 bg-white">
+      <div className="overflow-x-auto overflow-y-auto rounded-xl max-h-[75vh] shadow-md border border-gray-200 bg-white font-sans">
         <table className="w-full text-sm text-left text-gray-700">
-          <thead className="text-xs uppercase bg-blue-600 text-white font-bold ">
+          <thead className="text-xs uppercase bg-blue-600 text-white font-bold sticky top-0 z-10">
             <tr>
               <th className="px-6 py-3">ID</th>
               <th className="px-6 py-3">Name</th>
@@ -93,27 +118,34 @@ export default function QuotesTable({ quotes }) {
               <th className="px-6 py-3">Phone</th>
               <th className="px-6 py-3">Service</th>
               <th className="px-6 py-3">Status</th>
-              <th className="px-6 py-3">Created At</th>
-              <th className="px-6 py-3">Updated At</th>
+              <th className="px-6 py-3">Date</th>
               <th className="px-6 py-3 text-center">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-200">
             {quotes_data.map((quote) => (
               <tr
                 key={quote.id}
-                className={`border-b hover:bg-gray-50 transition duration-150 ${
+                className={`hover:bg-gray-50 transition duration-150 ${
                   !quote.is_read ? "bg-yellow-50" : ""
                 }`}
               >
-                <td className="px-6 py-4 font-medium text-gray-900">
+                <td className="px-4 py-2 font-medium text-gray-900 min-w-[80px]">
                   {quote.id}
                 </td>
-                <td className="px-6 py-4 font-medium">{quote.name}</td>
-                <td className="px-6 py-4 font-bold">{quote.email}</td>
-                <td className="px-6 py-4">{quote.phone}</td>
-                <td className="px-6 py-4 font-bold">{quote.service}</td>
-                <td className="px-6 py-4">
+                <td className="px-4 py-2 font-medium min-w-[150px] max-w-[200px]">
+                  <div className="line-clamp-2">{quote.name}</div>
+                </td>
+                <td className="px-4 py-2 font-bold min-w-[200px] max-w-[250px]">
+                  <div className="line-clamp-2">{quote.email}</div>
+                </td>
+                <td className="px-4 py-2 min-w-[120px]">
+                  <div className="line-clamp-2">{quote.phone}</div>
+                </td>
+                <td className="px-4 py-2 font-bold min-w-[150px] max-w-[200px]">
+                  <div className="line-clamp-2">{quote.service}</div>
+                </td>
+                <td className="px-4 py-2 min-w-[100px]">
                   <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${
                       quote.is_read
@@ -129,16 +161,13 @@ export default function QuotesTable({ quotes }) {
                     {quote.is_read ? "Read" : "Unread"}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-gray-600">
-                  {formatDate(quote.created_at)}
+                <td className="px-4 py-2 text-gray-600 min-w-[150px]">
+                  <div className="line-clamp-2">{formatDate(quote.created_at)}</div>
                 </td>
-                <td className="px-6 py-4 text-gray-600">
-                  {formatDate(quote.updated_at)}
-                </td>
-                <td className="px-6 py-4 text-center">
+                <td className="px-4 py-2 text-center">
                   <button
                     onClick={() => handleMarkAsRead(quote.id, quote.is_read)}
-                    className={`px-4 py-2 cursor-pointer rounded-md transition-colors font-medium ${
+                    className={`px-4 py-2 cursor-pointer rounded-md transition-colors font-medium w-16 ${
                       quote.is_read
                         ? "bg-yellow-600 hover:bg-yellow-700 text-white"
                         : "bg-green-600 hover:bg-green-700 text-white"
