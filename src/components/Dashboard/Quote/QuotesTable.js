@@ -113,7 +113,7 @@ export default function QuotesTable({ quotes, currentPage }) {
             disabled={isExporting}
             className={`flex items-center gap-2 px-4 py-2 ${
               isExporting ? "bg-green-400" : "bg-green-600 hover:bg-green-700"
-            } text-white rounded-md transition-colors font-medium shadow-sm disabled:cursor-not-allowed`}
+            } text-white rounded-md transition-colors font-medium shadow-sm cursor-pointer disabled:cursor-not-allowed`}
             title="Export to Excel"
           >
             {isExporting ? (
