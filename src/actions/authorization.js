@@ -436,3 +436,80 @@ export async function remove_member_from_role(userId, roleId) {
     };
   }
 }
+
+export async function ban_user(userId) {
+  const accessToken = cookies().get("access_token")?.value;
+
+  try {
+    const res = await fetch(`${BASE_URL}/api/authorization/v1/ban/${userId}/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Cookie: `access_token=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const response = await res.json();
+
+    if (response.code === 200 && response.status === "success") {
+      revalidateTag("all-users");
+      return {
+        success: true,
+        message: response.message || "User banned successfully",
+        data: response.data,
+      };
+    } else {
+      return {
+        success: false,
+        message: response.message || "Failed to ban user",
+        data: null,
+      };
+    }
+  } catch (err) {
+    return {
+      success: false,
+      message: err?.message || "Network error",
+      data: null,
+    };
+  }
+}
+
+export async function unban_user(userId) {
+  const accessToken = cookies().get("access_token")?.value;
+
+  try {
+    const res = await fetch(`${BASE_URL}/api/authorization/v1/ban/${userId}/`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        Cookie: `access_token=${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const response = await res.json();
+
+    if (response.code === 200 && response.status === "success") {
+      revalidateTag("all-users");
+      return {
+        success: true,
+        message: response.message || "User unbanned successfully",
+        data: response.data,
+      };
+    } else {
+      return {
+        success: false,
+        message: response.message || "Failed to unban user",
+        data: null,
+      };
+    }
+  } catch (err) {
+    return {
+      success: false,
+      message: err?.message || "Network error",
+      data: null,
+    };
+  }
+}
+
