@@ -4,7 +4,7 @@ import Image from "next/image";
 import Masonry from "react-masonry-css";
 import { Calendar, Images, Layers2, SearchX } from "lucide-react";
 import "./gallery-details.css";
-import ImageModal from "./ImageModal";
+import MultiImageModal from "./MultiImageModal";
 
 const GalleryDetails = ({ gallery, images }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -155,8 +155,9 @@ const GalleryDetails = ({ gallery, images }) => {
         </div>
       </div>
       {selectedImage && (
-        <ImageModal
-          image={selectedImage}
+        <MultiImageModal
+          images={images}
+          initialImage={selectedImage}
           onClose={() => setSelectedImage(null)}
         />
       )}

@@ -1,0 +1,221 @@
+/* TalenTracker Multi Image Modal Styling - Unified with Project Pattern */
+.tt-mim-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.25); /* Matches modal.css */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px); /* Matches modal.css */
+  animation: tt-mim-fadeIn 0.3s ease; /* Matches modal.css */
+}
+
+@keyframes tt-mim-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tt-mim-content {
+  position: relative;
+  width: 80%;
+  max-width: 1000px;
+  max-height: 90vh;
+  animation: tt-mim-slideUp 0.4s ease; /* Matches modal.css */
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: aliceblue; /* Matches modal.css */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes tt-mim-slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.tt-mim-header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+}
+
+.tt-mim-close-btn {
+  background: rgba(255, 255, 255, 0.9); /* Matches modal.css */
+  border: none;
+  width: 44px; /* Matches modal.css */
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1a1a;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.tt-mim-close-btn:hover {
+  background: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.tt-mim-viewport {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0 20px;
+  position: relative;
+  min-height: 400px;
+}
+
+.tt-mim-image-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 65vh;
+  overflow: hidden;
+}
+
+.tt-mim-main-img {
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  display: block;
+  border-radius: 4px;
+  animation: tt-mim-imageZoom 0.5s ease; /* Matches modal.css */
+}
+
+@keyframes tt-mim-imageZoom {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tt-mim-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+  transition: all 0.2s ease;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tt-mim-nav-btn:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.tt-mim-prev { left: 15px; }
+.tt-mim-next { right: 15px; }
+
+.tt-mim-footer {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.tt-mim-counter {
+  font-size: 13px;
+  color: #166de7;
+  font-weight: 500;
+}
+
+.tt-mim-thumb-strip {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: thin;
+}
+
+.tt-mim-thumb-strip::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tt-mim-thumb-item {
+  width: 80px;
+  height: 65px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tt-mim-thumb-item:hover {
+  opacity: 0.8;
+}
+
+.tt-mim-thumb-item.active-thumb {
+  opacity: 1;
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.tt-mim-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .tt-mim-content {
+    width: 85%;
+  }
+
+  .tt-mim-close-btn {
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    opacity: 0.3;
+    transition: all 0.2s ease;
+    color: white;
+    box-shadow: none;
+  
+  }
+
+  .tt-mim-nav-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
