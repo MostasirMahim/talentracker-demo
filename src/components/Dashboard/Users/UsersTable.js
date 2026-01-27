@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Ban } from "lucide-react";
+import { Ban, UserCheck, Loader2 } from "lucide-react";
+import { ban_user, unban_user } from "@/actions/authorization";
+import { toast } from "react-toastify";
 
 const UserTypeCard = ({ type, count, isActive, onClick, icon, color }) => (
   <button
@@ -39,8 +41,31 @@ const UserTypeCard = ({ type, count, isActive, onClick, icon, color }) => (
 );
 
 const UserRow = ({ user, index }) => {
-  const banUserHandler = (userId) => {
-    console.log("banUserHandler", userId);
+  const [loading, setLoading] = useState(false);
+
+  const banUserHandler = async (userId) => {
+    setLoading(true);
+    try {
+      if (user.is_active) {
+        const res = await ban_user(userId);
+        if (res.success) {
+          toast.success(res.message || "User banned successfully");
+        } else {
+          toast.error(res.message || "Failed to ban user");
+        }
+      } else {
+        const res = await unban_user(userId);
+        if (res.success) {
+          toast.success(res.message || "User unbanned successfully");
+        } else {
+          toast.error(res.message || "Failed to unban user");
+        }
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getUserTypeStyle = (type) => {
@@ -64,7 +89,9 @@ const UserRow = ({ user, index }) => {
 
   return (
     <tr className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200">
-      <td className="px-6 py-4 text-sm text-gray-600 font-medium">{index + 1}</td>
+      <td className="px-6 py-4 text-sm text-gray-600 font-medium">
+        {index + 1}
+      </td>
       <td className="px-6 py-4">
         <div className="flex flex-col">
           <span className="text-sm font-semibold text-gray-800">
@@ -78,7 +105,7 @@ const UserRow = ({ user, index }) => {
       <td className="px-6 py-4">
         <span
           className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${getUserTypeStyle(
-            user.user_type
+            user.user_type,
           )}`}
         >
           {user.user_type || "Empty"}
@@ -87,7 +114,7 @@ const UserRow = ({ user, index }) => {
       <td className="px-6 py-4">
         <span
           className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${getStatusStyle(
-            user.is_active
+            user.is_active,
           )}`}
         >
           {user.is_active ? "Active" : "Inactive"}
@@ -113,11 +140,28 @@ const UserRow = ({ user, index }) => {
       </td>
       <td className="px-6 py-4">
         <button
-          onClick={() => banUserHandler(user.id)}
-          className="p-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 transition-all duration-200 cursor-pointer"
-          title="Ban User"
+          onClick={() => !loading && banUserHandler(user.id)}
+          disabled={loading}
+          className={`p-2 rounded-lg transition-all text-center duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
+            user.is_active
+              ? "bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700"
+              : "bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-700"
+          }`}
+          title={user.is_active ? "Ban User" : "Unban User"}
         >
-          <Ban className="w-5 h-5" />
+          {loading ? (
+            <Loader2 className="w-5 h-5 animate-spin text-center" />
+          ) : user.is_active ? (
+            <div className="flex items-center gap-2 text-sm font-sans">
+              {" "}
+              Ban User
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 text-sm font-sans">
+              {" "}
+              Unban User
+            </div>
+          )}
         </button>
       </td>
     </tr>
