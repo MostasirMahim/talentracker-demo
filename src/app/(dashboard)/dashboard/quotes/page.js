@@ -15,7 +15,7 @@ async function page({ searchParams }) {
   const authToken = cookieStore.get("access_token")?.value || "";
 
   try {
-    const response = await axiosInstance.get(`/api/quotes/v1/quotes/?page_size=10&page=${currentPage}`,
+    const response = await axiosInstance.get(`/api/quotes/v1/quotes/?page_size=50&page=${currentPage}`,
     {
       headers: {
         Cookie: `access_token=${authToken}`,
@@ -27,7 +27,7 @@ async function page({ searchParams }) {
   }
   return (
     <div>
-      <QuotesTable quotes={quotes} />
+      <QuotesTable quotes={quotes} currentPage={currentPage} />
     </div>
   );
 }
