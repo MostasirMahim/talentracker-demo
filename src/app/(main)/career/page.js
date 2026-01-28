@@ -29,7 +29,7 @@ export default async function Page({ searchParams }) {
     query = query.slice(1);
   }
   try {
-    const jobURL = `/api/jobs/v1/jobs/`;
+    const jobURL = `/api/jobs/v1/jobs/?deadline_filter=true&page_size=10&page=${page}&${query}`;
     const job_req = axiosInstance.get(jobURL);
     const job_type_req = axiosInstance.get("/api/jobs/v1/job_types/");
     const job_category_req = axiosInstance.get("/api/jobs/v1/job_categories/");
