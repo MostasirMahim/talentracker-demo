@@ -168,6 +168,8 @@ export default function QuotesTable({ quotes, currentPage }) {
               <th className="px-6 py-3">Phone</th>
               <th className="px-6 py-3">Service</th>
               <th className="px-6 py-3">Status</th>
+              <th className="px-6 py-3">Designation</th>
+              <th className="px-6 py-3">message</th>
               <th className="px-6 py-3">Date</th>
               <th className="px-6 py-3 text-center">Action</th>
             </tr>
@@ -210,6 +212,12 @@ export default function QuotesTable({ quotes, currentPage }) {
                     ></span>
                     {quote.is_read ? "Read" : "Unread"}
                   </span>
+                </td>
+                <td className="px-4 py-2 font-bold min-w-[150px] max-w-[200px]">
+                  <div className="line-clamp-2">{quote.designation}</div>
+                </td> 
+                <td className="px-4 py-2 text-gray-600 min-w-[150px]">
+                  <div className="line-clamp-2">{quote.message}</div>
                 </td>
                 <td className="px-4 py-2 text-gray-600 min-w-[150px]">
                   <div className="line-clamp-2">{formatDate(quote.created_at)}</div>
