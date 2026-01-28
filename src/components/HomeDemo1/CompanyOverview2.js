@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const CompanyOverview2 = () => {
   return (
-    <div>
+    <div className="container">
       <div className="mt-5 section-title   text-center">
         <span className="sub-title">OVERVIEW</span>
          <h3>Company Overview</h3>
