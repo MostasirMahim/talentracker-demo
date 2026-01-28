@@ -10,9 +10,12 @@ const FreeQuoteFormStyle2 = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [message, setMessage] = useState("");
+
   const handleRequestQuote = async (e) => {
     e.preventDefault();
-    if (!name || !phone || !service) {
+    if (!name || !email || !phone || !service) {
       toast.info("Please fill all the fields");
       return;
     }
@@ -20,18 +23,33 @@ const FreeQuoteFormStyle2 = () => {
       toast.info("Please select a service");
       return;
     }
-    const response = await axiosInstance.post("/api/quotes/v1/quotes/", {
+
+    const payload = {
       name,
       email,
       phone,
       service,
-    });
+    };
+
+    if (designation.trim()) {
+      payload.designation = designation;
+    }
+    if (message.trim()) {
+      payload.message = message;
+    }
+
+    const response = await axiosInstance.post(
+      "/api/quotes/v1/quotes/",
+      payload
+    );
     if (response.status == 201) {
       toast.success("Request sent successfully");
       setName("");
       setEmail("");
       setPhone("");
       setService("");
+      setDesignation("");
+      setMessage("");
     } else {
       toast.error("Something went wrong");
     }
@@ -64,7 +82,9 @@ const FreeQuoteFormStyle2 = () => {
                   <div className="row">
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
-                        <label>Your Name</label>
+                        <label>
+                          Your Name <span style={{ color: "red" }}>*</span>
+                        </label>
                         <input
                           type="text"
                           className="form-control"
@@ -76,7 +96,9 @@ const FreeQuoteFormStyle2 = () => {
 
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
-                        <label>Your Email</label>
+                        <label>
+                          Your Email <span style={{ color: "red" }}>*</span>
+                        </label>
                         <input
                           type="email"
                           className="form-control"
@@ -88,7 +110,9 @@ const FreeQuoteFormStyle2 = () => {
 
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
-                        <label>Your Phone</label>
+                        <label>
+                          Your Phone <span style={{ color: "red" }}>*</span>
+                        </label>
                         <input
                           type="number"
                           className="form-control"
@@ -100,7 +124,9 @@ const FreeQuoteFormStyle2 = () => {
 
                     <div className="col-lg-6 col-md-6">
                       <div className="form-group">
-                        <label>Services</label>
+                        <label>
+                          Services <span style={{ color: "red" }}>*</span>
+                        </label>
                         <select
                           className="form-select"
                           onChange={(e) => setService(e.target.value)}
@@ -127,6 +153,30 @@ const FreeQuoteFormStyle2 = () => {
                     </div>
 
                     <div className="col-lg-6 col-md-6">
+                      <div className="form-group">
+                        <label>Designation</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={designation}
+                          onChange={(e) => setDesignation(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-lg-6 col-md-6">
+                      <div className="form-group">
+                        <label>Message</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12 col-md-12">
                       <div className="form-group">
                         <button type="submit" className="default-btn">
                           Request A Quote
