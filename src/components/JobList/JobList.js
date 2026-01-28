@@ -9,6 +9,7 @@ import { format_date } from "@/lib/utility_functions";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { color } from "framer-motion";
+import CircleLoader from "../Loaders/CircleLoader/CircleLoader";
 
 const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
   const router = useRouter();
@@ -19,6 +20,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
   const [jobType, setJobType] = useState(null);
   const [location, setLocation] = useState(null);
   const [keyword, setKeyword] = useState("");
+  const [isPending, startTransition] = React.useTransition();
 
   const handleSearch = () => {
     let URL = "?";
@@ -41,8 +43,9 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
       URL = URL.slice(0, -1);
     }
     if (URL !== "?") {
-      router.push(URL);
-      router.refresh();
+      startTransition(() => {
+        router.push(URL);
+      });
     }
   };
 
@@ -51,12 +54,32 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
     setJobType(null);
     setLocation(null);
     setKeyword("");
-    router.push(window.location.pathname);
-    router.refresh();
+    startTransition(() => {
+      router.push(window.location.pathname);
+    });
   };
 
   return (
-    <div className="job-list container my-4">
+    <div className="job-list container my-4" style={{ position: "relative" }}>
+      {isPending && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "transparent",
+            zIndex: 10,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "400px",
+          }}
+        >
+          <CircleLoader />
+        </div>
+      )}
       <h3 className="fw-bold text-main mb-4">All Jobs</h3>
 
       {/* Search Bar */}

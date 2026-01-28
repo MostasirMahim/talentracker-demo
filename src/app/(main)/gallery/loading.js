@@ -4,12 +4,20 @@ import TopHeaderStyleTwo from "@/components/Layouts/TopHeaderStyleTwo";
 import Loader from "@/components/Loaders/Loader/Loader";
 import React from "react";
 
-function LoaderComponent() {
+function Loading() {
   return (
     <div>
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
-      <div style={{ width: "100%", height: "100vh" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "60vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Loader />
       </div>
       <Footer />
@@ -17,4 +25,4 @@ function LoaderComponent() {
   );
 }
 
-export default LoaderComponent;
+export default Loading;
