@@ -1500,14 +1500,14 @@ Main Banner Area CSS
 .single-banner-item {
     z-index: 1;
     position: relative;
-    height: 100vh; 
+    height: min(100vh,1000px);
     width: 100%;
+    margin: 0 auto;
     padding-top: 180px;
     background: {
         position: center center;
         repeat: no-repeat;
         size: cover;
-        max-height: 100vh;
     };
     &::before {
         content: '';
