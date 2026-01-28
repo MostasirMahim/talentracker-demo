@@ -10,31 +10,31 @@ const testimonials = [
     id: 1,
     quotesIcon: "ri-double-quotes-l",
     feedbckText:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy ant extra eirmod ut labore et dolore magna aliquyam erat, sed diammi maxil voluptua. At vero eos et accusam lores et ea rebum. Stet clitaiai to ankasd gubergren, no sea takimata sanctus est Lorem ipsu adasta na. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.",
-    clientName: "Max Anderson",
-    designation: "CEO, Switch Color Ltd.",
+      "TalenTracker Limited has completely transformed our recruitment process. Their team has an exceptional ability to find the right talent that fits our company culture perfectly. Their commitment to excellence and professional approach is truly impressive.-dummy",
+    clientName: "Rahat Chowdhury",
+    designation: "HR Director, Apex Group",
     image: "/images/testimonial/testimonial1.jpg",
-    altText: "Max Anderson",
+    altText: "Rahat Chowdhury",
   },
   {
     id: 2,
     quotesIcon: "ri-double-quotes-l",
     feedbckText:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy ant extra eirmod ut labore et dolore magna aliquyam erat, sed diammi maxil voluptua. At vero eos et accusam lores et ea rebum. Stet clitaiai to ankasd gubergren, no sea takimata sanctus est Lorem ipsu adasta na. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.",
-    clientName: "Max Anderson",
-    designation: "CEO, Switch Color Ltd.",
+      "Working with TalenTracker was the best decision for our HR restructuring. They provided insightful consultancy that helped us optimize our workforce management. Their training solutions have significantly improved our team's overall productivity.-dummy",
+    clientName: "Sarah Ahmed",
+    designation: "Operations Manager, Blue Horizon Ltd.",
     image: "/images/testimonial/testimonial2.jpg",
-    altText: "Max Anderson",
+    altText: "Sarah Ahmed",
   },
   {
     id: 3,
     quotesIcon: "ri-double-quotes-l",
     feedbckText:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy ant extra eirmod ut labore et dolore magna aliquyam erat, sed diammi maxil voluptua. At vero eos et accusam lores et ea rebum. Stet clitaiai to ankasd gubergren, no sea takimata sanctus est Lorem ipsu adasta na. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.",
-    clientName: "Max Anderson",
-    designation: "CEO, Switch Color Ltd.",
+      "The expert trainers from TalenTracker are exceptional. They deep-dived into our specific industrial challenges and delivered a customized training program that resonated with our employees. We've seen a measurable impact on performance ever since.-dummy",
+    clientName: "Tanveer Hassan",
+    designation: "Managing Director, Global Tech Solutions",
     image: "/images/testimonial/testimonial3.jpg",
-    altText: "Max Anderson",
+    altText: "Tanveer Hassan",
   },
 ];
 
