@@ -185,12 +185,20 @@ const JobApplicationsListTable = ({ data = {} }) => {
         <h2 className="text-xl font-semibold mb-4 text-gray-700">
           Job applications
         </h2>
-        <button
-          onClick={() => handleRefresh()}
-          className="px-3  bg-sky-600 text-white cursor-pointer rounded-md hover:bg-sky-700 transition-colors"
-        >
-          Refresh
-        </button>
+        <div>
+          <button
+            onClick={() => handleRefresh()}
+            className="p-3  bg-green-600 text-white cursor-pointer rounded-md hover:bg-green-700 transition-colors me-2"
+          >
+            Export
+          </button>
+          <button
+            onClick={() => handleRefresh()}
+            className="p-3  bg-sky-600 text-white cursor-pointer rounded-md hover:bg-sky-700 transition-colors"
+          >
+            Refresh
+          </button>
+        </div>
       </div>
       {data?.data?.length === 0 ? (
         <p className="text-gray-500 text-center py-4">
