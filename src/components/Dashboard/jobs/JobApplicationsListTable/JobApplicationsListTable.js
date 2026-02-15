@@ -7,6 +7,7 @@ import { LucideFileText, X } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
+import { calculateExperience } from "@/lib/utility_functions";
 
 const JobApplicationsListTable = ({ data = {} }) => {
   const router = useRouter();
@@ -160,9 +161,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
               <tr>
                 <th className="text-left py-3 px-4 border-b">ID</th>
                 <th className="text-left py-3 px-4 border-b">Candidate name</th>
-                <th className="text-left py-3 px-4 border-b">
-                  Career Start Date
-                </th>
+                <th className="text-left py-3 px-4 border-b">Experience</th>
                 <th className="text-left py-3 px-4 border-b">
                   field of specialization
                 </th>
@@ -184,7 +183,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
                     {app?.candidate?.full_name}
                   </td>
                   <td className="py-3 px-4 border-b">
-                    {app?.candidate?.career_start_date}
+                    {calculateExperience(app?.candidate?.career_start_date)}
                   </td>
                   <td className="py-3 px-4 border-b">
                     {app?.candidate?.field_of_specialization}
