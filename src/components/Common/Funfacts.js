@@ -106,7 +106,7 @@ const Funfacts = () => {
         <div className="container">
           <div className="section-title">
             <span className="sub-title">MILESTONES</span>
-            <h2>Here are our milestones we have achieved so far</h2>
+            <h2>Growth You Can Measure</h2>
           </div>
 
           <div className="row justify-content-center">
