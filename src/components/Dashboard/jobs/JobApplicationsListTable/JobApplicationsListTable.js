@@ -7,6 +7,16 @@ import { LucideFileText, X } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
+import { calculateExperience } from "@/lib/utility_functions";
+import { useForm } from "react-hook-form";
+import { ca } from "zod/v4/locales";
+
+const STATUS_CHOICES = [
+  { value: "pending", label: "Pending" },
+  { value: "accepted", label: "Accepted" },
+  { value: "rejected", label: "Rejected" },
+  { value: "reached", label: "Reached" },
+];
 
 const JobApplicationsListTable = ({ data = {} }) => {
   const router = useRouter();
@@ -18,6 +28,36 @@ const JobApplicationsListTable = ({ data = {} }) => {
   const [candidateData, setCandidateData] = useState(null);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
   const [selectedJobAppId, setSelectedJobAppId] = useState(null);
+  const [selectedCandidateId, setSelectedCandidateId] = useState(null);
+
+  const [showUpdateStatusForm, setShowUpdateStatusForm] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: { status: "" },
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      const req_data = {
+        job_application: selectedJobAppId,
+        status: data.status,
+      };
+      console.log(req_data);
+      const response = await axiosInstance.patch(
+        "/api/jobs/v1/job_applications/",
+        req_data,
+      );
+      if (response.status === 200) {
+        toast.success("Status updated successfully!");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to update status");
+    }
+  };
 
   const handleDownloadResume = async (id) => {
     try {
@@ -77,7 +117,19 @@ const JobApplicationsListTable = ({ data = {} }) => {
     }
   };
 
-  const handleViewResume = async (id) => {
+  const handleMarkAsRead = async (id) => {
+    try {
+      await axiosInstance.patch(
+        `/api/jobs/v1/job_applications/read_update/${id}/`,
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleViewResume = async (id, application_id) => {
+    setSelectedJobAppId(application_id);
+    setSelectedCandidateId(id);
     try {
       setIsViewingResume(true);
       const response = await axiosInstance.get(
@@ -96,11 +148,13 @@ const JobApplicationsListTable = ({ data = {} }) => {
       toast.error("Failed to load resume. Please try again.");
     } finally {
       setIsViewingResume(false);
+      handleMarkAsRead(application_id);
     }
   };
 
   const handleCloseModal = () => {
     setShowResumeModal(false);
+    setShowUpdateStatusForm(false);
     if (selectedResumeUrl) {
       window.URL.revokeObjectURL(selectedResumeUrl);
       setSelectedResumeUrl("");
@@ -130,6 +184,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
     setShowProfileModal(false);
     setCandidateData(null);
     setSelectedJobAppId(null);
+    setSelectedCandidateId(null);
   };
 
   const handleRefresh = () => {
@@ -142,12 +197,20 @@ const JobApplicationsListTable = ({ data = {} }) => {
         <h2 className="text-xl font-semibold mb-4 text-gray-700">
           Job applications
         </h2>
-        <button
-          onClick={() => handleRefresh()}
-          className="px-3  bg-sky-600 text-white cursor-pointer rounded-md hover:bg-sky-700 transition-colors"
-        >
-          Refresh
-        </button>
+        <div>
+          <button
+            onClick={() => handleRefresh()}
+            className="p-3  bg-green-600 text-white cursor-pointer rounded-md hover:bg-green-700 transition-colors me-2"
+          >
+            Export
+          </button>
+          <button
+            onClick={() => handleRefresh()}
+            className="p-3  bg-sky-600 text-white cursor-pointer rounded-md hover:bg-sky-700 transition-colors"
+          >
+            Refresh
+          </button>
+        </div>
       </div>
       {data?.data?.length === 0 ? (
         <p className="text-gray-500 text-center py-4">
@@ -160,9 +223,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
               <tr>
                 <th className="text-left py-3 px-4 border-b">ID</th>
                 <th className="text-left py-3 px-4 border-b">Candidate name</th>
-                <th className="text-left py-3 px-4 border-b">
-                  Career Start Date
-                </th>
+                <th className="text-left py-3 px-4 border-b">Experience</th>
                 <th className="text-left py-3 px-4 border-b">
                   field of specialization
                 </th>
@@ -184,7 +245,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
                     {app?.candidate?.full_name}
                   </td>
                   <td className="py-3 px-4 border-b">
-                    {app?.candidate?.career_start_date}
+                    {calculateExperience(app?.candidate?.career_start_date)}
                   </td>
                   <td className="py-3 px-4 border-b">
                     {app?.candidate?.field_of_specialization}
@@ -237,7 +298,9 @@ const JobApplicationsListTable = ({ data = {} }) => {
                           : "Profile"}
                       </button>
                       <button
-                        onClick={() => handleViewResume(app?.candidate?.id)}
+                        onClick={() =>
+                          handleViewResume(app?.candidate?.id, app?.id)
+                        }
                         disabled={isViewingResume}
                         className="px-3 py-1 cursor-pointer bg-sky-600 text-white rounded-md hover:bg-sky-700 transition-colors flex items-center gap-1"
                       >
@@ -286,11 +349,73 @@ const JobApplicationsListTable = ({ data = {} }) => {
                 </div>
                 <div className="px-6 py-3 border-t bg-gray-50 flex justify-end gap-3">
                   <button
+                    onClick={() => setShowUpdateStatusForm((state) => !state)}
+                    className="px-3 py-1 cursor-pointer bg-red-500 text-white rounded-md hover:bg-red-700 transition-colors"
+                  >
+                    {showUpdateStatusForm ? "Cancel" : "Update Status"}
+                  </button>
+                  <button
+                    onClick={() => handleDownloadResume(selectedCandidateId)}
+                    className="px-3 py-1 cursor-pointer bg-gray-700 text-white rounded-md hover:bg-gray-800 transition-colors"
+                  >
+                    Download
+                  </button>
+                  <button
                     onClick={handleCloseModal}
                     className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
                   >
                     Close
                   </button>
+                </div>
+                <div>
+                  {showUpdateStatusForm && (
+                    <form
+                      onSubmit={handleSubmit(onSubmit)}
+                      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+                    >
+                      <h2 className="text-xl font-semibold text-gray-800">
+                        Update Job Status
+                      </h2>
+
+                      <div>
+                        <label
+                          htmlFor="status"
+                          className="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Status
+                        </label>
+                        <select
+                          id="status"
+                          {...register("status", {
+                            required: "Please select a status",
+                          })}
+                          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                            errors.status ? "border-red-500" : "border-gray-300"
+                          }`}
+                        >
+                          <option value="">Select status</option>
+                          {STATUS_CHOICES.map((choice) => (
+                            <option key={choice.value} value={choice.value}>
+                              {choice.label}
+                            </option>
+                          ))}
+                        </select>
+                        {errors.status && (
+                          <p className="text-sm text-red-500 mt-1">
+                            {errors.status.message}
+                          </p>
+                        )}
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? "Updating..." : "Update Status"}
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
             </div>
