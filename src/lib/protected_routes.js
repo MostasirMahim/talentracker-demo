@@ -21,4 +21,5 @@ export const protected_routes = [
   { path: "users", permission_name: "view_all_users" },
   { path: "gallery", permission_name: "gallery_management" },
   { path: "trainers", permission_name: "trainer_management" },
+  { path: "candidate_testimonial", permission_name: "candidate_testimonial_management"},
 ];

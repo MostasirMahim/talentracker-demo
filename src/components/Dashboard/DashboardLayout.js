@@ -237,6 +237,18 @@ const navItems = [
       },
     ],
   },
+  // candidate testimonial management
+  {
+    href: "#",
+    label: "Candidate Testimonials",
+    icon: UserPlus2,
+    children: [
+      {
+        href: "/dashboard/candidate_testimonial/",
+        label: "Candidate Testimonials",
+      },
+    ]
+    },
 ];
 export default function DashboardLayout({ children, permissions }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);

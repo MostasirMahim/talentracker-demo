@@ -102,15 +102,47 @@ export default function AllPublishedTestimonial({ testimonials }) {
           height: 100%;
           display: flex;
           flex-direction: column;
+          /* Subtle border for non-hover state */
+          border: 1px solid rgba(13, 110, 253, 0.1) !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
         }
 
+        /* Alternative subtle outline using box-shadow */
+        .testimonial-card {
+          box-shadow: 0 4px 12px rgba(13, 110, 253, 0.05) !important;
+        }
+
+        /* Subtle gradient border */
+        .testimonial-card::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 16px;
+          padding: 1px;
+          background: linear-gradient(135deg, rgba(13, 110, 253, 0.2), rgba(13, 110, 253, 0.05));
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+        }
+
+        /* Hover state - your existing hover styles */
         .testimonial-card:hover {
           transform: translateY(-8px) !important;
           box-shadow: 0 20px 30px -10px rgba(13, 110, 253, 0.2) !important;
+          border-color: transparent !important;
         }
 
         .testimonial-card:hover .testimonial-accent {
           width: 100% !important;
+        }
+
+        .testimonial-card:hover::after {
+          opacity: 0;
         }
 
         .testimonial-card img {
@@ -137,6 +169,7 @@ export default function AllPublishedTestimonial({ testimonials }) {
           max-height: none;
         }
 
+        /* Border glow effect for non-hover */
         .testimonial-card::before {
           content: '';
           position: absolute;
@@ -151,7 +184,7 @@ export default function AllPublishedTestimonial({ testimonials }) {
           mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
-          opacity: 0;
+          opacity: 0.3; /* Slightly visible in non-hover state */
           transition: opacity 0.3s ease;
         }
 
@@ -229,6 +262,20 @@ export default function AllPublishedTestimonial({ testimonials }) {
           padding-top: 1rem;
           border-top: 1px solid rgba(0,0,0,0.05);
         }
+
+        /* Optional: Different border styles you can try */
+        .border-style-1 {
+          border: 1px solid rgba(13, 110, 253, 0.2) !important;
+        }
+        
+        .border-style-2 {
+          box-shadow: 0 0 0 1px rgba(13, 110, 253, 0.1) !important;
+        }
+        
+        .border-style-3 {
+          outline: 1px solid rgba(13, 110, 253, 0.1);
+          outline-offset: -1px;
+        }
       `}</style>
 
       <section className="testimonial-section py-5">
@@ -238,7 +285,7 @@ export default function AllPublishedTestimonial({ testimonials }) {
             {testimonialData?.map((testimonial, index) => (
               <div key={testimonial.id || index} className="col-lg-4 col-md-6">
                 <div
-                  className="testimonial-card card border-0 shadow-sm animate-on-client"
+                  className="testimonial-card card shadow-sm animate-on-client"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                   }}
