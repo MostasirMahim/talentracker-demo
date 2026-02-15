@@ -40,7 +40,7 @@ const FreeQuoteFormStyle2 = () => {
 
     const response = await axiosInstance.post(
       "/api/quotes/v1/quotes/",
-      payload
+      payload,
     );
     if (response.status == 201) {
       toast.success("Request sent successfully");
@@ -77,7 +77,9 @@ const FreeQuoteFormStyle2 = () => {
 
             <div className="col-lg-7 col-md-12">
               <div className="free-quote-form">
-                <h3>GET A QUOTE</h3>
+                <h3 className="mb-0">REQUEST SERVICES</h3>
+                <p className="mb-5">Only for employers companies</p>
+
                 <form onSubmit={handleRequestQuote}>
                   <div className="row">
                     <div className="col-lg-6 col-md-6">

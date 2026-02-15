@@ -50,7 +50,7 @@ export const filterNavigationByPermissions = (navArray, userPermissions) => {
     if (item.children && item.children.length > 0) {
       const filteredSubItems = filterNavigationByPermissions(
         item.children,
-        userPermissions
+        userPermissions,
       );
       if (hasPermissionForItem || filteredSubItems.length > 0) {
         return { ...item, children: filteredSubItems };
@@ -60,3 +60,18 @@ export const filterNavigationByPermissions = (navArray, userPermissions) => {
     return hasPermissionForItem;
   });
 };
+
+export function calculateExperience(startDate) {
+  if (!startDate) return "0 Years";
+
+  const start = new Date(startDate);
+  const now = new Date();
+
+  // Difference in milliseconds
+  const diffMs = now - start;
+
+  // Convert to years (365.25 accounts for leap years)
+  const years = diffMs / (1000 * 60 * 60 * 24 * 365.25);
+
+  return `${years.toFixed(1)} Years`;
+}
