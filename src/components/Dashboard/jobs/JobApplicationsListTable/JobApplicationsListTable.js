@@ -19,6 +19,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
   const [candidateData, setCandidateData] = useState(null);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
   const [selectedJobAppId, setSelectedJobAppId] = useState(null);
+  const [selectedCandidateId, setSelectedCandidateId] = useState(null);
 
   const handleDownloadResume = async (id) => {
     try {
@@ -79,6 +80,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
   };
 
   const handleViewResume = async (id) => {
+    setSelectedCandidateId(id);
     try {
       setIsViewingResume(true);
       const response = await axiosInstance.get(
@@ -284,6 +286,12 @@ const JobApplicationsListTable = ({ data = {} }) => {
                   />
                 </div>
                 <div className="px-6 py-3 border-t bg-gray-50 flex justify-end gap-3">
+                  <button
+                    onClick={() => handleDownloadResume(selectedCandidateId)}
+                    className="px-3 py-1 cursor-pointer bg-gray-700 text-white rounded-md hover:bg-gray-800 transition-colors"
+                  >
+                    Download
+                  </button>
                   <button
                     onClick={handleCloseModal}
                     className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
