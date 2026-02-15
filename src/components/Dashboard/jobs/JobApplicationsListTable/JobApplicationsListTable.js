@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import { calculateExperience } from "@/lib/utility_functions";
 import { useForm } from "react-hook-form";
+import { ca } from "zod/v4/locales";
 
 const STATUS_CHOICES = [
   { value: "pending", label: "Pending" },
@@ -116,6 +117,16 @@ const JobApplicationsListTable = ({ data = {} }) => {
     }
   };
 
+  const handleMarkAsRead = async (id) => {
+    try {
+      await axiosInstance.patch(
+        `/api/jobs/v1/job_applications/read_update/${id}/`,
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleViewResume = async (id, application_id) => {
     setSelectedJobAppId(application_id);
     setSelectedCandidateId(id);
@@ -137,6 +148,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
       toast.error("Failed to load resume. Please try again.");
     } finally {
       setIsViewingResume(false);
+      handleMarkAsRead(application_id);
     }
   };
 
