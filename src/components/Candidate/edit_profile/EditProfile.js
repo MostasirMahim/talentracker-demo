@@ -89,6 +89,12 @@ export default function EditProfileForm({ initialData }) {
         isNew =
           !initialData?.candidate ||
           Object.keys(initialData.candidate).length === 0;
+        // delete blank objects
+        Object.keys(formData).forEach((key) => {
+          if (formData[key] === "") {
+            delete formData[key];
+          }
+        });
       } else if (step.id === "skills") {
         isNew = initialData?.candidate?.skills?.length === 0;
       } else {
@@ -100,7 +106,7 @@ export default function EditProfileForm({ initialData }) {
           formData.map((item) => {
             const isItemNew = !item.id;
             return updateCandidateProfile(step.id, item, isItemNew);
-          })
+          }),
         );
 
         const hasError = results.some((res) => res.success === false);
@@ -123,15 +129,26 @@ export default function EditProfileForm({ initialData }) {
         const result = await updateCandidateProfile(step.id, formData, isNew);
 
         if (result.success) {
-         setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1));
+          setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1));
           toast.success(result.message || "Saved successfully.");
           setSubmitStatus({ type: "success", message: "Saved successfully." });
         } else {
-          toast.error(result.message || "Failed to save.");
+          // toast.error(result.message || "Failed to save.");
+
           setSubmitStatus({
             type: "error",
             message: result.message || "Failed to save.",
           });
+          console.log(result.data.data);
+
+          if (result.data?.data?.errors) {
+            const backendErrors = result.data?.data?.errors;
+            // Dynamically set errors for each invalid field
+            Object.keys(backendErrors).forEach((field) => {
+              // Optional toast for each field
+              toast.error(`${field}: ${backendErrors[field][0]}`);
+            });
+          }
         }
       }
     } catch (err) {
@@ -153,6 +170,9 @@ export default function EditProfileForm({ initialData }) {
     career_start_date: initialData?.candidate?.career_start_date,
     field_of_specialization: initialData?.candidate?.field_of_specialization,
     other_specialization: initialData?.candidate?.other_specialization,
+    gender: initialData?.candidate?.gender,
+    present_address: initialData?.candidate?.present_address,
+    permanent_address: initialData?.candidate?.permanent_address,
   };
   const employmentData = initialData?.employment?.map((emp) => ({
     id: emp?.id,

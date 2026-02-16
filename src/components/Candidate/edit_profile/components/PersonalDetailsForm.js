@@ -18,7 +18,9 @@ export default function PersonalDetailsForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="profile-form">
       <div className="form-group">
-        <label className="form-label">Full Name </label>
+        <label className="form-label">
+          Full Name <span className="text-danger">*</span>
+        </label>
         <input
           {...register("full_name", { required: "Full name is required" })}
           type="text"
@@ -31,7 +33,9 @@ export default function PersonalDetailsForm({
       </div>
 
       <div className="form-group">
-        <label className="form-label">Primary Phone Number </label>
+        <label className="form-label">
+          Primary Phone Number <span className="text-danger">*</span>
+        </label>
         <input
           {...register("primary_phone_number", {
             required: "Phone number is required",
@@ -58,6 +62,47 @@ export default function PersonalDetailsForm({
       </div>
 
       <div className="form-group">
+        <label className="form-label">
+          Gender <span className="text-danger">*</span>
+        </label>
+        <select
+          {...register(`gender`, {
+            required: "Gender is required",
+          })}
+          className="form-input"
+        >
+          <option value="">Select Gender</option>
+          <option value="N/A">Prefer not to say</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="custom">Custom</option>
+        </select>
+        {errors.gender && (
+          <span className="form-error">{errors.gender.message}</span>
+        )}
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Present Address</label>
+        <input
+          {...register("present_address")}
+          type="text"
+          className="form-input"
+          placeholder="Enter present address"
+        />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Permanent Address</label>
+        <input
+          {...register("permanent_address")}
+          type="text"
+          className="form-input"
+          placeholder="Enter permanent address"
+        />
+      </div>
+
+      <div className="form-group">
         <label className="form-label">National ID</label>
         <input
           {...register("national_id")}
@@ -68,22 +113,38 @@ export default function PersonalDetailsForm({
       </div>
 
       <div className="form-group">
-        <label className="form-label">Career Start Date</label>
+        <label className="form-label">
+          Career Start Date <span className="text-danger">*</span>
+        </label>
         <input
-          {...register("career_start_date")}
+          {...register("career_start_date", {
+            required: "Career start date is required",
+          })}
           type="date"
           className="form-input"
         />
+        {errors.career_start_date && (
+          <span className="form-error">{errors.career_start_date.message}</span>
+        )}
       </div>
 
       <div className="form-group">
-        <label className="form-label">Field of Specialization</label>
+        <label className="form-label">
+          Field of Specialization <span className="text-danger">*</span>
+        </label>
         <input
-          {...register("field_of_specialization")}
+          {...register("field_of_specialization", {
+            required: "Field of specialization is required",
+          })}
           type="text"
           className="form-input"
           placeholder="Enter field of specialization"
         />
+        {errors.field_of_specialization && (
+          <span className="form-error">
+            {errors.field_of_specialization.message}
+          </span>
+        )}
       </div>
 
       <div className="form-group">
