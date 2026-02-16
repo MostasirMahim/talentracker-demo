@@ -12,11 +12,12 @@ const CandidateTestimonialCTA = () => {
 
   return (
     <section
-      className="py-5 py-lg-6 overflow-hidden"
+      className="py-5 py-lg-6 overflow-hidden cta-section-wrapper"
       style={{ position: "relative" }}
     >
       {/* Floating decorative elements - using primary color with low opacity */}
       <div
+        className="cta-float-circle-1"
         style={{
           position: "absolute",
           top: "10%",
@@ -26,11 +27,12 @@ const CandidateTestimonialCTA = () => {
           background: `radial-gradient(circle, ${primaryColorWithOpacity} 0%, rgba(20,138,188,0) 70%)`,
           borderRadius: "50%",
           zIndex: -1,
-          animation: "floatEffect 20s infinite alternate",
+          animation: "ctaFloatEffect 20s infinite alternate",
         }}
       />
 
       <div
+        className="cta-float-circle-2"
         style={{
           position: "absolute",
           bottom: "5%",
@@ -40,15 +42,15 @@ const CandidateTestimonialCTA = () => {
           background: `radial-gradient(circle, ${primaryColorLight} 0%, rgba(20,138,188,0) 70%)`,
           borderRadius: "50%",
           zIndex: -1,
-          animation: "floatEffectReverse 15s infinite alternate",
+          animation: "ctaFloatEffectReverse 15s infinite alternate",
         }}
       />
 
       <div className="container">
         {/* Section Header */}
-        <div className="text-center mb-5 header-animation">
+        <div className="text-center mb-5 cta-header-animation">
           <span
-            className="badge px-4 py-2 rounded-pill fw-semibold mb-3 d-inline-flex align-items-center"
+            className="badge px-4 py-2 rounded-pill fw-semibold mb-3 d-inline-flex align-items-center cta-badge"
             style={{
               backgroundColor: primaryColorLight,
               color: primaryColor,
@@ -70,13 +72,13 @@ const CandidateTestimonialCTA = () => {
             SHARE YOUR JOURNEY
           </span>
 
-          <h2 className="display-6 fw-bold mb-3">
+          <h2 className="display-6 fw-bold mb-3 cta-title">
             Your Success Story{" "}
             <span style={{ color: primaryColor }}>Inspires Others</span>
           </h2>
 
           <p
-            className="text-secondary fs-5 mx-auto"
+            className="text-secondary fs-5 mx-auto cta-description"
             style={{ maxWidth: "600px", color: "#6c757d" }}
           >
             Did our platform help you land an opportunity or solve a challenge?
@@ -89,7 +91,7 @@ const CandidateTestimonialCTA = () => {
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">
             <div
-              className="card border-0 text-white overflow-hidden position-relative cta-card"
+              className="card border-0 text-white overflow-hidden position-relative cta-main-card"
               style={{
                 background: `linear-gradient(135deg, ${primaryColor} 0%, ${primaryColorDark} 100%)`,
                 boxShadow: `0 20px 40px ${primaryColorMedium}`,
@@ -98,7 +100,7 @@ const CandidateTestimonialCTA = () => {
             >
               {/* Animated background circles */}
               <div
-                className="bg-circle-1"
+                className="cta-bg-circle-1"
                 style={{
                   position: "absolute",
                   top: "-10%",
@@ -108,12 +110,12 @@ const CandidateTestimonialCTA = () => {
                   background:
                     "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)",
                   borderRadius: "50%",
-                  animation: "floatBg 20s infinite",
+                  animation: "ctaFloatBg 20s infinite",
                 }}
               />
 
               <div
-                className="bg-circle-2"
+                className="cta-bg-circle-2"
                 style={{
                   position: "absolute",
                   bottom: "-20%",
@@ -123,18 +125,18 @@ const CandidateTestimonialCTA = () => {
                   background:
                     "radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%)",
                   borderRadius: "50%",
-                  animation: "floatBgReverse 15s infinite",
+                  animation: "ctaFloatBgReverse 15s infinite",
                 }}
               />
 
               <div className="card-body p-4 p-lg-5 position-relative">
                 <div className="row g-4 align-items-center">
                   {/* Left Side - Icon and Text */}
-                  <div className="col-md-7 left-content">
+                  <div className="col-md-7 cta-left-content">
                     <div className="d-flex align-items-center gap-4 mb-4">
                       {/* Professional Handshake Icon */}
                       <div
-                        className="icon-wrapper"
+                        className="cta-icon-wrapper"
                         style={{
                           background: "rgba(255, 255, 255, 0.15)",
                           backdropFilter: "blur(10px)",
@@ -144,7 +146,7 @@ const CandidateTestimonialCTA = () => {
                           alignItems: "center",
                           justifyContent: "center",
                           border: "1px solid rgba(255, 255, 255, 0.2)",
-                          animation: "floatIcon 3s ease-in-out infinite",
+                          animation: "ctaFloatIcon 3s ease-in-out infinite",
                         }}
                       >
                         <svg
@@ -205,13 +207,13 @@ const CandidateTestimonialCTA = () => {
 
                       <div>
                         <h3
-                          className="h2 fw-bold mb-2"
+                          className="h2 fw-bold mb-2 cta-heading"
                           style={{ color: "white" }}
                         >
                           Got Help or an Opportunity?
                         </h3>
                         <p
-                          className="mb-0 fs-5"
+                          className="mb-0 fs-5 cta-subheading"
                           style={{ color: "rgba(255, 255, 255, 0.9)" }}
                         >
                           We'd love to hear about your experience! Share your
@@ -221,9 +223,9 @@ const CandidateTestimonialCTA = () => {
                     </div>
 
                     {/* Benefits Pills */}
-                    <div className="d-flex flex-wrap gap-2 mt-4">
+                    <div className="d-flex flex-wrap gap-2 mt-4 cta-benefits-wrapper">
                       <span
-                        className="badge rounded-pill px-3 py-2 d-inline-flex align-items-center benefit-pill"
+                        className="badge rounded-pill px-3 py-2 d-inline-flex align-items-center cta-benefit-pill"
                         style={{
                           background: "rgba(255, 255, 255, 0.15)",
                           color: "white",
@@ -249,7 +251,7 @@ const CandidateTestimonialCTA = () => {
                       </span>
 
                       <span
-                        className="badge rounded-pill px-3 py-2 d-inline-flex align-items-center benefit-pill"
+                        className="badge rounded-pill px-3 py-2 d-inline-flex align-items-center cta-benefit-pill"
                         style={{
                           background: "rgba(255, 255, 255, 0.15)",
                           color: "white",
@@ -282,7 +284,7 @@ const CandidateTestimonialCTA = () => {
                       </span>
 
                       <span
-                        className="badge rounded-pill px-3 py-2 d-inline-flex align-items-center benefit-pill"
+                        className="badge rounded-pill px-3 py-2 d-inline-flex align-items-center cta-benefit-pill"
                         style={{
                           background: "rgba(255, 255, 255, 0.15)",
                           color: "white",
@@ -310,10 +312,10 @@ const CandidateTestimonialCTA = () => {
                   </div>
 
                   {/* Right Side - CTA Button */}
-                  <div className="col-md-5 text-md-end right-content">
+                  <div className="col-md-5 text-md-end cta-right-content">
                     <Link
-                      href="/candidate_testimonial"
-                      className="btn btn-light btn-lg rounded-pill px-5 py-3 fw-semibold d-inline-flex align-items-center gap-2 cta-button"
+                      href="/candidate_testimonial/post"
+                      className="btn btn-light btn-lg rounded-pill px-5 py-3 fw-semibold d-inline-flex align-items-center gap-2 cta-main-button"
                       style={{
                         background: "white",
                         color: primaryColor,
@@ -344,7 +346,7 @@ const CandidateTestimonialCTA = () => {
                     </Link>
 
                     <p
-                      className="mt-3 mb-0 small d-flex align-items-center justify-content-md-end justify-content-center gap-1"
+                      className="mt-3 mb-0 small d-flex align-items-center justify-content-md-end justify-content-center gap-1 cta-note"
                       style={{ color: "rgba(255, 255, 255, 0.75)" }}
                     >
                       <svg
@@ -371,38 +373,39 @@ const CandidateTestimonialCTA = () => {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        @keyframes floatEffect {
+        /* CTA Component Specific Animations - All prefixed with cta- */
+        @keyframes ctaFloatEffect {
           0% { transform: translate(0, 0) scale(1); }
           100% { transform: translate(-20px, -20px) scale(1.1); }
         }
         
-        @keyframes floatEffectReverse {
+        @keyframes ctaFloatEffectReverse {
           0% { transform: translate(0, 0) scale(1); }
           100% { transform: translate(20px, 20px) scale(1.1); }
         }
         
-        @keyframes floatBg {
+        @keyframes ctaFloatBg {
           0% { transform: translate(0, 0) scale(1); }
           50% { transform: translate(-20px, -20px) scale(1.1); }
           100% { transform: translate(0, 0) scale(1); }
         }
         
-        @keyframes floatBgReverse {
+        @keyframes ctaFloatBgReverse {
           0% { transform: translate(0, 0) scale(1); }
           50% { transform: translate(20px, 20px) scale(1.1); }
           100% { transform: translate(0, 0) scale(1); }
         }
         
-        @keyframes floatIcon {
+        @keyframes ctaFloatIcon {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
         
-        .header-animation {
-          animation: fadeInUp 0.8s ease-out;
+        .cta-header-animation {
+          animation: ctaFadeInUp 0.8s ease-out;
         }
         
-        @keyframes fadeInUp {
+        @keyframes ctaFadeInUp {
           from {
             opacity: 0;
             transform: translateY(30px);
@@ -413,11 +416,11 @@ const CandidateTestimonialCTA = () => {
           }
         }
         
-        .left-content {
-          animation: slideInLeft 0.8s ease-out;
+        .cta-left-content {
+          animation: ctaSlideInLeft 0.8s ease-out;
         }
         
-        @keyframes slideInLeft {
+        @keyframes ctaSlideInLeft {
           from {
             opacity: 0;
             transform: translateX(-50px);
@@ -428,11 +431,11 @@ const CandidateTestimonialCTA = () => {
           }
         }
         
-        .right-content {
-          animation: slideInRight 0.8s ease-out;
+        .cta-right-content {
+          animation: ctaSlideInRight 0.8s ease-out;
         }
         
-        @keyframes slideInRight {
+        @keyframes ctaSlideInRight {
           from {
             opacity: 0;
             transform: translateX(50px);
@@ -443,16 +446,16 @@ const CandidateTestimonialCTA = () => {
           }
         }
         
-        .cta-card {
-          animation: scaleIn 0.6s ease-out;
+        .cta-main-card {
+          animation: ctaScaleIn 0.6s ease-out;
           transition: transform 0.3s ease;
         }
         
-        .cta-card:hover {
+        .cta-main-card:hover {
           transform: scale(1.01);
         }
         
-        @keyframes scaleIn {
+        @keyframes ctaScaleIn {
           from {
             opacity: 0;
             transform: scale(0.95);
@@ -464,27 +467,28 @@ const CandidateTestimonialCTA = () => {
         }
         
         /* Hover effects using CSS pseudo-classes */
-        .benefit-pill {
+        .cta-benefit-pill {
           cursor: default;
+          transition: transform 0.3s ease, background 0.3s ease;
         }
         
-        .benefit-pill:hover {
+        .cta-benefit-pill:hover {
           transform: translateY(-2px) scale(1.05) !important;
           background: rgba(255, 255, 255, 0.25) !important;
         }
         
-        .cta-button {
+        .cta-main-button {
           position: relative;
           overflow: hidden;
           transition: all 0.3s ease !important;
         }
         
-        .cta-button:hover {
+        .cta-main-button:hover {
           transform: translateY(-2px) scale(1.05) !important;
           box-shadow: 0 20px 30px rgba(20, 138, 188, 0.3) !important;
         }
         
-        .cta-button::after {
+        .cta-main-button::after {
           content: '';
           position: absolute;
           top: 50%;
@@ -499,23 +503,28 @@ const CandidateTestimonialCTA = () => {
           z-index: 0;
         }
         
-        .cta-button:hover::after {
+        .cta-main-button:hover::after {
           width: 300px;
           height: 300px;
         }
         
-        .cta-button span, .cta-button svg {
+        .cta-main-button span, .cta-main-button svg {
           position: relative;
           z-index: 1;
         }
         
-        .cta-button svg path {
-          animation: arrowMove 1.5s ease-in-out infinite;
+        .cta-main-button svg path {
+          animation: ctaArrowMove 1.5s ease-in-out infinite;
         }
         
-        @keyframes arrowMove {
+        @keyframes ctaArrowMove {
           0%, 100% { transform: translateX(0); }
           50% { transform: translateX(5px); }
+        }
+
+        /* Ensure no style leakage */
+        .cta-section-wrapper * {
+          box-sizing: border-box;
         }
       `,
         }}

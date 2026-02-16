@@ -48,14 +48,14 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
     const validRating = Math.min(5, Math.max(0, rating || 0));
 
     return (
-      <div className="rating mb-3 d-flex align-items-center">
+      <div className="tc-rating mb-3 d-flex align-items-center">
         <span
-          className="me-2 small fw-semibold"
+          className="me-2 small fw-semibold tc-rating-value"
           style={{ color: primaryColor }}
         >
           {validRating}.0
         </span>
-        <div className="d-flex">
+        <div className="d-flex tc-stars-wrapper">
           {[...Array(5)].map((_, i) => {
             // For filled stars
             if (i < Math.floor(validRating)) {
@@ -68,7 +68,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                   fill={primaryColor}
                   stroke={primaryColor}
                   strokeWidth="1.5"
-                  className="me-1"
+                  className="me-1 tc-star-filled"
                 >
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z" />
                 </svg>
@@ -79,7 +79,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
               return (
                 <div
                   key={i}
-                  className="position-relative me-1"
+                  className="position-relative me-1 tc-half-star"
                   style={{ width: "16px", height: "16px" }}
                 >
                   <svg
@@ -90,6 +90,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                     stroke={primaryColor}
                     strokeWidth="1.5"
                     style={{ position: "absolute", top: 0, left: 0 }}
+                    className="tc-star-outline"
                   >
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z" />
                   </svg>
@@ -106,6 +107,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                       left: 0,
                       clipPath: "inset(0 50% 0 0)",
                     }}
+                    className="tc-star-half"
                   >
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z" />
                   </svg>
@@ -123,7 +125,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                   fill="none"
                   stroke={primaryColor}
                   strokeWidth="1.5"
-                  className="me-1"
+                  className="me-1 tc-star-empty"
                 >
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z" />
                 </svg>
@@ -142,7 +144,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
     if (!testimonial.image || imageError) {
       return (
         <div
-          className="avatar-fallback d-flex align-items-center justify-content-center fw-bold"
+          className="tc-avatar-fallback d-flex align-items-center justify-content-center fw-bold"
           style={{
             width: "100%",
             height: "100%",
@@ -167,18 +169,19 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
           height: "100%",
           objectFit: "cover",
         }}
+        className="tc-avatar-image"
         onError={() => setImageError(true)}
       />
     );
   };
 
   return (
-    <section className="py-5 py-lg-6 overflow-hidden testimonial-section">
+    <section className="py-5 py-lg-6 overflow-hidden tc-section">
       <div className="container">
         {/* Section Header */}
-        <div className="text-center mb-5">
+        <div className="text-center mb-5 tc-header">
           <span
-            className="badge px-4 py-2 rounded-pill fw-semibold mb-3 d-inline-flex align-items-center"
+            className="badge px-4 py-2 rounded-pill fw-semibold mb-3 d-inline-flex align-items-center tc-badge"
             style={{
               backgroundColor: "rgba(20, 138, 188, 0.1)",
               color: primaryColor,
@@ -192,19 +195,22 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
-              className="me-2"
+              className="me-2 tc-badge-icon"
             >
               <path d="M4 4v16h16V4H4zm2 4h12v2H6V8zm0 4h12v2H6v-2zm0 4h8v2H6v-2z" />
             </svg>
             SUCCESS STORIES
           </span>
 
-          <h2 className="display-6 fw-bold mb-3">
-            What Our <span style={{ color: primaryColor }}>Candidates Say</span>
+          <h2 className="display-6 fw-bold mb-3 tc-title">
+            What Our{" "}
+            <span style={{ color: primaryColor }} className="tc-highlight">
+              Candidates Say
+            </span>
           </h2>
 
           <p
-            className="text-secondary fs-5 mx-auto"
+            className="text-secondary fs-5 mx-auto tc-description"
             style={{ maxWidth: "600px", color: "#6c757d" }}
           >
             Real experiences from candidates who transformed their careers
@@ -213,25 +219,25 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
         </div>
 
         {/* Auto-sliding Carousel */}
-        <div className="testimonial-carousel-container">
-          <div className="testimonial-track">
+        <div className="tc-carousel-container">
+          <div className="tc-track">
             {duplicatedTestimonials.map((testimonial, index) => (
               <div
                 key={`${testimonial.id}-${index}`}
-                className="testimonial-card-wrapper"
+                className="tc-card-wrapper"
               >
-                <div className="card testimonial-card h-100 border-0">
+                <div className="card tc-card h-100 border-0">
                   {/* Card Top Gradient Bar */}
                   <div
-                    className="card-top-bar"
+                    className="tc-card-top-bar"
                     style={{
                       background: `linear-gradient(90deg, ${primaryColor}, ${primaryColor}80)`,
                     }}
                   />
 
-                  <div className="card-body p-4">
+                  <div className="card-body p-4 tc-card-body">
                     {/* Quote Icon */}
-                    <div className="quote-icon mb-3">
+                    <div className="tc-quote-icon mb-3">
                       <svg
                         width="40"
                         height="40"
@@ -244,23 +250,26 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                           d="M10 11h-4v-4h4v4zm8 0h-4v-4h4v4z"
                           fill={primaryColor}
                           fillOpacity="0.2"
+                          className="tc-quote-fill"
                         />
                         <path
                           d="M10 11h-4v-4h4v4zm8 0h-4v-4h4v4z"
                           stroke={primaryColor}
+                          className="tc-quote-stroke"
                         />
                         <path
                           d="M10 11v6l-4-2v-4h4zm8 0v6l-4-2v-4h4z"
                           fill={primaryColor}
                           fillOpacity="0.1"
+                          className="tc-quote-bg"
                         />
                       </svg>
                     </div>
 
                     {/* Testimonial Message */}
-                    <div className="testimonial-message mb-4">
+                    <div className="tc-message mb-4">
                       <p
-                        className="card-text"
+                        className="card-text tc-message-text"
                         style={{
                           fontSize: "0.95rem",
                           lineHeight: "1.6",
@@ -277,10 +286,10 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                     <RatingStars rating={testimonial.rating} />
 
                     {/* Author Info */}
-                    <div className="d-flex align-items-center mt-auto">
+                    <div className="d-flex align-items-center mt-auto tc-author-info">
                       {/* Avatar with gradient border */}
                       <div
-                        className="avatar-wrapper me-3"
+                        className="tc-avatar-wrapper me-3"
                         style={{
                           position: "relative",
                           width: "56px",
@@ -291,7 +300,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                         }}
                       >
                         <div
-                          className="avatar-inner rounded-circle bg-white overflow-hidden"
+                          className="tc-avatar-inner rounded-circle bg-white overflow-hidden"
                           style={{
                             width: "100%",
                             height: "100%",
@@ -303,20 +312,20 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
                       </div>
 
                       {/* Name and Company */}
-                      <div>
+                      <div className="tc-author-details">
                         <h6
-                          className="fw-bold mb-1"
+                          className="fw-bold mb-1 tc-author-name"
                           style={{ color: "#1a2634" }}
                         >
                           {testimonial.full_name}
                         </h6>
                         <p
-                          className="mb-0 small"
+                          className="mb-0 small tc-author-designation"
                           style={{ color: primaryColor }}
                         >
                           {testimonial.designation}
                         </p>
-                        <p className="mb-0 small text-muted">
+                        <p className="mb-0 small text-muted tc-author-company">
                           {testimonial.company_name}
                         </p>
                       </div>
@@ -325,7 +334,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
 
                   {/* Card Footer Decoration */}
                   <div
-                    className="card-footer-decoration"
+                    className="tc-card-footer"
                     style={{
                       height: "4px",
                       background: `linear-gradient(90deg, ${primaryColor}20, transparent)`,
@@ -339,13 +348,13 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
         </div>
 
         {/* Gradient Overlays for Smooth Edges */}
-        <div className="carousel-gradient-left" />
-        <div className="carousel-gradient-right" />
+        <div className="tc-gradient-left" />
+        <div className="tc-gradient-right" />
 
-       
-        <div className="read-more-btn mt-2">
-          <Link href="/candidate_testimonial/" className="default-btn">
-            See More <i className="ri-arrow-right-line"></i>
+        {/* See More Button */}
+        <div className="about-btn text-center">
+          <Link href="/candidate_testimonial" className="default-btn">
+            Read More <i className="ri-arrow-right-line"></i>
           </Link>
         </div>
       </div>
@@ -353,13 +362,14 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .testimonial-section {
+        /* Testimonial Carousel Specific Styles - All prefixed with tc- */
+        .tc-section {
           position: relative;
           background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
         }
 
         /* Carousel Container */
-        .testimonial-carousel-container {
+        .tc-carousel-container {
           position: relative;
           width: 100%;
           overflow: hidden;
@@ -367,29 +377,29 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
         }
 
         /* Testimonial Track */
-        .testimonial-track {
+        .tc-track {
           display: flex;
           gap: 24px;
-          animation: scrollTestimonials 40s linear infinite;
+          animation: tcScroll 40s linear infinite;
           width: fit-content;
         }
 
-        .testimonial-track:hover {
+        .tc-track:hover {
           animation-play-state: paused;
         }
 
         /* Testimonial Card Wrapper */
-        .testimonial-card-wrapper {
+        .tc-card-wrapper {
           flex: 0 0 350px;
           transition: transform 0.3s ease;
         }
 
-        .testimonial-card-wrapper:hover {
+        .tc-card-wrapper:hover {
           transform: translateY(-10px);
         }
 
         /* Testimonial Card */
-        .testimonial-card {
+        .tc-card {
           background: white;
           border-radius: 16px !important;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -399,12 +409,12 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
           border: 1px solid rgba(20, 138, 188, 0.1) !important;
         }
 
-        .testimonial-card:hover {
+        .tc-card:hover {
           box-shadow: 0 20px 40px rgba(20, 138, 188, 0.15);
         }
 
         /* Card Top Bar */
-        .card-top-bar {
+        .tc-card-top-bar {
           position: absolute;
           top: 0;
           left: 0;
@@ -414,27 +424,27 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
         }
 
         /* Quote Icon Animation */
-        .quote-icon svg {
+        .tc-quote-icon svg {
           opacity: 0.5;
           transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .testimonial-card:hover .quote-icon svg {
+        .tc-card:hover .tc-quote-icon svg {
           opacity: 1;
           transform: scale(1.1);
         }
 
         /* Avatar Wrapper */
-        .avatar-wrapper {
+        .tc-avatar-wrapper {
           transition: transform 0.3s ease;
         }
 
-        .testimonial-card:hover .avatar-wrapper {
+        .tc-card:hover .tc-avatar-wrapper {
           transform: scale(1.05);
         }
 
         /* Gradient Overlays */
-        .carousel-gradient-left {
+        .tc-gradient-left {
           position: absolute;
           top: 0;
           left: 0;
@@ -445,7 +455,7 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
           z-index: 2;
         }
 
-        .carousel-gradient-right {
+        .tc-gradient-right {
           position: absolute;
           top: 0;
           right: 0;
@@ -456,8 +466,26 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
           z-index: 2;
         }
 
+        /* See More Button */
+        .tc-see-more-btn {
+          transition: all 0.3s ease !important;
+        }
+
+        .tc-see-more-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(20, 138, 188, 0.3);
+        }
+
+        .tc-see-more-btn i {
+          transition: transform 0.3s ease;
+        }
+
+        .tc-see-more-btn:hover i {
+          transform: translateX(5px);
+        }
+
         /* Animations */
-        @keyframes scrollTestimonials {
+        @keyframes tcScroll {
           0% {
             transform: translateX(0);
           }
@@ -468,40 +496,62 @@ const CandidateTestimonialCarousel = ({ testimonials }) => {
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-          .testimonial-card-wrapper {
+          .tc-card-wrapper {
             flex: 0 0 300px;
           }
           
-          @keyframes scrollTestimonials {
+          @keyframes tcScroll {
             100% {
               transform: translateX(calc(-300px * ${publishedTestimonials.length} - 24px * ${publishedTestimonials.length}));
             }
           }
           
-          .carousel-gradient-left,
-          .carousel-gradient-right {
+          .tc-gradient-left,
+          .tc-gradient-right {
             width: 50px;
           }
         }
 
         /* Loading Animation for Avatar */
-        .avatar-fallback {
-          animation: pulse 2s infinite;
+        .tc-avatar-fallback {
+          animation: tcPulse 2s infinite;
         }
 
-        @keyframes pulse {
+        @keyframes tcPulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.7; }
         }
 
         /* Custom Scrollbar (hidden but functional) */
-        .testimonial-carousel-container {
+        .tc-carousel-container {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
         
-        .testimonial-carousel-container::-webkit-scrollbar {
+        .tc-carousel-container::-webkit-scrollbar {
           display: none;
+        }
+
+        /* Rating Stars */
+        .tc-star-filled,
+        .tc-star-half,
+        .tc-star-empty {
+          transition: transform 0.2s ease;
+        }
+
+        .tc-card:hover .tc-star-filled,
+        .tc-card:hover .tc-star-half,
+        .tc-card:hover .tc-star-empty {
+          transform: scale(1.1);
+        }
+
+        /* Message Text */
+        .tc-message-text {
+          transition: color 0.3s ease;
+        }
+
+        .tc-card:hover .tc-message-text {
+          color: #1a2634 !important;
         }
       `,
         }}
