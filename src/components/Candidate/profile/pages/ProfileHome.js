@@ -13,6 +13,8 @@ import {
   Wallet,
   SquareUser,
   User2,
+  VenusAndMars,
+  MapPinHouse,
 } from "lucide-react";
 import Image from "next/image";
 import "./style.css";
@@ -72,17 +74,24 @@ export default function ViewProfile({ profileData }) {
               <div className="contact-item">
                 <Phone className="icon-md" />
                 <span className="contact-value">
-                  {candidate.primary_phone_number}
+                  {candidate.primary_phone_number}{" "}
+                  <span className="text-muted">(primary)</span>
                 </span>
               </div>
-              {candidate.secondary_phone_number && (
+
+              {candidate.secondary_phone_number !== "N/A" && (
                 <div className="contact-item">
                   <PhoneCall className="icon-md" />
                   <span className="contact-value">
-                    {candidate.secondary_phone_number}
+                    {candidate.secondary_phone_number}{" "}
+                    <span className="text-muted">(secondary)</span>
                   </span>
                 </div>
               )}
+              <div className="contact-item">
+                <VenusAndMars className="icon-md" />
+                <span className="contact-value">{candidate.gender}</span>
+              </div>
               <div className="contact-item">
                 <Mail className="icon-md" />
                 <span className="contact-value contact-email">
@@ -92,9 +101,27 @@ export default function ViewProfile({ profileData }) {
               {currentLocation && (
                 <div className="contact-item">
                   <MapPin className="icon-md" />
-                  <span className="contact-value">{currentLocation}</span>
+                  <span className="contact-value">
+                    {currentLocation}{" "}
+                    <span className="text-muted">(current job location)</span>
+                  </span>
                 </div>
               )}
+
+              <div className="contact-item">
+                <MapPinHouse className="icon-md" />
+                <span className="contact-value">
+                  {candidate.permanent_address}{" "}
+                  <span className="text-muted">(permanent)</span>
+                </span>
+              </div>
+              <div className="contact-item">
+                <MapPinHouse className="icon-md" />
+                <span className="contact-value">
+                  {candidate.present_address}{" "}
+                  <span className="text-muted">(present)</span>
+                </span>
+              </div>
             </div>
           </div>
           {candidate?.profile_img && (
@@ -252,9 +279,7 @@ export default function ViewProfile({ profileData }) {
                     </a>
                   </div>
                 )}
-                {doc.resume && (
-                <ResumeButton id={candidate?.id} doc={doc}/>
-                )}
+                {doc.resume && <ResumeButton id={candidate?.id} doc={doc} />}
               </div>
             ))}
           </div>
