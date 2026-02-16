@@ -89,6 +89,27 @@ export default function EditProfileForm({ initialData }) {
         isNew =
           !initialData?.candidate ||
           Object.keys(initialData.candidate).length === 0;
+        // delete blank objects
+        Object.keys(formData).forEach((key) => {
+          if (formData[key] === "") {
+            delete formData[key];
+          }
+        });
+      } else if (step.id === "employment") {
+        for (const obj of formData) {
+          Object.keys(obj).forEach((key) => {
+            if (obj[key] === "") {
+              delete obj[key];
+            }
+          });
+        }
+      } else if (step.id === "compensation") {
+        Object.keys(formData).forEach((key) => {
+          if (formData[key] === "") {
+            delete formData[key];
+          }
+        });
+        isNew = !sectionData || sectionData.length === 0;
       } else if (step.id === "skills") {
         isNew = initialData?.candidate?.skills?.length === 0;
       } else {
@@ -100,13 +121,25 @@ export default function EditProfileForm({ initialData }) {
           formData.map((item) => {
             const isItemNew = !item.id;
             return updateCandidateProfile(step.id, item, isItemNew);
-          })
+          }),
         );
 
         const hasError = results.some((res) => res.success === false);
 
         if (hasError) {
-          toast.error("Some employment entries failed to save.");
+          // console.log(results);
+          for (const obj of results) {
+            if (obj.data?.data?.errors) {
+              const backendErrors = obj.data?.data?.errors;
+              // Dynamically set errors for each invalid field
+              Object.keys(backendErrors).forEach((field) => {
+                // Optional toast for each field
+                toast.error(`${field}: ${backendErrors[field][0]}`);
+              });
+            }
+          }
+          // toast.error("Some employment entries failed to save.");
+
           setSubmitStatus({
             type: "error",
             message: "Some employment entries failed to save.",
@@ -123,15 +156,26 @@ export default function EditProfileForm({ initialData }) {
         const result = await updateCandidateProfile(step.id, formData, isNew);
 
         if (result.success) {
-         setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1));
+          setCurrentStep(Math.min(STEPS.length - 1, currentStep + 1));
           toast.success(result.message || "Saved successfully.");
           setSubmitStatus({ type: "success", message: "Saved successfully." });
         } else {
-          toast.error(result.message || "Failed to save.");
+          // toast.error(result.message || "Failed to save.");
+
           setSubmitStatus({
             type: "error",
             message: result.message || "Failed to save.",
           });
+          console.log(result.data.data);
+
+          if (result.data?.data?.errors) {
+            const backendErrors = result.data?.data?.errors;
+            // Dynamically set errors for each invalid field
+            Object.keys(backendErrors).forEach((field) => {
+              // Optional toast for each field
+              toast.error(`${field}: ${backendErrors[field][0]}`);
+            });
+          }
         }
       }
     } catch (err) {
@@ -153,6 +197,9 @@ export default function EditProfileForm({ initialData }) {
     career_start_date: initialData?.candidate?.career_start_date,
     field_of_specialization: initialData?.candidate?.field_of_specialization,
     other_specialization: initialData?.candidate?.other_specialization,
+    gender: initialData?.candidate?.gender,
+    present_address: initialData?.candidate?.present_address,
+    permanent_address: initialData?.candidate?.permanent_address,
   };
   const employmentData = initialData?.employment?.map((emp) => ({
     id: emp?.id,
@@ -170,6 +217,7 @@ export default function EditProfileForm({ initialData }) {
     expected_salary: Number(initialData?.compensation[0]?.expected_salary),
     currency: initialData?.compensation[0]?.currency,
     notice_period: initialData?.compensation[0]?.notice_period,
+    other_benefits: initialData?.compensation[0]?.other_benefits,
   };
 
   const skillsData = initialData?.candidate.skills?.map((skill) => {
@@ -182,6 +230,7 @@ export default function EditProfileForm({ initialData }) {
     id: initialData?.document[0]?.id,
     linked_in_url: initialData?.document[0]?.linked_in_url,
     resume: initialData?.document[0]?.resume,
+    portfolio_links: initialData?.document[0]?.portfolio_links,
   };
   const locationData = {
     id: initialData?.location[0]?.id,

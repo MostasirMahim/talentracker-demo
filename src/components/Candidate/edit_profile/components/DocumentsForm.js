@@ -17,17 +17,18 @@ export default function DocumentsForm({ initialData, setSubmitStatus }) {
   const isNew = initialData?.id === null || initialData?.id === undefined;
   const onSubmit = async (data) => {
     setIsLoading(true);
-    if (
-      !data.resume ||
-      data.resume == initialData.resume ||
-      !data.linked_in_url
-    ) {
-      toast.error("Please upload your resume and LinkedIn URL.");
-      return;
-    }
+    // if (
+    //   !data.resume ||
+    //   data.resume == initialData.resume ||
+    //   !data.linked_in_url
+    // ) {
+    //   toast.error("Please upload your resume and LinkedIn URL.");
+    //   return;
+    // }
     try {
       const formData = new FormData();
       formData.append("linked_in_url", data.linked_in_url || "");
+      formData.append("portfolio_links", data.portfolio_links || "");
 
       if (data.resume && data.resume[0]) {
         formData.append("resume", data.resume[0]);
@@ -37,9 +38,17 @@ export default function DocumentsForm({ initialData, setSubmitStatus }) {
         toast.success(result.message);
         setSubmitStatus({ type: "success", message: "Saved successfully." });
       } else {
-        toast.error(result.message);
+        // toast.error(result.message);
+
+        if (result.data?.errors) {
+          const backendErrors = result.data?.errors;
+          // Dynamically set errors for each invalid field
+          Object.keys(backendErrors).forEach((field) => {
+            // Optional toast for each field
+            toast.error(`${field}: ${backendErrors[field][0]}`);
+          });
+        }
         setSubmitStatus({ type: "error", message: result.message });
-        console.log(result.data);
       }
     } catch (err) {
       toast.error(err.message);
@@ -60,25 +69,49 @@ export default function DocumentsForm({ initialData, setSubmitStatus }) {
           placeholder="https://linkedin.com/in/yourprofile"
         />
       </div>
+      <div className="form-group">
+        <label className="form-label">Portfolio URL</label>
+        <input
+          {...register("portfolio_links")}
+          type="text"
+          className="form-input"
+          placeholder="Enter portfolio links"
+        />
+        <div>
+          <small className="form-hint">
+            If multiple use comma separated ( link1 , link2)
+          </small>
+        </div>
+      </div>
 
       <div className="form-group">
-        <div style={{
-          display : "flex",
-          justifyContent: "space-between"
-        }}>
-          <label className="form-label">Resume</label>
-           <small style={{color : "#0e4c89"}}>{initialData?.resume?.split("/").pop()}</small>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <label className="form-label">
+            Resume <span className="text-danger">*</span>
+          </label>
+          <small style={{ color: "#0e4c89" }}>
+            {initialData?.resume?.split("/").pop()}
+          </small>
         </div>
         <input
-          {...register("resume")}
+          {...register("resume", {
+            required: "Resume is required",
+          })}
           type="file"
           className="form-input"
           accept=".pdf,.doc,.docx"
         />
         <div>
           <small className="form-hint">Accepted formats: PDF, DOC, DOCX</small>
-         
         </div>
+        {errors.resume && (
+          <span className="form-error">{errors.resume?.message}</span>
+        )}
       </div>
 
       <button type="submit" disabled={isLoading} className="btn btn-primary">

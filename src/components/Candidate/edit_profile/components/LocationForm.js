@@ -1,8 +1,6 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
-
-
+import { useForm } from "react-hook-form";
 
 export default function LocationsForm({ initialData, onSubmit, isLoading }) {
   const {
@@ -11,12 +9,14 @@ export default function LocationsForm({ initialData, onSubmit, isLoading }) {
     formState: { errors },
   } = useForm({
     defaultValues: initialData || {},
-  })
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="profile-form">
       <div className="form-group">
-        <label className="form-label">Current Job Location *</label>
+        <label className="form-label">
+          Current Job Location <span className="text-danger">*</span>{" "}
+        </label>
         <input
           {...register("current_job_location", {
             required: "Location is required",
@@ -25,12 +25,16 @@ export default function LocationsForm({ initialData, onSubmit, isLoading }) {
           className="form-input"
           placeholder="Enter current job location"
         />
-        {errors.current_job_location && <span className="form-error">{errors.current_job_location.message}</span>}
+        {errors.current_job_location && (
+          <span className="form-error">
+            {errors.current_job_location.message}
+          </span>
+        )}
       </div>
 
       <button type="submit" disabled={isLoading} className="btn btn-primary">
         {isLoading ? "Saving..." : "Save & Continue"}
       </button>
     </form>
-  )
+  );
 }
