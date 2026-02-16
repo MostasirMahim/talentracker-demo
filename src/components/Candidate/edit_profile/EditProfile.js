@@ -230,6 +230,7 @@ export default function EditProfileForm({ initialData }) {
     id: initialData?.document[0]?.id,
     linked_in_url: initialData?.document[0]?.linked_in_url,
     resume: initialData?.document[0]?.resume,
+    portfolio_links: initialData?.document[0]?.portfolio_links,
   };
   const locationData = {
     id: initialData?.location[0]?.id,

@@ -16,6 +16,7 @@ import {
   VenusAndMars,
   MapPinHouse,
   Download,
+  LinkIcon,
 } from "lucide-react";
 import Image from "next/image";
 import "./style.css";
@@ -314,6 +315,22 @@ export default function ViewProfile({ profileData }) {
                         className="document-link"
                       >
                         {doc.linked_in_url}
+                      </a>
+                    </div>
+                  )}
+                  {doc.portfolio_links && (
+                    <div className="document-row">
+                      <div className="document-label-with-icon">
+                        <LinkIcon className="icon-md" />
+                        <span>Portfolios </span>
+                      </div>
+                      <a
+                        href={doc.portfolio_links}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="document-link"
+                      >
+                        {doc.portfolio_links}
                       </a>
                     </div>
                   )}
