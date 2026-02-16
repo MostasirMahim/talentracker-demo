@@ -103,8 +103,13 @@ export default function EditProfileForm({ initialData }) {
             }
           });
         }
-        console.log("Employment data");
-        console.log(formData);
+      } else if (step.id === "compensation") {
+        Object.keys(formData).forEach((key) => {
+          if (formData[key] === "") {
+            delete formData[key];
+          }
+        });
+        isNew = !sectionData || sectionData.length === 0;
       } else if (step.id === "skills") {
         isNew = initialData?.candidate?.skills?.length === 0;
       } else {
@@ -212,6 +217,7 @@ export default function EditProfileForm({ initialData }) {
     expected_salary: Number(initialData?.compensation[0]?.expected_salary),
     currency: initialData?.compensation[0]?.currency,
     notice_period: initialData?.compensation[0]?.notice_period,
+    other_benefits: initialData?.compensation[0]?.other_benefits,
   };
 
   const skillsData = initialData?.candidate.skills?.map((skill) => {

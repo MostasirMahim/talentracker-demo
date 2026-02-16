@@ -186,6 +186,12 @@ export default function ViewProfile({ profileData }) {
                   </span>
                 </div>
                 <div className="compensation-row">
+                  <span className="compensation-label">Other benefits</span>
+                  <span className="compensation-value">
+                    : {comp.other_benefits}
+                  </span>
+                </div>
+                <div className="compensation-row">
                   <span className="compensation-label">Expected Salary</span>
                   <span className="compensation-value">
                     : {comp.currency} {comp.expected_salary || "-"}
