@@ -26,10 +26,11 @@ function FloatingForm() {
           justifyContent: "center",
           animation: "bounce 2s infinite",
           cursor: "pointer",
-          backgroundColor: "#1489bc"
+          backgroundColor: "#1489bc",
         }}
+        title="Request service"
       >
-             <Send size={24} />
+        <Send size={24} />
       </button>
 
       {/* Popup Form */}
@@ -38,7 +39,8 @@ function FloatingForm() {
       {/* Bounce Animation */}
       <style jsx>{`
         @keyframes bounce {
-          0%, 100% {
+          0%,
+          100% {
             transform: translateY(0);
           }
           50% {
