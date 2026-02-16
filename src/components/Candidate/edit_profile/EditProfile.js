@@ -95,6 +95,16 @@ export default function EditProfileForm({ initialData }) {
             delete formData[key];
           }
         });
+      } else if (step.id === "employment") {
+        for (const obj of formData) {
+          Object.keys(obj).forEach((key) => {
+            if (obj[key] === "") {
+              delete obj[key];
+            }
+          });
+        }
+        console.log("Employment data");
+        console.log(formData);
       } else if (step.id === "skills") {
         isNew = initialData?.candidate?.skills?.length === 0;
       } else {
@@ -112,7 +122,19 @@ export default function EditProfileForm({ initialData }) {
         const hasError = results.some((res) => res.success === false);
 
         if (hasError) {
-          toast.error("Some employment entries failed to save.");
+          // console.log(results);
+          for (const obj of results) {
+            if (obj.data?.data?.errors) {
+              const backendErrors = obj.data?.data?.errors;
+              // Dynamically set errors for each invalid field
+              Object.keys(backendErrors).forEach((field) => {
+                // Optional toast for each field
+                toast.error(`${field}: ${backendErrors[field][0]}`);
+              });
+            }
+          }
+          // toast.error("Some employment entries failed to save.");
+
           setSubmitStatus({
             type: "error",
             message: "Some employment entries failed to save.",

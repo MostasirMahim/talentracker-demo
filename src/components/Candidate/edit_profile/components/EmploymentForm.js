@@ -89,7 +89,9 @@ export default function EmploymentHistoryForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Company Name </label>
+            <label className="form-label">
+              Company Name <span className="text-danger">*</span>{" "}
+            </label>
             <input
               {...register(`employment.${index}.company_name`, {
                 required: "Company name is required",
@@ -106,7 +108,9 @@ export default function EmploymentHistoryForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Designation </label>
+            <label className="form-label">
+              Designation <span className="text-danger">*</span>
+            </label>
             <input
               {...register(`employment.${index}.designation`, {
                 required: "Designation is required",
@@ -123,7 +127,9 @@ export default function EmploymentHistoryForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Joining Date </label>
+            <label className="form-label">
+              Joining Date <span className="text-danger">*</span>
+            </label>
             <input
               {...register(`employment.${index}.joining_date`, {
                 required: "Joining date is required",
@@ -148,9 +154,13 @@ export default function EmploymentHistoryForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Employment Type</label>
+            <label className="form-label">
+              Employment Type <span className="text-danger">*</span>
+            </label>
             <select
-              {...register(`employment.${index}.employment_type`)}
+              {...register(`employment.${index}.employment_type`, {
+                required: "Employment type is required",
+              })}
               className="form-input"
             >
               <option value="">Select employment type</option>
@@ -159,6 +169,11 @@ export default function EmploymentHistoryForm({
               <option value="contract">Contract</option>
               <option value="freelance">Freelance</option>
             </select>
+            {errors.employment?.[index]?.employment_type && (
+              <span className="form-error">
+                {errors.employment[index]?.employment_type?.message}
+              </span>
+            )}
           </div>
 
           <div className="form-group checkbox-group">
