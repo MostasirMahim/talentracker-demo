@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import AdminSmartPagination from "@/components/SmartPagination/AdminSmartPagination";
 import { calculateExperience } from "@/lib/utility_functions";
 import { useForm } from "react-hook-form";
-import { ca } from "zod/v4/locales";
+import { useSearchParams } from "next/navigation";
 
 const STATUS_CHOICES = [
   { value: "pending", label: "Pending" },
@@ -31,6 +31,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
   const [selectedCandidateId, setSelectedCandidateId] = useState(null);
 
   const [showUpdateStatusForm, setShowUpdateStatusForm] = useState(false);
+  const searchParams = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -191,6 +192,49 @@ const JobApplicationsListTable = ({ data = {} }) => {
     router.refresh();
   };
 
+  const handleExport = async () => {
+    try {
+      const params = new URLSearchParams(searchParams);
+      if (!params.has("page_size")) {
+        params.set("page_size", "25");
+      }
+      params.set("download", "true");
+
+      const response = await axiosInstance.get(
+        `/api/jobs/v1/job_applications/?${params.toString()}`,
+        {
+          responseType: "blob", // critical
+        },
+      );
+
+      // Extract filename from header
+      const contentDisposition = response.headers["content-disposition"];
+      let fileName = "job_applications.xlsx";
+
+      if (contentDisposition) {
+        const match = contentDisposition.match(/filename="?(.+)"?/);
+        if (match?.[1]) {
+          fileName = match[1];
+        }
+      }
+
+      // Create blob URL
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName);
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
+      toast.success("Export successful");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
       <div className="flex justify-between mb-3 align-baseline">
@@ -199,7 +243,7 @@ const JobApplicationsListTable = ({ data = {} }) => {
         </h2>
         <div>
           <button
-            onClick={() => handleRefresh()}
+            onClick={() => handleExport()}
             className="p-3  bg-green-600 text-white cursor-pointer rounded-md hover:bg-green-700 transition-colors me-2"
           >
             Export
