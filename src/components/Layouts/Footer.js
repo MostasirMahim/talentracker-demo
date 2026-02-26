@@ -86,8 +86,8 @@ const Footer = () => {
                     <li>
                       <span>Location :</span>{" "}
                       <a>
-                        House 1(Level 2), Road 3, Block A, Mirpur 11, Begum
-                        Rokeya Avenue, Dhaka-1216.
+                        11/A, Main Road-03, Plot-10, Pallabi, Mirpur-11,
+                        Dhaka-1216; Bangladesh.
                       </a>
                     </li>
                   </ul>
