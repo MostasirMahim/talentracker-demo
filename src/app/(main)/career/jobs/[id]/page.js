@@ -9,7 +9,7 @@ async function page({ params }) {
   const { id } = await params;
   let jobDetails = {};
   try {
-    const response = await axiosInstance.get(`/api/jobs/v1/jobs/${id}/`);
+    const response = await axiosInstance.get(`/api/jobs/v1/jobs/slug/${id}/`);
     jobDetails = response?.data?.data;
   } catch (error) {
     console.error(error);

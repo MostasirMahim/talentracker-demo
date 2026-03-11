@@ -192,7 +192,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
               </div>
 
               <div className="flex-grow-1">
-                <Link href={`jobs/${job?.id}/`}>
+                <Link href={`jobs/${job?.slug}/`}>
                   <h5 className="job-title text-main mb-2 ">{job?.title}</h5>
                 </Link>
 
@@ -226,7 +226,7 @@ const JobList = ({ jobs, job_types, job_categories, job_locations }) => {
             </div>
 
             <div className="mt-3 mt-md-0 d-flex justify-content-md-end">
-              <Link href={`/career/jobs/${job?.id}/`} className="default-btn">
+              <Link href={`/career/jobs/${job?.slug}/`} className="default-btn">
                 Apply<i className="ri-arrow-right-line"></i>
               </Link>
             </div>
