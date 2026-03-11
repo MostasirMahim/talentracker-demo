@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build --no-lint",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "limit": "systemd-run --scope -p MemoryMax=400M --user npm run dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
