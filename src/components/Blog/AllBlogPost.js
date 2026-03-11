@@ -45,7 +45,7 @@ const AllBlogPost = ({ blogs }) => {
             <div className="col-lg-4 col-md-6" key={post.id}>
               <div className="single-blog-post">
                 <div className="post-image">
-                  <Link href={`/blog/${post.id}`} className="d-block">
+                  <Link href={`/blog/${post.slug}`} className="d-block">
                     <Image
                       src={
                         post.featured_image
@@ -72,14 +72,16 @@ const AllBlogPost = ({ blogs }) => {
                     </li>
                     <li>
                       <i className="ri-user-voice-line"></i>
-                      <Link href={`/blog/${post.id}`}>{post.author}</Link>
+                      <Link href={`/blog/${post.slug}`}>{post.author}</Link>
                     </li>
                   </ul>
                   <h3>
-                    <Link href={`/blog/${post.id}`}>{truncateText(post.title, 40)}</Link>
+                    <Link href={`/blog/${post.slug}`}>
+                      {truncateText(post.title, 40)}
+                    </Link>
                   </h3>
                   <p>{truncateText(post.summary, 100)}</p>
-                  <Link href={`/blog/${post.id}`} className="default-btn">
+                  <Link href={`/blog/${post.slug}`} className="default-btn">
                     Read More <i className="ri-arrow-right-line"></i>
                   </Link>
                 </div>

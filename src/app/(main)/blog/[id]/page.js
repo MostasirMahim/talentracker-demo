@@ -6,17 +6,12 @@ import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import TopHeaderStyleTwo from "@/components/Layouts/TopHeaderStyleTwo";
 import Footer from "@/components/Layouts/Footer";
 
-export default async function SingleBlogPage({ params } ) {
-  console.log(params);
-  const cookieStore = cookies();
-  const authToken = cookieStore.get("access_token")?.value || "";
-
+export default async function SingleBlogPage({ params }) {
   let blog = null;
 
   try {
     const { data } = await axiosInstance.get(
-      `/api/blogs/v1/blogs/${params.id}/`
-      
+      `/api/blogs/v1/blogs/slug/${params.id}/`,
     );
     blog = data.data;
   } catch (error) {
@@ -32,7 +27,8 @@ export default async function SingleBlogPage({ params } ) {
         </h2>
         <p className="text-gray-600 max-w-md">
           We couldn’t find the blog you’re looking for. It might have been
-          removed, or the ID <span className="font-mono">{params.id}</span> is invalid.
+          removed, or the ID <span className="font-mono">{params.id}</span> is
+          invalid.
         </p>
         <a
           href="/blog/all"
@@ -45,8 +41,7 @@ export default async function SingleBlogPage({ params } ) {
   }
 
   return (
-   
-     <>
+    <>
       <TopHeaderStyleTwo />
       <NavbarStyleOne />
       <BlogDetailsContent blog={blog} />
