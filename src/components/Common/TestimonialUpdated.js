@@ -92,7 +92,7 @@ const Design5 = () => {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setActive((p) => (p + 1) % testimonials.length), 5000);
+    const timer = setInterval(() => setActive((p) => (p + 1) % testimonials.length), 7000);
     return () => clearInterval(timer);
   }, []);
 
@@ -136,13 +136,6 @@ const Design5 = () => {
                   <div className="tu-d5-author-info">
                     <h5 className="tu-d5-author-name">{testimonials[active].clientName}</h5>
                     <p className="tu-d5-author-role">{testimonials[active].designation}</p>
-                    <div className="tu-d5-stars-row">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={COLORS.light} stroke="none">
-                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z" />
-                        </svg>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </div>
@@ -363,7 +356,7 @@ const Design5 = () => {
           height: 3px;
           background: linear-gradient(90deg, ${COLORS.main}, ${COLORS.light});
           border-radius: 0 0 16px 16px;
-          animation: tu-d5-progress 5s linear;
+          animation: tu-d5-progress 7s linear;
           width: 100%;
         }
         @keyframes tu-d5-progress {
