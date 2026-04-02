@@ -49,11 +49,12 @@ const COLORS = {
 
 const AvatarImg = ({ src, alt, size = 70 }) => {
   const [err, setErr] = useState(false);
-  const initials = alt
-    ?.split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase() || "?";
+  const initials =
+    alt
+      ?.split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase() || "?";
 
   if (err || !src)
     return (
@@ -82,7 +83,13 @@ const AvatarImg = ({ src, alt, size = 70 }) => {
       alt={alt}
       width={size}
       height={size}
-      style={{ width: size, height: size, objectFit: "cover", borderRadius: "50%", flexShrink: 0 }}
+      style={{
+        width: size,
+        height: size,
+        objectFit: "cover",
+        borderRadius: "50%",
+        flexShrink: 0,
+      }}
       onError={() => setErr(true)}
     />
   );
@@ -92,7 +99,10 @@ const Design5 = () => {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setActive((p) => (p + 1) % testimonials.length), 7000);
+    const timer = setInterval(
+      () => setActive((p) => (p + 1) % testimonials.length),
+      7000,
+    );
     return () => clearInterval(timer);
   }, []);
 
@@ -118,9 +128,18 @@ const Design5 = () => {
               <div className="tu-d5-deco-line tu-d5-deco-2" />
 
               <div className="tu-d5-showcase-content">
-                <svg className="tu-d5-quote-svg" width="54" height="54" viewBox="0 0 24 24" fill="none">
+                <svg
+                  className="tu-d5-quote-svg"
+                  width="54"
+                  height="54"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
                   <path d="M10 11H6V7h4v4zm8 0h-4V7h4v4z" fill={COLORS.main} />
-                  <path d="M10 11v6l-4-2V11h4zm8 0v6l-4-2V11h4z" fill={COLORS.light} />
+                  <path
+                    d="M10 11v6l-4-2V11h4zm8 0v6l-4-2V11h4z"
+                    fill={COLORS.light}
+                  />
                 </svg>
 
                 <p className="tu-d5-show-text">
@@ -129,13 +148,21 @@ const Design5 = () => {
 
                 <div className="tu-d5-author-row">
                   <div className="tu-d5-author-img-wrap">
-                    <AvatarImg src={testimonials[active].image} alt={testimonials[active].altText} size={68} />
+                    <AvatarImg
+                      src={testimonials[active].image}
+                      alt={testimonials[active].altText}
+                      size={68}
+                    />
                     {/* Status indicator */}
                     <div className="tu-d5-status-dot" />
                   </div>
                   <div className="tu-d5-author-info">
-                    <h5 className="tu-d5-author-name">{testimonials[active].clientName}</h5>
-                    <p className="tu-d5-author-role">{testimonials[active].designation}</p>
+                    <h5 className="tu-d5-author-name">
+                      {testimonials[active].clientName}
+                    </h5>
+                    <p className="tu-d5-author-role">
+                      {testimonials[active].designation}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -171,17 +198,12 @@ const Design5 = () => {
               })}
             </div>
           </div>
-
-          {/* See More Button */}
-          <div className="text-center mt-5">
-            <Link href="#" className="default-btn tu-d5-see-more">
-              Read More Stories <i className="ri-arrow-right-line"></i>
-            </Link>
-          </div>
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
         .tu-design5-section {
@@ -381,7 +403,9 @@ const Design5 = () => {
           .tu-d5-pill { padding: 12px 14px; }
           .tu-design5-section { padding: 60px 0; }
         }
-      `}} />
+      `,
+        }}
+      />
     </section>
   );
 };
@@ -390,18 +414,35 @@ const SectionHeader = ({ badge, title, highlight, description }) => (
   <div className="text-center mb-5">
     <span
       className="tu-sh-badge d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill fw-semibold mb-3"
-      style={{ backgroundColor: `${COLORS.main}14`, color: COLORS.main, fontSize: ".82rem", letterSpacing: "1px" }}
+      style={{
+        backgroundColor: `${COLORS.main}14`,
+        color: COLORS.main,
+        fontSize: ".82rem",
+        letterSpacing: "1px",
+      }}
     >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
         <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z" />
       </svg>
       {badge}
     </span>
     <h2 className="tu-sh-title display-6 fw-bold mb-3">
       {title}{" "}
-      <span className="tu-sh-highlight" style={{ color: COLORS.main }}>{highlight}</span>
+      <span className="tu-sh-highlight" style={{ color: COLORS.main }}>
+        {highlight}
+      </span>
     </h2>
-    <p className="tu-sh-desc fs-5 mx-auto" style={{ maxWidth: 580, color: COLORS.optional }}>
+    <p
+      className="tu-sh-desc fs-5 mx-auto"
+      style={{ maxWidth: 580, color: COLORS.optional }}
+    >
       {description}
     </p>
   </div>
