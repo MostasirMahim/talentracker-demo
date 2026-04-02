@@ -2,7 +2,7 @@ import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
 import MainBanner from "@/components/HomeDemo1/MainBanner";
 import ServicesCard from "@/components/HomeDemo1/ServicesCard";
 import Funfacts from "@/components/Common/Funfacts";
-import TestimonialStyleOne from "@/components/Common/TestimonialStyleOne";
+import TestimonialUpdated from "@/components/Common/TestimonialUpdated";
 import WhyChooseUs from "@/components/HomeDemo1/WhyChooseUs";
 import Footer from "@/components/Layouts/Footer";
 import FreeQuoteFormStyle2 from "@/components/FreeQuoteForm/FreeQuoteFormStyle2";
@@ -26,10 +26,9 @@ export default async function Home() {
       <Funfacts />
       <WhyChooseUs />
       <FreeQuoteFormStyle2 />
-      <TestimonialStyleOne />
+      <TestimonialUpdated />
       < CandidateOverview />
       <CandidateTestimonialCarousel testimonials={testimonials} />
-
       <Footer />
     </>
   );
