@@ -10,11 +10,11 @@ const testimonials = [
     id: 1,
     quotesIcon: "ri-double-quotes-l",
     feedbckText:
-      "TalenTracker Limited has completely transformed our recruitment process. Their team has an exceptional ability to find the right talent that fits our company culture perfectly. Their commitment to excellence and professional approach is truly impressive.-dummy",
-    clientName: "Rahat Chowdhury",
-    designation: "HR Director, Apex Group",
-    image: "/images/testimonial/testimonial1.jpg",
-    altText: "Rahat Chowdhury",
+      "I had the pleasure of working with Talent Tracker as a client, and the experience was exceptional from start to finish. Their ability to understand our organizational needs, culture, and long-term vision truly set them apart.They demonstrated a highly professional and proactive approach, presenting well-screened, high-quality candidates within a short timeframe. What impressed me most was their attention to detail and commitment to finding not just the right skill set, but the right cultural fit for our team.Communication was always clear, timely, and transparent, making the entire hiring process smooth and efficient. Their market knowledge and strategic insight added significant value to our recruitment efforts.I would highly recommend Talent Tracker to any organization seeking a reliable and results-driven recruitment partner.",
+    clientName: "Kazi Mohammad Jafar Sadek ",
+    designation: "Group CHRO, Runner Group",
+    image: "/images/testimonial/kazi_mohammad.jpg",
+    altText: "Kazi Mohammad Jafar Sadek ",
   },
   {
     id: 2,
