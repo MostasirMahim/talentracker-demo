@@ -8,7 +8,7 @@ async function TrainingSolutionDetails({ params }) {
   let data = {};
   try {
     const response = await axiosInstance.get(
-      `/api/training_solutions/v1/training_catalog/${id}/`
+      `/api/training_solutions/v1/training_catalog/slugs/${id}/`,
     );
     data = response.data;
   } catch (error) {

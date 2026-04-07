@@ -9,7 +9,7 @@ export async function get_training_service_categories() {
       `${BASE_URL}/api/training_solutions/v1/training_categories/`,
       {
         cache: "no-store",
-      }
+      },
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
@@ -38,7 +38,7 @@ export async function get_learning_segments() {
       `${BASE_URL}/api/learning_segments/v1/learning_segments/`,
       {
         cache: "no-store",
-      }
+      },
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
@@ -67,7 +67,7 @@ export async function get_trainers() {
       `${BASE_URL}/api/expert_trainer_profiles/v1/expert_trainer_profiles/?slider_filter=true`,
       {
         cache: "no-store",
-      }
+      },
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
@@ -94,7 +94,7 @@ export async function get_trainers() {
 export async function get_catalogs(currentPage) {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/training_solutions/v1/training_catalog/?page_size=18&page=${currentPage}`
+      `${BASE_URL}/api/training_solutions/v1/training_catalog/?page_size=18&page=${currentPage}`,
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
@@ -122,7 +122,7 @@ export async function get_catalogs(currentPage) {
 export async function get_trainer_profile(id) {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/expert_trainer_profiles/v1/expert_trainer_profiles/${id}/`
+      `${BASE_URL}/api/expert_trainer_profiles/v1/expert_trainer_profiles/${id}/`,
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
@@ -149,7 +149,7 @@ export async function get_trainer_profile(id) {
 export async function get_course_details(id) {
   try {
     const res = await fetch(
-      `${BASE_URL}/api/learning_segments/v1/learning_segments/${id}/`
+      `${BASE_URL}/api/learning_segments/v1/learning_segments/${id}/`,
     );
     const response = await res.json();
     if (response.code === 200 && response.status === "success") {
@@ -183,7 +183,7 @@ export async function create_service_request(data) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }
+      },
     );
 
     const response = await res.json();

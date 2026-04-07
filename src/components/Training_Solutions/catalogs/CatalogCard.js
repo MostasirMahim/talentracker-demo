@@ -11,9 +11,7 @@ function CatalogCard({ catalog }) {
     <StyledWrapper>
       <div
         className="card-x"
-        onClick={() =>
-          router.push(`/training-solutions/${catalog.id}`)
-        }
+        onClick={() => router.push(`/training-solutions/${catalog.slug}`)}
       >
         <div className="card__shine-x" />
         <div className="card__glow-x" />
@@ -29,15 +27,11 @@ function CatalogCard({ catalog }) {
 
           <div className="card__text">
             <p className="card__title">{catalog.title}</p>
-            <p className="card__description">
-              {catalog.short_description}
-            </p>
+            <p className="card__description">{catalog.short_description}</p>
           </div>
 
           <div className="card__footer">
-            <div className="card__price">
-              {catalog?.category?.name}
-            </div>
+            <div className="card__price">{catalog?.category?.name}</div>
             <div className="card__button">
               <ArrowRight />
             </div>
@@ -64,8 +58,9 @@ const StyledWrapper = styled.div`
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: var(--card-shadow);
     border: 1px solid #1489bc;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, sans-serif;
   }
 
   .card__shine-x {
@@ -135,7 +130,8 @@ const StyledWrapper = styled.div`
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(
+    background:
+      radial-gradient(
         circle at 30% 30%,
         rgba(255, 255, 255, 0.1) 0%,
         transparent 30%
@@ -211,7 +207,8 @@ const StyledWrapper = styled.div`
   /* Hover Effects */
   .card-x:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border-color: rgba(124, 58, 237, 0.2);
   }
