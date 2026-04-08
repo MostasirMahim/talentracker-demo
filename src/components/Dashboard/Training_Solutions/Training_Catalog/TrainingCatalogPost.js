@@ -28,6 +28,9 @@ export default function TrainingCatalogPost() {
     short_description: "",
     thumbnail_image: null,
     status: "",
+    start_date: "",
+    end_date: "",
+    registration_status: "",
   });
 
   // Fetch categories on mount
@@ -35,7 +38,7 @@ export default function TrainingCatalogPost() {
     const fetchCategories = async () => {
       try {
         const res = await axiosInstance.get(
-          "/api/training_solutions/v1/training_categories/"
+          "/api/training_solutions/v1/training_categories/",
         );
         setCategories(res.data.data || res.data);
         console.log(res.data.data);
@@ -57,12 +60,15 @@ export default function TrainingCatalogPost() {
         short_description: catalog.short_description || "",
         thumbnail_image: null,
         status: catalog.status || "",
+        start_date: catalog.start_date || "",
+        end_date: catalog.end_date || "",
+        registration_status: catalog.registration_status || "",
       });
 
       // Set existing image preview
       if (catalog.thumbnail_image) {
         setImagePreview(
-          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${catalog.thumbnail_image}`
+          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${catalog.thumbnail_image}`,
         );
       }
     } else {
@@ -74,6 +80,9 @@ export default function TrainingCatalogPost() {
         short_description: "",
         thumbnail_image: null,
         status: "",
+        start_date: "",
+        end_date: "",
+        registration_status: "",
       });
       setImagePreview(null);
     }
@@ -135,6 +144,9 @@ export default function TrainingCatalogPost() {
       payload.append("title", formData.title);
       payload.append("category", formData.category);
       payload.append("short_description", formData.short_description);
+      payload.append("start_date", formData.start_date);
+      payload.append("end_date", formData.end_date);
+      payload.append("registration_status", formData.registration_status);
       if (catalogId) {
         payload.append("status", formData.status);
       }
@@ -170,9 +182,7 @@ export default function TrainingCatalogPost() {
         return;
       }
       toast.error(
-        catalogId
-          ? "Failed to update catalog"
-          : "Failed to create catalog"
+        catalogId ? "Failed to update catalog" : "Failed to create catalog",
       );
       console.error(error);
     } finally {
@@ -353,7 +363,51 @@ export default function TrainingCatalogPost() {
             </select>
           </div>
         )}
+        {/* Start Date */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Start Date
+          </label>
+          <input
+            type="date"
+            name="start_date"
+            value={formData.start_date}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
 
+        {/* End Date */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            End Date
+          </label>
+          <input
+            type="date"
+            name="end_date"
+            value={formData.end_date}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        {/* Registration Status */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Registration Status
+          </label>
+          <select
+            name="registration_status"
+            value={formData.registration_status}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Select Registration Status</option>
+            <option value="Registration Open">Registration Open</option>
+            <option value="Live Now">Live Now</option>
+            <option value="Ended">Ended</option>
+          </select>
+        </div>
         {/* Submit Buttons */}
         <div className="flex gap-4 pt-4">
           <button
@@ -364,8 +418,8 @@ export default function TrainingCatalogPost() {
             {loading
               ? "Processing..."
               : catalogId
-              ? "Update Catalog"
-              : "Create Catalog"}
+                ? "Update Catalog"
+                : "Create Catalog"}
           </button>
           <button
             type="button"

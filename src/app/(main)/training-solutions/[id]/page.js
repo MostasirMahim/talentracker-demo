@@ -11,6 +11,7 @@ async function TrainingSolutionDetails({ params }) {
       `/api/training_solutions/v1/training_catalog/slugs/${id}/`,
     );
     data = response.data;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
