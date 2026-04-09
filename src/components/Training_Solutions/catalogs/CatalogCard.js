@@ -1,61 +1,68 @@
 "use client";
 
-import { ArrowRight, Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Calendar,
+  CheckCircle,
+  Clock,
+  XCircle,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import styled from "styled-components";
 
 function CatalogCard({ catalog }) {
   const router = useRouter();
-  
+
   // Get values from catalog object
-  const registrationStatus = catalog?.registration_status || "Registration Open";
+  const registrationStatus =
+    catalog?.registration_status || "Registration Open";
   const startDate = catalog?.start_date || "";
   const endDate = catalog?.end_date || "";
-  
+
   // Format date function
   const formatDate = (dateString) => {
     if (!dateString) return "TBA";
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", { 
-      month: "short", 
-      day: "numeric", 
-      year: "numeric" 
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
     });
   };
-  
+
   // Get status icon and color based on registration status
   const getStatusConfig = (status) => {
-    switch(status) {
+    switch (status) {
       case "Registration Open":
         return {
           icon: <CheckCircle size={12} />,
           color: "#10b981",
-          bgColor: "rgba(16, 185, 129, 0.1)"
+          bgColor: "rgba(16, 185, 129, 0.1)",
         };
       case "Live Now":
         return {
           icon: <Clock size={12} />,
           color: "#f59e0b",
-          bgColor: "rgba(245, 158, 11, 0.1)"
+          bgColor: "rgba(245, 158, 11, 0.1)",
         };
       case "Ended":
         return {
           icon: <XCircle size={12} />,
           color: "#ef4444",
-          bgColor: "rgba(239, 68, 68, 0.1)"
+          bgColor: "rgba(239, 68, 68, 0.1)",
         };
       default:
         return {
           icon: <CheckCircle size={12} />,
           color: "#10b981",
-          bgColor: "rgba(16, 185, 129, 0.1)"
+          bgColor: "rgba(16, 185, 129, 0.1)",
         };
     }
   };
-  
+
   const statusConfig = getStatusConfig(registrationStatus);
-  
+
   return (
     <StyledWrapper>
       <div
@@ -65,7 +72,6 @@ function CatalogCard({ catalog }) {
         <div className="card__shine-x" />
         <div className="card__glow-x" />
         <div className="card__content-x">
-
           <div
             style={{
               backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_API_URL}${catalog.thumbnail_image})`,
@@ -84,39 +90,37 @@ function CatalogCard({ catalog }) {
               <ArrowRight />
             </div>
           </div>
-          
+
           {/* Added fields section */}
           <div className="card__fields">
-            {/* Row for Status and Start Date */}
-            <div className="card__fields-row">
-              <div className="card__field" style={{ backgroundColor: statusConfig.bgColor }}>
-                <div className="field-icon" style={{ color: statusConfig.color }}>
+            {/* Status - single line full width, text center */}
+            <div className="card__status-wrapper">
+              <div
+                className="card__status"
+                style={{ backgroundColor: statusConfig.bgColor }}
+              >
+                <span
+                  className="status-icon"
+                  style={{ color: statusConfig.color }}
+                >
                   {statusConfig.icon}
-                </div>
-                <span className="field-value" style={{ color: statusConfig.color }}>
+                </span>
+                <span
+                  className="status-text"
+                  style={{ color: statusConfig.color }}
+                >
                   {registrationStatus}
                 </span>
               </div>
-              
-              <div className="card__field">
-                <div className="field-icon">
-                  <Calendar size={12} />
-                </div>
-                <span className="field-label">Start:</span>
-                <span className="field-value">{formatDate(startDate)}</span>
-              </div>
             </div>
-            
-            {/* End Date - Centered below */}
-            <div className="card__field-end-wrapper">
-              <div className="card__field-end">
-                <div className="field-icon">
-                  <Calendar size={12} />
-                </div>
-                <span className="field-label">End:</span>
-                <span className="field-value">{formatDate(endDate)}</span>
+
+            {/* Start Date as quote block style */}
+            {startDate && (
+              <div className="card__date-quote">
+                <span className="date-label">Start:</span>
+                <span className="date-value">{formatDate(startDate)}</span>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -298,45 +302,6 @@ const StyledWrapper = styled.div`
     border-top: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  .card__fields-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-
-  .card__field {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.75rem;
-    color: var(--card-text);
-    background: rgba(20, 137, 188, 0.08);
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    flex: 1;
-    transition: all 0.3s ease;
-  }
-
-  .card__field-end-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .card__field-end {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
-    font-size: 0.75rem;
-    color: var(--card-text);
-    background: rgba(20, 137, 188, 0.08);
-    padding: 0.25rem 1rem;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    min-width: 120px;
-  }
-
   .field-icon {
     display: flex;
     align-items: center;
@@ -344,15 +309,69 @@ const StyledWrapper = styled.div`
     color: #1489bc;
   }
 
-  .field-label {
-    font-weight: 600;
-    opacity: 0.7;
+  /* Updated styles for the added fields */
+  .card__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
   }
 
-  .field-value {
+  /* Status wrapper - full width */
+  .card__status-wrapper {
+    width: 100%;
+  }
+
+  /* Status styling - full line, text center */
+  .card__status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .status-text {
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+  }
+
+  /* Start Date as quote block - left aligned, subtle gray background */
+  .card__date-quote {
+    background: rgba(128, 128, 128, 0.08);
+    padding: 0.625rem 0.875rem;
+    border-radius: 6px;
+    border-left: 3px solid #1489bc;
+    text-align: left;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+  }
+
+  .date-label {
+    font-weight: 600;
+    opacity: 0.7;
+    margin-right: 0.375rem;
+  }
+
+  .date-value {
     font-weight: 500;
     opacity: 0.9;
   }
+
+  /* Remove old styles (card__fields-row, card__field, card__field-end etc) */
 
   /* Hover Effects */
   .card-x:hover {
