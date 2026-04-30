@@ -7168,12 +7168,14 @@ Modal CSS
   gap: 1rem;
   width: 100%;
   padding: 0px 5px;
-  /* larger screens: left / right alignment */
 }
 .auth-row .remember,
 .auth-row .lost-wrap {
   display: flex;
   align-items: center;
+}
+.auth-row {
+  /* larger screens: left / right alignment */
 }
 .auth-row .remember {
   justify-content: flex-start;
@@ -7189,8 +7191,6 @@ Modal CSS
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    /* make the checkbox + label stay inline and centered */
-    /* slightly reduce link hit area on very small screens */
   }
   .auth-row .remember,
   .auth-row .lost-wrap {
@@ -7198,11 +7198,17 @@ Modal CSS
     justify-content: center; /* center horizontally */
     text-align: center;
   }
+  .auth-row {
+    /* make the checkbox + label stay inline and centered */
+  }
   .auth-row .remember .form-check {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+  }
+  .auth-row {
+    /* slightly reduce link hit area on very small screens */
   }
   .auth-row .lost-wrap .lost-your-password {
     display: inline-block;
@@ -7264,4 +7270,373 @@ Modal CSS
 }
 .form-check-input {
   flex: 0 0 auto;
+}
+
+/*================================================
+Main Banner New CSS (Custom BEM Design)
+=================================================*/
+.main-banner-new {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--whiteColor);
+  z-index: 1;
+}
+.main-banner-new__mobile-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-image: url("/images/mtry1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.main-banner-new::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(14, 76, 137, 0.12) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.main-banner-new::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(20, 137, 188, 0.1) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.main-banner-new__desktop-bg {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+.main-banner-new__desktop-bg .bg-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+.main-banner-new__content-wrapper {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 120px;
+  padding-bottom: 40px;
+}
+.main-banner-new__content-wrapper .container {
+  margin-inline: auto;
+  padding-inline: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.main-banner-new__title {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--mainColor2) 0%, var(--mainColor) 50%, var(--lightColor) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: var(--mainColor2);
+  line-height: 1.25;
+  margin-bottom: 14px;
+  padding-bottom: 4px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: -0.02em;
+}
+.main-banner-new__subtitle {
+  color: var(--blackColor);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.main-banner-new__subtitle .highlight-color {
+  color: var(--mainColor);
+  font-weight: 700;
+}
+.main-banner-new__buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  margin-inline: auto;
+  z-index: 10;
+}
+.main-banner-new__buttons .btn-solid {
+  width: auto;
+  flex: 1;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, var(--mainColor) 0%, var(--mainColor2) 100%);
+  color: var(--whiteColor);
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(20, 137, 188, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+.main-banner-new__buttons .btn-solid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+.main-banner-new__buttons .btn-solid:hover {
+  background: linear-gradient(135deg, var(--mainColor2) 0%, var(--mainColor) 100%);
+  color: var(--whiteColor);
+  box-shadow: 0 8px 30px rgba(14, 76, 137, 0.45);
+  transform: translateY(-2px);
+}
+.main-banner-new__buttons .btn-solid:hover::before {
+  left: 100%;
+}
+.main-banner-new__buttons .btn-gradient-outline {
+  width: auto;
+  flex: 1;
+  padding: 10px 22px;
+  background: transparent;
+  color: var(--mainColor2);
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-size: 14px;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+.main-banner-new__buttons .btn-gradient-outline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--lightColor) 0%, var(--mainColor) 50%, var(--mainColor2) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: -1;
+  transition: all 0.4s;
+}
+.main-banner-new__buttons .btn-gradient-outline:hover {
+  background: linear-gradient(135deg, var(--lightColor) 0%, var(--mainColor) 50%, var(--mainColor2) 100%);
+  color: var(--whiteColor);
+  box-shadow: 0 8px 30px rgba(5, 180, 255, 0.3);
+  transform: translateY(-2px);
+}
+.main-banner-new__mobile-orb {
+  position: absolute;
+  bottom: 15%;
+  left: -8%;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(20, 137, 188, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 3;
+  animation: hero-float-blob-2 8s ease-in-out infinite;
+  pointer-events: none;
+}
+.main-banner-new__mobile-img {
+  width: 100%;
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.main-banner-new__mobile-img img {
+  width: 100%;
+  max-width: 400px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: bottom;
+     object-position: bottom;
+  pointer-events: none;
+}
+.main-banner-new__mobile-texture {
+  display: block;
+}
+
+@keyframes hero-float-blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(25px, -25px) scale(1.1);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.9);
+  }
+}
+@keyframes hero-float-blob-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(35px, -35px) scale(1.15);
+    opacity: 1;
+  }
+}
+/* Tablet & Desktop Adjustments */
+@media (min-width: 768px) {
+  .main-banner-new__desktop-bg {
+    display: block;
+  }
+  .main-banner-new__content-wrapper {
+    height: 100vh;
+    min-height: 550px;
+    padding-top: 100px;
+    padding-bottom: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .main-banner-new__content-wrapper .container {
+    align-items: flex-start;
+    text-align: left;
+    margin-inline: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-left: 50px;
+  }
+  .main-banner-new__title {
+    font-size: 34px;
+  }
+  .main-banner-new__subtitle {
+    font-size: 20px;
+    color: var(--blackColor);
+  }
+  .main-banner-new__subtitle .highlight-color {
+    color: var(--mainColor);
+    font-weight: 700;
+  }
+  .main-banner-new__buttons {
+    flex-direction: row;
+    max-width: none;
+    margin-inline: 0;
+    gap: 18px;
+  }
+  .main-banner-new__buttons .btn-solid,
+  .main-banner-new__buttons .btn-gradient-outline {
+    width: auto;
+    flex: none;
+    min-width: 165px;
+  }
+  .main-banner-new__buttons .btn-solid {
+    font-size: 16px;
+    padding: 13px 32px;
+  }
+  .main-banner-new__buttons .btn-gradient-outline {
+    color: var(--mainColor2);
+    font-size: 16px;
+    padding: 13px 32px;
+  }
+  .main-banner-new__mobile-orb {
+    display: none;
+  }
+  .main-banner-new__mobile-texture {
+    display: none;
+  }
+  .main-banner-new__mobile-img {
+    display: none;
+  }
+  .main-banner-new::before {
+    display: none;
+  }
+}
+@media (min-width: 1200px) {
+  .main-banner-new__content-wrapper {
+    height: 100vh;
+    min-height: 700px;
+  }
+  .main-banner-new__content-wrapper .container {
+    padding-left: 80px;
+  }
+  .main-banner-new__title {
+    font-size: 42px;
+    margin-bottom: 20px;
+  }
+  .main-banner-new__subtitle {
+    font-size: 24px;
+  }
+}
+/*================================================
+Floating Social Icons CSS
+=================================================*/
+.floating-social-icons {
+  position: fixed;
+  right: 26.5px;
+  bottom: 85px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+@media only screen and (max-width: 767px) {
+  .floating-social-icons {
+    right: 12px;
+    bottom: 70px;
+  }
+}
+.floating-social-icons__link {
+  width: 38px;
+  height: 38px;
+  color: var(--mainColor2);
+  background: rgba(14, 76, 137, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.floating-social-icons__link:hover {
+  color: var(--whiteColor);
+  background: linear-gradient(135deg, var(--mainColor) 0%, var(--mainColor2) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(20, 137, 188, 0.35);
 }/*# sourceMappingURL=styles.css.map */

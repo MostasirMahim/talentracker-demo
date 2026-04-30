@@ -508,10 +508,12 @@
   .what-we-do-content .react-tabs__tab-list .react-tabs__tab {
     margin-left: 8px;
     margin-right: 8px;
-    font-size: 14px;
   }
   .what-we-do-content .react-tabs__tab-list .react-tabs__tab:first-child {
     margin-left: 0;
+  }
+  .what-we-do-content .react-tabs__tab-list .react-tabs__tab {
+    font-size: 14px;
   }
   .what-we-do-text {
     padding-right: 0;

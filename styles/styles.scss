@@ -8363,3 +8363,411 @@ Modal CSS
 .form-check-input {
   flex: 0 0 auto;
 }
+/*================================================
+Main Banner New CSS (Custom BEM Design)
+=================================================*/
+.main-banner-new {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--whiteColor);
+    z-index: 1;
+
+    // Mobile texture background image
+    &__mobile-texture {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background-image: url('/images/mtry1.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    // Mobile corner shadow overlays (primary/secondary color)
+    &::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba(14, 76, 137, 0.12) 0%, transparent 70%);
+        z-index: 1;
+        pointer-events: none;
+        border-radius: 50%;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: -40px;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(20, 137, 188, 0.10) 0%, transparent 70%);
+        z-index: 1;
+        pointer-events: none;
+        border-radius: 50%;
+    }
+
+    &__desktop-bg {
+        display: none;
+        position: absolute;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 0;
+
+        .bg-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &__content-wrapper {
+        position: relative;
+        z-index: 5;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: 120px; 
+        padding-bottom: 40px;
+        
+        .container {
+            margin-inline: auto;
+            padding-inline: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    // Title - gradient on all screens
+    &__title {
+        font-size: 32px;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--mainColor2) 0%, var(--mainColor) 50%, var(--lightColor) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: var(--mainColor2); // Fallback
+        line-height: 1.25; // Slightly more space to prevent clipping
+        margin-bottom: 14px;
+        padding-bottom: 4px; // Prevents gradient clipping on descenders
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: -0.02em;
+    }
+
+    &__subtitle {
+        color: var(--blackColor);
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 24px;
+        line-height: 1.5;
+
+        .highlight-color {
+            color: var(--mainColor);
+            font-weight: 700;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+        max-width: 340px;
+        margin-inline: auto;
+        z-index: 10;
+
+        // Solid primary button
+        .btn-solid {
+            width: auto;
+            flex: 1;
+            padding: 10px 22px;
+            background: linear-gradient(135deg, var(--mainColor) 0%, var(--mainColor2) 100%);
+            color: var(--whiteColor);
+            border: none; // Remove border to fix hard edge artifact
+            border-radius: 50px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 14px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(20, 137, 188, 0.35);
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                transition: left 0.5s;
+            }
+
+            &:hover {
+                background: linear-gradient(135deg, var(--mainColor2) 0%, var(--mainColor) 100%);
+                color: var(--whiteColor);
+                box-shadow: 0 8px 30px rgba(14, 76, 137, 0.45);
+                transform: translateY(-2px);
+
+                &::before {
+                    left: 100%;
+                }
+            }
+        }
+
+        // Gradient border outline button
+        .btn-gradient-outline {
+            width: auto;
+            flex: 1;
+            padding: 10px 22px;
+            background: transparent;
+            color: var(--mainColor2);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 14px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+
+            // Gradient border via mask trick
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 50px;
+                padding: 2px;
+                background: linear-gradient(135deg, var(--lightColor) 0%, var(--mainColor) 50%, var(--mainColor2) 100%);
+                -webkit-mask: 
+                    linear-gradient(#fff 0 0) content-box, 
+                    linear-gradient(#fff 0 0);
+                -webkit-mask-composite: xor;
+                mask: 
+                    linear-gradient(#fff 0 0) content-box, 
+                    linear-gradient(#fff 0 0);
+                mask-composite: exclude;
+                z-index: -1;
+                transition: all 0.4s;
+            }
+
+            &:hover {
+                background: linear-gradient(135deg, var(--lightColor) 0%, var(--mainColor) 50%, var(--mainColor2) 100%);
+                color: var(--whiteColor);
+                box-shadow: 0 8px 30px rgba(5, 180, 255, 0.3);
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    // Animated floating orb for mobile
+    &__mobile-orb {
+        position: absolute;
+        bottom: 15%;
+        left: -8%;
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(circle, rgba(20, 137, 188, 0.12) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: 3;
+        animation: hero-float-blob-2 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    // Mobile bottom person image
+    &__mobile-img {
+        width: 100%;
+        position: relative;
+        z-index: 4;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            max-width: 400px;
+            object-fit: contain;
+            object-position: bottom;
+            pointer-events: none;
+        }
+    }
+
+    // Mobile texture visible by default
+    &__mobile-texture {
+        display: block;
+    }
+}
+
+// Floating blob animations
+@keyframes hero-float-blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(25px, -25px) scale(1.1); }
+    66% { transform: translate(-15px, 15px) scale(0.9); }
+}
+@keyframes hero-float-blob-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50% { transform: translate(35px, -35px) scale(1.15); opacity: 1; }
+}
+
+/* Tablet & Desktop Adjustments */
+@media (min-width: 768px) {
+    .main-banner-new {
+        &__desktop-bg {
+            display: block;
+        }
+
+        &__content-wrapper {
+            height: 100vh;
+            min-height: 550px;
+            padding-top: 100px;
+            padding-bottom: 0;
+            align-items: center;
+            justify-content: center;
+
+            .container {
+                align-items: flex-start;
+                text-align: left;
+                margin-inline: 0;
+                margin: 0 auto;
+                max-width: 1200px;
+                padding-left: 50px;
+            }
+        }
+
+        // Desktop: gradient text
+        &__title {
+            font-size: 34px;
+        }
+
+        &__subtitle {
+            font-size: 20px;
+            color: var(--blackColor);
+
+            .highlight-color {
+                color: var(--mainColor);
+                font-weight: 700;
+            }
+        }
+
+        &__buttons {
+            flex-direction: row;
+            max-width: none;
+            margin-inline: 0;
+            gap: 18px;
+            
+            .btn-solid,
+            .btn-gradient-outline {
+                width: auto;
+                flex: none; // Remove flex stretch on desktop
+                min-width: 165px;
+            }
+
+            .btn-solid {
+                font-size: 16px;
+                padding: 13px 32px;
+            }
+
+            .btn-gradient-outline {
+                color: var(--mainColor2);
+                font-size: 16px;
+                padding: 13px 32px;
+            }
+        }
+
+        &__mobile-orb {
+            display: none;
+        }
+        &__mobile-texture {
+            display: none;
+        }
+        &__mobile-img {
+            display: none;
+        }
+        &::before {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-banner-new {
+        &__content-wrapper {
+            height: 100vh;
+            min-height: 700px;
+            .container {
+                padding-left: 80px;
+            }
+        }
+        &__title {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        &__subtitle {
+            font-size: 24px;
+        }
+    }
+}
+
+/*================================================
+Floating Social Icons CSS
+=================================================*/
+.floating-social-icons {
+    position: fixed;
+    right: 26.5px; // Centered above go-top (24px right + (43px - 38px)/2)
+    bottom: 85px; // Sits above the GoTop button
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    @media only screen and (max-width: 767px) {
+        right: 12px; // Centered above mobile go-top (15px right + (32px - 38px)/2)
+        bottom: 70px;
+    }
+
+    &__link {
+        width: 38px;
+        height: 38px;
+        color: var(--mainColor2);
+        background: rgba(14, 76, 137, 0.08);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: all 0.3s;
+        text-decoration: none;
+
+        &:hover {
+            color: var(--whiteColor);
+            background: linear-gradient(135deg, var(--mainColor) 0%, var(--mainColor2) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(20, 137, 188, 0.35);
+        }
+    }
+}
+

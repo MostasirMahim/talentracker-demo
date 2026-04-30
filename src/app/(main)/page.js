@@ -1,5 +1,5 @@
 import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
-import MainBanner from "@/components/HomeDemo1/MainBanner";
+import MainBannerNew from "@/components/HomeDemo1/MainBannerNew";
 import ServicesCard from "@/components/HomeDemo1/ServicesCard";
 import Funfacts from "@/components/Common/Funfacts";
 import TestimonialUpdated from "@/components/Common/TestimonialUpdated";
@@ -9,27 +9,29 @@ import FreeQuoteFormStyle2 from "@/components/FreeQuoteForm/FreeQuoteFormStyle2"
 import CompanyOverview2 from "@/components/HomeDemo1/CompanyOverview2";
 import CandidateOverview from "@/components/HomeDemo1/CandidateOverview";
 import CandidateTestimonialCarousel from "@/components/HomeDemo1/CandidateTestimonials";
+import FloatingSocialIcons from "@/components/HomeDemo1/FloatingSocialIcons";
 import { get_me } from "@/actions/auth";
 import fetchTestimonials from "@/actions/candidate_testimonial";
 
-
 export default async function Home() {
   const data = await get_me();
-    const testimonials = await fetchTestimonials();
+  const testimonials = await fetchTestimonials();
 
   return (
     <>
       <NavbarStyleTwo />
-      <MainBanner />
+      <MainBannerNew />
+      <FloatingSocialIcons />
       <CompanyOverview2 />
       <ServicesCard />
       <Funfacts />
       <WhyChooseUs />
       <FreeQuoteFormStyle2 />
       <TestimonialUpdated />
-      < CandidateOverview />
+      <CandidateOverview />
       <CandidateTestimonialCarousel testimonials={testimonials} />
       <Footer />
     </>
   );
 }
+
