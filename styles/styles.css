@@ -7279,10 +7279,27 @@ Main Banner New CSS (Custom BEM Design)
   position: relative;
   width: 100%;
   overflow: hidden;
-  background-color: var(--whiteColor);
+  background: linear-gradient(160deg, #ffffff 0%, #f0f7fc 30%, #e3f0fa 60%, #dbeaf8 100%);
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+}
+.main-banner-new::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(20, 137, 188, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
 }
 .main-banner-new__bg {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -7308,63 +7325,121 @@ Main Banner New CSS (Custom BEM Design)
   background: linear-gradient(180deg, rgba(14, 76, 137, 0.1) 0%, rgba(14, 76, 137, 0.4) 100%);
   box-shadow: inset 0 0 120px rgba(14, 76, 137, 0.7);
 }
+.main-banner-new__orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+.main-banner-new__orb--top-right {
+  top: -30px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(20, 137, 188, 0.15) 0%, transparent 70%);
+  animation: hero-float-blob 7s ease-in-out infinite;
+}
+.main-banner-new__orb--bottom-left {
+  top: 40%;
+  left: -50px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(14, 76, 137, 0.1) 0%, transparent 70%);
+  animation: hero-float-blob-2 9s ease-in-out infinite;
+}
+.main-banner-new__badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mainColor2);
+  background: rgba(14, 76, 137, 0.07);
+  border: 1px solid rgba(14, 76, 137, 0.12);
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.main-banner-new__badge::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(20, 137, 188, 0.15), transparent);
+  animation: badge-shimmer 3s ease-in-out infinite;
+}
 .main-banner-new__content-wrapper {
   position: relative;
   z-index: 5;
   width: 100%;
-  height: calc(100vh - 80px);
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 60px;
-  padding-bottom: 20px;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 10px;
 }
 .main-banner-new__content-wrapper .container {
   margin-inline: auto;
-  padding-inline: 15px;
+  padding-inline: 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 .main-banner-new__title {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 800;
   background: linear-gradient(135deg, var(--mainColor2) 0%, var(--mainColor) 50%, var(--lightColor) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: var(--mainColor2);
-  line-height: 1.25;
-  margin-bottom: 14px;
+  line-height: 1.2;
+  margin-bottom: 12px;
   padding-bottom: 4px;
   font-family: "Poppins", sans-serif;
   letter-spacing: -0.02em;
+  filter: drop-shadow(0 2px 8px rgba(14, 76, 137, 0.08));
 }
 .main-banner-new__subtitle {
-  color: var(--blackColor);
-  font-size: 13px;
+  color: #334155;
+  font-size: 15px;
   font-weight: 500;
-  margin-bottom: 24px;
-  line-height: 1.5;
+  margin-bottom: 28px;
+  line-height: 1.55;
 }
 .main-banner-new__subtitle .highlight-color {
   color: var(--mainColor);
   font-weight: 700;
 }
+.main-banner-new__shadow-bridge {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  z-index: 6;
+  flex-shrink: 0;
+  margin-bottom: -30px;
+  background: linear-gradient(180deg, rgba(219, 234, 248, 0.6) 0%, rgba(219, 234, 248, 0.3) 40%, transparent 100%);
+  pointer-events: none;
+}
 .main-banner-new__buttons {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 15px;
   width: 100%;
-  max-width: 340px;
-  margin-inline: 0;
+  max-width: 360px;
+  margin-inline: auto;
   z-index: 10;
 }
 .main-banner-new__buttons .btn-solid {
   width: auto;
   flex: 1;
-  padding: 10px 22px;
+  padding: 13px 26px;
   background: linear-gradient(135deg, var(--mainColor) 0%, var(--mainColor2) 100%);
   color: var(--whiteColor);
   border: none;
@@ -7402,8 +7477,9 @@ Main Banner New CSS (Custom BEM Design)
 .main-banner-new__buttons .btn-gradient-outline {
   width: auto;
   flex: 1;
-  padding: 10px 22px;
-  background: transparent;
+  padding: 13px 26px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
   color: var(--mainColor2);
   border: none;
   border-radius: 50px;
@@ -7439,6 +7515,36 @@ Main Banner New CSS (Custom BEM Design)
   box-shadow: 0 8px 30px rgba(5, 180, 255, 0.3);
   transform: translateY(-2px);
 }
+.main-banner-new__mobile-img {
+  flex: 1;
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+.main-banner-new__mobile-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(180deg, #dbeaf8 0%, rgba(219, 234, 248, 0.5) 40%, transparent 100%);
+  z-index: 5;
+  pointer-events: none;
+}
+.main-banner-new__mobile-img img {
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: bottom;
+     object-position: bottom;
+  pointer-events: none;
+}
 
 @keyframes hero-float-blob {
   0%, 100% {
@@ -7461,8 +7567,30 @@ Main Banner New CSS (Custom BEM Design)
     opacity: 1;
   }
 }
+@keyframes badge-shimmer {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
 /* Tablet & Desktop Adjustments */
 @media (min-width: 768px) {
+  .main-banner-new {
+    display: block;
+    height: auto;
+    background: var(--whiteColor);
+  }
+  .main-banner-new::before {
+    display: none;
+  }
+  .main-banner-new__bg {
+    display: block;
+  }
   .main-banner-new__bg .bg-img {
     background-image: url("/images/new_banner.jpeg");
     background-position: bottom center;
@@ -7487,7 +7615,8 @@ Main Banner New CSS (Custom BEM Design)
     padding-left: 50px;
   }
   .main-banner-new__title {
-    font-size: 34px;
+    font-size: 44px;
+    filter: none;
   }
   .main-banner-new__subtitle {
     font-size: 20px;
@@ -7517,6 +7646,20 @@ Main Banner New CSS (Custom BEM Design)
     color: var(--mainColor2);
     font-size: 16px;
     padding: 13px 32px;
+    background: transparent;
+    backdrop-filter: none;
+  }
+  .main-banner-new__mobile-img {
+    display: none;
+  }
+  .main-banner-new__orb {
+    display: none;
+  }
+  .main-banner-new__badge {
+    display: none;
+  }
+  .main-banner-new__shadow-bridge {
+    display: none;
   }
 }
 @media (min-width: 1200px) {
@@ -7528,8 +7671,8 @@ Main Banner New CSS (Custom BEM Design)
     padding-left: 80px;
   }
   .main-banner-new__title {
-    font-size: 42px;
-    margin-bottom: 20px;
+    font-size: 54px;
+    margin-bottom: 24px;
   }
   .main-banner-new__subtitle {
     font-size: 24px;

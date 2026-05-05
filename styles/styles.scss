@@ -8370,11 +8370,37 @@ Main Banner New CSS (Custom BEM Design)
     position: relative;
     width: 100%;
     overflow: hidden;
-    background-color: var(--whiteColor);
+    // Mobile: subtle premium gradient background
+    background: linear-gradient(
+        160deg, 
+        #ffffff 0%, 
+        #f0f7fc 30%, 
+        #e3f0fa 60%, 
+        #dbeaf8 100%
+    );
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px); // Mobile: strict viewport fit
 
-    // Unified background container
+    // Soft radial accent glow behind content (mobile only)
+    &::before {
+        content: "";
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(20, 137, 188, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    // Unified background container (desktop only)
     &__bg {
+        display: none; // Hide on mobile
         position: absolute;
         top: 0;
         left: 0;
@@ -8403,49 +8429,106 @@ Main Banner New CSS (Custom BEM Design)
         }
     }
 
+    // Decorative floating orbs (mobile only)
+    &__orb {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+
+        &--top-right {
+            top: -30px;
+            right: -40px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(20, 137, 188, 0.15) 0%, transparent 70%);
+            animation: hero-float-blob 7s ease-in-out infinite;
+        }
+
+        &--bottom-left {
+            top: 40%;
+            left: -50px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(14, 76, 137, 0.10) 0%, transparent 70%);
+            animation: hero-float-blob-2 9s ease-in-out infinite;
+        }
+    }
+
+    // Tagline badge (mobile only)
+    &__badge {
+        display: inline-block;
+        padding: 6px 18px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--mainColor2);
+        background: rgba(14, 76, 137, 0.07);
+        border: 1px solid rgba(14, 76, 137, 0.12);
+        margin-bottom: 18px;
+        position: relative;
+        overflow: hidden;
+
+        // Shimmer animation
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(20, 137, 188, 0.15), transparent);
+            animation: badge-shimmer 3s ease-in-out infinite;
+        }
+    }
+
     &__content-wrapper {
         position: relative;
         z-index: 5;
         width: 100%;
-        height: calc(100vh - 80px); // Limit hero to 100vh - 80px for the header
+        flex: 0 0 auto;
         display: flex;
-        align-items: center; // Vertically center within the space
-        justify-content: flex-start;
-        padding-top: 60px; // account for navbar
-        padding-bottom: 20px;
+        align-items: center; 
+        justify-content: center;
+        padding-top: 40px; 
+        padding-bottom: 10px;
         
         .container {
             margin-inline: auto;
-            padding-inline: 15px;
+            padding-inline: 20px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; // Align content leftish
-            text-align: left;
+            align-items: center;
+            text-align: center;
         }
     }
 
     // Title - gradient on all screens
     &__title {
-        font-size: 32px;
+        font-size: 36px;
         font-weight: 800;
         background: linear-gradient(135deg, var(--mainColor2) 0%, var(--mainColor) 50%, var(--lightColor) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         color: var(--mainColor2); // Fallback
-        line-height: 1.25; // Slightly more space to prevent clipping
-        margin-bottom: 14px;
-        padding-bottom: 4px; // Prevents gradient clipping on descenders
+        line-height: 1.2;
+        margin-bottom: 12px;
+        padding-bottom: 4px;
         font-family: 'Poppins', sans-serif;
         letter-spacing: -0.02em;
+        // Subtle text shadow for depth (applied via drop-shadow on parent)
+        filter: drop-shadow(0 2px 8px rgba(14, 76, 137, 0.08));
     }
 
     &__subtitle {
-        color: var(--blackColor);
-        font-size: 13px;
+        color: #334155; // Slightly softer than pure black
+        font-size: 15px;
         font-weight: 500;
-        margin-bottom: 24px;
-        line-height: 1.5;
+        margin-bottom: 28px;
+        line-height: 1.55;
 
         .highlight-color {
             color: var(--mainColor);
@@ -8453,23 +8536,40 @@ Main Banner New CSS (Custom BEM Design)
         }
     }
 
+    // Seamless bridge between content and image (no visible divide)
+    &__shadow-bridge {
+        width: 100%;
+        height: 30px;
+        position: relative;
+        z-index: 6;
+        flex-shrink: 0;
+        margin-bottom: -30px; // Overlap into the image area
+        background: linear-gradient(
+            180deg, 
+            rgba(219, 234, 248, 0.6) 0%,
+            rgba(219, 234, 248, 0.3) 40%,  
+            transparent 100%
+        );
+        pointer-events: none;
+    }
+
     &__buttons {
         display: flex;
         flex-direction: row;
-        gap: 10px;
+        gap: 15px;
         width: 100%;
-        max-width: 340px;
-        margin-inline: 0; // Align left, removed auto
+        max-width: 360px;
+        margin-inline: auto;
         z-index: 10;
 
         // Solid primary button
         .btn-solid {
             width: auto;
             flex: 1;
-            padding: 10px 22px;
+            padding: 13px 26px;
             background: linear-gradient(135deg, var(--mainColor) 0%, var(--mainColor2) 100%);
             color: var(--whiteColor);
-            border: none; // Remove border to fix hard edge artifact
+            border: none;
             border-radius: 50px;
             font-weight: 700;
             display: flex;
@@ -8509,8 +8609,9 @@ Main Banner New CSS (Custom BEM Design)
         .btn-gradient-outline {
             width: auto;
             flex: 1;
-            padding: 10px 22px;
-            background: transparent;
+            padding: 13px 26px;
+            background: rgba(255, 255, 255, 0.7); // Frosted glass effect
+            backdrop-filter: blur(4px);
             color: var(--mainColor2);
             border: none;
             border-radius: 50px;
@@ -8553,7 +8654,43 @@ Main Banner New CSS (Custom BEM Design)
         }
     }
 
-    // Mobile old elements removed
+    // Mobile bottom person image
+    &__mobile-img {
+        flex: 1;
+        position: relative;
+        z-index: 4;
+        display: flex;
+        align-items: flex-end; 
+        justify-content: center;
+        overflow: hidden;
+
+        // Fade overlay on top of image to blend with content area
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(
+                180deg, 
+                #dbeaf8 0%, 
+                rgba(219, 234, 248, 0.5) 40%,
+                transparent 100%
+            );
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        img {
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: bottom;
+            pointer-events: none;
+        }
+    }
 }
 
 // Floating blob animations
@@ -8566,11 +8703,26 @@ Main Banner New CSS (Custom BEM Design)
     0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
     50% { transform: translate(35px, -35px) scale(1.15); opacity: 1; }
 }
+@keyframes badge-shimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
 
 /* Tablet & Desktop Adjustments */
 @media (min-width: 768px) {
     .main-banner-new {
+        display: block;
+        height: auto;
+        background: var(--whiteColor); // Reset to white on desktop
+
+        // Hide mobile-only radial glow
+        &::before {
+            display: none;
+        }
+
         &__bg {
+            display: block; // Show background on desktop
             .bg-img {
                 background-image: url('/images/new_banner.jpeg');
                 background-position: bottom center;
@@ -8600,7 +8752,8 @@ Main Banner New CSS (Custom BEM Design)
 
         // Desktop: gradient text
         &__title {
-            font-size: 34px;
+            font-size: 44px;
+            filter: none; // Remove drop-shadow on desktop
         }
 
         &__subtitle {
@@ -8622,7 +8775,7 @@ Main Banner New CSS (Custom BEM Design)
             .btn-solid,
             .btn-gradient-outline {
                 width: auto;
-                flex: none; // Remove flex stretch on desktop
+                flex: none;
                 min-width: 165px;
             }
 
@@ -8635,10 +8788,24 @@ Main Banner New CSS (Custom BEM Design)
                 color: var(--mainColor2);
                 font-size: 16px;
                 padding: 13px 32px;
+                background: transparent; // Reset frosted glass on desktop
+                backdrop-filter: none;
             }
         }
 
-        // Other mobile elements that are removed don't need hidden specifically here anymore
+        // Hide all mobile-only elements on desktop
+        &__mobile-img {
+            display: none;
+        }
+        &__orb {
+            display: none;
+        }
+        &__badge {
+            display: none;
+        }
+        &__shadow-bridge {
+            display: none;
+        }
     }
 }
 
@@ -8652,8 +8819,8 @@ Main Banner New CSS (Custom BEM Design)
             }
         }
         &__title {
-            font-size: 42px;
-            margin-bottom: 20px;
+            font-size: 54px; // Scale up for wide desktop
+            margin-bottom: 24px;
         }
         &__subtitle {
             font-size: 24px;
