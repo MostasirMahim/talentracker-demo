@@ -1,4 +1,4 @@
-import NavbarStyleTwo from "@/components/Layouts/NavbarStyleTwo";
+import NavbarStyleOne from "@/components/Layouts/NavbarStyleOne";
 import MainBannerNew from "@/components/HomeDemo1/MainBannerNew";
 import ServicesCard from "@/components/HomeDemo1/ServicesCard";
 import Funfacts from "@/components/Common/Funfacts";
@@ -19,7 +19,7 @@ export default async function Home() {
 
   return (
     <>
-      <NavbarStyleTwo />
+      <NavbarStyleOne />
       <MainBannerNew />
       <FloatingSocialIcons />
       <CompanyOverview2 />

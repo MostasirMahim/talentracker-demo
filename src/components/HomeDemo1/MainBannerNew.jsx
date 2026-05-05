@@ -12,7 +12,7 @@ const MainBannerNew = () => {
             <div className="main-banner-new__desktop-bg">
                 <div 
                     className="bg-img"
-                    style={{ backgroundImage: "url('/images/bg_v2.png')" }}
+                    style={{ backgroundImage: "url('/images/new_banner.jpeg')" }}
                 ></div>
             </div>
 

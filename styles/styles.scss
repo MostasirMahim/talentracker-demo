@@ -8642,9 +8642,9 @@ Main Banner New CSS (Custom BEM Design)
         &__content-wrapper {
             height: 100vh;
             min-height: 550px;
-            padding-top: 100px;
+            padding-top: 25vh; /* Adjustable: moves content higher */
             padding-bottom: 0;
-            align-items: center;
+            align-items: flex-start; /* Changed from center to push it up */
             justify-content: center;
 
             .container {
