@@ -8,6 +8,7 @@ import SideCanvas from "./SideCanvas";
 import { get_me } from "@/actions/auth";
 import { useLayoutTransitionStore } from "@/stores/layout_transition_store";
 import { useUserStore } from "@/stores/user_store";
+import TopHeaderStyleOne from "./TopHeaderStyleOne";
 
 const NavbarStyleOne = () => {
   const pathname = usePathname();
@@ -61,6 +62,8 @@ const NavbarStyleOne = () => {
     : "navbar-toggler navbar-toggler-right";
   return (
     <>
+      <div className="">
+      
       <div id="navbar" className="navbar-area navbar-style-one">
         <div className="zixon-nav">
           <div className="container-fluid">
@@ -260,7 +263,7 @@ const NavbarStyleOne = () => {
           </div>
         </div>
       </div>
-
+      </div>
       {/* Search Form */}
       <div
         className={`search-overlay ${

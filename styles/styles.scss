@@ -8373,64 +8373,33 @@ Main Banner New CSS (Custom BEM Design)
     background-color: var(--whiteColor);
     z-index: 1;
 
-    // Mobile texture background image
-    &__mobile-texture {
+    // Unified background container
+    &__bg {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         z-index: 0;
-        background-image: url('/images/mtry1.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    // Mobile corner shadow overlays (primary/secondary color)
-    &::before {
-        content: "";
-        position: absolute;
-        top: -60px;
-        left: -60px;
-        width: 250px;
-        height: 250px;
-        background: radial-gradient(circle, rgba(14, 76, 137, 0.12) 0%, transparent 70%);
-        z-index: 1;
-        pointer-events: none;
-        border-radius: 50%;
-    }
-
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: -40px;
-        right: -40px;
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(circle, rgba(20, 137, 188, 0.10) 0%, transparent 70%);
-        z-index: 1;
-        pointer-events: none;
-        border-radius: 50%;
-    }
-
-    &__desktop-bg {
-        display: none;
-        position: absolute;
-        top: 0; 
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        z-index: 0;
-
+        
         .bg-img {
             width: 100%;
             height: 100%;
+            background-image: url('/images/banner/new_banner.png');
             background-size: cover;
-            background-position: bottom center;
+            background-position: center top;
             background-repeat: no-repeat;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Vintage type shadow overlay with primary colors */
+            background: linear-gradient(180deg, rgba(14, 76, 137, 0.1) 0%, rgba(14, 76, 137, 0.4) 100%);
+            box-shadow: inset 0 0 120px rgba(14, 76, 137, 0.7);
         }
     }
 
@@ -8438,19 +8407,20 @@ Main Banner New CSS (Custom BEM Design)
         position: relative;
         z-index: 5;
         width: 100%;
+        height: calc(100vh - 80px); // Limit hero to 100vh - 80px for the header
         display: flex;
-        align-items: flex-start;
+        align-items: center; // Vertically center within the space
         justify-content: flex-start;
-        padding-top: 120px; 
-        padding-bottom: 40px;
+        padding-top: 60px; // account for navbar
+        padding-bottom: 20px;
         
         .container {
             margin-inline: auto;
             padding-inline: 15px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start; // Align content leftish
+            text-align: left;
         }
     }
 
@@ -8489,7 +8459,7 @@ Main Banner New CSS (Custom BEM Design)
         gap: 10px;
         width: 100%;
         max-width: 340px;
-        margin-inline: auto;
+        margin-inline: 0; // Align left, removed auto
         z-index: 10;
 
         // Solid primary button
@@ -8583,42 +8553,7 @@ Main Banner New CSS (Custom BEM Design)
         }
     }
 
-    // Animated floating orb for mobile
-    &__mobile-orb {
-        position: absolute;
-        bottom: 15%;
-        left: -8%;
-        width: 160px;
-        height: 160px;
-        background: radial-gradient(circle, rgba(20, 137, 188, 0.12) 0%, transparent 70%);
-        border-radius: 50%;
-        z-index: 3;
-        animation: hero-float-blob-2 8s ease-in-out infinite;
-        pointer-events: none;
-    }
-
-    // Mobile bottom person image
-    &__mobile-img {
-        width: 100%;
-        position: relative;
-        z-index: 4;
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-            max-width: 400px;
-            object-fit: contain;
-            object-position: bottom;
-            pointer-events: none;
-        }
-    }
-
-    // Mobile texture visible by default
-    &__mobile-texture {
-        display: block;
-    }
+    // Mobile old elements removed
 }
 
 // Floating blob animations
@@ -8635,12 +8570,18 @@ Main Banner New CSS (Custom BEM Design)
 /* Tablet & Desktop Adjustments */
 @media (min-width: 768px) {
     .main-banner-new {
-        &__desktop-bg {
-            display: block;
+        &__bg {
+            .bg-img {
+                background-image: url('/images/new_banner.jpeg');
+                background-position: bottom center;
+            }
+            .bg-overlay {
+                display: none; // Disable the heavy mobile vintage overlay on desktop
+            }
         }
 
         &__content-wrapper {
-            height: 100vh;
+            height: calc(100vh - 80px);
             min-height: 550px;
             padding-top: 25vh; /* Adjustable: moves content higher */
             padding-bottom: 0;
@@ -8697,25 +8638,14 @@ Main Banner New CSS (Custom BEM Design)
             }
         }
 
-        &__mobile-orb {
-            display: none;
-        }
-        &__mobile-texture {
-            display: none;
-        }
-        &__mobile-img {
-            display: none;
-        }
-        &::before {
-            display: none;
-        }
+        // Other mobile elements that are removed don't need hidden specifically here anymore
     }
 }
 
 @media (min-width: 1200px) {
     .main-banner-new {
         &__content-wrapper {
-            height: 100vh;
+            height: calc(100vh - 80px);
             min-height: 700px;
             .container {
                 padding-left: 80px;
