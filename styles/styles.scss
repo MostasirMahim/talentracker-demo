@@ -8363,44 +8363,16 @@ Modal CSS
 .form-check-input {
   flex: 0 0 auto;
 }
-/*================================================
-Main Banner New CSS (Custom BEM Design)
-=================================================*/
 .main-banner-new {
     position: relative;
     width: 100%;
     overflow: hidden;
-    // Mobile: subtle premium gradient background
-    background: linear-gradient(
-        160deg, 
-        #ffffff 0%, 
-        #f0f7fc 30%, 
-        #e3f0fa 60%, 
-        #dbeaf8 100%
-    );
+    height: calc(100vh - 150px);
     z-index: 1;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 80px); // Mobile: strict viewport fit
 
-    // Soft radial accent glow behind content (mobile only)
-    &::before {
-        content: "";
-        position: absolute;
-        top: 10%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 320px;
-        height: 320px;
-        background: radial-gradient(circle, rgba(20, 137, 188, 0.08) 0%, transparent 70%);
-        border-radius: 50%;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    // Unified background container (desktop only)
+    // Desktop background container (hidden on mobile)
     &__bg {
-        display: none; // Hide on mobile
+        display: none;
         position: absolute;
         top: 0;
         left: 0;
@@ -8423,55 +8395,103 @@ Main Banner New CSS (Custom BEM Design)
             left: 0;
             width: 100%;
             height: 100%;
-            /* Vintage type shadow overlay with primary colors */
             background: linear-gradient(180deg, rgba(14, 76, 137, 0.1) 0%, rgba(14, 76, 137, 0.4) 100%);
             box-shadow: inset 0 0 120px rgba(14, 76, 137, 0.7);
         }
     }
 
-    // Decorative floating orbs (mobile only)
+    // ── MOBILE POSTER BACKGROUND ──
+    &__poster-bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+
+        img {
+            position: absolute;
+            right: 0; // Flush with component right edge
+            top: 50%;
+            transform: translateY(-50%);
+            height: 90%;
+            width: auto;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        // Left-to-right gradient overlay for text readability
+        .poster-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.92) 0%,
+                rgba(255, 255, 255, 0.85) 30%,
+                rgba(255, 255, 255, 0.5) 50%,
+                transparent 65%
+            );
+            // Soft bottom edge
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 80px;
+                background: linear-gradient(0deg, rgba(255,255,255,0.6) 0%, transparent 100%);
+            }
+        }
+    }
+
+    // ── DECORATIVE FLOATING ORBS ──
     &__orb {
         position: absolute;
         border-radius: 50%;
         pointer-events: none;
-        z-index: 1;
+        z-index: 2;
 
         &--top-right {
-            top: -30px;
-            right: -40px;
-            width: 140px;
-            height: 140px;
-            background: radial-gradient(circle, rgba(20, 137, 188, 0.15) 0%, transparent 70%);
+            top: 8%;
+            right: 5%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(20, 137, 188, 0.12) 0%, transparent 70%);
             animation: hero-float-blob 7s ease-in-out infinite;
         }
 
         &--bottom-left {
-            top: 40%;
-            left: -50px;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(14, 76, 137, 0.10) 0%, transparent 70%);
+            bottom: 20%;
+            left: -30px;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, rgba(14, 76, 137, 0.08) 0%, transparent 70%);
             animation: hero-float-blob-2 9s ease-in-out infinite;
         }
     }
 
-    // Tagline badge (mobile only)
+    // ── TAGLINE BADGE ──
     &__badge {
         display: inline-block;
-        padding: 6px 18px;
+        padding: 5px 14px;
         border-radius: 50px;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 600;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--mainColor2);
-        background: rgba(14, 76, 137, 0.07);
-        border: 1px solid rgba(14, 76, 137, 0.12);
-        margin-bottom: 18px;
+        background: rgba(14, 76, 137, 0.06);
+        border: 1px solid rgba(14, 76, 137, 0.10);
+        margin-bottom: 14px;
         position: relative;
         overflow: hidden;
+        animation: hero-fadeInUp 0.6s ease-out both;
+        animation-delay: 0.1s;
 
-        // Shimmer animation
         &::after {
             content: "";
             position: absolute;
@@ -8484,51 +8504,58 @@ Main Banner New CSS (Custom BEM Design)
         }
     }
 
+    // ── CONTENT WRAPPER ──
     &__content-wrapper {
         position: relative;
         z-index: 5;
         width: 100%;
-        flex: 0 0 auto;
+        height: 100%;
         display: flex;
-        align-items: center; 
-        justify-content: center;
-        padding-top: 40px; 
-        padding-bottom: 10px;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0;
         
         .container {
-            margin-inline: auto;
-            padding-inline: 20px;
+            margin: 0;
+            padding-left: 20px;
+            padding-right: 10px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;
+            text-align: left;
+            max-width: 60%;
         }
     }
 
-    // Title - gradient on all screens
+    // ── TITLE ──
     &__title {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 800;
         background: linear-gradient(135deg, var(--mainColor2) 0%, var(--mainColor) 50%, var(--lightColor) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        color: var(--mainColor2); // Fallback
-        line-height: 1.2;
-        margin-bottom: 12px;
+        color: var(--mainColor2);
+        line-height: 1.15;
+        margin-bottom: 10px;
         padding-bottom: 4px;
         font-family: 'Poppins', sans-serif;
         letter-spacing: -0.02em;
-        // Subtle text shadow for depth (applied via drop-shadow on parent)
-        filter: drop-shadow(0 2px 8px rgba(14, 76, 137, 0.08));
+        filter: drop-shadow(0 1px 3px rgba(14, 76, 137, 0.15));
+        animation: hero-fadeInUp 0.6s ease-out both;
+        animation-delay: 0.2s;
     }
 
+    // ── SUBTITLE ──
     &__subtitle {
-        color: #334155; // Slightly softer than pure black
-        font-size: 15px;
-        font-weight: 500;
-        margin-bottom: 28px;
+        color: #1e293b;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 22px;
         line-height: 1.55;
+        text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+        animation: hero-fadeInUp 0.6s ease-out both;
+        animation-delay: 0.35s;
 
         .highlight-color {
             color: var(--mainColor);
@@ -8536,36 +8563,20 @@ Main Banner New CSS (Custom BEM Design)
         }
     }
 
-    // Seamless bridge between content and image (no visible divide)
-    &__shadow-bridge {
-        width: 100%;
-        height: 15px;
-        position: relative;
-        z-index: 6;
-        flex-shrink: 0;
-        margin-bottom: -15px; // Slight overlap into the image area
-        background: linear-gradient(
-            180deg, 
-            rgba(219, 234, 248, 0.4) 0%,
-            transparent 100%
-        );
-        pointer-events: none;
-    }
-
+    // ── BUTTONS ──
     &__buttons {
         display: flex;
-        flex-direction: row;
-        gap: 15px;
+        flex-direction: column; // Stack vertically for narrow left column
+        gap: 10px;
         width: 100%;
-        max-width: 360px;
-        margin-inline: auto;
+        max-width: 200px;
         z-index: 10;
+        animation: hero-fadeInUp 0.6s ease-out both;
+        animation-delay: 0.5s;
 
-        // Solid primary button
         .btn-solid {
-            width: auto;
-            flex: 1;
-            padding: 13px 26px;
+            width: 100%;
+            padding: 12px 20px;
             background: linear-gradient(135deg, var(--mainColor) 0%, var(--mainColor2) 100%);
             color: var(--whiteColor);
             border: none;
@@ -8575,7 +8586,7 @@ Main Banner New CSS (Custom BEM Design)
             align-items: center;
             justify-content: center;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-size: 14px;
+            font-size: 13px;
             text-decoration: none;
             box-shadow: 0 4px 15px rgba(20, 137, 188, 0.35);
             position: relative;
@@ -8604,12 +8615,10 @@ Main Banner New CSS (Custom BEM Design)
             }
         }
 
-        // Gradient border outline button
         .btn-gradient-outline {
-            width: auto;
-            flex: 1;
-            padding: 13px 26px;
-            background: rgba(255, 255, 255, 0.7); // Frosted glass effect
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(4px);
             color: var(--mainColor2);
             border: none;
@@ -8619,12 +8628,11 @@ Main Banner New CSS (Custom BEM Design)
             align-items: center;
             justify-content: center;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-size: 14px;
+            font-size: 13px;
             text-decoration: none;
             position: relative;
             z-index: 1;
 
-            // Gradient border via mask trick
             &::before {
                 content: "";
                 position: absolute;
@@ -8652,46 +8660,9 @@ Main Banner New CSS (Custom BEM Design)
             }
         }
     }
-
-    // Mobile bottom person image
-    &__mobile-img {
-        flex: 1;
-        position: relative;
-        z-index: 4;
-        display: flex;
-        align-items: flex-end; 
-        justify-content: center;
-        overflow: hidden;
-
-        // Subtle fade on top edge to blend with content area
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 25px;
-            background: linear-gradient(
-                180deg, 
-                rgba(219, 234, 248, 0.35) 0%,
-                transparent 100%
-            );
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        img {
-            max-height: 100%;
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-            object-position: bottom;
-            pointer-events: none;
-        }
-    }
 }
 
-// Floating blob animations
+// ── ANIMATIONS ──
 @keyframes hero-float-blob {
     0%, 100% { transform: translate(0, 0) scale(1); }
     33% { transform: translate(25px, -25px) scale(1.1); }
@@ -8706,36 +8677,46 @@ Main Banner New CSS (Custom BEM Design)
     50% { left: 100%; }
     100% { left: 100%; }
 }
+@keyframes hero-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* Tablet & Desktop Adjustments */
 @media (min-width: 768px) {
     .main-banner-new {
         display: block;
         height: auto;
-        background: var(--whiteColor); // Reset to white on desktop
-
-        // Hide mobile-only radial glow
-        &::before {
-            display: none;
-        }
+        background: var(--whiteColor);
 
         &__bg {
-            display: block; // Show background on desktop
+            display: block;
             .bg-img {
                 background-image: url('/images/new_banner.jpeg');
                 background-position: bottom center;
             }
             .bg-overlay {
-                display: none; // Disable the heavy mobile vintage overlay on desktop
+                display: none;
             }
+        }
+
+        // Hide mobile poster on desktop
+        &__poster-bg {
+            display: none;
         }
 
         &__content-wrapper {
             height: calc(100vh - 80px);
             min-height: 550px;
-            padding-top: 25vh; /* Adjustable: moves content higher */
+            padding-top: 25vh;
             padding-bottom: 0;
-            align-items: flex-start; /* Changed from center to push it up */
+            align-items: flex-start;
             justify-content: center;
 
             .container {
@@ -8748,15 +8729,16 @@ Main Banner New CSS (Custom BEM Design)
             }
         }
 
-        // Desktop: gradient text
         &__title {
             font-size: 44px;
-            filter: none; // Remove drop-shadow on desktop
+            filter: none;
+            animation: none;
         }
 
         &__subtitle {
             font-size: 20px;
             color: var(--blackColor);
+            animation: none;
 
             .highlight-color {
                 color: var(--mainColor);
@@ -8769,6 +8751,7 @@ Main Banner New CSS (Custom BEM Design)
             max-width: none;
             margin-inline: 0;
             gap: 18px;
+            animation: none;
             
             .btn-solid,
             .btn-gradient-outline {
@@ -8786,22 +8769,16 @@ Main Banner New CSS (Custom BEM Design)
                 color: var(--mainColor2);
                 font-size: 16px;
                 padding: 13px 32px;
-                background: transparent; // Reset frosted glass on desktop
+                background: transparent;
                 backdrop-filter: none;
             }
         }
 
         // Hide all mobile-only elements on desktop
-        &__mobile-img {
-            display: none;
-        }
         &__orb {
             display: none;
         }
         &__badge {
-            display: none;
-        }
-        &__shadow-bridge {
             display: none;
         }
     }

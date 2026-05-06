@@ -5,10 +5,16 @@ import Link from 'next/link';
 const MainBannerNew = () => {
     return (
         <section className="main-banner-new">
-            {/* Background Image with Vintage Overlay (desktop) */}
+            {/* Desktop Background Image */}
             <div className="main-banner-new__bg">
                 <div className="bg-img"></div>
                 <div className="bg-overlay"></div>
+            </div>
+
+            {/* Mobile Poster Background (image positioned right, gradient overlay left) */}
+            <div className="main-banner-new__poster-bg">
+                <img src="/images/banner/m1.png" alt="" aria-hidden="true" />
+                <div className="poster-overlay"></div>
             </div>
 
             {/* Mobile decorative floating orbs */}
@@ -20,7 +26,7 @@ const MainBannerNew = () => {
                 <div className="container">
                     {/* Small tagline badge */}
                     <span className="main-banner-new__badge">
-                        ✦ Your Trusted HR Partner
+                        ✦Trusted HR Partner
                     </span>
 
                     {/* Title */}
@@ -45,17 +51,6 @@ const MainBannerNew = () => {
                         </Link>
                     </div>
                 </div>
-            </div>
-
-            {/* Vintage shadow bridge between content and image */}
-            <div className="main-banner-new__shadow-bridge"></div>
-
-            {/* Mobile Bottom Image (2nd row) */}
-            <div className="main-banner-new__mobile-img">
-                <img 
-                    src="/images/new_m.png" 
-                    alt="Hero person" 
-                />
             </div>
         </section>
     );
