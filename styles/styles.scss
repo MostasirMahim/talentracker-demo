@@ -8539,15 +8539,14 @@ Main Banner New CSS (Custom BEM Design)
     // Seamless bridge between content and image (no visible divide)
     &__shadow-bridge {
         width: 100%;
-        height: 30px;
+        height: 15px;
         position: relative;
         z-index: 6;
         flex-shrink: 0;
-        margin-bottom: -30px; // Overlap into the image area
+        margin-bottom: -15px; // Slight overlap into the image area
         background: linear-gradient(
             180deg, 
-            rgba(219, 234, 248, 0.6) 0%,
-            rgba(219, 234, 248, 0.3) 40%,  
+            rgba(219, 234, 248, 0.4) 0%,
             transparent 100%
         );
         pointer-events: none;
@@ -8664,18 +8663,17 @@ Main Banner New CSS (Custom BEM Design)
         justify-content: center;
         overflow: hidden;
 
-        // Fade overlay on top of image to blend with content area
+        // Subtle fade on top edge to blend with content area
         &::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px;
+            height: 25px;
             background: linear-gradient(
                 180deg, 
-                #dbeaf8 0%, 
-                rgba(219, 234, 248, 0.5) 40%,
+                rgba(219, 234, 248, 0.35) 0%,
                 transparent 100%
             );
             z-index: 5;
