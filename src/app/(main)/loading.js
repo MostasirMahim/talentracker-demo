@@ -7,7 +7,7 @@ import React from "react";
 function LoaderComponent() {
   return (
     <div>
-      <TopHeaderStyleTwo />
+      {/* <TopHeaderStyleTwo /> */}
       <NavbarStyleOne />
       <div style={{ width: "100%", height: "100vh" }}>
         <Loader />
