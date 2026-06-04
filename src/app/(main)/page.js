@@ -12,6 +12,7 @@ import CandidateTestimonialCarousel from "@/components/HomeDemo1/CandidateTestim
 import FloatingSocialIcons from "@/components/HomeDemo1/FloatingSocialIcons";
 import { get_me } from "@/actions/auth";
 import fetchTestimonials from "@/actions/candidate_testimonial";
+import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
 
 export default async function Home() {
   const data = await get_me();
@@ -19,6 +20,7 @@ export default async function Home() {
 
   return (
     <>
+      <TopHeaderStyleOne />
       <NavbarStyleOne />
       <MainBannerNew />
       <FloatingSocialIcons />

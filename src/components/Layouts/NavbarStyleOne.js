@@ -63,7 +63,7 @@ const NavbarStyleOne = () => {
   return (
     <>
       <div className="">
-      <TopHeaderStyleOne />
+      {/* <TopHeaderStyleOne /> */}
       <div id="navbar" className="navbar-area navbar-style-one">
         <div className="zixon-nav">
           <div className="container-fluid">
