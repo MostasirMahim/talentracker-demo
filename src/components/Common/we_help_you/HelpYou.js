@@ -16,7 +16,13 @@ const HowCanWeHelpYou = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           {/* Person silhouette */}
-          <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="1.5" />
+          <circle
+            cx="12"
+            cy="7"
+            r="4"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
           <path
             d="M4 21C4 17.134 7.134 14 11 14H13C16.866 14 20 17.134 20 21"
             stroke="currentColor"
@@ -106,17 +112,39 @@ const HowCanWeHelpYou = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <rect x="2" y="13" width="3" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="19" y="13" width="3" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M19 19V20C19 21.1046 18.1046 22 17 22H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <rect
+            x="2"
+            y="13"
+            width="3"
+            height="6"
+            rx="1"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <rect
+            x="19"
+            y="13"
+            width="3"
+            height="6"
+            rx="1"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M19 19V20C19 21.1046 18.1046 22 17 22H14"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       ),
       audience: "For Employers",
       title: "Request a Service",
-      cta: "Get in Touch",
-      href: "/contact/",
+      cta: "Explore Services",
+      href: "/services/",
       description:
-        "Need top talent or a custom training program for your team? Let TalenTracker handle the heavy lifting — from sourcing to onboarding.",
+        "Need top talent, corporate services, or a custom training program for your team? Let TalenTracker take care of everything from sourcing and onboarding to corporate solutions and professional training.",
       gradient: "linear-gradient(135deg, #05b4ff, #05ffff)",
       lightGradient:
         "linear-gradient(135deg, rgba(5, 180, 255, 0.09), rgba(5, 255, 255, 0.03))",
@@ -177,7 +205,11 @@ const HowCanWeHelpYou = () => {
           fill="none"
           strokeWidth="1"
         >
-          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#05b4ff" opacity="0.12" />
+          <path
+            d="M12 2L2 7L12 12L22 7L12 2Z"
+            stroke="#05b4ff"
+            opacity="0.12"
+          />
         </svg>
       </div>
 
