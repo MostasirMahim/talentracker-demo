@@ -64,7 +64,7 @@ const services = [
 const ServicesCard = () => {
   return (
     <>
-      <div className="services-">
+      <div className="services ptb-70">
         <div className="container">
           <div className="section-title">
             <span className="sub-title mt-5">SERVICES</span>

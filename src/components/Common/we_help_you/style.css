@@ -1,0 +1,411 @@
+/* HelpYou.css — TalenTracker Brand */
+/* Prefix: ppk-why */
+/* Colors: --mainColor:#1489bc | --mainColor2:#0e4c89 | --lightColor:#05b4ff | --lightColor2:#05ffff */
+
+.ppk-why {
+    position: relative;
+    width: 100%;
+    padding: 80px 0;
+    background: linear-gradient(160deg, #f0f8ff 0%, #ffffff 50%, #f5fbff 100%);
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Soft Background Orbs (branded) ── */
+.ppk-why-bg {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ppk-why-bg-1 {
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    left: -200px;
+    background: radial-gradient(circle, rgba(20, 137, 188, 0.06) 0%, transparent 70%);
+    animation: ppkWhyFloat 25s ease-in-out infinite;
+}
+
+.ppk-why-bg-2 {
+    width: 500px;
+    height: 500px;
+    bottom: -150px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(14, 76, 137, 0.05) 0%, transparent 70%);
+    animation: ppkWhyFloat 20s ease-in-out reverse infinite;
+}
+
+.ppk-why-bg-3 {
+    width: 400px;
+    height: 400px;
+    top: 40%;
+    left: 60%;
+    background: radial-gradient(circle, rgba(5, 180, 255, 0.05) 0%, transparent 70%);
+    animation: ppkWhyFloat 22s ease-in-out 2s infinite;
+}
+
+/* ── Floating Decorative Icons ── */
+.ppk-why-float {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ppk-why-float-1 {
+    top: 15%;
+    left: 10%;
+    animation: ppkWhyRotate 20s linear infinite;
+}
+
+.ppk-why-float-2 {
+    bottom: 20%;
+    right: 8%;
+    animation: ppkWhyRotate 25s linear reverse infinite;
+}
+
+.ppk-why-float-3 {
+    top: 60%;
+    left: 20%;
+    animation: ppkWhyRotate 18s linear infinite;
+}
+
+/* ── Container & Grid ── */
+.ppk-why-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.ppk-why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* ── Card ── */
+.ppk-why-card {
+    opacity: 0;
+    animation: ppkWhyFadeUp 0.8s ease forwards;
+    animation-delay: calc(0.15s * var(--card-index));
+}
+
+.ppk-why-card-inner {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(20, 137, 188, 0.1);
+    border-radius: 28px;
+    padding: 36px 30px 32px;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    box-shadow:
+        0 4px 6px -2px rgba(20, 137, 188, 0.04),
+        0 20px 40px -15px rgba(20, 137, 188, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.ppk-why-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.45;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+/* ── Hover ── */
+.ppk-why-card-inner:hover {
+    transform: translateY(-10px);
+    border-color: rgba(20, 137, 188, 0.25);
+    box-shadow:
+        0 10px 20px -5px rgba(20, 137, 188, 0.12),
+        0 30px 60px -15px rgba(14, 76, 137, 0.15);
+}
+
+.ppk-why-card-inner:hover .ppk-why-card-bg {
+    opacity: 0.75;
+}
+
+/* ── Audience Badge ── */
+.ppk-why-audience-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 2;
+    width: fit-content;
+}
+
+/* ── Icon Circle ── */
+.ppk-why-icon-circle {
+    width: 76px;
+    height: 76px;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 26px;
+    transition: all 0.4s ease;
+    color: white;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 24px -6px rgba(20, 137, 188, 0.45);
+}
+
+.ppk-why-card-inner:hover .ppk-why-icon-circle {
+    border-radius: 50%;
+    transform: scale(1.06) rotate(6deg);
+    box-shadow: 0 12px 30px -6px rgba(20, 137, 188, 0.55);
+}
+
+.ppk-why-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.ppk-why-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: white;
+    fill: none;
+}
+
+/* ── Content ── */
+.ppk-why-content {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ppk-why-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #262E2E;
+    margin: 0 0 14px;
+    font-family: 'Syne', 'Inter', sans-serif;
+    line-height: 1.3;
+}
+
+.ppk-why-description {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #4b5680;
+    margin: 0 0 26px;
+    flex: 1;
+}
+
+/* ── CTA Button ── */
+.ppk-why-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 11px 22px;
+    border-radius: 50px;
+    width: fit-content;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(20, 137, 188, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.ppk-why-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    transition: background 0.3s ease;
+}
+
+.ppk-why-cta:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 22px rgba(20, 137, 188, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.ppk-why-cta:hover::before {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.ppk-why-cta svg {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.ppk-why-cta:hover svg {
+    transform: translateX(4px);
+}
+
+/* ── Decorative Dots ── */
+.ppk-why-dots {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 6px;
+    opacity: 0.25;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.ppk-why-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: ppkWhyPulse 2s ease infinite;
+}
+
+.ppk-why-dots span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.ppk-why-dots span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.ppk-why-card-inner:hover .ppk-why-dots {
+    opacity: 0.7;
+}
+
+/* ── Glow Effect ── */
+.ppk-why-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160%;
+    height: 160%;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(55px);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ppk-why-card-inner:hover .ppk-why-glow {
+    opacity: 0.08;
+}
+
+/* ── Animations ── */
+@keyframes ppkWhyFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ppkWhyFloat {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(40px, 20px);
+    }
+}
+
+@keyframes ppkWhyRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ppkWhyPulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .ppk-why-grid {
+        gap: 20px;
+    }
+
+    .ppk-why-card-inner {
+        padding: 32px 24px 28px;
+    }
+
+    .ppk-why-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ppk-why {
+        padding: 60px 0;
+    }
+
+    .ppk-why-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .ppk-why-card-inner {
+        padding: 36px 28px 30px;
+    }
+
+    .ppk-why-float {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .ppk-why {
+        padding: 40px 0;
+    }
+
+    .ppk-why-card-inner {
+        padding: 30px 22px 26px;
+    }
+
+    .ppk-why-icon-circle {
+        width: 68px;
+        height: 68px;
+        margin-bottom: 22px;
+    }
+
+    .ppk-why-title {
+        font-size: 19px;
+    }
+
+    .ppk-why-description {
+        font-size: 14px;
+    }
+}

@@ -13,6 +13,7 @@ import FloatingSocialIcons from "@/components/HomeDemo1/FloatingSocialIcons";
 import { get_me } from "@/actions/auth";
 import fetchTestimonials from "@/actions/candidate_testimonial";
 import TopHeaderStyleOne from "@/components/Layouts/TopHeaderStyleOne";
+import HowCanWeHelpYou from "@/components/Common/we_help_you/HelpYou";
 
 export default async function Home() {
   const data = await get_me();
@@ -26,6 +27,7 @@ export default async function Home() {
       <FloatingSocialIcons />
       <CompanyOverview2 />
       <ServicesCard />
+      <HowCanWeHelpYou />
       <Funfacts />
       <WhyChooseUs />
       <FreeQuoteFormStyle2 />
@@ -36,4 +38,3 @@ export default async function Home() {
     </>
   );
 }
-
