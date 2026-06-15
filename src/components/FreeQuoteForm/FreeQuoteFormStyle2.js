@@ -78,7 +78,7 @@ const FreeQuoteFormStyle2 = () => {
             <div className="col-lg-7 col-md-12">
               <div className="free-quote-form">
                 <h3 className="mb-0">REQUEST SERVICES</h3>
-                <p className="mb-5">Only for employers companies</p>
+                <p className="mb-5">For employers and companies only</p>
 
                 <form onSubmit={handleRequestQuote}>
                   <div className="row">

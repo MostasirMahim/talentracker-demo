@@ -10,7 +10,7 @@ const chooseList = [
     icon: "ri-rocket-2-line",
     title: "Integrity",
     shortDes:
-      "Integrity	We operate with honesty, confidentiality and fairness.",
+      "We operate with honesty, confidentiality and fairness.",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const chooseList = [
     icon: "ri-bar-chart-horizontal-line",
     title: "People-First",
     shortDes:
-      "People-First	We prioritize wellbeing, culture, and sustainable performance.",
+      "We prioritize wellbeing, culture, and sustainable performance.",
   },
 ];
 
@@ -52,9 +52,8 @@ const WhyChooseUs = () => {
 
             <div className="col-lg-6 col-md-12">
               <div className="why-choose-us-content">
-                <span className="sub-title">REASON OF CHOOSE US</span>
-                <h2>WHY CHOOSE <br/> <span>TALENTRACKER </span><br />
-                   TO BUILD TRUST</h2>
+                <span className="sub-title">REASONS TO CHOOSE US</span>
+                <h2>WHY ORGANIZATIONS <br/> <span>TRUST TALENTRACKER</span></h2>
                 <p>
                   At TalenTracker Limited, we are your trusted one-stop HR business partner, delivering comprehensive solutions that go beyond recruitment to include training, payroll, legal consultancy, organizational development, and employee wellbeing. Our strength lies in combining strategic talent partnering, legal and compliance expertise, and psychology-driven people insights to help organizations build stronger teams and healthier workplaces.
                 </p>

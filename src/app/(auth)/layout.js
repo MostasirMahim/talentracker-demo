@@ -8,7 +8,7 @@ import "../../../styles/responsive.css";
 import { ToastContainer } from "react-toastify";
 
 export const metadata = {
-  title: "TalenTracker Limited - Right People,Right Fit",
+  title: "TalenTracker Limited - Right People, Right Fit",
   description:
     "TalenTracker Limited is a full-service Human Resources Business Partnering and Consultancy firm.",
   icons: {

@@ -169,10 +169,10 @@ export default function HooksPostForm() {
             )}
           </div>
 
-          {/* Trained Employee */}
+          {/* Trained Employees */}
           <div>
             <label className="font-semibold text-gray-700 block mb-2">
-              Trained Employee
+              Trained Employees
             </label>
             <input
               type="number"

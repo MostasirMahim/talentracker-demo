@@ -141,7 +141,7 @@ const NavbarStyleOne = () => {
                         pathname.startsWith("/training-solutions/") && "active"
                       }`}
                     >
-                      Training solutions
+                      Training Solutions
                     </Link>
                   </li>
 

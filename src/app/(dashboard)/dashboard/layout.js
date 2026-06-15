@@ -5,7 +5,7 @@ import { get_me } from "@/actions/auth";
 import { redirect } from "next/navigation";
 export const experimental_styleIsolation = true;
 export const metadata = {
-  title: "TalenTracker Limited - Right People,Right Fit",
+  title: "TalenTracker Limited - Right People, Right Fit",
   description:
     "TalenTracker Limited is a full-service Human Resources Business Partnering and Consultancy firm.",
   icons: {

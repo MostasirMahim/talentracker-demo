@@ -98,26 +98,17 @@ const HowCanWeHelpYou = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Building / office */}
-          <rect
-            x="3"
-            y="3"
-            width="18"
-            height="18"
-            rx="2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
+          {/* Headset / Service */}
           <path
-            d="M8 21V12H16V21"
+            d="M3 13V11C3 6.02944 7.02944 2 12 2C16.9706 2 21 6.02944 21 11V13"
             stroke="currentColor"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <rect x="9" y="7" width="2" height="2" fill="currentColor" />
-          <rect x="13" y="7" width="2" height="2" fill="currentColor" />
-          <rect x="10" y="14" width="4" height="7" fill="currentColor" opacity="0.4" />
+          <rect x="2" y="13" width="3" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="19" y="13" width="3" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M19 19V20C19 21.1046 18.1046 22 17 22H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
       audience: "For Employers",

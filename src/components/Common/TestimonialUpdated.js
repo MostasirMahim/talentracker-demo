@@ -114,9 +114,9 @@ const Design5 = () => {
       <div className="container position-relative" style={{ zIndex: 2 }}>
         <SectionHeader
           badge="TESTIMONIALS"
-          title="Let's Meet With"
-          highlight="Our Client Says"
-          description="From strategy to execution — real impact through talent partnership"
+          title="What"
+          highlight="Our Clients Say"
+          description="From strategy to execution: real impact through talent partnership"
         />
 
         <div className="tu-d5-stage">

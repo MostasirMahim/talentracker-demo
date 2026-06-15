@@ -45,7 +45,7 @@ const TestimonialStyleTwo = () => {
         <div className="container">
           <div className="section-title">
             <span className="sub-title">TESTIMONIALS</span>
-            <h2>Let&apos;s Meet With Our Client Says</h2>
+            <h2>What Our Clients Say</h2>
             <p>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore.

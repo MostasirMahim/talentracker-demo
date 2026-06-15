@@ -45,7 +45,7 @@ const TestimonialStyleOne = () => {
         <div className="container">
           <div className="section-title">
             <span className="sub-title">TESTIMONIALS</span>
-            <h2>Let&apos;s Meet With Our Client Says</h2>
+            <h2>What Our Clients Say</h2>
           </div>
 
           <Swiper
